@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.india-covid.info',
+  apiBase: 'https://api.india-covid.info',
  // apiUrl: 'http://localhost:3000',
 };
 

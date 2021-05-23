@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VaccineRestService } from '../../services/vaccine-rest.service';
 
 
 @Component({
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vaccine-homepage.component.scss']
 })
 export class VaccineHomepageComponent implements OnInit {
-  constructor(){
+  constructor(private vaccineService: VaccineRestService){
 
   }
   ngOnInit(){
-
+    this.vaccineService.centersByPinCode(560064).subscribe(console.log)
   }
 }

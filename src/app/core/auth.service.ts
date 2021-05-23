@@ -23,14 +23,14 @@ export class AuthService {
   }
 
   getStatus() {
-    const url = environment.apiUrl + '/auth/status';
+    const url = environment.apiBase + '/auth/status';
     return this.httpClient.get<User>(url).pipe(tap(user => {
       this._userSubject.next(user);
     }));
   }
 
   logout() {
-    const url = environment.apiUrl + '/auth/logout';
+    const url = environment.apiBase + '/auth/logout';
     return this.httpClient.post(url, undefined, {responseType: 'text'}).pipe(tap(() => {
       this.cookieService.remove('Authorization');
     }))
@@ -41,7 +41,7 @@ export class AuthService {
       throw new Error('Missing fields');
     }
     authInfo.otp = btoa('' + authInfo.otp);
-    const url = environment.apiUrl + this.authMainLoginUrl;
+    const url = environment.apiBase + this.authMainLoginUrl;
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
       const { token, ...others } = body;
       if(token?.token) {

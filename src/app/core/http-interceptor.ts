@@ -17,7 +17,7 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
      let sendReq = req;
-     if(req.url.includes(environment.apiUrl)) {
+     if(req.url.includes(environment.apiBase)) {
         const jwt = this.cookieService.get('Authorization');
         if(!jwt) return next.handle(sendReq);
         sendReq = req.clone({headers: req.headers.set('authorization', `Bearer ${jwt}`)});
