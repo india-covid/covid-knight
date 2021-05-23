@@ -5,6 +5,7 @@ import { CookieModule } from 'ngx-cookie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpHeaderInterceptor } from './core/http-interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HttpHeaderInterceptor } from './core/http-interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    NgbModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true}

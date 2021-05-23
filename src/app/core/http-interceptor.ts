@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
 import { CookieService } from 'ngx-cookie';
-export const alwaysAbsoluteUrls = ['/auth/api/access-token', '/auth/api/login'];
+
 
 @Injectable()
 export class HttpHeaderInterceptor implements HttpInterceptor {
@@ -24,16 +24,5 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
      }
      return next.handle(sendReq)
   }
-
-//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-//     let jwt: string;
-//     if(!req.url.includes(environment.apiUrl) || !(jwt = this.cookieService.get('Authorization'))) {
-//       return next.handle(req)
-//     }
-//     console.log(jwt)
-//     const headers = req.headers.set('authorization', jwt)
-//     req = req.clone({headers});
-//     return next.handle(req)
-//  }
 
 }

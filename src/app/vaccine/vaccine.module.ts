@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { VaccineFinderRoutingModule } from './vaccine-finder-routing.module';
+import { VaccineFinderRoutingModule } from './vaccine-routing.module';
 
 
 @NgModule({
