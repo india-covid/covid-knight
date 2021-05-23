@@ -29,6 +29,13 @@ export class AuthService {
     }));
   }
 
+  logout() {
+    const url = environment.apiUrl + '/auth/logout';
+    return this.httpClient.post(url, undefined, {responseType: 'text'}).pipe(tap(() => {
+      this.cookieService.remove('Authorization');
+    }))
+  }
+
   vaccineLoginOrSignup(authInfo: UserRegisterLogin) {
     if(!authInfo.phoneNumber || !authInfo.otp) {
       throw new Error('Missing fields');

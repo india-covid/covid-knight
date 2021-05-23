@@ -22,4 +22,9 @@ export class AppComponent {
     this.authService.getStatus().subscribe(console.log);
   }
 
+  dummyLogout() {
+    this.authService.logout().subscribe(console.log);
+  }
+
+
 }
