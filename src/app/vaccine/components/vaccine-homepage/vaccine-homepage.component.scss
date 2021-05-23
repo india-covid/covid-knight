@@ -1,0 +1,372 @@
+$color: #999;
+$brand: #d75893;
+$duration: 0.1s;
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgb(207, 206, 206);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(158, 158, 158);
+}
+.main-wrapper{
+  font-family: 'Muli';
+  background-color: rgb(240, 240, 240);
+  height: 100vh;
+  width:100%;
+}
+.body-content{
+  background-color: white;
+  margin: auto;
+  max-width: 600px;
+  height:100vh;
+  overflow: scroll;
+}
+.flex {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  padding: 12px;
+  h3 {
+    font-size: 22px;
+  }
+  .back-btn {
+    position: relative;
+    bottom: 0px;
+    margin-right: 20px;
+  }
+}
+
+.info-wrapper {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  .head {
+    align-items: center;
+    // justify-content: center;
+    padding: 0;
+    max-width: 460px;
+    margin: auto;
+    .icon {
+      height: 70px;
+      width: 70px;
+      position: relative;
+      top: -3px;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .title {
+      margin-left: 10px;
+      .title-text {
+        font-size: calc(1vw + 20px);
+        padding: 0;
+        margin: 0;
+      }
+      .title-slogan {
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+/* taeb-switch styles */
+.taeb-switch {
+  position: relative;
+  width: 300px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.taeb-switch:after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  top: 0;
+  transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
+  border-radius: 27.5px;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+  background-color: #3d90ef;
+  height: 100%;
+  z-index: 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.taeb-switch.left:after {
+  left: 0;
+}
+
+.taeb-switch.right:after {
+  left: 50%;
+}
+
+.taeb-switch .taeb {
+  display: inline-block;
+  width: 50%;
+  padding: 12px 0;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+  transition: color 200ms;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: normal;
+}
+
+.taeb-switch .taeb.active {
+  color: #ffffff;
+}
+
+//css for pincode input
+.pincodeInput {
+  margin-top: 50px;
+  input {
+    color: black;
+    width: 80%;
+    border: none;
+    background: none;
+    border-bottom: 2px solid $color;
+    transition: $duration border-color ease-in-out;
+    outline: none !important;
+    transition: 0.3s ease all;
+    padding: 5px;
+    margin: auto;
+    font-weight: bold;
+  }
+
+  .btn {
+    background-color: #3d90ef;
+    color: white;
+    margin-left: 5px;
+  }
+}
+
+.districtInput {
+  .btn {
+    background-color: #3d90ef;
+    color: white;
+    margin: 20px auto;
+  }
+  input {
+    color: rgb(0, 0, 0);
+     width: 100%;
+    border: none;
+    background: none;
+    border-bottom: 2px solid $color;
+    transition: $duration border-color ease-in-out;
+    outline: none !important;
+    transition: 0.3s ease all;
+    padding: 5px;
+  }
+  input:focus {
+    border-bottom: 2px solid #3d90ef;
+  }
+}
+.districtInput {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.districtInput {
+  .state {
+    // border:solid yellow;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .district {
+    // border:solid yellow;
+    margin-top: 50px;
+    margin-bottom: 10px;
+  }
+}
+
+.select {
+  position: relative;
+
+  .options,
+  .options2 {
+    background: #fff;
+    text-align: left;
+    background-color: #fff !important ;
+    max-height: 300px;
+    width: 100%;
+    overflow-y: scroll;
+    transition: ($duration * 2) opacity ease-in-out, ($duration * 2) max-height ease-in-out;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .sInput:focus ~ .options {
+    z-index: 200;
+    opacity: 1;
+  }
+
+  .dInput:focus ~ .options2 {
+    z-index: 200;
+    opacity: 1;
+  }
+
+  .label {
+    position: absolute;
+    transform: translateY(-1.8rem);
+    transition: $duration transform ease-in-out, $duration color ease-in-out;
+  }
+
+  .opt {
+    padding: 7px;
+  }
+
+  .opt:hover {
+    background-color: rgb(238, 238, 238);
+  }
+}
+
+.select {
+  width: 100%;
+  background: none;
+}
+
+
+
+
+.skeleton-wrapper{
+  margin-top:30px;
+}
+
+.skeleton-district{
+  margin-top:30px;
+}
+// css for centers
+.centers-list-wrapper {
+  margin-top: 40px;
+  width: 100%;
+  padding: 0;
+
+//center head
+.head {
+  margin-top:20px;
+  width: 100%;
+  .filter-title {
+  }
+  .vaccine-drop-down {
+    div {
+      margin-left: 10px;
+    }
+  }
+  .search-bar{
+    margin-top:20px;
+    .input-wrapper{
+      position: relative;
+      // border:solid green;
+      input{
+        width:100%;
+        padding:10px;
+        border:solid 1px #7aafec;
+        border-radius: 5px;
+        outline: none;
+        transition: cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
+
+      }
+      input:focus{
+
+        border:solid 2px rgb(0, 119, 255);
+      }
+      .cross-icon{
+        position: absolute;
+        right:15px;
+        top:16px;
+        color: #3d90ef;
+      }
+    }
+  }
+}
+
+//center body
+
+  .body {
+    margin-top:20px;
+    ul {
+      min-height:80vh;
+      padding: 0;
+      .list-item {
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+        height: 120px;
+        align-items: center;
+        margin-top: 10px;
+        position: relative;
+        background-color: rgb(245, 249, 252);
+        .list-title {
+          padding-left: 10px;
+          h3 {
+            font-size: 18px;
+          }
+        }
+        list-style: none;
+        width: 100%;
+        padding: 7px;
+        .list-body{
+          .address{
+            font-size:13.5px;
+            width:80%;
+          }
+          .icon {
+            position: relative;
+            top: -3px;
+            margin: 5px;
+            font-size: 20px;
+            color:#3d90ef
+          }
+        }
+
+    }
+    }
+    .no-centers{
+      margin-top: 100px;
+      .img{
+        width:200px;
+        margin:0 auto;
+        img{
+          width: 100%;
+        }
+      }
+      .text{
+        p{
+          text-align: center;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+    .arrow {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      font-weight: 100;
+      font-size: 50px;
+      right: 5px;
+      top: 0;
+      bottom: 0;
+      color: rgb(214, 212, 212);
+    }
+  }
+}
