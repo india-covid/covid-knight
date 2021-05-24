@@ -24,9 +24,6 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
     this.centers$ = this._pincodeChangedSubject.asObservable()
       .pipe(distinctUntilChanged(),
         debounceTime(50),
-        tap(() => {
-          this.selectedCenters = [];
-        }),
         switchMap((pin) => this.vaccineRestService.centersByPinCode(pin)));
   }
 
