@@ -1,4 +1,6 @@
 <main class="wizard">
+
+  <!-- Tabs -->
   <div class="wizard__tabs">
     <div class="wizard__tab d-flex justify-content-around">
       <button type="button" (click)="changeTab(WizardTabs.PIN)" class="wizard__tab-button"
@@ -7,4 +9,14 @@
         [class.wizard__tab-active]="WizardTabs.DISTRICT === activeTab">{{ WizardTabs.DISTRICT }}</button>
     </div>
   </div>
+
+  <!-- Centers selectors -->
+
+  <div class="wizard__centers-picker">
+    <app-centers-by-district *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district>
+    <app-centers-by-pin-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.PIN">
+    </app-centers-by-pin-selector>
+  </div>
+
+
 </main>

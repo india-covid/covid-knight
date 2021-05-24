@@ -11,23 +11,24 @@ import { State } from '../models/state.model';
 })
 export class VaccineRestService {
 
+  private readonly vaccineBase = '/vaccine'
 
   constructor(private http: HttpClient){
   }
 
 
-  centersByPinCode(pin: number | string) {
-    const url = environment.apiBase + `/vaccine/centers/pin/${pin}`;
-    return this.http.get(url);
+  centersByPinCode(pin: number | string): Observable<Center[]> {
+    const url = environment.apiBase + `${this.vaccineBase}/centers/pin/${pin}`;
+    return this.http.get<Center[]>(url);
   }
 
   getStates$() {
-    const url = environment.apiBase + `/vaccine/states/`;
+    const url = environment.apiBase + `${this.vaccineBase}/states/`;
     return this.http.get(url);
   }
 
   getDistrictByState$(stateId: string) {
-    const url = environment.apiBase + `/vaccine/districts/states/`;
+    const url = environment.apiBase + `${this.vaccineBase}/districts/states/`;
     return this.http.get(stateId);
   }
 

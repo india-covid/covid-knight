@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Center } from '../../models/center.model';
 
 enum WizardTabs {
   PIN = 'Pin',
@@ -15,6 +17,7 @@ export class VaccineWizardComponent implements OnInit {
   activeTab: WizardTabs = WizardTabs.PIN;
 
 
+
   constructor() { }
 
   ngOnInit(): void {
@@ -24,5 +27,9 @@ export class VaccineWizardComponent implements OnInit {
     // perform other here
     this.activeTab = tab;
   }
+
+  centersSelected({ centers }: { centers: Center[] }) {
+    console.log('selected centers', centers);
+  };
 
 }
