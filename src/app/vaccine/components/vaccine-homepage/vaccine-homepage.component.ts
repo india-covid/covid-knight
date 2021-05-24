@@ -12,6 +12,8 @@ export class VaccineHomepageComponent implements OnInit {
 
   }
   ngOnInit(){
-    this.vaccineService.centersByPinCode(560064).subscribe(console.log)
+    this.vaccineService.allStates$.subscribe((allStates => console.log('all states', allStates)));
+    this.vaccineService.stateByStateId('60a7ba59a46a9f004c3975e7').subscribe((singleState => console.log('single state', singleState)));
+
   }
 }
