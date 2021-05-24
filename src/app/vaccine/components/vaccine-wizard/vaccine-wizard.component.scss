@@ -1,0 +1,23 @@
+$tab-button-active-color:#3d90ef;
+
+.wizard {
+  &__tab-button {
+    transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
+    border-radius: 27.5px;
+    box-shadow: 0 2px 15px 0 rgb(0 0 0 / 10%);
+    background-color: transparent;
+    height: 3rem;
+    width: 10rem;
+    font-weight: bold;
+    z-index: 0;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+    border: none;
+  }
+
+  &__tab-active {
+    color: var(--white);
+
+    background-color: $tab-button-active-color;
+
+  }
+}
