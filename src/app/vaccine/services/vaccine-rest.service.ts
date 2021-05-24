@@ -17,17 +17,17 @@ export class VaccineRestService {
 
 
   centersByPinCode(pin: number | string) {
-    const url = environment.apiBase + `/centers/pin/${pin}`;
+    const url = environment.apiBase + `/vaccine/centers/pin/${pin}`;
     return this.http.get(url);
   }
 
   getStates$() {
-    const url = environment.apiBase + `/states/`;
+    const url = environment.apiBase + `/vaccine/states/`;
     return this.http.get(url);
   }
 
   getDistrictByState$(stateId: string) {
-    const url = environment.apiBase + `/districts/states/`;
+    const url = environment.apiBase + `/vaccine/districts/states/`;
     return this.http.get(stateId);
   }
 
