@@ -5,6 +5,6 @@
   </div>
   <!-- <ng-select [items]="(centers$ | async)!" bindLabel="name" bindValue="_id"> -->
     <ng-select (ngModelChange)="onCenterSelected($event)" [multiple]="true" [(ngModel)]="selectedCenters">
-      <ng-option *ngFor="let center of centers$ | async" [value]="center">{{center.name}}</ng-option>
+      <ng-option *ngFor="let center of centers$ | async" [value]="center">{{center.name}}, {{ center.address }}</ng-option>
    </ng-select>
 </div>
