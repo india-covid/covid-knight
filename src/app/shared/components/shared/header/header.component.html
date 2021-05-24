@@ -1,7 +1,10 @@
-<nav class="navbar">
-  <div class="container">
-      <a href="#">
-        <h4>India Covid<span>.info</span></h4>
-      </a>
-    </div>
-</nav>
+<div class="nav-wrapper">
+  <div class="top-nav" id="mytop-nav" #navbarMenu>
+    <a class="brand">Covid.<i>info</i></a>
+    <a href="#" class="menu-item" [ngClass]="link.active ? 'active' : ''"  *ngFor="let link of links"><i [ngClass]="link.icon"></i>{{link.label}}</a>
+
+    <a href="#" class="icon toggle-btn" (click)="toggleNav()">
+      <i class="ri-bar-chart-horizontal-line"></i>
+    </a>
+  </div>
+</div>
