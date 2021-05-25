@@ -13,10 +13,28 @@
   <!-- Centers selectors -->
 
   <div class="wizard__centers-picker">
-    <app-centers-by-district-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district-selector>
+    <app-centers-by-district-selector (centersSelected)="centersSelected($event)"
+      *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district-selector>
     <app-centers-by-pin-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.PIN">
     </app-centers-by-pin-selector>
   </div>
+
+  <div class="wizard__phone-number d-flex mt-3" *ngIf="selectedCenters && selectedCenters.length">
+    <ngx-intl-tel-input
+      (ngModelChange)="onPhoneChange({number: $event?.number, countryCode: $event?.countryCode}, phoneNumber.errors)"
+      #phoneNumber="ngModel" [(ngModel)]="phone" class="mx-auto" required [phoneValidation]="true"
+      [enablePlaceholder]="true" customPlaceholder="enter phone number" [onlyCountries]="[CountryISO.India]">
+    </ngx-intl-tel-input>
+    <!--
+    <p>{{ log(mobileForm) }}</p> -->
+  </div>
+
+  <div class="div subscribe d-flex mt-2">
+    <button class="btn btn-primary mx-auto" (click)="subscribeClicked()" [disabled]="!isSubscribeButtonEnabled">Subscribe </button>
+  </div>
+
+
+
 
 
 </main>

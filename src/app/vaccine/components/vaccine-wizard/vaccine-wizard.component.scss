@@ -1,5 +1,16 @@
 $tab-button-active-color: #3d90ef;
 
+
+// TODO REFACTOR BELOW
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+
 .wizard {
   &__tabs {
     border: solid green;
