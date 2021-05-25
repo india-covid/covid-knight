@@ -20,11 +20,11 @@
     <app-centers-by-pin-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.PIN">
     </app-centers-by-pin-selector>
   </div>
-
-  <div class="wizard__phone-number d-flex mt-3" *ngIf="(selectedCenters && selectedCenters.length) || phoneNumber">
+  <!-- *ngIf="(selectedCenters && selectedCenters.length) || phoneNumber" -->
+  <div class="wizard__phone-number d-flex mt-5" >
     <ngx-intl-tel-input
       (ngModelChange)="onPhoneChange({number: $event?.number, countryCode: $event?.countryCode}, phoneNumber.errors)"
-      #phoneNumber="ngModel" [(ngModel)]="phone" class="mx-auto" required [phoneValidation]="true"
+      #phoneNumber="ngModel" [(ngModel)]="phone" class="mx-auto wizard__phone-input" required [phoneValidation]="true"
       [enablePlaceholder]="true" customPlaceholder="enter phone number" [onlyCountries]="[CountryISO.India]">
     </ngx-intl-tel-input>
     <!--
