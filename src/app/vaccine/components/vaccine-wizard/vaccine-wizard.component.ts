@@ -44,6 +44,12 @@ export class VaccineWizardComponent implements OnInit {
   }
 
 
+
+  get phoneNumber() {
+      return this._phoneNumber?.number;
+  }
+
+
   get isSubscribeButtonEnabled() {
     return this._phoneNumber?.number && isNonEmptyArray(this.selectedCenters);
   }
