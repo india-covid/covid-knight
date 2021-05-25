@@ -1,6 +1,7 @@
 $tab-button-active-color:#3d90ef;
 
 .wizard {
+  margin-top:20px;
   &__tab-button {
     transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
     border-radius: 27.5px;
