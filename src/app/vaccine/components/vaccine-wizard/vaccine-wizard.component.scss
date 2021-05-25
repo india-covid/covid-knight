@@ -1,20 +1,20 @@
 $tab-button-active-color: #3d90ef;
 
-
 // TODO REFACTOR BELOW
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
 }
 
-.ng-invalid:not(form)  {
+.ng-invalid:not(form) {
   border-left: 5px solid #cfc7c7; /* red */
 }
-
 
 .wizard {
   &__tab {
     position: relative;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     margin: auto;
 
     &:after {
@@ -55,5 +55,4 @@ $tab-button-active-color: #3d90ef;
   &__tab-active {
     color: #ffffff;
   }
-
 }

@@ -9,8 +9,11 @@
 
 body {
   font-family: "Lato", sans-serif;
+  scroll-behavior: smooth
 }
-
+html{
+  scroll-behavior: smooth;
+}
 ////////////////////////////////////////////////////// css for ng-select////////////////////////////////////////////////////////////
 .ng-select .ng-select-container {
   border: none !important;

@@ -1,10 +1,11 @@
 $menu-active-color: #000000;
 .header {
-  // border:solid red;
+
+  width:100%;
   &__content {
-    // border:solid green;
     position: relative;
     max-width: 550px;
+    z-index:200;
     display: flex;
     margin: auto;
     height: 80px;
