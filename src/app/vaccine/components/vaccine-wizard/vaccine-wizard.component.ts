@@ -29,6 +29,7 @@ export class VaccineWizardComponent implements OnInit {
 
   changeTab(tab: WizardTabs) {
     // perform other here
+    this.selectedCenters = [];
     this.activeTab = tab;
   }
 
