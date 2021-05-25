@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { forkJoin, Observable } from 'rxjs';
 import { Center } from '../../models/center.model';
 import { CountryISO } from 'ngx-intl-tel-input'
 import { ValidationErrors } from '@angular/forms';
 import { isNonEmptyArray } from 'src/app/core/utils';
+import { AuthService } from 'src/app/core/auth.service';
+import { concatMap, map, switchMap, take } from 'rxjs/operators';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
+import * as DayJs from 'dayjs';
+
+
 enum WizardTabs {
   PIN = 'Pin',
   DISTRICT = 'DISTRICT'
@@ -15,13 +21,16 @@ enum WizardTabs {
 })
 export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;
-  activeTab: WizardTabs = WizardTabs.PIN;
+  activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
   CountryISO = CountryISO;
-  private _phoneNumber: {number?: string; countryCode?: string} = {}
-
   phone: any;
-  constructor() { }
+  @Output() done = new EventEmitter<boolean>();
+
+  private _phoneNumber: { number?: string; countryCode?: string } = {}
+  subscribing = false;
+  constructor(private authService: AuthService,
+    private storageService: LocalStorageService) { }
 
   ngOnInit(): void {
   }
@@ -37,30 +46,41 @@ export class VaccineWizardComponent implements OnInit {
     console.log(this.selectedCenters);
   };
 
-  onPhoneChange(phone: {number: string, countryCode: string}, errors?: any) {
-      if(errors) {
-        return this._phoneNumber = {};
-      }
-      return this._phoneNumber = phone
+  onPhoneChange(phone: { number: string, countryCode: string }, errors?: any) {
+    if (errors) {
+      return this._phoneNumber = {};
+    }
+    return this._phoneNumber = phone
   }
-
-
 
   get phoneNumber() {
-      return this._phoneNumber?.number;
+    return this._phoneNumber?.number;
   }
-
 
   get isSubscribeButtonEnabled() {
     return this._phoneNumber?.number && isNonEmptyArray(this.selectedCenters);
   }
 
   subscribeClicked() {
-    if(!this.isSubscribeButtonEnabled) {
+    if (!this.isSubscribeButtonEnabled) {
       return;
     }
-    console.log('centers', this.selectedCenters);
-    console.log('phoneNumber', this._phoneNumber);
+   this.subscribing = true;
+   this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber.number)), take(1)).subscribe(results => {
+      this.saveCurrentResults(this._phoneNumber.number);
+   });
+  }
+
+
+  private saveCurrentResults(phoneNumber: string = '', countryCode: string = CountryISO.India.toUpperCase()) {
+    console.log(phoneNumber, countryCode)
+    this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber, countryCode });
+    this.done.next(true);
+  }
+
+  private get  _ping$() {
+   return this.authService
+      .ping({ phoneNumber: this._phoneNumber?.number, centers: this.selectedCenters.map(c => c._id) }, 'subscribe')
   }
 
 }
