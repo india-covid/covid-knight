@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms'
 import { DigitOnlyDirective } from '../core/directives/digit-only.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CentersByDistrictSelectorComponent } from './components/shared/centers-by-district-selector/centers-by-district-selector.component';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     VaccineWizardComponent,
     CentersByPinSelectorComponent,
     DigitOnlyDirective,
-    CentersByDistrictSelectorComponent
+    CentersByDistrictSelectorComponent,
+    VaccineSubscribeComponent,
   ],
   imports: [
     CommonModule,
