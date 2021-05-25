@@ -1,1 +1,14 @@
-<p>vaccine-subscribe works!</p>
+<div class="subscribe">
+  <div class="subscribe__header">
+    <p class="text-center">{{ (wizardResult.minLeft || 0 )| number:"2.0" }}: {{ (wizardResult.secLeft || 0) | number:"2.0"}}</p>
+  </div>
+  <div class="subscribe__body mt-3">
+    <div class="subscribe__otp d-flex">
+      <input type="text" placeholder="Enter otp" digitOnly class="form-control mx-3">
+    </div>
+    <div class="subscribe__confirm d-flex mt-2">
+      <button class="btn btn-primary mx-auto"> Confirm </button>
+    </div>
+  </div>
+
+</div>
