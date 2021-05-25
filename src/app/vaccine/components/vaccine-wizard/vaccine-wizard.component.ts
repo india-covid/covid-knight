@@ -43,7 +43,6 @@ export class VaccineWizardComponent implements OnInit {
 
   centersSelected({ centers }: { centers: Center[] }) {
     this.selectedCenters = centers;
-    console.log(this.selectedCenters);
   };
 
   onPhoneChange(phone: { number: string, countryCode: string }, errors?: any) {
@@ -73,8 +72,7 @@ export class VaccineWizardComponent implements OnInit {
 
 
   private saveCurrentResults(phoneNumber: string = '', countryCode: string = CountryISO.India.toUpperCase()) {
-    console.log(phoneNumber, countryCode)
-    this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber, countryCode });
+    this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber, countryCode , centers: this.selectedCenters});
     this.done.next(true);
   }
 
