@@ -1,9 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, } from 'rxjs';
-import { filter, switchMap, map } from 'rxjs/operators';
-import { isNonEmptyArray } from 'src/app/core/utils';
+import {  Observable, ReplaySubject, } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Center } from '../models/center.model';
 import { State } from '../models/state.model';
@@ -13,8 +11,8 @@ import { State } from '../models/state.model';
 export class VaccineRestService {
 
   private readonly vaccineBase = '/vaccine'
-  private _stateByStateIdSubject = new BehaviorSubject<{ [stateId: string]: State }>({});
-  private _stateSubject = new BehaviorSubject<State[]>([]);
+  private _stateByStateIdSubject = new ReplaySubject<{ [stateId: string]: State }>();
+  private _stateSubject = new ReplaySubject<State[]>();
 
   constructor(private http: HttpClient) {
     this._prefetchStates();
@@ -40,11 +38,11 @@ export class VaccineRestService {
 
   get allStates$() {
     // @ts-ignore
-    return this._stateSubject.asObservable().pipe(filter((s) => isNonEmptyArray(s)));
+    return this._stateSubject.asObservable();
   }
 
   stateByStateId(stateId: string) {
-    return this._stateByStateIdSubject.asObservable().pipe(map(s => s[stateId]));
+    return this._stateByStateIdSubject.asObservable();
   }
 
   get allStatesByStateId() {

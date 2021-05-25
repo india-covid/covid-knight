@@ -13,7 +13,7 @@
   <!-- Centers selectors -->
 
   <div class="wizard__centers-picker">
-    <app-centers-by-district *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district>
+    <app-centers-by-district-selector *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district-selector>
     <app-centers-by-pin-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.PIN">
     </app-centers-by-pin-selector>
   </div>
