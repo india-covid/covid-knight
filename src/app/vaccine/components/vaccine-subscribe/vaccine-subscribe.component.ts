@@ -40,4 +40,8 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/']);
   }
 
+  onOtpChange(otp: any) {
+    console.log(otp)
+  }
+
 }

@@ -4,7 +4,7 @@
   </div>
   <div class="subscribe__body mt-3">
     <div class="subscribe__otp d-flex">
-      <input type="text" placeholder="Enter otp" digitOnly class="form-control mx-3">
+      <ng-otp-input class="mx-auto"  (onInputChange)="onOtpChange($event)"  [config]="{length:4}"></ng-otp-input>
     </div>
     <div class="subscribe__confirm d-flex mt-2">
       <button class="btn btn-primary mx-auto"> Confirm </button>
