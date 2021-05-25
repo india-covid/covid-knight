@@ -15,26 +15,34 @@ body {
   border: none !important;
 }
 
+.ng-select.state-selector .ng-select-container,
+.ng-select.district-selector .ng-select-container {
+  box-shadow: none !important;
+}
 .ng-select .ng-select-container .ng-value,
 .ng-option {
   background-color: rgb(248, 248, 248) !important;
   color: black !important;
 }
 
-.ng-select .ng-select-container .ng-value,
+.ng-select.center-selector .ng-select-container .ng-value,
 .ng-option-selected {
   background-color: rgb(90, 139, 247) !important;
   color: var(--white) !important;
-
 }
 
+.ng-select.state-selector .ng-value,
+.ng-option-selected,
+.ng-select.district-selector .ng-value,
+.ng-option-selected {
+  background-color: none !important;
+}
 
 .ng-dropdown-panel {
   animation: animateGrow 200ms ease-in-out forwards;
   transform-origin: top center;
   margin-top: 5px !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
-
 }
 
 @keyframes animateGrow {
