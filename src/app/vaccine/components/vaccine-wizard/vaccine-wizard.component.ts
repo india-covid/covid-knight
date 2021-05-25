@@ -4,7 +4,7 @@ import { Center } from '../../models/center.model';
 
 enum WizardTabs {
   PIN = 'Pin',
-  DISTRICT = 'DISTRICT',
+  DISTRICT = 'DISTRICT'
 }
 @Component({
   selector: 'app-vaccine-wizard',
@@ -12,7 +12,6 @@ enum WizardTabs {
   styleUrls: ['./vaccine-wizard.component.scss'],
 })
 export class VaccineWizardComponent implements OnInit {
-  active: boolean = true;
   WizardTabs = WizardTabs;
   activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
