@@ -1,0 +1,17 @@
+input ,ng-select{
+  color: black;
+  border: none;
+  background: none;
+  border-bottom: 2px solid rgb(83, 82, 82);
+  outline: none !important;
+  transition: 0.3s ease all;
+  margin: auto;
+  font-weight: bold;
+  border-radius: 0;;
+}
+
+input:focus{
+  box-shadow:none;
+  border-bottom: 2px solid rgb(29, 122, 209);
+}
+

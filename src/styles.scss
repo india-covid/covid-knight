@@ -1,11 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,400&display=swap');
+@import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,400&display=swap");
 @import "~@ng-select/ng-select/themes/default.theme.css";
-@import 'remixicon/fonts/remixicon.css';
+@import "remixicon/fonts/remixicon.css";
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
+}
+
+.ng-select .ng-select-container {
+  border-radius: 4px !important;
+  border: none !important;
+}
+
+.ng-select .ng-select-container .ng-value,
+.ng-option {
+  background-color: rgb(248, 248, 248) !important;
+  color: black !important;
+}
+
+.ng-select .ng-select-container .ng-value,
+.ng-option-selected {
+  background-color: rgb(90, 139, 247) !important;
+  color: var(--white) !important;
+
+}
+
+
+.ng-dropdown-panel {
+  animation: animateGrow 200ms ease-in-out forwards;
+  transform-origin: top center;
+  margin-top: 5px !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+
+}
+
+@keyframes animateGrow {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
