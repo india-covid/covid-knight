@@ -1,21 +1,105 @@
-.nav-icon {
-  padding: 3px;
-  position: relative;
-  bottom: -3px;
+$menu-active-color: #000000;
+.header {
+  // border:solid red;
+  &__content {
+    // border:solid green;
+    position: relative;
+    max-width: 550px;
+    display: flex;
+    margin: auto;
+    height: 80px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 105px;
+      height: 40px;
+      top: 25%;
+      transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
+      border-radius: 27.5px;
+      box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+      background-color: $menu-active-color;
+      z-index: 0;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    &.home:after {
+      left: 6.5%;
+    }
+
+    &.contact:after {
+      left: 39%;
+    }
+    &.donate:after {
+      left: 72%;
+    }
+  }
+  &__item {
+    width: 33.3%;
+    margin: 0 auto;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+    transition: color 100ms;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    text-align: center;
+    &__icon {
+      margin-right: 3px;
+      position: relative;
+      left:-3px;
+      font-size: 25px;
+      transition: font-size 0.2s;
+    }
+    &__label {
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      display: none;
+    }
+    &__active &__icon {
+      color: white;
+      font-size: 15px !important;
+    }
+    &__active &__label {
+      animation: fadeUp 0.4s ease-in-out forwards;
+      display: inline-block !important;
+      color: white;
+    }
+  }
+
 }
 
-.navbar {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.navbar-brand i {
-  color: blue;
-}
+@media screen and (max-width: 405px) {
+  .header {
+    &__content {
+      &.home:after {
+        left: calc(5% - 4vw) !important;
+      }
 
-@media screen and (max-width: 992px) {
-  .navbar-nav {
-    .nav-item {
-      border-bottom: 1px solid rgb(47, 151, 221, 0.2);
+      &.contact:after {
+        left: calc(40% - 4vw) !important;
+      }
+      &.donate:after {
+        left: calc(70% - 4vw) !important;
+      }
     }
   }
 }
