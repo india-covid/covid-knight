@@ -6,17 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpHeaderInterceptor } from './core/http-interceptor';
 import { HeaderComponent } from './shared/components/shared/header/header.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true}
