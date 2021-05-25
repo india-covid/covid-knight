@@ -1,7 +1,9 @@
-$tab-button-active-color:#3d90ef;
+$tab-button-active-color: #3d90ef;
 
 .wizard {
-  margin-top:20px;
+  &__tabs {
+    border: solid green;
+  }
   &__tab-button {
     transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
     border-radius: 27.5px;
@@ -17,8 +19,11 @@ $tab-button-active-color:#3d90ef;
 
   &__tab-active {
     color: var(--white);
-
     background-color: $tab-button-active-color;
+  }
 
+  &__centers-picker{
+    border:solid yellow;
+    padding:20px;
   }
 }
