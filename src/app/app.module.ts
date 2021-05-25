@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpHeaderInterceptor } from './core/http-interceptor';
 import { HeaderComponent } from './shared/components/shared/header/header.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HeaderComponent } from './shared/components/shared/header/header.compon
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CookieModule.forRoot()
+    BrowserAnimationsModule,
+    CookieModule.forRoot(),
+    CollapseModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true}
