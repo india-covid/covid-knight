@@ -2,11 +2,11 @@
 
   <!-- Tabs -->
   <div class="wizard__tabs p-3">
-    <div class="wizard__tab d-flex justify-content-around">
-      <button type="button" (click)="changeTab(WizardTabs.PIN)" class="wizard__tab-button"
-        [class.wizard__tab-active]="WizardTabs.PIN === activeTab">{{ WizardTabs.PIN }}</button>
-      <button type="button" (click)="changeTab(WizardTabs.DISTRICT)" class="wizard__tab-button"
-        [class.wizard__tab-active]="WizardTabs.DISTRICT === activeTab">{{ WizardTabs.DISTRICT }}</button>
+    <div class="wizard__tab left text-center" [ngClass]="WizardTabs.PIN === activeTab ? 'right' : 'left'">
+      <div (click)="changeTab(WizardTabs.DISTRICT)" class="wizard__tab-button"
+      [class.wizard__tab-active]="WizardTabs.PIN !== activeTab">{{ WizardTabs.PIN }}</div>
+      <div (click)="changeTab(WizardTabs.PIN)" class="wizard__tab-button"
+      [class.wizard__tab-active]="WizardTabs.DISTRICT !== activeTab">{{ WizardTabs.DISTRICT }}</div>
     </div>
   </div>
 

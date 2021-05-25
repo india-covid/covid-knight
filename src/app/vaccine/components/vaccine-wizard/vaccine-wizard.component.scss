@@ -12,29 +12,48 @@ $tab-button-active-color: #3d90ef;
 
 
 .wizard {
-  &__tabs {
-    border: solid green;
+  &__tab {
+    position: relative;
+    width: 300px;
+    margin: auto;
+    margin-top: 40px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      top: 0;
+      transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
+      border-radius: 27.5px;
+      box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+      background-color: $tab-button-active-color;
+      height: 100%;
+      z-index: 0;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    }
+
+    &.left:after {
+      left: 0;
+    }
+
+    &.right:after {
+      left: 50%;
+    }
   }
   &__tab-button {
-    transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
-    border-radius: 27.5px;
-    box-shadow: 0 2px 15px 0 rgb(0 0 0 / 10%);
-    background-color: transparent;
-    height: 3rem;
-    width: 10rem;
+    display: inline-block;
+    width: 50%;
+    padding: 12px 0;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+    transition: color 200ms;
+    font-size: 16px;
     font-weight: bold;
-    z-index: 0;
-    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
-    border: none;
+    line-height: normal;
   }
 
   &__tab-active {
-    color: var(--white);
-    background-color: $tab-button-active-color;
-  }
-
-  &__centers-picker{
-    border:solid yellow;
-    padding:20px;
+    color: #ffffff;
   }
 }

@@ -1,18 +1,18 @@
 <div class="centers-selector">
 
   <div class="centers-selector__state">
-    <ng-select placeholder="Select state" notFoundText="No states found" (ngModelChange)="onStateChange($event)" [clearable]="false"  [(ngModel)]="selectedState">
+    <ng-select  class="state-selector selector" placeholder="Select state" notFoundText="No states found" (ngModelChange)="onStateChange($event)" [clearable]="false"  [(ngModel)]="selectedState">
       <ng-option *ngFor="let state of allStates$ | async" [value]="state">{{ state.stateName }}</ng-option>
    </ng-select>
   </div>
-  <div class="centers-selector__district mt-2">
-    <ng-select placeholder="Select district" notFoundText="No districts found" (ngModelChange)="onDistrictChange($event)" [clearable]="false"  [(ngModel)]="selectedDistrict">
+  <div  class="centers-selector__district mt-2">
+    <ng-select class="district-selector selector" placeholder="Select district" notFoundText="No districts found" (ngModelChange)="onDistrictChange($event)" [clearable]="false"  [(ngModel)]="selectedDistrict">
       <ng-option *ngFor="let district of districts$ | async" [value]="district"> {{ district.districtName }}</ng-option>
    </ng-select>
   </div>
 
   <div class="centers-selector__center mt-2">
-    <ng-select placeholder="Select center/hospital" notFoundText="No centers match the above criteria" [multiple]="true" (ngModelChange)="onCenterChange($event)" [clearable]="false"  ngModel>
+    <ng-select  class="center-selector selector" placeholder="Select center/hospital" notFoundText="No centers match the above criteria" [multiple]="true" (ngModelChange)="onCenterChange($event)" [clearable]="false"  ngModel>
       <ng-option *ngFor="let center of centers$ | async" [value]="center"> {{ center.name }}, {{ center.blockName }}</ng-option>
    </ng-select>
   </div>

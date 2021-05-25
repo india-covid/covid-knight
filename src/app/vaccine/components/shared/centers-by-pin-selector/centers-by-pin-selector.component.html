@@ -1,10 +1,10 @@
 <div class="pin pin-container">
   <div class="form-group pin__body">
-    <input type="text" [maxlength]="pincodeLength" (ngModelChange)="refreshCenters($event)" [(ngModel)]="pincode"
+    <input type="text" class="p-5" [maxlength]="pincodeLength" (ngModelChange)="refreshCenters($event)" [(ngModel)]="pincode"
       class="form-control pin__input" digitOnly placeholder="Pin code">
   </div>
   <!-- <ng-select [items]="(centers$ | async)!" bindLabel="name" bindValue="_id"> -->
-    <ng-select placeholder="Select center/hospital" notFoundText="No centers match the above criteria" (ngModelChange)="onCenterSelected($event)" [multiple]="true" [(ngModel)]="selectedCenters">
+    <ng-select class="center-selector selector" placeholder="Select center/hospital" notFoundText="No centers match the above criteria" (ngModelChange)="onCenterSelected($event)" [multiple]="true" [(ngModel)]="selectedCenters">
       <ng-option *ngFor="let center of centers$ | async" [value]="center">{{center.name}}, {{ center.address }}</ng-option>
    </ng-select>
 </div>

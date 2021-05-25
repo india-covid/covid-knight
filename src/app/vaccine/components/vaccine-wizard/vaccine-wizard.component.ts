@@ -11,10 +11,9 @@ enum WizardTabs {
 @Component({
   selector: 'app-vaccine-wizard',
   templateUrl: './vaccine-wizard.component.html',
-  styleUrls: ['./vaccine-wizard.component.scss']
+  styleUrls: ['./vaccine-wizard.component.scss'],
 })
 export class VaccineWizardComponent implements OnInit {
-
   WizardTabs = WizardTabs;
   activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
