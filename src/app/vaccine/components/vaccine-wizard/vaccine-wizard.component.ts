@@ -4,25 +4,22 @@ import { Center } from '../../models/center.model';
 
 enum WizardTabs {
   PIN = 'Pin',
-  DISTRICT = 'DISTRICT'
+  DISTRICT = 'DISTRICT',
 }
 @Component({
   selector: 'app-vaccine-wizard',
   templateUrl: './vaccine-wizard.component.html',
-  styleUrls: ['./vaccine-wizard.component.scss']
+  styleUrls: ['./vaccine-wizard.component.scss'],
 })
 export class VaccineWizardComponent implements OnInit {
-
+  active: boolean = true;
   WizardTabs = WizardTabs;
   activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
 
+  constructor() {}
 
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   changeTab(tab: WizardTabs) {
     // perform other here
@@ -32,6 +29,5 @@ export class VaccineWizardComponent implements OnInit {
   centersSelected({ centers }: { centers: Center[] }) {
     this.selectedCenters = centers;
     console.log('selected centers', centers);
-  };
-
+  }
 }
