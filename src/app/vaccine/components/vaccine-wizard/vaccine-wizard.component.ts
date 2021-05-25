@@ -34,6 +34,7 @@ export class VaccineWizardComponent implements OnInit {
 
   centersSelected({ centers }: { centers: Center[] }) {
     this.selectedCenters = centers;
+    console.log(this.selectedCenters);
   };
 
   onPhoneChange(phone: {number: string, countryCode: string}, errors?: any) {
