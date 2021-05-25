@@ -34,9 +34,6 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   refreshCenters(pin?: string) {
     pin = pin || this.pincode;
     if (!pin || (pin.length !== this.pincodeLength)) {
-      if (isNonEmptyArray(this.selectedCenters)) {
-        this.centersSelected.emit({ pincode: this.pincode, centers: (this.selectedCenters = []) });
-      };
       return;
     }
     this._pincodeChangedSubject.next(pin);

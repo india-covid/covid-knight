@@ -14,7 +14,8 @@ enum WizardTabs {
 export class VaccineWizardComponent implements OnInit {
 
   WizardTabs = WizardTabs;
-  activeTab: WizardTabs = WizardTabs.PIN;
+  activeTab: WizardTabs = WizardTabs.DISTRICT;
+  selectedCenters: Center[] = [];
 
 
 
@@ -29,6 +30,7 @@ export class VaccineWizardComponent implements OnInit {
   }
 
   centersSelected({ centers }: { centers: Center[] }) {
+    this.selectedCenters = centers;
     console.log('selected centers', centers);
   };
 

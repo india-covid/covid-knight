@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import {  Observable, ReplaySubject, } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Center } from '../models/center.model';
+import { District } from '../models/district.model';
 import { State } from '../models/state.model';
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,6 @@ export class VaccineRestService {
   }
 
   get allStates$() {
-    // @ts-ignore
     return this._stateSubject.asObservable();
   }
 
@@ -51,7 +51,12 @@ export class VaccineRestService {
 
   getDistrictByState$(stateId: string) {
     const url = environment.apiBase + `${this.vaccineBase}/districts/states/${stateId}`;
-    return this.http.get(url);
+    return this.http.get<District[]>(url);
+  }
+
+  centersByDistrictId(districtId: string) {
+    const url = environment.apiBase + `${this.vaccineBase}/centers/districts/${districtId}`;
+    return this.http.get<Center[]>(url);
   }
 
 
