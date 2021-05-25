@@ -1,18 +1,20 @@
 <main class="wizard">
-
   <!-- Tabs -->
-  <div class="wizard__tabs p-3">
-    <div class="wizard__tab left text-center" [ngClass]="WizardTabs.PIN === activeTab ? 'right' : 'left'">
-      <div (click)="changeTab(WizardTabs.DISTRICT)" class="wizard__tab-button"
-      [class.wizard__tab-active]="WizardTabs.PIN !== activeTab">{{ WizardTabs.PIN }}</div>
+  <div class="wizard__tabs">
+    <div class="wizard__tab left text-center" [ngClass]="WizardTabs.PIN === activeTab ? 'left' : 'right'">
       <div (click)="changeTab(WizardTabs.PIN)" class="wizard__tab-button"
-      [class.wizard__tab-active]="WizardTabs.DISTRICT !== activeTab">{{ WizardTabs.DISTRICT }}</div>
+        [class.wizard__tab-active]="WizardTabs.PIN === activeTab">{{ WizardTabs.PIN }}
+      </div>
+      <div (click)="changeTab(WizardTabs.DISTRICT)" class="wizard__tab-button"
+        [class.wizard__tab-active]="WizardTabs.DISTRICT === activeTab">
+        {{ WizardTabs.DISTRICT }}
+      </div>
     </div>
   </div>
 
   <!-- Centers selectors -->
 
-  <div class="wizard__centers-picker">
+  <div class="wizard__centers-picker mt-5">
     <app-centers-by-district-selector (centersSelected)="centersSelected($event)"
       *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district-selector>
     <app-centers-by-pin-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.PIN">
@@ -20,21 +22,21 @@
   </div>
 
   <div class="wizard__phone-number d-flex mt-3" *ngIf="selectedCenters && selectedCenters.length">
-    <ngx-intl-tel-input
-      (ngModelChange)="onPhoneChange({number: $event?.number, countryCode: $event?.countryCode}, phoneNumber.errors)"
-      #phoneNumber="ngModel" [(ngModel)]="phone" class="mx-auto" required [phoneValidation]="true"
+    <ngx-intl-tel-input (ngModelChange)="
+        onPhoneChange(
+          { number: $event?.number, countryCode: $event?.countryCode },
+          phoneNumber.errors
+        )
+      " #phoneNumber="ngModel" [(ngModel)]="phone" class="mx-auto" required [phoneValidation]="true"
       [enablePlaceholder]="true" customPlaceholder="enter phone number" [onlyCountries]="[CountryISO.India]">
     </ngx-intl-tel-input>
     <!--
     <p>{{ log(mobileForm) }}</p> -->
   </div>
 
-  <div class="div subscribe d-flex mt-2">
-    <button class="btn btn-primary mx-auto" (click)="subscribeClicked()" [disabled]="!isSubscribeButtonEnabled">Subscribe </button>
+  <div class="div subscribe d-flex mt-4">
+    <button class="btn btn-primary mx-auto" (click)="subscribeClicked()" [disabled]="!isSubscribeButtonEnabled">
+      Subscribe
+    </button>
   </div>
-
-
-
-
-
 </main>

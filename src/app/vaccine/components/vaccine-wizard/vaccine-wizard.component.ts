@@ -15,7 +15,7 @@ enum WizardTabs {
 })
 export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;
-  activeTab: WizardTabs = WizardTabs.DISTRICT;
+  activeTab: WizardTabs = WizardTabs.PIN;
   selectedCenters: Center[] = [];
   CountryISO = CountryISO;
   private _phoneNumber: {number?: string; countryCode?: string} = {}
