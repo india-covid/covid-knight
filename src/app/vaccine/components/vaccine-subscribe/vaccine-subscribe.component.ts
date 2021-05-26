@@ -89,14 +89,14 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     console.log(this.otp);
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
-      phoneNumber: this.wizardResult.phoneNumber as string
+      phoneNumber: this.wizardResult.phoneNumber as string,
+      subscriptions: { centerIds: this.centers.map(c => c._id) }
     }).subscribe(res => {
-      console.log("OTP CORRCT GO TO NEXT PAGE");
+      console.log("OTP CORRECT GO TO NEXT PAGE");
       // this.router.navigate(['/subscriptions/dashboard]);
 
     }, err => {
-      console.log('WRONG OTP');
-
+      console.log('WRONG OTP! clear');
       this.loading = false;
       this.isOtpLengthValid = false;
       this.ngOtpInputRef?.otpForm.enable();
