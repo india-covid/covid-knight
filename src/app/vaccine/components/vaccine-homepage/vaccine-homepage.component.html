@@ -1,15 +1,50 @@
 <div class="homepage container">
   <!-- <div class="homepage__header">Home Page Header</div>
   <div class="homepage__body">Homepage body</div> -->
-  <div class="container">
+  <!-- <div class="container">
 
   </div>
   <h2 class="p-2 mt-3">Get free vaccine availability alerts on your phone. Subscribe below </h2>
   <p class="p-2 text-muted"> Non profit, if this helped you please considering donating.
-  <p class="homepage__alerts-info"></p>
-  <div class="homepage__container">
-    <app-vaccine-wizard (done) ="wizardDone()"></app-vaccine-wizard>
+  <p class="homepage__alerts-info"></p> -->
+  <!-- <div class="homepage__container">
+    <app-vaccine-wizard (done) ="wizardDone()"></app-vaccine-wizard> -->
+
+
+<div class="homepage">
+  <div class="homepage__info-wrapper">
+    <div class="homepage__layer">
+      <div class="flex head">
+        <div class="icon">
+          <img src="../../assets/icons/shield.png" alt="" />
+        </div>
+        <div class="title">
+          <p class="title-text">VACCINE WATCHER</p>
+          <p class="title-slogan">100% accurate data</p>
+        </div>
+      </div>
+      <div class="body">
+        <div class="text">
+          <p>
+            Get notification on your Whatsapp/SMS for available vaccine slots
+            for <b>18+ & 45+ </b> in your selected area for free.
+          </p>
+          <p>Lets get vaccinated (:</p>
+        </div>
+        <p><i class="ri-arrow-down-s-line"></i></p>
+        <a href="#container"><button class="btn btn-warning">
+            <b>Select your Area Now</b>
+          </button></a>
+      </div>
+      <div class="last-sync">
+        Last Data Synced
+        <p class="last-sync__text">26 May, 1:30 Am</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="homepage__container" id="container">
+    <h2 class="text-center homepage__container__heading">Select your area</h2>
+    <app-vaccine-wizard (done)="wizardDone()"></app-vaccine-wizard>
   </div>
 </div>
-
-

@@ -1,15 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Covid.<i>info</i></a>
-  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-    <span class="ri-bar-chart-horizontal-line"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapseBasic" [isAnimated]="true" [collapse]="isCollapsed">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item" *ngFor="let item of items">
-        <a class="nav-link" href="#"><i class="nav-icon" [ngClass]="[item.icon]"></i>{{ item.label }}
-        </a>
-      </li>
-    </ul>
+
+<div class="header">
+  <div class="header__content" [ngClass]="[activeMenuItem]" >
+    <div class="header__item" (click)="changeMenu(MENUITEMS.HOME)"  [class.header__item__active]="activeMenuItem ==='home'" >
+      <i class="ri-home-3-fill header__item__icon"></i>
+      <p class="header__item__label" >Home</p>
+    </div>
+    <div class="header__item" (click)="changeMenu(MENUITEMS.CONTACT)" [class.header__item__active]="activeMenuItem ==='contact'">
+      <i class="ri-contacts-fill header__item__icon"></i>
+      <p class="header__item__label">Contact</p>
+    </div>
+    <div class="header__item"  (click)="changeMenu(MENUITEMS.DONATE)"  [class.header__item__active]="activeMenuItem ==='donate'">
+      <i class="ri-hand-heart-fill header__item__icon"></i>
+      <p class="header__item__label">Donate</p>
+    </div>
   </div>
-</nav>
+</div>

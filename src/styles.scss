@@ -5,21 +5,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,400&display=swap");
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "remixicon/fonts/remixicon.css";
-@import '~intl-tel-input/build/css/intlTelInput.css';
+@import "~intl-tel-input/build/css/intlTelInput.css";
 
 body {
   font-family: "Lato", sans-serif;
+  scroll-behavior: smooth
 }
-
+html{
+  scroll-behavior: smooth;
+}
+////////////////////////////////////////////////////// css for ng-select////////////////////////////////////////////////////////////
 .ng-select .ng-select-container {
-  border-radius: 4px !important;
   border: none !important;
 }
 
-.ng-select.state-selector .ng-select-container,
-.ng-select.district-selector .ng-select-container {
-  box-shadow: none !important;
-}
 .ng-select .ng-select-container .ng-value,
 .ng-option {
   background-color: rgb(248, 248, 248) !important;
@@ -30,13 +29,6 @@ body {
 .ng-option-selected {
   background-color: rgb(90, 139, 247) !important;
   color: var(--white) !important;
-}
-
-.ng-select.state-selector .ng-value,
-.ng-option-selected,
-.ng-select.district-selector .ng-value,
-.ng-option-selected {
-  background-color: none !important;
 }
 
 .ng-dropdown-panel {
@@ -56,4 +48,21 @@ body {
   100% {
     transform: scaleY(1);
   }
+}
+
+/////////////////////////////////////////////////// css for int-tel-input /////////////////////////////////////////////////////////////
+
+.iti input:focus {
+  border-bottom: 2px solid rgb(1, 129, 248) !important;
+}
+
+.wizard__phone-input .form-control {
+  outline: none;
+  border: none;
+  height: auto !important;
+  width: 85vw !important;
+  max-width: 540px;
+  box-shadow: none;
+  border-radius: 0px;
+  border-bottom: solid 2px rgb(49, 49, 49) !important;
 }
