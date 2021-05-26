@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Center } from '../models/center.model';
 import { District } from '../models/district.model';
 import { State } from '../models/state.model';
+import { VaccineSession } from '../models/vaccine-session.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -57,6 +58,11 @@ export class VaccineRestService {
   centersByDistrictId(districtId: string) {
     const url = environment.apiBase + `${this.vaccineBase}/centers/districts/${districtId}`;
     return this.http.get<Center[]>(url);
+  }
+
+  getSessionsByCenterId(centerId: string, date: string) {
+    const url = environment.apiBase + `${this.vaccineBase}/sessions/${date}/center/${centerId}`;
+    return this.http.get<VaccineSession[]>(url);
   }
 
 

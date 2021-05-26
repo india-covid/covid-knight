@@ -1,3 +1,5 @@
+import { VaccineSession } from "./vaccine-session.model";
+
 export interface Center {
   _id: string;
   address: string;
@@ -14,6 +16,14 @@ export interface Center {
   stateId: string;
   districtId: string;
 }
+
+
+
+// only an ui helper
+export interface CenterWithSessions extends Center{
+  sessions: VaccineSession[];
+}
+
 export enum FeeType {
   FREE = 'Free',
   PAID = 'Paid',

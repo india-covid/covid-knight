@@ -26,7 +26,7 @@ export class CentersByDistrictSelectorComponent implements OnInit {
 
   constructor(private vaccineRestService: VaccineRestService) {
     this.districts$ = this._stateSubject.pipe(tap(() => this.selectedCenters = []),switchMap(stateId => this.vaccineRestService.getDistrictByState$(stateId)));
-    this.centers$ = this._districtSubject.pipe(switchMap(districtId => this.vaccineRestService.centersByDistrictId(districtId)))
+    this.centers$ = this._districtSubject.pipe(switchMap(districtId => this.vaccineRestService.centersByDistrictId(districtId)));
   }
 
   ngOnInit(): void {

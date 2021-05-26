@@ -1,14 +1,51 @@
 <div class="subscribe">
-  <div class="subscribe__header">
-    <p class="text-center">{{ (wizardResult.minLeft || 0 )| number:"2.0" }}: {{ (wizardResult.secLeft || 0) | number:"2.0"}}</p>
-  </div>
+  <!-- <div class="subscribe__header p-3">
+
+  </div> -->
   <div class="subscribe__body mt-3">
-    <div class="subscribe__otp d-flex">
-      <ng-otp-input class="mx-auto"  (onInputChange)="onOtpChange($event)"  [config]="{length:4}"></ng-otp-input>
+
+    <div class="subscribe__number">
+      <h2 class="text-center">OTP sent to: {{ wizardResult.phoneNumber }}</h2>
     </div>
+    <div class="subscribe__timer">
+      <h3 class="text-center">{{ (wizardResult.minLeft || 0 )| number:"2.0" }}: {{ (wizardResult.secLeft || 0) |
+        number:"2.0"}}</h3>
+    </div>
+
+    <div class="subscribe__otp d-flex mt-2">
+      <ng-otp-input class="mx-auto" (onInputChange)="onOtpChange($event)" [config]="{length:4}"></ng-otp-input>
+    </div>
+
+
     <div class="subscribe__confirm d-flex mt-2">
       <button class="btn btn-primary mx-auto"> Confirm </button>
     </div>
-  </div>
 
+    <!-- Simple display data -->
+    <div class="subscribe__center mt-4">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Center</th>
+              <th scope="col" *ngFor="let day of threeDaysFromNow">{{ day| date: 'dd/MM' }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let center of centers">
+              <!-- TODO: Fix all the below styles -->
+              <th scope="row"> <span class="d-block" style="text-overflow: ellipsis; width: 20px;" >{{ center.name}} </span></th>
+              <th *ngFor="let session of (center.sessions || [])">
+                <div>
+                    Age: {{ session.minAgeLimit }}
+                    Vaccine: {{ session.vaccine }}
+                    Available: {{ session.availableCapacity }}
+                </div>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
