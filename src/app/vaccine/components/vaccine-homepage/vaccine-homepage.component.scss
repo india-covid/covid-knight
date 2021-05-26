@@ -1,18 +1,22 @@
 
+$action-button-color:#fdfff5;
+$action-button-bg-color:  #455268;
+$stage1-bg-color: #fdfcfa;
+
+
 .homepage {
   position: relative;
   max-width: 550px;
   margin: 0 auto;
   overflow:hidden ;
   &__layer {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color:  $stage1-bg-color;
     height: 100%;
     padding-top: 20%;
     position: relative;
     .last-sync{
       width:150px;
       margin:10px auto;
-      color: white;
       &__text{
         border:solid red;
         padding:5px;
@@ -54,22 +58,29 @@
           font-size: calc(1vw + 20px);
           padding: 0;
           margin: 0;
-          color: white;
         }
         .title-slogan {
           padding: 0;
           margin: 0;
           font-size: 15px;
-          color: white;
         }
       }
     }
     .body {
-      color: white;
       font-size: 20px;
       padding: 20px;
       margin-top: 20px;
+      &__non-profit{
+        font-size: 1.02rem;
+      }
+      &__action-btn {
+        background-color: $action-button-bg-color;
+        color: $action-button-color;
+        border-radius: 2rem;
+      }
+
       .text{
+        font-weight: 400;
         p{
           padding:0;
           margin:0;
