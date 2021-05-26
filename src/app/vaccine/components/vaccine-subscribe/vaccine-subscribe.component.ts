@@ -46,18 +46,18 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     if(isNonEmptyArray(this.centers)) {
       return;
     }
-    for(let center of centers) {
-      console.log('looping through centers', centers)
-      const sub = this.subscriptionService.getDetailedCenterInfo(center).subscribe(sessions => {
-        const flattenSessions = sessions.reduce((p, c) => p = [...p, ...c], [])
-        this.centers.push({...center, sessions: flattenSessions}) as any;
-      })
-      this.subs.add(sub);
-    }
-    // just for testing remove later
-    setTimeout(() => {
-      console.log(this.centers)
-    }, 3000);
+    // for(let center of centers) {
+    //   console.log('looping through centers', centers)
+    //   const sub = this.subscriptionService.getDetailedCenterInfo(center).subscribe(sessions => {
+    //     const flattenSessions = sessions.reduce((p, c) => p = [...p, ...c], [])
+    //     this.centers.push({...center, sessions: flattenSessions}) as any;
+    //   })
+    //   this.subs.add(sub);
+    // }
+    // // just for testing remove later
+    // setTimeout(() => {
+    //   console.log(this.centers)
+    // }, 3000);
 
   }
 
