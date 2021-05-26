@@ -20,31 +20,5 @@
     <div class="subscribe__confirm d-flex mt-2">
       <button class="btn btn-primary mx-auto"> Confirm </button>
     </div>
-
-    <!-- Simple display data -->
-    <!-- <div class="subscribe__center mt-4">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Center</th>
-              <th scope="col" *ngFor="let day of threeDaysFromNow">{{ day| date: 'dd/MM' }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let center of centers">
-              <th scope="row"> <span class="d-block" style="text-overflow: ellipsis; width: 20px;" >{{ center.name}} </span></th>
-              <th *ngFor="let session of (center.sessions || [])">
-                <div>
-                    Age: {{ session.minAgeLimit }}
-                    Vaccine: {{ session.vaccine }}
-                    Available: {{ session.availableCapacity }}
-                </div>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div> -->
   </div>
 </div>
