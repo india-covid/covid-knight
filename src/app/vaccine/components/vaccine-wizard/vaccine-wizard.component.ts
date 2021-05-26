@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { Center } from '../../models/center.model';
-import { CountryISO } from 'ngx-intl-tel-input'
 import { ValidationErrors } from '@angular/forms';
 import { isNonEmptyArray } from 'src/app/core/utils';
 import { AuthService } from 'src/app/core/auth.service';
@@ -23,7 +22,6 @@ export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;
   activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
-  CountryISO = CountryISO;
   phone: any;
   @Output() done = new EventEmitter<boolean>();
 
@@ -45,7 +43,8 @@ export class VaccineWizardComponent implements OnInit {
     this.selectedCenters = centers;
   };
 
-  onPhoneChange(phone: { number: string, countryCode: string }, errors?: any) {
+  onPhoneChange(phone: { number: string, countryCode: string}, errors?: any) {
+    console.log(errors)
     if (errors) {
       return this._phoneNumber = {};
     }
@@ -71,7 +70,7 @@ export class VaccineWizardComponent implements OnInit {
   }
 
 
-  private saveCurrentResults(phoneNumber: string = '', countryCode: string = CountryISO.India.toUpperCase()) {
+  private saveCurrentResults(phoneNumber: string = '', countryCode: string = 'IN') {
     this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber, countryCode , centers: this.selectedCenters});
     this.done.next(true);
   }
