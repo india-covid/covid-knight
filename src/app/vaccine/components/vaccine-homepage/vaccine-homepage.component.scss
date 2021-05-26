@@ -1,8 +1,10 @@
 
 $action-button-color:#fdfff5;
-$action-button-bg-color:  #455268;
-$stage1-bg-color: #fdfcfa;
-
+$action-button-bg-color:  #363945;
+$stage1-bg-color:#159bd5;
+$head-text-color:#363945;//var(--app-color-light);
+$text-color:var(--app-color-light);
+$text-muted-color:var(--app-color-light-tint);
 
 .homepage {
   position: relative;
@@ -10,23 +12,14 @@ $stage1-bg-color: #fdfcfa;
   margin: 0 auto;
   overflow:hidden ;
   &__layer {
-    background-color:  $stage1-bg-color;
+    background-color:rgba(0,0,0,0.1);//$stage1-bg-color;
     height: 100%;
     padding-top: 20%;
     position: relative;
-    .last-sync{
-      width:150px;
-      margin:10px auto;
-      &__text{
-        border:solid red;
-        padding:5px;
-        border:solid rgb(80, 219, 87) 1px;
-        border-radius:20px;
-      }
-    }
+
   }
   &__info-wrapper {
-    background-image: url("../../../../assets/img/s3.jpg");
+    background-color:$stage1-bg-color;// url("../../../../assets/img/s3.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -34,7 +27,7 @@ $stage1-bg-color: #fdfcfa;
     text-align: center;
     align-items: center;
 
-    .head {
+    &__head {
       align-items: center;
       padding: 0;
       max-width: 460px;
@@ -42,7 +35,9 @@ $stage1-bg-color: #fdfcfa;
       display: flex;
       justify-content: center;
       font-weight: bold;
-      .icon {
+      color:$head-text-color;
+
+      &__icon {
         height: 70px;
         width: 70px;
         position: relative;
@@ -52,14 +47,14 @@ $stage1-bg-color: #fdfcfa;
           width: 100%;
         }
       }
-      .title {
+      &__title {
         margin-left: 10px;
-        .title-text {
+        &__text {
           font-size: calc(1vw + 20px);
           padding: 0;
           margin: 0;
         }
-        .title-slogan {
+        &__slogan {
           padding: 0;
           margin: 0;
           font-size: 15px;
@@ -69,9 +64,11 @@ $stage1-bg-color: #fdfcfa;
     .body {
       font-size: 20px;
       padding: 20px;
+      color:$text-color;
       margin-top: 20px;
       &__non-profit{
         font-size: 1.02rem;
+        color:$text-muted-color;
       }
       &__action-btn {
         background-color: $action-button-bg-color;
@@ -79,23 +76,43 @@ $stage1-bg-color: #fdfcfa;
         border-radius: 2rem;
       }
 
-      .text{
+      &__text{
         font-weight: 400;
+        color:$text-color;
         p{
           padding:0;
           margin:0;
         }
       }
     }
+    .last-sync{
+      width:150px;
+      margin:10px auto;
+      color:$text-color;
+
+      &__text{
+        border:solid red;
+        padding:5px;
+        border:solid rgb(80, 219, 87) 1px;
+        border-radius:20px;
+      }
+    }
   }
   &__container {
-    // max-width: 600px;
-    height:100vh;
-    margin: 2rem auto;
-    padding: 30px 25px 0px 25px;
+    height:97vh;
+    margin: 0px  auto;
+    padding: 30px 30px 0px 30px;
     &__heading{
-      padding:40px 0px 40px 0px;
+      padding:20px 0px 40px 0px;
+      font-size:1.6rem;
+      &__icon{
+        position: relative;
+        bottom:-4px;
+        font-size:1.7rem;
+        margin:7px;
+      }
     }
+
   }
 
   &__alerts-info {

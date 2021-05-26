@@ -6,6 +6,8 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "remixicon/fonts/remixicon.css";
 @import "~intl-tel-input/build/css/intlTelInput.css";
+@import "theme.scss";
+
 
 body {
   font-family: "Lato", sans-serif;
@@ -17,6 +19,7 @@ html{
 ////////////////////////////////////////////////////// css for ng-select////////////////////////////////////////////////////////////
 .ng-select .ng-select-container {
   border: none !important;
+  box-shadow: none !important;
 }
 
 .ng-select .ng-select-container .ng-value,
@@ -50,19 +53,31 @@ html{
   }
 }
 
-/////////////////////////////////////////////////// css for int-tel-input /////////////////////////////////////////////////////////////
 
-.iti input:focus {
-  border-bottom: 2px solid rgb(1, 129, 248) !important;
+
+.selector{
+  border-bottom: 2px solid rgb(83, 82, 82);
+  margin: auto;
+  margin-top:30px;
+ }
+
+
+
+.app-input{
+  color: black ;
+  border: none ;
+  background: none ;
+  border-bottom: 2px solid rgb(83, 82, 82) ;
+  outline: none ;
+  transition: 0.3s ease all ;
+  margin: auto ;
+  border-radius: 0 ;
+  padding:10px !important;
 }
 
-.wizard__phone-input .form-control {
-  outline: none;
-  border: none;
-  height: auto !important;
-  width: 85vw !important;
-  max-width: 540px;
-  box-shadow: none;
-  border-radius: 0px;
-  border-bottom: solid 2px rgb(49, 49, 49) !important;
+
+.app-input:focus{
+  box-shadow: none !important;
+  border-bottom: 2px solid rgb(29, 122, 209);
 }
+

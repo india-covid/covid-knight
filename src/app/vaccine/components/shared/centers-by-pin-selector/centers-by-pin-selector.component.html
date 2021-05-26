@@ -1,7 +1,7 @@
 <div class="pin pin-container">
   <div class="form-group pin__body">
-    <input type="text" class="p-5" [maxlength]="pincodeLength" (ngModelChange)="refreshCenters($event)"
-      [(ngModel)]="pincode" class="form-control pin__input" digitOnly placeholder="Pin code">
+    <input type="text" [maxlength]="pincodeLength" (ngModelChange)="refreshCenters($event)"
+      [(ngModel)]="pincode" class="form-control pin__input app-input" digitOnly placeholder="Pin code">
   </div>
   <!-- <ng-select [items]="(centers$ | async)!" bindLabel="name" bindValue="_id"> -->
   <ng-select class="center-selector selector mt-4" placeholder="Select center/hospital"

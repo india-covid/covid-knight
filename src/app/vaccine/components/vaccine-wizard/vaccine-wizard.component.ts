@@ -7,16 +7,35 @@ import { AuthService } from 'src/app/core/auth.service';
 import { concatMap, map, switchMap, take } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 
 enum WizardTabs {
-  PIN = 'Pin',
+  PIN = 'PINCODE',
   DISTRICT = 'DISTRICT'
 }
 @Component({
   selector: 'app-vaccine-wizard',
   templateUrl: './vaccine-wizard.component.html',
   styleUrls: ['./vaccine-wizard.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimationLeft', [
+        transition(':enter', [
+          style({transform: 'translateX(-100%)', opacity: 0}),
+          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        ])
+      ]
+    ),
+    trigger(
+      'enterAnimationRight', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        ])
+      ]
+    )
+  ],
 })
 export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;

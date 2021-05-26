@@ -10,6 +10,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CentersByDistrictSelectorComponent } from './components/shared/centers-by-district-selector/centers-by-district-selector.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
+
 import { NgOtpInputModule } from  'ng-otp-input';
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { NgOtpInputModule } from  'ng-otp-input';
     FormsModule,
     NgSelectModule,
     NgxIntlTelInputModule,
-    NgOtpInputModule
+    NgOtpInputModule,
   ]
 })
 export class VaccineModule { }

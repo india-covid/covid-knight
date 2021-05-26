@@ -14,37 +14,34 @@
 <div class="homepage">
   <div class="homepage__info-wrapper">
     <div class="homepage__layer">
-      <div class="flex head">
-        <div class="icon">
+      <div class="flex homepage__info-wrapper__head">
+        <div class="homepage__info-wrapper__head__icon">
           <img src="../../assets/icons/shield.png" alt="" />
         </div>
-        <div class="title">
-          <p class="title-text">VACCINE WATCHER</p>
+        <div class="homepage__info-wrapper__head__title">
+          <p class="homepage__info-wrapper__head__title__text">VACCINE WATCHER</p>
+          <p class="homepage__info-wrapper__head__title__slogan">Lets get vaccinated (:</p>
         </div>
+
       </div>
       <div class="body">
-        <div class="text mt-2">
-            <!-- Get notification on your Whatsapp/SMS for available vaccine slots
-              for <b>18+ & 45+ </b> in your selected area for free. -->
+        <div class="body__text mt-2">
             Get free vaccine availability alerts on your phone, <b>18+ & 45+ </b>.
-
-
         </div>
-        <p class="body__non-profit p-2 text-muted mt-1"> Non profit, if this helped you please considering donating.</p>
-        <!-- <p><i class="ri-arrow-down-s-line"></i></p> -->
+        <p class="body__non-profit body__text__muted p-2  mt-1"> Non profit, if this helped you please considering donating.</p>
         <a href="#container"><button class="btn btn-lg pt-2 body__action-btn">
             <b>Select your Area Now</b>
           </button></a>
       </div>
       <div class="last-sync">
         Last sync from cowin
-        <p class="last-sync__text">2 min ago</p>
+        <p class="last-sync__text mt-2">2 min ago</p>
       </div>
     </div>
   </div>
 
   <div class="homepage__container" id="container">
-    <h2 class="text-center homepage__container__heading">Select your area</h2>
+    <h2 class="text-center homepage__container__heading"> <i  class="ri-map-pin-user-fill homepage__container__heading__icon"></i>Select your center</h2>
     <app-vaccine-wizard (done)="wizardDone()"></app-vaccine-wizard>
   </div>
 </div>

@@ -9,7 +9,7 @@ import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.servic
 @Component({
   selector: 'app-centers-by-district-selector',
   templateUrl: './centers-by-district-selector.component.html',
-  styleUrls: ['./centers-by-district-selector.component.scss']
+  styleUrls: ['./centers-by-district-selector.component.scss'],
 })
 export class CentersByDistrictSelectorComponent implements OnInit {
 
