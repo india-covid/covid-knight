@@ -6,6 +6,8 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "remixicon/fonts/remixicon.css";
 @import "~intl-tel-input/build/css/intlTelInput.css";
+@import "theme/theme.scss";
+
 
 body {
   font-family: "Lato", sans-serif;
@@ -14,9 +16,11 @@ body {
 html{
   scroll-behavior: smooth;
 }
+
 ////////////////////////////////////////////////////// css for ng-select////////////////////////////////////////////////////////////
 .ng-select .ng-select-container {
   border: none !important;
+  box-shadow: none !important;
 }
 
 .ng-select .ng-select-container .ng-value,
@@ -27,8 +31,8 @@ html{
 
 .ng-select.center-selector .ng-select-container .ng-value,
 .ng-option-selected {
-  background-color: rgb(90, 139, 247) !important;
-  color: var(--white) !important;
+  background-color: rgb(164, 193, 255) !important;
+  // color: var(--white) !important;
 }
 
 .ng-dropdown-panel {
@@ -50,19 +54,66 @@ html{
   }
 }
 
-/////////////////////////////////////////////////// css for int-tel-input /////////////////////////////////////////////////////////////
 
-.iti input:focus {
-  border-bottom: 2px solid rgb(1, 129, 248) !important;
+
+.selector{
+  border-bottom: 2px solid rgb(83, 82, 82);
+  margin: auto;
+  margin-top:30px;
+ }
+
+
+
+ .app-btn{
+  width:150px;
+  padding:7px;
+  background: var(--btn-bg-color);
+  color:white;
+  border-radius:4px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.wizard__phone-input .form-control {
-  outline: none;
-  border: none;
-  height: auto !important;
-  width: 85vw !important;
-  max-width: 540px;
-  box-shadow: none;
-  border-radius: 0px;
-  border-bottom: solid 2px rgb(49, 49, 49) !important;
+.disabled-btn{
+background-color: var(--app-color-dark-tint) !important;
+}
+
+.app-input{
+  color: black ;
+  border: none ;
+  background: none ;
+  border-bottom: 2px solid rgb(83, 82, 82) ;
+  outline: none ;
+  transition: 0.3s ease all ;
+  margin: auto ;
+  border-radius: 0 ;
+  padding:10px !important;
+  font-weight: 300;
+}
+
+
+.app-input:focus{
+  box-shadow: none !important;
+  border-bottom: 2px solid rgb(29, 122, 209);
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgb(209, 209, 209);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(158, 158, 158);
 }

@@ -1,0 +1,80 @@
+
+
+:root {
+
+  --tab-color:rgb(0, 0, 0);
+  --btn-bg-color:black;
+
+/** primary **/
+  --app-color-primary: rgb(43, 162, 241);
+
+  --app-color-primary-rgb: 56, 128, 255;
+  --app-color-primary-contrast: #ffffff;
+  --app-color-primary-contrast-rgb: 255, 255, 255;
+  --app-color-primary-shade: #3171e0;
+  --app-color-primary-tint: #4c8dff;
+
+  /** secondary **/
+  --app-color-secondary: #3dc2ff;
+  --app-color-secondary-rgb: 61, 194, 255;
+  --app-color-secondary-contrast: #ffffff;
+  --app-color-secondary-contrast-rgb: 255, 255, 255;
+  --app-color-secondary-shade: #36abe0;
+  --app-color-secondary-tint: #50c8ff;
+
+  /** tertiary **/
+  --app-color-tertiary: #5260ff;
+  --app-color-tertiary-rgb: 82, 96, 255;
+  --app-color-tertiary-contrast: #ffffff;
+  --app-color-tertiary-contrast-rgb: 255, 255, 255;
+  --app-color-tertiary-shade: #4854e0;
+  --app-color-tertiary-tint: #6370ff;
+
+  /** success **/
+  --app-color-success: #2dd36f;
+  --app-color-success-rgb: 45, 211, 111;
+  --app-color-success-contrast: #ffffff;
+  --app-color-success-contrast-rgb: 255, 255, 255;
+  --app-color-success-shade: #28ba62;
+  --app-color-success-tint: #42d77d;
+
+  /** warning **/
+  --app-color-warning: #ffc409;
+  --app-color-warning-rgb: 255, 196, 9;
+  --app-color-warning-contrast: #000000;
+  --app-color-warning-contrast-rgb: 0, 0, 0;
+  --app-color-warning-shade: #e0ac08;
+  --app-color-warning-tint: #ffca22;
+
+  /** danger **/
+  --app-color-danger: #eb445a;
+  --app-color-danger-rgb: 235, 68, 90;
+  --app-color-danger-contrast: #ffffff;
+  --app-color-danger-contrast-rgb: 255, 255, 255;
+  --app-color-danger-shade: #cf3c4f;
+  --app-color-danger-tint: #ed576b;
+
+  /** dark **/
+  --app-color-dark: #222428;
+  --app-color-dark-rgb: 34, 36, 40;
+  --app-color-dark-contrast: #ffffff;
+  --app-color-dark-contrast-rgb: 255, 255, 255;
+  --app-color-dark-shade: #1e2023;
+  --app-color-dark-tint: #383a3e;
+
+  /** medium **/
+  --app-color-medium: #92949c;
+  --app-color-medium-rgb: 146, 148, 156;
+  --app-color-medium-contrast: #ffffff;
+  --app-color-medium-contrast-rgb: 255, 255, 255;
+  --app-color-medium-shade: #808289;
+  --app-color-medium-tint: #9d9fa6;
+
+  /** light **/
+  --app-color-light: #f4f5f8;
+  --app-color-light-rgb: 244, 245, 248;
+  --app-color-light-contrast: #000000;
+  --app-color-light-contrast-rgb: 0, 0, 0;
+  --app-color-light-shade: #d7d8da;
+  --app-color-light-tint: #f5f6f9;
+}

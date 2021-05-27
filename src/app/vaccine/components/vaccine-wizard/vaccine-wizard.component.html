@@ -1,4 +1,6 @@
 <main class="wizard">
+  <ngx-spinner></ngx-spinner>
+
   <!-- Tabs -->
   <div class="wizard__tabs">
     <div class="wizard__tab left text-center" [ngClass]="WizardTabs.PIN === activeTab ? 'left' : 'right'">
@@ -15,24 +17,45 @@
   <!-- Centers selectors -->
 
   <div class="wizard__centers-picker mt-5">
-    <app-centers-by-district-selector (centersSelected)="centersSelected($event)"
-      *ngIf="activeTab === WizardTabs.DISTRICT"></app-centers-by-district-selector>
-    <app-centers-by-pin-selector (centersSelected)="centersSelected($event)" *ngIf="activeTab === WizardTabs.PIN">
+    <div  *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
+
+      <app-centers-by-district-selector (centersSelected)="centersSelected($event)"
+      ></app-centers-by-district-selector>
+    </div>
+    <div *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
+
+      <app-centers-by-pin-selector (centersSelected)="centersSelected($event)"
+       >
     </app-centers-by-pin-selector>
   </div>
+  </div>
 
-  <div class="wizard__phone-number d-flex mt-3">
 
+  <div class="wizard__phone-number d-flex mt-4" *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
     <input type="text"
        #phoneNumber="ngModel"
       placeholder="Enter Mobile Number"
       (ngModelChange)="onPhoneChange({number: $event, countryCode: 'IN'}, phoneNumber.errors)"
-      [(ngModel)]="phone" class="form-control" digitOnly maxlength="10" minlength="10" />
-
+      [(ngModel)]="phone" class="form-control app-input" digitOnly maxlength="10" minlength="10" />
   </div>
 
-  <div class="div subscribe d-flex mt-4">
-    <button class="btn btn-primary mx-auto" (click)="subscribeClicked()"
+  <div class="wizard__phone-number d-flex mt-4" *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
+    <input type="text"
+       #phoneNumber="ngModel"
+      placeholder="Enter Mobile Number"
+      (ngModelChange)="onPhoneChange({number: $event, countryCode: 'IN'}, phoneNumber.errors)"
+      [(ngModel)]="phone" class="form-control app-input" digitOnly maxlength="10" minlength="10" />
+  </div>
+
+
+  <div class="div subscribe d-flex mt-5" *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
+    <button class="mx-auto app-btn" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="subscribeClicked()"
+      [disabled]="!isSubscribeButtonEnabled || subscribing">
+      Subscribe
+    </button>
+  </div>
+  <div class="div subscribe d-flex mt-5" *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
+    <button class="mx-auto app-btn" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="subscribeClicked()"
       [disabled]="!isSubscribeButtonEnabled || subscribing">
       Subscribe
     </button>

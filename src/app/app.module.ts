@@ -5,14 +5,15 @@ import { CookieModule } from 'ngx-cookie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpHeaderInterceptor } from './core/http-interceptor';
-import { HeaderComponent } from './shared/components/shared/header/header.component';
+// import { HeaderComponent } from './shared/components/shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { EmptySpaceComponent } from './vaccine/components/shared/empty-space/empty-space.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    // HeaderComponent,
+    EmptySpaceComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -20,8 +21,6 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     HttpClientModule,
     BrowserAnimationsModule,
     CookieModule.forRoot(),
-    CollapseModule.forRoot(),
-    CookieModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true}
