@@ -1,5 +1,23 @@
 .subscribe {
+  margin-top:2rem;
+  height:100vh;
   &__header {
     height: 16rem;
+  }
+  &__image{
+    // border:solid red;
+    text-align: center;
+    padding:10px;
+    min-height:100px;
+  }
+  &__number{
+    &__text{
+      font-size: 1.5rem;;
+    }
+  }
+  &__timer{
+    &__text{
+      font-size:1.5rem;
+    }
   }
 }

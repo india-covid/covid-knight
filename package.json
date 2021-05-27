@@ -29,6 +29,7 @@
     "ngx-bootstrap": "^6.2.0",
     "ngx-cookie": "^5.0.2",
     "ngx-intl-tel-input": "^3.1.1",
+    "ngx-spinner": "^11.0.1",
     "remixicon": "^2.5.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
