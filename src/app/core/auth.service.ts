@@ -41,14 +41,14 @@ export class AuthService {
     if (!authInfo.phoneNumber || !authInfo.otp) {
       throw new Error('Missing fields');
     }
-    authInfo.otp = btoa('' + authInfo.otp);
+    authInfo.otp = btoa(authInfo.otp);
     const url = environment.apiBase + this.authMainLoginUrl;
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
-      const { token, ...others } = body;
+      const { token, ...user } = body;
       if (token?.token) {
         this.cookieService.put('Authorization', token.token, { expires: token.expiresIn + '' });
       }
-      this._userSubject.next(others);
+      this._userSubject.next(user);
     }));
   }
 

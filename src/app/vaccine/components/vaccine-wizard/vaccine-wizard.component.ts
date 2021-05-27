@@ -63,7 +63,6 @@ export class VaccineWizardComponent implements OnInit {
   };
 
   onPhoneChange(phone: { number: string, countryCode: string}, errors?: any) {
-    console.log(errors)
     if (errors) {
       return this._phoneNumber = {};
     }

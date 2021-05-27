@@ -1,18 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, of } from 'rxjs';
+import { forkJoin, timer, of, } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
+import { VaccineRestService } from './vaccine-rest.service';
+import { Center } from '../models/center.model';
 
-const OTP_EXPIRE_MIN = 3;
+const OTP_EXPIRE_MIN = 5;
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
 
-  constructor(private storageService: LocalStorageService) { }
-  private _secondInterval = interval(1000);
+  constructor(private storageService: LocalStorageService, private vaccineRestService: VaccineRestService) { }
+  private _secondInterval = timer(0, 1000);
   private storageKey = 'subscription';
 
   get wizardResult() {
@@ -28,6 +30,15 @@ export class SubscriptionService {
       }
       return result;
     }));
+  }
+
+  getDetailedCenterInfo(center: Center) {
+    const sessionRequests = ([0, 1, 2]
+      .map(val => DayJs().add(val, 'day')
+        .format('DDMMYYYY'))).map(date => this.vaccineRestService
+          .getSessionsByCenterId(center._id, date));
+
+    return forkJoin(sessionRequests);
   }
 
 }
