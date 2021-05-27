@@ -5,6 +5,8 @@ import { Center } from 'src/app/vaccine/models/center.model';
 import { District } from 'src/app/vaccine/models/district.model';
 import { State } from 'src/app/vaccine/models/state.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-centers-by-district-selector',
@@ -15,7 +17,7 @@ export class CentersByDistrictSelectorComponent implements OnInit {
 
   @Input() selectedState: null | State = null;
   @Input() selectedDistrict: District | null = null;
-  @Output() centersSelected = new EventEmitter<{ centers: Center[], districtId?: string,selectedState?:State|null,selectedDistrict?:District|null }>()
+  @Output() centersSelected = new EventEmitter<{ centers: Center[], districtId?: string}>()
 
   private _stateSubject = new Subject<string>();
   private _districtSubject = new Subject<string>();
@@ -24,7 +26,9 @@ export class CentersByDistrictSelectorComponent implements OnInit {
   selectedCenters: Center[] = [];
 
 
-  constructor(private vaccineRestService: VaccineRestService) {
+  constructor(private vaccineRestService: VaccineRestService,
+    private storageService: LocalStorageService,
+    private spinner: NgxSpinnerService) {
     this.districts$ = this._stateSubject.pipe(tap(() => this.selectedCenters = []),switchMap(stateId => this.vaccineRestService.getDistrictByState$(stateId)));
     this.centers$ = this._districtSubject.pipe(switchMap(districtId => this.vaccineRestService.centersByDistrictId(districtId)));
   }
@@ -49,7 +53,7 @@ export class CentersByDistrictSelectorComponent implements OnInit {
   }
 
   onCenterChange(centers: Center[]) {
-    this.centersSelected.emit({centers, districtId: this.selectedDistrict?._id,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict})
+    this.centersSelected.emit({centers, districtId: this.selectedDistrict?._id})
   }
 
 }

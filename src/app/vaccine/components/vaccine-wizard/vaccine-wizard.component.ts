@@ -5,11 +5,11 @@ import { ValidationErrors } from '@angular/forms';
 import { isNonEmptyArray } from 'src/app/core/utils';
 import { AuthService } from 'src/app/core/auth.service';
 import { concatMap, map, switchMap, take } from 'rxjs/operators';
-import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { District } from 'src/app/vaccine/models/district.model';
 import { State } from 'src/app/vaccine/models/state.model';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { NgxSpinnerService } from "ngx-spinner";
 
 enum WizardTabs {
@@ -43,9 +43,9 @@ export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;
   activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
-  selectedState:State|null=null;
-  selectedDistrict:District|null=null;
-  pincode:string|null=null;
+  selectedState:State|null|undefined=null;
+  selectedDistrict:District|null|undefined=null;
+  pincode:string|null|undefined=null;
   phone: any;
   @Output() done = new EventEmitter<boolean>();
 
@@ -58,7 +58,7 @@ export class VaccineWizardComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
 
-    let prevData = this.storageService.get('subscription');
+    let prevData = this.storageService.get('wizardState');
     console.log(prevData);
     if(prevData){
       this.selectedCenters = prevData.centers;
@@ -75,8 +75,8 @@ export class VaccineWizardComponent implements OnInit {
     this.activeTab = tab;
   }
 
-  centersSelected({ centers , pincode ,selectedState , selectedDistrict}: { centers: Center[],pincode?:string,selectedState?:State|null,selectedDistrict?:District|null }) {
-    console.log(pincode,selectedState,selectedDistrict);
+  centersSelected({ centers}: { centers: Center[] }) {
+
     this.selectedCenters = centers;
   };
 
@@ -110,7 +110,7 @@ export class VaccineWizardComponent implements OnInit {
 
   private saveCurrentResults(phoneNumber: string = '', countryCode: string = 'IN') {
     this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber, countryCode , centers: this.selectedCenters});
-    this.storageService.set('wizardState', {phoneNumber:phoneNumber, countryCode:countryCode ,pincode:this.pincode,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict,centers: this.selectedCenters});
+    // this.storageService.set('wizardState', {tab:this.activeTab,phoneNumber:phoneNumber, countryCode:countryCode ,pincode:this.pincode,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict,centers: this.selectedCenters});
 
     this.spinner.hide();
 

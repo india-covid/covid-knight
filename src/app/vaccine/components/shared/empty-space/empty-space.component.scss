@@ -5,52 +5,20 @@ $head-text-color: var(--app-color-light);
 $text-color: var(--app-color-light);
 $text-muted-color: var(--app-color-light-tint);
 
-.app-wrapper {
-  // border: solid red;
-  display: flex;
-  justify-content: space-between;
-  height: 100vh;
-  width:100vw;
-  .empty-space {
-    background-color: $stage1-bg-color;
-    width: 50%;
-    &__icon{
-      position: relative;
-      bottom:-3px;
-    }
-    &__image-wrapper {
-      height:100%;
-      background-image: url("../../../../assets/img/s3.jpg");
-      background-color:  $stage1-bg-color;
-    }
-  }
-}
 
-.homepage-wrapper{
-  width:50%;
-  background-color:rgba(0, 0, 0, 0.603);
-  // background-color:rgba(90, 160, 252, 0.486); ;
-}
-
-.homepage {
-  height:100vh;
-  overflow: auto;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
-  background-color: white;;
+.empty-space {
+  background-color:var(--app-color-primary-tint);
   position: relative;
-  // max-width: 500px;
-  margin: 0 auto;
-  overflow: hidden;
-  overflow-y: scroll;
+
   // border: solid green;
   &__layer {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color:rgba(0, 0, 0, 0.3);
     height: 100%;
     padding-top: 20%;
     position: relative;
   }
   &__info-wrapper {
-    background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
+    background-image:url('../../../../../assets/img/s3.jpg');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -83,12 +51,12 @@ $text-muted-color: var(--app-color-light-tint);
         margin-left: 10px;
         // border:solid blue;
         &__text {
-          font-size:1.8rem;
+          font-size: 1.8rem;
           padding: 0;
           margin: 0;
           white-space: nowrap;
-          padding-right:4px;
-          text-overflow:ellipse;
+          padding-right: 4px;
+          text-overflow: ellipse;
         }
         &__slogan {
           // border:solid yellow;
@@ -135,51 +103,8 @@ $text-muted-color: var(--app-color-light-tint);
       }
     }
   }
-  &__container {
-    // min-height: 97vh;
-    margin: 0px auto;
-    padding: 30px 30px 0px 30px;
-    &__heading {
-      padding: 20px 0px 40px 0px;
-      font-size: 1.6rem;
-      &__icon {
-        position: relative;
-        bottom: -4px;
-        font-size: 1.7rem;
-        margin: 7px;
-      }
-    }
-  }
+
 
   &__alerts-info {
   }
 }
-
-.flex {
-  display: flex;
-}
-
-
-@media screen and (min-width: 740px) {
-  .info-wrapper-small{
-    display: none;
-  }
-
-}
-
-
-
-
-
-
-// @media screen and (max-width: 740px) {
-//   .empty-space{
-// display: none;
-//   }
-//   .homepage-wrapper{
-//     width:100%;
-//   }
-//   .homepage__container{
-//     min-height: 97vh;
-//   }
-// }

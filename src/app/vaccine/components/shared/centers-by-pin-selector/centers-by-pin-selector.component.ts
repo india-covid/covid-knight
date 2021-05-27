@@ -32,18 +32,6 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.refreshCenters();
   }
-
-  getPrevData(){
-    let prevData = this.storageService.get('selectedCenters');
-    console.log(prevData);
-    if(prevData){
-      this.selectedCenters = prevData.centers;
-    }else{
-      console.log('on prev data');
-
-    }
-  }
-
   refreshCenters(pin?: string) {
     pin = pin || this.pincode;
     if (!pin || (pin.length !== this.pincodeLength)) {
@@ -57,7 +45,6 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   }
 
   onCenterSelected(centers: Center[]) {
-    // this.storageService.set('selectedCenters', {centers: this.selectedCenters});
     this.centersSelected.emit({ pincode: this.pincode, centers });
   }
 

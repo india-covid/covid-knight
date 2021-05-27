@@ -14,6 +14,7 @@ import { HeaderComponent } from './../shared/components/shared/header/header.com
 import { HeaderBackComponent } from './../shared/components/shared/header-back/header-back.component';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { EmptySpaceComponent } from './components/shared/empty-space/empty-space.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     CentersByDistrictSelectorComponent,
     VaccineSubscribeComponent,
     HeaderComponent,
-    HeaderBackComponent
+    HeaderBackComponent,
+    // EmptySpaceComponent
   ],
   imports: [
     CommonModule,

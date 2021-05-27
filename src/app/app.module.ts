@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { HttpHeaderInterceptor } from './core/http-interceptor';
 // import { HeaderComponent } from './shared/components/shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmptySpaceComponent } from './vaccine/components/shared/empty-space/empty-space.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // HeaderComponent,
+    EmptySpaceComponent
   ],
   imports: [
     BrowserAnimationsModule,
