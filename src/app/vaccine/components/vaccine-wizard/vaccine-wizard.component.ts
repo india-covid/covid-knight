@@ -56,16 +56,7 @@ export class VaccineWizardComponent implements OnInit {
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.spinner.show();
 
-    let prevData = this.storageService.get('wizardState');
-    console.log(prevData);
-    if(prevData){
-      this.selectedCenters = prevData.centers;
-      this.phone = prevData.phoneNumber;
-      this.spinner.hide();
-
-    }
 
   }
 
