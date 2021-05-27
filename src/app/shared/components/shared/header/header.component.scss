@@ -2,7 +2,6 @@ $menu-active-color: var(--tab-color);
 .header {
   overflow: hidden;
   width: 100%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
   &__content {
     position: relative;
@@ -11,6 +10,7 @@ $menu-active-color: var(--tab-color);
     display: flex;
     margin: auto;
     height: 80px;
+    // background-color:black;
     &:after {
       content: "";
       position: absolute;
@@ -76,6 +76,8 @@ $menu-active-color: var(--tab-color);
   }
 }
 
+
+
 @keyframes fadeUp {
   0% {
     opacity: 0;
@@ -88,6 +90,12 @@ $menu-active-color: var(--tab-color);
   }
 }
 
+@media screen and (max-width: 740px) {
+  .header{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  }
+}
 @media screen and (max-width: 425px) {
   .header {
     &__content {
