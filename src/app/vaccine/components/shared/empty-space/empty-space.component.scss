@@ -9,7 +9,6 @@ $text-muted-color: var(--app-color-light-tint);
 .empty-space {
   background-color:var(--app-color-primary-tint);
   position: relative;
-
   // border: solid green;
   &__layer {
     background-color:rgba(0, 0, 0, 0.3);
@@ -18,11 +17,11 @@ $text-muted-color: var(--app-color-light-tint);
     position: relative;
   }
   &__info-wrapper {
-    background-image:url('../../../../../assets/img/s3.jpg');
+    // background-image:url('../../../../../assets/img/s3.jpg');
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 88.5vh;
+    height: 100vh;
     text-align: center;
     align-items: center;
 

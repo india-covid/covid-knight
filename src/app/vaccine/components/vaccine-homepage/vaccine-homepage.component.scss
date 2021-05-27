@@ -172,14 +172,9 @@ $text-muted-color: var(--app-color-light-tint);
 
 
 
-// @media screen and (max-width: 740px) {
-//   .empty-space{
-// display: none;
-//   }
-//   .homepage-wrapper{
-//     width:100%;
-//   }
-//   .homepage__container{
-//     min-height: 97vh;
-//   }
-// }
+@media screen and (max-width: 740px) {
+
+  .homepage__container{
+    min-height: 97vh;
+  }
+}
