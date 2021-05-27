@@ -1,0 +1,27 @@
+.header-back{
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  &__content{
+    padding:10px;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    &__button-wrapper{
+      &__button{
+        background-color: transparent;
+        border:none;
+        outline:none;
+        font-size:1.5rem;
+      }
+    }
+    &__text-wrapper{
+      &__text{
+        font-size:1.2rem;
+        font-weight: 400;
+        position: relative;
+        bottom:-6px;
+        padding-left:10px;
+      }
+    }
+  }
+}

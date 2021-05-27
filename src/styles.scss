@@ -30,8 +30,8 @@ html{
 
 .ng-select.center-selector .ng-select-container .ng-value,
 .ng-option-selected {
-  background-color: rgb(90, 139, 247) !important;
-  color: var(--white) !important;
+  background-color: rgb(164, 193, 255) !important;
+  // color: var(--white) !important;
 }
 
 .ng-dropdown-panel {
@@ -73,6 +73,9 @@ html{
   font-weight: bold;
 }
 
+.disabled-btn{
+background-color: var(--app-color-dark-tint) !important;
+}
 
 .app-input{
   color: black ;
@@ -91,4 +94,25 @@ html{
 .app-input:focus{
   box-shadow: none !important;
   border-bottom: 2px solid rgb(29, 122, 209);
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgb(209, 209, 209);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(158, 158, 158);
 }

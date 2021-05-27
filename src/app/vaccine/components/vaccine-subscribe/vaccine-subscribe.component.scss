@@ -1,7 +1,14 @@
 .subscribe {
   margin-top:2rem;
+
   &__header {
     height: 16rem;
+  }
+  &__image{
+    // border:solid red;
+    text-align: center;
+    padding:10px;
+    min-height:100px;
   }
   &__number{
     &__text{

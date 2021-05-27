@@ -15,7 +15,7 @@ export class CentersByDistrictSelectorComponent implements OnInit {
 
   @Input() selectedState: null | State = null;
   @Input() selectedDistrict: District | null = null;
-  @Output() centersSelected = new EventEmitter<{ centers: Center[], districtId?: string }>()
+  @Output() centersSelected = new EventEmitter<{ centers: Center[], districtId?: string,selectedState?:State|null,selectedDistrict?:District|null }>()
 
   private _stateSubject = new Subject<string>();
   private _districtSubject = new Subject<string>();
@@ -49,7 +49,7 @@ export class CentersByDistrictSelectorComponent implements OnInit {
   }
 
   onCenterChange(centers: Center[]) {
-    this.centersSelected.emit({centers, districtId: this.selectedDistrict?._id})
+    this.centersSelected.emit({centers, districtId: this.selectedDistrict?._id,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict})
   }
 
 }

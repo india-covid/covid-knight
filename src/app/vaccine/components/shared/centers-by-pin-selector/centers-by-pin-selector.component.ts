@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
 import { isNonEmptyArray } from 'src/app/core/utils';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
 
 @Component({
   selector: 'app-centers-by-pin-selector',
@@ -20,7 +21,8 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   centers$: Observable<Center[]>;
   selectedCenters: Center[] = []
 
-  constructor(private vaccineRestService: VaccineRestService) {
+  constructor(private vaccineRestService: VaccineRestService,
+     private storageService: LocalStorageService) {
     this.centers$ = this._pincodeChangedSubject.asObservable()
       .pipe(distinctUntilChanged(),
         debounceTime(50),
@@ -29,6 +31,17 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.refreshCenters();
+  }
+
+  getPrevData(){
+    let prevData = this.storageService.get('selectedCenters');
+    console.log(prevData);
+    if(prevData){
+      this.selectedCenters = prevData.centers;
+    }else{
+      console.log('on prev data');
+
+    }
   }
 
   refreshCenters(pin?: string) {
@@ -44,7 +57,8 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   }
 
   onCenterSelected(centers: Center[]) {
-    this.centersSelected.emit({ pincode: this.pincode, centers })
+    // this.storageService.set('selectedCenters', {centers: this.selectedCenters});
+    this.centersSelected.emit({ pincode: this.pincode, centers });
   }
 
 }

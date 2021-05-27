@@ -5,13 +5,13 @@ import { CookieModule } from 'ngx-cookie';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpHeaderInterceptor } from './core/http-interceptor';
-import { HeaderComponent } from './shared/components/shared/header/header.component';
+// import { HeaderComponent } from './shared/components/shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    // HeaderComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -2,6 +2,8 @@ $menu-active-color: var(--tab-color);
 .header {
   overflow: hidden;
   width: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
   &__content {
     position: relative;
     max-width: 550px;
@@ -9,7 +11,6 @@ $menu-active-color: var(--tab-color);
     display: flex;
     margin: auto;
     height: 80px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
     &:after {
       content: "";
       position: absolute;
@@ -29,7 +30,7 @@ $menu-active-color: var(--tab-color);
     }
 
     &.contact:after {
-      left: 40%;
+      left: 39%;
     }
     &.donate:after {
       left: 72%;
@@ -95,7 +96,7 @@ $menu-active-color: var(--tab-color);
       }
 
       &.contact:after {
-        left: calc(40% - 4vw) !important;
+        left: calc(39% - 4vw) !important;
       }
       &.donate:after {
         left: calc(73% - 4vw) !important;
