@@ -69,7 +69,7 @@ export class AuthService {
      return of(null);
     }
     const url = environment.apiBase + `${this.authMainLoginUrl}` + '/otp/request';
-    return this.httpClient.post<any>(url, { phoneNumber }); // pass countryCode if not india
+    return this.httpClient.post<any>(url, { phoneNumber, production: environment.production }); // pass countryCode if not india
   }
 
 }
