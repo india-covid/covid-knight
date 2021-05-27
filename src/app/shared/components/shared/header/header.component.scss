@@ -1,11 +1,11 @@
-$menu-active-color:var(--tab-color);
+$menu-active-color: var(--tab-color);
 .header {
-
-  width:100%;
+  overflow: hidden;
+  width: 100%;
   &__content {
     position: relative;
     max-width: 550px;
-    z-index:200;
+    z-index: 200;
     display: flex;
     margin: auto;
     height: 80px;
@@ -29,7 +29,7 @@ $menu-active-color:var(--tab-color);
     }
 
     &.contact:after {
-      left: 39%;
+      left: 40%;
     }
     &.donate:after {
       left: 72%;
@@ -53,7 +53,7 @@ $menu-active-color:var(--tab-color);
     &__icon {
       margin-right: 3px;
       position: relative;
-      left:-3px;
+      left: -3px;
       font-size: 25px;
       transition: font-size 0.2s;
     }
@@ -73,7 +73,6 @@ $menu-active-color:var(--tab-color);
       color: white;
     }
   }
-
 }
 
 @keyframes fadeUp {
@@ -88,18 +87,18 @@ $menu-active-color:var(--tab-color);
   }
 }
 
-@media screen and (max-width: 405px) {
+@media screen and (max-width: 425px) {
   .header {
     &__content {
       &.home:after {
-        left: calc(5% - 4vw) !important;
+        left: calc(7% - 4vw) !important;
       }
 
       &.contact:after {
         left: calc(40% - 4vw) !important;
       }
       &.donate:after {
-        left: calc(70% - 4vw) !important;
+        left: calc(73% - 4vw) !important;
       }
     }
   }

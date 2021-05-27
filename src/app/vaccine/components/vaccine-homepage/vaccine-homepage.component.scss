@@ -1,8 +1,8 @@
 
-$action-button-color:#fdfff5;
-$action-button-bg-color:  #363945;
-$stage1-bg-color:#159bd5;
-$head-text-color:#363945;//var(--app-color-light);
+$action-button-color:var(--app-color-light);
+$action-button-bg-color: var(--app-color-dark-tint);
+$stage1-bg-color:var(--app-color-primary-tint);
+$head-text-color:var(--app-color-light);
 $text-color:var(--app-color-light);
 $text-muted-color:var(--app-color-light-tint);
 
@@ -11,8 +11,9 @@ $text-muted-color:var(--app-color-light-tint);
   max-width: 550px;
   margin: 0 auto;
   overflow:hidden ;
+  border:solid green;
   &__layer {
-    background-color:rgba(0,0,0,0.1);//$stage1-bg-color;
+    background-color:rgba(0,0,0,0.2);
     height: 100%;
     padding-top: 20%;
     position: relative;
@@ -99,7 +100,7 @@ $text-muted-color:var(--app-color-light-tint);
     }
   }
   &__container {
-    height:97vh;
+     min-height:97vh;
     margin: 0px  auto;
     padding: 30px 30px 0px 30px;
     &__heading{

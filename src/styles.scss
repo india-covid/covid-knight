@@ -6,7 +6,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "remixicon/fonts/remixicon.css";
 @import "~intl-tel-input/build/css/intlTelInput.css";
-@import "theme.scss";
+@import "theme/theme.scss";
 
 
 body {
@@ -63,6 +63,17 @@ html{
 
 
 
+ .app-btn{
+  width:150px;
+  padding:7px;
+  background: var(--btn-bg-color);
+  color:white;
+  border-radius:4px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+
 .app-input{
   color: black ;
   border: none ;
@@ -73,6 +84,7 @@ html{
   margin: auto ;
   border-radius: 0 ;
   padding:10px !important;
+  font-weight: 300;
 }
 
 
@@ -80,4 +92,3 @@ html{
   box-shadow: none !important;
   border-bottom: 2px solid rgb(29, 122, 209);
 }
-

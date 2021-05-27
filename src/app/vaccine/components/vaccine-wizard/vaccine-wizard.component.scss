@@ -1,15 +1,7 @@
-$tab-button-active-color:var(--tab-color);
-$tab-border-color:var(--app-color-primary);
-$subscribe-btn-bg-color:var(--app-color-dark);
-// TODO REFACTOR BELOW
-.ng-valid[required],
-.ng-valid.required {
-  border-left: 5px solid #42a948; /* green */
-}
 
-.ng-invalid:not(form) {
-  border-left: 5px solid #cfc7c7; /* red */
-}
+$tab-button-active-color: var(--tab-color);
+$tab-border-color: var(--app-color-primary);
+
 
 .wizard {
   &__tab {
@@ -17,10 +9,10 @@ $subscribe-btn-bg-color:var(--app-color-dark);
     width: 100%;
     max-width: 300px;
     margin: auto;
-    border:solid 1px $tab-border-color;
+    border: solid 1px $tab-border-color;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     border-radius: 27.5px;
-   background-color: aliceblue;
+    background-color: aliceblue;
 
     &:after {
       content: "";
@@ -30,7 +22,7 @@ $subscribe-btn-bg-color:var(--app-color-dark);
       transition: left cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
       border-radius: 27.5px;
       box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-      background-color:$tab-button-active-color;
+      background-color: $tab-button-active-color;
       height: 100%;
       z-index: 0;
       box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
@@ -59,16 +51,5 @@ $subscribe-btn-bg-color:var(--app-color-dark);
 
   &__tab-active {
     color: #ffffff;
-  }
-  .subscribe{
-    &__button{
-      width:150px;
-      padding:7px;
-      background: $subscribe-btn-bg-color;
-      color:white;
-      border-radius:4px;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
   }
 }

@@ -1,5 +1,16 @@
 .subscribe {
+  margin-top:2rem;
   &__header {
     height: 16rem;
+  }
+  &__number{
+    &__text{
+      font-size: 1.5rem;;
+    }
+  }
+  &__timer{
+    &__text{
+      font-size:1.5rem;
+    }
   }
 }
