@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core/auth.service';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
+import { User } from './core/models/user.model';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +12,9 @@ import { AuthService } from './core/auth.service';
 })
 export class AppComponent {
   title = 'covid-frontend';
-
-  constructor(private authService: AuthService) {
-
+  constructor(   private storageService: LocalStorageService,private spinner: NgxSpinnerService, private router: Router,private authService: AuthService) {
+    this.spinner.show();
+    this.getAuthStatus();
   }
 
   dummyLogin() {
@@ -19,11 +23,26 @@ export class AppComponent {
   }
 
   dummyGetStatus() {
-    this.authService.getStatus().subscribe(console.log);
+    this.authService.getStatus().subscribe((data)=>{
+      console.log(data);
+    });
   }
 
   dummyLogout() {
     this.authService.logout().subscribe(console.log);
+  }
+  getAuthStatus() {
+      this.authService.getStatus().subscribe((userData:User)=>{
+        console.log(userData);
+        if(userData && userData.phoneNumber){
+          this.storageService.set('user',userData);
+          this.spinner.hide();
+          this.router.navigate(['/']);
+        }else{
+          console.log('no user data');
+        }
+      });
+
   }
 
 

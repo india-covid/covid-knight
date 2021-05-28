@@ -1,12 +1,15 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, ReplaySubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { UserRegisterLogin } from './models/auth.model';
 import { User } from './models/user.model';
+import {catchError, map} from 'rxjs/operators';
+import {Observable, of, ReplaySubject,throwError} from "rxjs";
 import { CookieService } from 'ngx-cookie';
+import { NgxSpinnerService } from "ngx-spinner";
+
 import * as DayJs from 'dayjs'
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class AuthService {
   private authMainLoginUrl = '/auth'
   private _userSubject = new ReplaySubject<User>();
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {
+  constructor( private spinner: NgxSpinnerService,private httpClient: HttpClient, private cookieService: CookieService) {
     this._userSubject = new ReplaySubject<User>();
   }
 
@@ -27,7 +30,14 @@ export class AuthService {
     const url = environment.apiBase + '/auth/status';
     return this.httpClient.get<User>(url).pipe(tap(user => {
       this._userSubject.next(user);
-    }));
+    }),
+    catchError((error) => {
+      this.spinner.hide();
+      console.log('error is intercept')
+      console.error(error.error.message);
+      return throwError(error);
+    })
+    );
   }
 
   logout() {

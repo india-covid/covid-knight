@@ -1,0 +1,97 @@
+.center-list{
+  .no-centers-selected{
+    font-size: 1.2rem;
+    text-align: center;
+    &__img{
+      width: 100%;
+      height:100%;
+      &__image{
+        width: 100%;
+        height:100%;
+      }
+    }
+  }
+}
+.card-list{
+  // border:solid red;
+  height:100vh;
+    overflow: scroll !important;
+    padding-bottom:200px;
+  }
+  .card{
+    // border:solid green;
+    width:100%;
+    overflow: scroll !important;
+
+    align-items: center;
+    &__item{
+      margin:0 auto;
+      min-width:350px;
+      max-width:350px;
+      // border:solid red;
+      margin-top:15px;
+      border-radius:5px;
+      min-height:70px;
+      display: flex;
+
+      align-items: center;
+      justify-content: flex-start;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+              &__content{
+        width:100%;
+        &__card-head{
+          border-radius:5px;
+         padding: 10px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         .app-btn{
+           width:auto !important;
+           border:solid gray 1px;
+         }
+         &__text{
+           font-size:1rem;
+          color:white;
+          font-weight: bold;;
+         }
+          background-color:black;//rgb(92, 174, 250); ;
+          .btn-subscribe{
+            border:solid green 1px;
+          }
+          .btn-unsubscribe{
+            border:solid red 1px;
+          }
+        }
+        &__card-body{
+          padding: 7px;
+
+          &__address{
+            display: flex;
+            // border:solid red;
+            align-items: center;
+            justify-content: flex-start;
+            &__icon{
+              font-size:1.3rem;
+              margin-right:6px;
+            }
+            &__text{
+              font-size:1rem;
+            }
+
+          }
+          &__slots{
+            font-weight: bold;
+          }
+
+        }
+      }
+    }
+    .no-slots{
+      padding:10px;
+      width: 100%;
+      margin-top: 100px;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  }

@@ -1,0 +1,54 @@
+<div class="slots-wrapper">
+  <app-header-back headerText="Subscribe Centers" routeTo="/"></app-header-back>
+  <div class="filters"></div>
+<div class="date-slider">
+  <div class="slider">
+    <div class="slider__item" *ngFor="let date of dateRange;let i =index" [class.slider__active]="i==activeDay">
+        <button class="btn slider__item__btn" (click)="getSessionsForDay(i)">{{date}}</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="card-list">
+  <div class="card">
+    <ng-container *ngFor="let center of centerWithSession">
+    <div class="card__item" *ngIf="center.ssessions[0].length>0" >
+      <div class="card__item__content">
+        <div class="card__item__content__card-head">
+          <div class="card__item__content__card-head__text">
+            {{center.center.name}}
+          </div>
+
+          <div class="card__item__content__card-head__button" *ngIf="center.selected" >
+            <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center.center)">Unsubscribe</button>
+          </div>
+          <div class="card__item__content__card-head__button" *ngIf="!center.selected">
+            <button class="app-btn btn-subscribe" (click)="subscribeCenter(center.center)">Subscribe</button>
+          </div>
+        </div>
+        <div class="card__item__content__card-body">
+          <div class="card__item__content__card-body__address">
+            <div class="card__item__content__card-body__address__icon"><i class="ri-map-pin-user-line"></i></div>
+            <div class="card__item__content__card-body__address__text">{{center.center.address}}</div>
+          </div>
+          <hr>
+          <div class="card__item__content__card-body__slots" *ngIf="center.ssessions[0].length>0">
+            <div class="card__item__content__card-body__slots__item" *ngFor="let session of center.ssessions[0]">
+              <div ><span>Available Slots: </span><span> {{session.availableCapacity}} </span> | <span>Age: </span><span> {{session.minAgeLimit}}+</span></div>
+            </div>
+          </div>
+          <div class="card__item__content__card-body__slots" *ngIf="center.ssessions[0].length==0">
+            <div class="card__item__content__card-body__slots__item">
+              <div ><span>Available Slots:</span><span>No Data</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
+  </div>
+</div>
+

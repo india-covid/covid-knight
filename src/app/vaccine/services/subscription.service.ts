@@ -32,8 +32,8 @@ export class SubscriptionService {
     }));
   }
 
-  getDetailedCenterInfo(center: Center) {
-    const sessionRequests = ([0, 1, 2]
+  getDetailedCenterInfo(center: Center,day:number) {
+    const sessionRequests = ([day]
       .map(val => DayJs().add(val, 'day')
         .format('DDMMYYYY'))).map(date => this.vaccineRestService
           .getSessionsByCenterId(center._id, date));

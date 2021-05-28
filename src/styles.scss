@@ -75,7 +75,7 @@ html{
 }
 
 .disabled-btn{
-background-color: var(--app-color-dark-tint) !important;
+background-color: var(--app-color-medium) !important;
 }
 
 .app-input{
@@ -98,22 +98,26 @@ background-color: var(--app-color-dark-tint) !important;
 }
 
 
-::-webkit-scrollbar {
-  width: 5px;
-}
+// ::-webkit-scrollbar {
+//   width: 5px;
+// }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #ffffff;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #ffffff;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-  background: rgb(209, 209, 209);
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   border-radius: 6px;
+//   background: rgb(209, 209, 209);
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(158, 158, 158);
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: rgb(158, 158, 158);
+// }
+
+.hidden{
+  display: none !important;
 }

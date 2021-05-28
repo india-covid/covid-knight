@@ -1,3 +1,4 @@
+import { User } from './../../../core/models/user.model';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { Center } from '../../models/center.model';
@@ -11,6 +12,7 @@ import { District } from 'src/app/vaccine/models/district.model';
 import { State } from 'src/app/vaccine/models/state.model';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { NavigationExtras, Router } from '@angular/router';
 
 enum WizardTabs {
   PIN = 'PINCODE',
@@ -45,7 +47,8 @@ export class VaccineWizardComponent implements OnInit {
   selectedCenters: Center[] = [];
   selectedState:State|null|undefined=null;
   selectedDistrict:District|null|undefined=null;
-  pincode:string|null|undefined=null;
+  pincode:string='';
+  districtId:string|null=null;
   phone: any;
   @Output() done = new EventEmitter<boolean>();
 
@@ -53,10 +56,11 @@ export class VaccineWizardComponent implements OnInit {
   subscribing = false;
   constructor(private authService: AuthService,
     private storageService: LocalStorageService,
+    private router: Router,
     private spinner: NgxSpinnerService) { }
-
+     user:User|null=null;
   ngOnInit(): void {
-
+    this.user = this.storageService.get("subscription");
 
   }
 
@@ -64,6 +68,17 @@ export class VaccineWizardComponent implements OnInit {
     // perform other here
     this.selectedCenters = [];
     this.activeTab = tab;
+    this.pincode='';
+    this.districtId=null;
+  }
+
+  pinEntered(p:any){
+    console.log(p);
+    this.pincode=p.pincode;
+  }
+  districtSelected(districtId:any){
+    console.log(districtId.districtId);
+    this.districtId = districtId.districtId;
   }
 
   centersSelected({ centers}: { centers: Center[] }) {
@@ -83,10 +98,22 @@ export class VaccineWizardComponent implements OnInit {
   }
 
   get isSubscribeButtonEnabled() {
-    return this._phoneNumber?.number && isNonEmptyArray(this.selectedCenters);
+    if(this.user?.phoneNumber){
+      if(this.pincode.length===6 || this.districtId){
+        return true;
+      }else{
+      return false;
+      }
+    }else if((this.pincode.length===6 || this.districtId) &&  this._phoneNumber?.number){
+      return true;
+    }else{
+      return false;
+    }
+
   }
 
-  subscribeClicked() {
+
+  registerUser(naviagationExtras:NavigationExtras) {
     this.spinner.show();
 
     if (!this.isSubscribeButtonEnabled) {
@@ -94,18 +121,48 @@ export class VaccineWizardComponent implements OnInit {
     }
    this.subscribing = true;
    this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber.number)), take(1)).subscribe(results => {
-      this.saveCurrentResults(this._phoneNumber.number);
+      this.saveCurrentResults(this._phoneNumber.number,naviagationExtras);
    });
   }
 
+  goToSlots(){
+    let query;
+    if(this.pincode.length===6){
+      query='pin';
+    }else{
+      query='district'
+    }
+    let naviagationExtras:NavigationExtras={
+      queryParams:{
+        pincode:this.pincode,
+        districtId:this.districtId,
+        queryType:query
+      }
+    }
+    if(this.user?.phoneNumber){
+      this.router.navigate(["/slots"],naviagationExtras)
+    }else{
+   this.registerUser(naviagationExtras);
+    }
 
-  private saveCurrentResults(phoneNumber: string = '', countryCode: string = 'IN') {
-    this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber, countryCode , centers: this.selectedCenters});
+  }
+
+  goToSelecteCentersList(){
+    this.router.navigate(['/selected-centers']);
+  }
+
+
+  private saveCurrentResults(phoneNumber: string = '',naviagationExtras:NavigationExtras) {
+    // this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber,  , centers: this.selectedCenters});
+    this.storageService.set('subscription',{phoneNumber:phoneNumber,countryCode:"IN",centers:[]})
     // this.storageService.set('wizardState', {tab:this.activeTab,phoneNumber:phoneNumber, countryCode:countryCode ,pincode:this.pincode,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict,centers: this.selectedCenters});
 
     this.spinner.hide();
+    // this.done.next(true);
+    console.log(naviagationExtras)
+    this.router.navigate(['/subscription'],naviagationExtras);
 
-    this.done.next(true);
+
   }
 
   private get  _ping$() {
@@ -113,4 +170,13 @@ export class VaccineWizardComponent implements OnInit {
       .ping({ phoneNumber: this._phoneNumber?.number, centers: this.selectedCenters.map(c => c._id) }, 'subscribe')
   }
 
+  logout(){
+    console.log("LOGOUT");
+    this.authService.logout().subscribe(()=>{
+      this.storageService.set("subscription",{});
+    this.user=null;
+    this.router.navigate(['/']);
+
+    });
+  }
 }

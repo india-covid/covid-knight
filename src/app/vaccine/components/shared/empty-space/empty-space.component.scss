@@ -64,6 +64,7 @@ $text-muted-color: var(--app-color-light-tint);
           font-size: 15px;
         }
       }
+
     }
     .body {
       font-size: 20px;
@@ -102,7 +103,10 @@ $text-muted-color: var(--app-color-light-tint);
       }
     }
   }
-
+  &__icon{
+    position: relative;
+    bottom:-4px;
+  }
 
   &__alerts-info {
   }

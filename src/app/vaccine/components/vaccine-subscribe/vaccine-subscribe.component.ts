@@ -1,6 +1,6 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import * as DayJs from 'dayjs';
 import { NgOtpInputComponent } from 'ng-otp-input/lib/components/ng-otp-input/ng-otp-input.component';
 import { forkJoin, Subscription } from 'rxjs';
@@ -13,6 +13,7 @@ import { SubscriptionService } from '../../services/subscription.service';
 import { NgOtpInputModule } from 'ng-otp-input'
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from '../../../../environments/environment'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-vaccine-subscribe',
@@ -21,11 +22,19 @@ import { environment } from '../../../../environments/environment'
 })
 export class VaccineSubscribeComponent implements OnInit, OnDestroy {
 
+    private navigationExtras!:NavigationExtras;
   constructor(private storageService: LocalStorageService,
     private route: ActivatedRoute,
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
-    private router: Router) { }
+    private router: Router,
+    private spinner:NgxSpinnerService
+    ) {
+      this.route.queryParams.subscribe((params) => {
+        this.navigationExtras=params;
+        console.log(this.navigationExtras);
+      })
+    }
 
   loading = false;
   otpLength = environment.otpLength;
@@ -59,7 +68,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
   }
 
   sessionInfo(center: Center) {
-    return this.subscriptionService.getDetailedCenterInfo(center);
+    return this.subscriptionService.getDetailedCenterInfo(center,0);
   }
 
   ngOnDestroy() {
@@ -84,18 +93,24 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     if (!this.isOtpLengthValid) {
       return;
     }
+    this.spinner.show();
     this.loading = true;
-
+    console.log( this.wizardResult.phoneNumber);
     console.log(this.otp);
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
       subscriptions: { centerIds: this.centers.map(c => c._id) }
     }).subscribe(res => {
-      console.log("OTP CORRECT GO TO NEXT PAGE");
-      // this.router.navigate(['/subscriptions/dashboard]);
+      this.spinner.hide();
+
+      console.log("OTP CORRECT GO TO NEXT PAGE",this.navigationExtras);
+       this.router.navigate(["/slots"],{queryParams:this.navigationExtras})
+
 
     }, err => {
+      this.spinner.hide();
+
       console.log('WRONG OTP! clear');
       this.loading = false;
       this.isOtpLengthValid = false;
