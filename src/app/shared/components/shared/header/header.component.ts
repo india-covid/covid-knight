@@ -1,8 +1,8 @@
+import { Router } from '@angular/router';
 import {
   Component,
   OnInit
 } from '@angular/core';
-
  enum MENUITEMS{
   HOME = 'home',
   CONTACT = 'contact',
@@ -14,7 +14,7 @@ import {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
+  active=true;
   MENUITEMS = MENUITEMS;
   activeMenuItem:MENUITEMS=MENUITEMS.HOME;
 
@@ -22,7 +22,12 @@ export class HeaderComponent implements OnInit {
       this.activeMenuItem = menuItem;
     }
 
-  constructor() {}
+  constructor(router:Router) {
+    if(router.url!='/'){
+      this.active==false;
+    }
+
+  }
 
   ngOnInit(): void {}
 }

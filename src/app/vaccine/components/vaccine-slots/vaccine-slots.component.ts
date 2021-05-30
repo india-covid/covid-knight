@@ -30,23 +30,22 @@ export class VaccineSlotsComponent implements OnInit {
   QueryType = QueryType;
   queryData: any | null = null;
 
-  centers$!:Observable<Center[]>;
-  centersSessions$!:Observable<VaccineSession[]>;
 
   centers:Center[]=[];
   centersSessions:VaccineSession[]=[];
 
   isCenterEmpty:boolean=false;
 
-  centersWithSession: any;
+  centersWithSession: any[]=[];
   private subscribedCenters:SubscribedCenter[]=[];
   dateRange: string[] = [];
 
   activeDay: number = 0;
+  activeDate:string='';
   totalDatesToShow:number=7;
 
 //filters
-dose: string = 'Dose - 1';
+dose: string = 'Dose 1';
   vaccineType: string = "Vaccine(2)"
   vaccines:any = {
     'COVAXIN': { name: 'COVAXIN', checked: true },
@@ -119,6 +118,8 @@ dose: string = 'Dose - 1';
   }
   generateDays(days: number) {
     //generate dates from today to n days
+    this.activeDate =   DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
+
     const dateMove = new Date();
     while (days > 0) {
       this.dateRange.push(DayJs(dateMove).format('DD MMM')); // '05 May'
@@ -130,6 +131,8 @@ dose: string = 'Dose - 1';
 
   getSessionsForDay(day: number) {
     this.activeDay = day;
+    this.activeDate =   DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
+
     console.log(this.queryData);
     var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
     if(this.centersWithSession[0][date]){
@@ -194,14 +197,17 @@ dose: string = 'Dose - 1';
         return false;
       }
   }
+
   getAgeLimit(center:any){
     var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
       return center[date]?center[date].minAgeLimit+"+":'-';
   }
+
   getAvailableCapacity(center:any){
     var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
-    return center[date]?.availableCapacity || 'No Slots' ;
+    return center[date]?.availableCapacity || '0' ;
   }
+
 
   async mergeCenterAndSessions() {
     while(!this.centers){
@@ -262,7 +268,7 @@ dose: string = 'Dose - 1';
     );
     this.centersWithSession[index].subscribed = false;
 
-    this.subscriptionService.deleteSubscriptionCenter(check_center.subscriptionId).subscribe((data)=>{
+    this.subscriptionService.deleteSubscriptionCenter(check_center._id).subscribe((data)=>{
       console.log("posted success ",data)
     })
 
@@ -281,6 +287,7 @@ dose: string = 'Dose - 1';
     this.dose = name;
     console.log(this.dose);
   }
+
   vaccineTypeChange():void {
     let all = true;
     for (let key in this.vaccines) {

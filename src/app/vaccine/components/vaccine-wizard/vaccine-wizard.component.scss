@@ -19,34 +19,7 @@ $tab-border-color: var(--app-color-primary);
 
     font-weight:bold
   }
-  &__user-info{
-    display: flex;
-    padding:10px;
-    align-items: center;
-    justify-content: space-between;
-    &__phone{
-      p{
-        margin:0;
-        padding:0;
-      }
-      .text{
-        font-size: 15px;
-        margin-left:6px;
-      }
-      .phone{
-        font-size: 1.2rem;
-        font-weight: bold;
-      }
-    }
-    &__logout{
-      &__button{
-        background-color: var(--app-color-primary-tint)!important;
-        width:auto !important;
-        border:none;
-      }
-    }
 
-  }
   &__content{
         padding: 30px 30px 0px 30px;
         position: relative;

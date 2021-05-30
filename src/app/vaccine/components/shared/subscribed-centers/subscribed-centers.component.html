@@ -1,0 +1,43 @@
+<div class="center-list" [@enterAnimationRight]>
+  <app-header-back headerText="Subscribed Centers List" routeTo="/auth-home"></app-header-back>
+    <div class="myCard-list">
+      <div class="myCard" *ngIf="subscribedCenters.length>0">
+        <ng-container *ngFor="let center of subscribedCenters">
+          <div class="myCard__item"  >
+            <div class="myCard__item__content">
+              <div class="myCard__item__content__myCard-head">
+                <div class="myCard__item__content__myCard-head__text">
+                  {{center.center.name}}
+                </div>
+
+                <div class="myCard__item__content__myCard-head__button">
+                  <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center._id)" >Unsubscribe</button>
+                </div>
+
+              </div>
+              <div class="myCard__item__content__myCard-body">
+                <div class="myCard__item__content__myCard-body__address">
+                  <div class="myCard__item__content__myCard-body__address__icon"><i class="ri-map-pin-user-line"></i></div>
+                  <div class="myCard__item__content__myCard-body__address__text">{{center.center.address}}</div>
+                </div>
+                <hr>
+                <div class="myCard__item__content__myCard-body__slots">
+                  <div class="myCard__item__content__myCard-body__slots__item" >
+                    <div ><span>Subscription days left: </span><span> {{getRemainingTime(center.from,center.to)}} </span>  </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
+      </div>
+      <div class="no-centers-selected" *ngIf="subscribedCenters.length===0">
+        <div class="no-centers-selected__img">
+          <img class="no-centers-selected__img__image" src="../../../assets/img/no-data.png" alt="">
+        </div>
+        <p class="no-centers-selected__text">No Centers Added</p>
+      </div>
+    </div>
+  </div>

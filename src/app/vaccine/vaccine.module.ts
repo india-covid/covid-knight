@@ -1,4 +1,6 @@
-import { VaccineSelectedCentersComponent } from './components/vaccine-selected-centers/vaccine-selected-centers.component';
+import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
+import { SubscribedCenter } from './models/subscribedCenter';
+import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
 import { VaccineSlotsComponent } from './components/vaccine-slots/vaccine-slots.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +19,7 @@ import { HeaderBackComponent } from './../shared/components/shared/header-back/h
 import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     HeaderComponent,
     HeaderBackComponent,
     VaccineSlotsComponent,
-    VaccineSelectedCentersComponent
+    VaccineAuthHomeComponent,
+    SubscribedCentersComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     NgxIntlTelInputModule,
     NgOtpInputModule,
     NgxSpinnerModule,
-    BsDropdownModule
+    BsDropdownModule,
+    AccordionModule.forRoot(),
+
   ]
 })
 export class VaccineModule { }

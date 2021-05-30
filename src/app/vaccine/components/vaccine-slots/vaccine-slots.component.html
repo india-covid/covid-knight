@@ -3,10 +3,10 @@
 
   <div class="card-list" *ngIf="!isCenterEmpty">
     <div class="filters">
-      <div class="row">
+      <div class="row filters__menu">
         <div class="col">
           <div class="btn-group" dropdown #doseDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
               {{ dose }}<span class="caret"></span>
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
@@ -33,7 +33,7 @@
 
         <div class="col">
           <div class="btn-group" dropdown #vaccineDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
               {{ vaccineType }}<span class="caret"></span>
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div class="search-bar">
+      <div class="filters__search-bar">
         <div class="input-wrapper">
           <input type="text" placeholder="Search By Hospital Name" />
           <i class="fa fa-times cross-icon"></i>
@@ -85,7 +85,7 @@
     </div>
     <div class="card">
       <div *ngFor="let center of centersWithSession">
-        <div class="card__item">
+        <div class="card__item" *ngIf="center[activeDate] && center[activeDate]!=null">
           <div class="card__item__content">
             <div class="card__item__content__card-head">
               <div class="card__item__content__card-head__text">
@@ -128,7 +128,7 @@
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
     </div>
   </div>
-  <div class="no-centers" *ngIf="isCenterEmpty || centersSessions">
+  <div class="no-centers" *ngIf="isCenterEmpty || centersSessions.length===0">
     <div class="no-centers__content">
       <div class="no-centers__content__img">
         <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />

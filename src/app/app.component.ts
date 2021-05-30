@@ -27,6 +27,7 @@ export class AppComponent {
       console.log(data);
       this.spinner.hide();
       this.storageService.set("User",data);
+      this.router.navigate(["/auth-home"])
     });
   }
 

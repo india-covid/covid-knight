@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { VaccineSelectedCentersComponent } from './vaccine-selected-centers.component';
+import { SubscribedCentersComponent } from './subscribed-centers.component';
 
-describe('VaccineSelectedCentersComponent', () => {
-  let component: VaccineSelectedCentersComponent;
-  let fixture: ComponentFixture<VaccineSelectedCentersComponent>;
+describe('SubscribedCentersComponent', () => {
+  let component: SubscribedCentersComponent;
+  let fixture: ComponentFixture<SubscribedCentersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VaccineSelectedCentersComponent ]
+      declarations: [ SubscribedCentersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VaccineSelectedCentersComponent);
+    fixture = TestBed.createComponent(SubscribedCentersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

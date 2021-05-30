@@ -1,16 +1,38 @@
-import { NgxSpinnerService } from 'ngx-spinner';
-import { SubscribedCenter } from './../../models/subscribedCenter';
-import { SubscriptionService } from './../../services/subscription.service';
-import { Subscriptions } from './../../models/subscriptions';
-import { LocalStorageService } from 'src/app/core/localstorage.service';
+import { SubscribedCenter } from './../../../models/subscribedCenter';
+import { SubscriptionService } from './../../../services/subscription.service';
+import { Subscriptions } from './../../../models/subscriptions';
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
+import { trigger, style, animate, transition } from '@angular/animations';
+
+
 @Component({
-  selector: 'app-vaccine-selected-centers',
-  templateUrl: './vaccine-selected-centers.component.html',
-  styleUrls: ['./vaccine-selected-centers.component.scss'],
+  selector: 'app-subscribed-centers',
+  templateUrl: './subscribed-centers.component.html',
+  styleUrls: ['./subscribed-centers.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimationLeft', [
+        transition(':enter', [
+          style({transform: 'translateX(-100%)', opacity: 0}),
+          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        ])
+      ]
+    ),
+    trigger(
+      'enterAnimationRight', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        ])
+      ]
+    )
+  ],
 })
-export class VaccineSelectedCentersComponent implements OnInit {
+export class SubscribedCentersComponent implements OnInit {
   subscribedCenters: SubscribedCenter[] = [];
   constructor(
     private storageService: LocalStorageService,
@@ -30,13 +52,14 @@ export class VaccineSelectedCentersComponent implements OnInit {
   ngOnInit() {}
 
   UnSubscribeCenter(subscriptionId: string) {
+     let index = this.subscribedCenters.findIndex(
+          (center) => center._id === subscriptionId
+        );
     this.subscriptionService
       .deleteSubscriptionCenter(subscriptionId)
       .subscribe((data) => {
         console.log('posted success ', data);
-        let index = this.subscribedCenters.findIndex(
-          (center) => center._id === subscriptionId
-        );
+
         this.subscribedCenters.splice(index, 1);
       });
   }

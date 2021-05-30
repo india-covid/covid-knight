@@ -1,11 +1,12 @@
+import { VaccineWizardComponent } from './components/vaccine-wizard/vaccine-wizard.component';
+import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
+import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
 import { AuthGuard } from './../core/auth.guard';
-import { VaccineSelectedCentersComponent } from './components/vaccine-selected-centers/vaccine-selected-centers.component';
 import { VaccineSlotsComponent } from './components/vaccine-slots/vaccine-slots.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VaccineHomepageComponent } from './components/vaccine-homepage/vaccine-homepage.component';
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -26,8 +27,20 @@ const routes: Routes = [
 
   },
   {
-    path: 'selected-centers',
-    component: VaccineSelectedCentersComponent,
+    path: 'subscribed',
+    component: SubscribedCentersComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'add-subscription',
+    component: VaccineWizardComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'auth-home',
+    component: VaccineAuthHomeComponent,
     canActivate: [AuthGuard]
 
   },

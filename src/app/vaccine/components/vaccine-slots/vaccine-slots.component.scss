@@ -1,13 +1,13 @@
 .slider {
   &__active {
     .btn {
-      background-color: black;
+      background-color: var(--app-color-primary);
       color: white !important;
     }
   }
   // border:solid red;
   display: flex;
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
   padding: 0px; // 10px;
   align-items: center;
@@ -24,36 +24,52 @@
 .card-list {
   // border:solid red;
   padding-bottom: 200px;
-  .search-bar{
-    margin-top:20px;
-    .input-wrapper{
-      position: relative;
-      // border:solid green;
-      input{
-        width:100%;
-        padding:10px;
-        border:solid 1px #7aafec;
-        border-radius: 5px;
-        outline: none;
-        transition: cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
 
-      }
-      input:focus{
-
-        border:solid 2px rgb(0, 119, 255);
-      }
-      .cross-icon{
-        position: absolute;
-        right:15px;
-        top:16px;
-        color: #3d90ef;
+  .filters{
+    // border:solid red;
+    .row{
+      // border:solid green ;
+      .col{
+        // border:solid blue;
+        text-align: center;
       }
     }
+    &__search-bar{
+      padding:0px 15px 0px 15px;
+      margin-top:20px;
+      margin-bottom:10px;
+      .input-wrapper{
+        position: relative;
+        // border:solid green;
+        input{
+          width:100%;
+          padding:10px;
+          border:solid 1px #7aafec;
+          border-radius: 5px;
+          outline: none;
+          transition: cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
+
+        }
+        input:focus{
+
+          border:solid 2px rgb(0, 119, 255);
+        }
+        .cross-icon{
+          position: absolute;
+          right:15px;
+          top:16px;
+          color: #3d90ef;
+        }
+      }
+    }
+  }
+  .app-btn{
+    width: auto!important;
   }
 }
 .card {
   height: 100vh;
-  overflow: scroll !important;
+  overflow: auto !important;
   // border:solid green;
   width: 100%;
   box-shadow: none !important;
