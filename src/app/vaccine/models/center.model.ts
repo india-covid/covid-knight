@@ -15,13 +15,15 @@ export interface Center {
   name: string;
   stateId: string;
   districtId: string;
+  subscribed:boolean;
+  subscriptionId:string
 }
 
 
 
 // only an ui helper
 export interface CenterWithSessions extends Center{
-  sessions: VaccineSession[];
+  date:VaccineSession[];
 }
 
 export enum FeeType {

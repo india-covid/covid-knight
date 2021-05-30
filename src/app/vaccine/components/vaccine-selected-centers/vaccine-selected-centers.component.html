@@ -1,29 +1,31 @@
 <div class="center-list">
 <app-header-back headerText="Subscribed Centers List" routeTo="/"></app-header-back>
   <div class="card-list">
-    <div class="card" *ngIf="subscription?.centers && subscription.centers.length>0">
-      <ng-container *ngFor="let center of subscription?.centers">
+    <div class="card" *ngIf="subscribedCenters.length>0">
+      <ng-container *ngFor="let center of subscribedCenters">
         <div class="card__item"  >
           <div class="card__item__content">
             <div class="card__item__content__card-head">
               <div class="card__item__content__card-head__text">
-                {{center.name}}
+                {{center.center.name}}
               </div>
 
-              <!-- <div class="card__item__content__card-head__button" *ngIf="center.selected" >
-                <button class="app-btn btn-unsubscribe" >Unsubscribe</button>
+              <div class="card__item__content__card-head__button">
+                <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center._id)" >Unsubscribe</button>
               </div>
-              <div class="card__item__content__card-head__button" *ngIf="!center.selected">
-                <button class="app-btn btn-subscribe">Subscribe</button>
-              </div> -->
+
             </div>
             <div class="card__item__content__card-body">
               <div class="card__item__content__card-body__address">
                 <div class="card__item__content__card-body__address__icon"><i class="ri-map-pin-user-line"></i></div>
-                <div class="card__item__content__card-body__address__text">{{center.address}}</div>
+                <div class="card__item__content__card-body__address__text">{{center.center.address}}</div>
               </div>
               <hr>
-
+              <div class="card__item__content__card-body__slots">
+                <div class="card__item__content__card-body__slots__item" >
+                  <div ><span>Subscription days left: </span><span> {{getRemainingTime(center.from,center.to)}} </span>  </div>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -31,7 +33,7 @@
       </ng-container>
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
     </div>
-    <div class="no-centers-selected" *ngIf="!subscription?.centers || subscription.centers.length==0">
+    <div class="no-centers-selected" *ngIf="subscribedCenters.length===0">
       <div class="no-centers-selected__img">
         <img class="no-centers-selected__img__image" src="../../../assets/img/no-data.png" alt="">
       </div>

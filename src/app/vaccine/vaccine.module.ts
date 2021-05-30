@@ -16,6 +16,7 @@ import { HeaderComponent } from './../shared/components/shared/header/header.com
 import { HeaderBackComponent } from './../shared/components/shared/header-back/header-back.component';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgSelectModule,
     NgxIntlTelInputModule,
     NgOtpInputModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BsDropdownModule
   ]
 })
 export class VaccineModule { }

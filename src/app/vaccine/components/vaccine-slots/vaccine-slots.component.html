@@ -1,54 +1,139 @@
 <div class="slots-wrapper">
   <app-header-back headerText="Subscribe Centers" routeTo="/"></app-header-back>
-  <div class="filters"></div>
-<div class="date-slider">
-  <div class="slider">
-    <div class="slider__item" *ngFor="let date of dateRange;let i =index" [class.slider__active]="i==activeDay">
-        <button class="btn slider__item__btn" (click)="getSessionsForDay(i)">{{date}}</button>
-    </div>
-  </div>
-</div>
-</div>
 
-<div class="card-list">
-  <div class="card">
-    <ng-container *ngFor="let center of centerWithSession">
-    <div class="card__item" *ngIf="center.ssessions[0].length>0" >
-      <div class="card__item__content">
-        <div class="card__item__content__card-head">
-          <div class="card__item__content__card-head__text">
-            {{center.center.name}}
-          </div>
-
-          <div class="card__item__content__card-head__button" *ngIf="center.selected" >
-            <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center.center)">Unsubscribe</button>
-          </div>
-          <div class="card__item__content__card-head__button" *ngIf="!center.selected">
-            <button class="app-btn btn-subscribe" (click)="subscribeCenter(center.center)">Subscribe</button>
+  <div class="card-list" *ngIf="!isCenterEmpty">
+    <div class="filters">
+      <div class="row">
+        <div class="col">
+          <div class="btn-group" dropdown #doseDropDown="bs-dropdown" [autoClose]="true">
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+              {{ dose }}<span class="caret"></span>
+            </button>
+            <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
+              aria-labelledby="button-triggers-manual">
+              <li role="menuitem" (click)="changeDose('Dose 1')" >
+                <a class="dropdown-item">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="dose1" name="dose" />
+                    <label class="form-check-label" for="dose1" name="dose">Dose 1</label>
+                  </div>
+                </a>
+              </li>
+              <li role="menuitem" (click)="changeDose('Dose 2')">
+                <a class="dropdown-item form-check">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="dose2" name="dose" />
+                    <label class="form-check-label" for="dose2" >Dose 2</label>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="card__item__content__card-body">
-          <div class="card__item__content__card-body__address">
-            <div class="card__item__content__card-body__address__icon"><i class="ri-map-pin-user-line"></i></div>
-            <div class="card__item__content__card-body__address__text">{{center.center.address}}</div>
-          </div>
-          <hr>
-          <div class="card__item__content__card-body__slots" *ngIf="center.ssessions[0].length>0">
-            <div class="card__item__content__card-body__slots__item" *ngFor="let session of center.ssessions[0]">
-              <div ><span>Available Slots: </span><span> {{session.availableCapacity}} </span> | <span>Age: </span><span> {{session.minAgeLimit}}+</span></div>
-            </div>
-          </div>
-          <div class="card__item__content__card-body__slots" *ngIf="center.ssessions[0].length==0">
-            <div class="card__item__content__card-body__slots__item">
-              <div ><span>Available Slots:</span><span>No Data</span></div>
-            </div>
-          </div>
 
+        <div class="col">
+          <div class="btn-group" dropdown #vaccineDropDown="bs-dropdown" [autoClose]="true">
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+              {{ vaccineType }}<span class="caret"></span>
+            </button>
+            <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
+              aria-labelledby="button-triggers-manual">
+              <li role="menuitem">
+                <a class="dropdown-item">
+                  <div class="form-check" class="dropdown-item">
+                    <input type="checkbox" class="form-check-input" id="check1" (click)="vaccineDropDown.hide()"
+                      name="vaccineType" value="covaxin" [(ngModel)]="vaccines.COVAXIN.checked"
+                      (change)="vaccineTypeChange()" checked />
+                    <label class="form-check-label" for="check1">
+                      COVAXIN
+                    </label>
+                  </div>
+                </a>
+              </li>
+              <li role="menuitem">
+                <a class="dropdown-item">
+                  <div class="form-check" class="dropdown-item">
+                    <input type="checkbox" class="form-check-input" id="check2" (click)="vaccineDropDown.hide()"
+                      name="vaccineType" value="covieshield" [(ngModel)]="vaccines.COVIESHIELD.checked"
+                      (change)="vaccineTypeChange()" checked />
+                    <label class="form-check-label" for="check2">
+                      COVIESHIELD
+                    </label>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <div class="input-wrapper">
+          <input type="text" placeholder="Search By Hospital Name" />
+          <i class="fa fa-times cross-icon"></i>
         </div>
       </div>
     </div>
-  </ng-container>
-  <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
+    <div class="date-slider">
+      <div class="slider">
+        <div class="slider__item" *ngFor="let date of dateRange; let i = index" [class.slider__active]="i == activeDay">
+          <button class="btn slider__item__btn" (click)="getSessionsForDay(i)">
+            {{ date }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div *ngFor="let center of centersWithSession">
+        <div class="card__item">
+          <div class="card__item__content">
+            <div class="card__item__content__card-head">
+              <div class="card__item__content__card-head__text">
+                {{ center.name }}
+              </div>
+
+              <div class="card__item__content__card-head__button" *ngIf="center.subscribed">
+                <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center)">
+                  Unsubscribe
+                </button>
+              </div>
+              <div class="card__item__content__card-head__button" *ngIf="!center.subscribed">
+                <button class="app-btn btn-subscribe" (click)="subscribeCenter(center)">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+            <div class="card__item__content__card-body">
+              <div class="card__item__content__card-body__address">
+                <div class="card__item__content__card-body__address__icon">
+                  <i class="ri-map-pin-user-line"></i>
+                </div>
+                <div class="card__item__content__card-body__address__text">
+                  {{ center.address }}
+                </div>
+              </div>
+              <hr />
+              <div class="card__item__content__card-body__slots">
+                <div class="card__item__content__card-body__slots__item">
+                  <div>
+                    <span>Available Slots: </span><span> {{ getAvailableCapacity(center) }} </span> |
+                    <span>Age: </span><span> {{ getAgeLimit(center) }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
+    </div>
+  </div>
+  <div class="no-centers" *ngIf="isCenterEmpty || centersSessions">
+    <div class="no-centers__content">
+      <div class="no-centers__content__img">
+        <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
+      </div>
+      <div class="no-centers__content__text">No Centers Found</div>
+    </div>
   </div>
 </div>
-

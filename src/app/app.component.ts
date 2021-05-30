@@ -14,7 +14,7 @@ export class AppComponent {
   title = 'covid-frontend';
   constructor(   private storageService: LocalStorageService,private spinner: NgxSpinnerService, private router: Router,private authService: AuthService) {
     this.spinner.show();
-    this.getAuthStatus();
+    this.getUserStatus();
   }
 
   dummyLogin() {
@@ -22,27 +22,16 @@ export class AppComponent {
     this.authService.vaccineLoginOrSignup(authInfo).subscribe(console.log)
   }
 
-  dummyGetStatus() {
+  getUserStatus() {
     this.authService.getStatus().subscribe((data)=>{
       console.log(data);
+      this.spinner.hide();
+      this.storageService.set("User",data);
     });
   }
 
   dummyLogout() {
     this.authService.logout().subscribe(console.log);
-  }
-  getAuthStatus() {
-      this.authService.getStatus().subscribe((userData:User)=>{
-        console.log(userData);
-        if(userData && userData.phoneNumber){
-          this.storageService.set('user',userData);
-          this.spinner.hide();
-          this.router.navigate(['/']);
-        }else{
-          console.log('no user data');
-        }
-      });
-
   }
 
 

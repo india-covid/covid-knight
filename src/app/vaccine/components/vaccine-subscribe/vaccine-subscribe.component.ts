@@ -40,12 +40,13 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
   otpLength = environment.otpLength;
   private subs: Subscription = new Subscription();
   wizardResult: { phoneNumber?: string, countryCode?: string, centers?: Center[], minLeft?: number, secLeft?: number } = {};
-  centers: CenterWithSessions[] = [];
+  centers: Center[] = [];
   now = DayJs();
   threeDaysFromNow = [new Date(), DayJs().add(1, 'day').toDate(), DayJs().add(2, 'day').toDate()]
   sessionsInfo: { [centerIdDate: string]: VaccineSession } = {};
   isOtpLengthValid = false
   otp: string = ''
+  isOtpWrong:boolean =false;
   @ViewChild('ngOtpInput') ngOtpInputRef: NgOtpInputComponent | null = null;
 
   ngOnInit(): void {
@@ -103,6 +104,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
       subscriptions: { centerIds: this.centers.map(c => c._id) }
     }).subscribe(res => {
       this.spinner.hide();
+      this.isOtpWrong=false;
 
       console.log("OTP CORRECT GO TO NEXT PAGE",this.navigationExtras);
        this.router.navigate(["/slots"],{queryParams:this.navigationExtras})
@@ -110,7 +112,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
 
     }, err => {
       this.spinner.hide();
-
+      this.isOtpWrong=true;
       console.log('WRONG OTP! clear');
       this.loading = false;
       this.isOtpLengthValid = false;

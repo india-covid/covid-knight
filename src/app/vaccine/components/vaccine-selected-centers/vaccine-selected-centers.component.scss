@@ -15,14 +15,12 @@
 .card-list{
   // border:solid red;
   height:100vh;
-    overflow: scroll !important;
+    overflow: scroll;
     padding-bottom:200px;
   }
   .card{
     // border:solid green;
     width:100%;
-    overflow: scroll !important;
-
     align-items: center;
     &__item{
       margin:0 auto;

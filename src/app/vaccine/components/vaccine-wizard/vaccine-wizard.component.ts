@@ -54,13 +54,17 @@ export class VaccineWizardComponent implements OnInit {
 
   private _phoneNumber: { number?: string; countryCode?: string, } = {}
   subscribing = false;
+  user:User|null=null;
   constructor(private authService: AuthService,
     private storageService: LocalStorageService,
     private router: Router,
-    private spinner: NgxSpinnerService) { }
-     user:User|null=null;
+    private spinner: NgxSpinnerService) {
+
+      this.user = this.storageService.get("User");
+
+    }
   ngOnInit(): void {
-    this.user = this.storageService.get("subscription");
+  //  this.user = this.storageService.get("subscription");
 
   }
 
@@ -126,17 +130,19 @@ export class VaccineWizardComponent implements OnInit {
   }
 
   goToSlots(){
-    let query;
+    let queryType;
     if(this.pincode.length===6){
-      query='pin';
+      queryType='pincode';
+    }else if(this.districtId){
+      queryType='districtId'
     }else{
-      query='district'
+      return;
     }
     let naviagationExtras:NavigationExtras={
       queryParams:{
         pincode:this.pincode,
         districtId:this.districtId,
-        queryType:query
+        queryType:queryType
       }
     }
     if(this.user?.phoneNumber){
