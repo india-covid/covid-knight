@@ -32,7 +32,7 @@ export enum QueryType {
 })
 export class VaccineSlotsComponent implements OnInit {
   QueryType = QueryType;
-  @ViewChild('header') header!:ElementRef;
+  @ViewChild('header') header!: ElementRef<HTMLElement>;
 
   queryData: any | null = null;
 
@@ -122,6 +122,7 @@ export class VaccineSlotsComponent implements OnInit {
   ngOnInit() {
     // console.log(this.subscription.centers);
     this.generateDays(this.totalDatesToShow);
+
   }
   generateDays(days: number) {
     //generate dates from today to n days
