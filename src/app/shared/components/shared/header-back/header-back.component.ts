@@ -9,7 +9,7 @@ import {Location} from '@angular/common';
 })
 export class HeaderBackComponent implements OnInit {
   @Input() headerText: string = '';
-  @Input() routeTo: string = '';
+  @Input() routeTo: string|null =null;
   active:boolean=true;
 
   constructor(private _location:Location,private router:Router) {
@@ -23,7 +23,11 @@ export class HeaderBackComponent implements OnInit {
 
     goBack(){
       console.log("ROUTING TO ",this.routeTo);
-      this.router.navigate([this.routeTo])
-      // this._location.back();
+      if(this.routeTo){
+        this.router.navigate([this.routeTo])
+      }else{
+         this._location.back();
+      }
+
     }
 }

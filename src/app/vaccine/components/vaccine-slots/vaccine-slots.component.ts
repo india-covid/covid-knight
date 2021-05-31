@@ -51,6 +51,8 @@ dose: string = 'Dose 1';
     'COVAXIN': { name: 'COVAXIN', checked: true },
     'COVIESHIELD': { name: 'COVISHIELD', checked: true }
   }
+  age:string="Age";
+  hospitalName:string='';
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -286,6 +288,11 @@ dose: string = 'Dose 1';
   changeDose(name:any):void{
     this.dose = name;
     console.log(this.dose);
+  }
+   //filters
+   changeAge(age:any):void{
+    this.age = age;
+    console.log(this.age);
   }
 
   vaccineTypeChange():void {

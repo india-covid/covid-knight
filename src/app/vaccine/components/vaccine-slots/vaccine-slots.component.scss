@@ -21,29 +21,49 @@
     }
   }
 }
-.card-list {
+.myCard-list {
   // border:solid red;
   padding-bottom: 200px;
 
   .filters{
     // border:solid red;
+    &__title{
+      // border:solid yellow;
+      margin:0;
+      padding:5px;
+      padding-left:25px;
+      font-weight:bold;
+    }
+    .app-btn{
+      background-color: var(--app-color-primary);
+      border:none !important
+    }
+    ul{
+      padding:0;
+      li{
+        padding:0;
+        margin:0;
+      }
+    }
     .row{
       // border:solid green ;
+      margin:0;
       .col{
         // border:solid blue;
         text-align: center;
       }
     }
     &__search-bar{
-      padding:0px 15px 0px 15px;
-      margin-top:20px;
-      margin-bottom:10px;
+      padding:0px 20px 0px 20px;
+      margin-top:10px;
+      margin-bottom:5px;
+      // border:solid green;
       .input-wrapper{
         position: relative;
         // border:solid green;
         input{
           width:100%;
-          padding:10px;
+          padding:7px;
           border:solid 1px #7aafec;
           border-radius: 5px;
           outline: none;
@@ -67,17 +87,17 @@
     width: auto!important;
   }
 }
-.card {
+.myCard {
   height: 100vh;
-  overflow: auto !important;
+  overflow: auto ;
   // border:solid green;
   width: 100%;
   box-shadow: none !important;
   align-items: center;
   &__item {
     margin: 0 auto;
-    min-width: 350px;
-    max-width: 350px;
+    min-width: 360px;
+    max-width: 360px;
     // border:solid red;
     margin-top: 15px;
     border-radius: 5px;
@@ -89,7 +109,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     &__content {
       width: 100%;
-      &__card-head {
+      &__myCard-head {
         border-radius: 5px;
         padding: 10px;
         display: flex;
@@ -97,7 +117,7 @@
         align-items: center;
         .app-btn {
           width: auto !important;
-          border: solid gray 1px;
+          // border: solid gray 1px;
         }
         &__text {
           font-size: 1rem;
@@ -106,13 +126,13 @@
         }
         background-color: black; //rgb(92, 174, 250); ;
         .btn-subscribe {
-          border: solid green 1px;
+          // border: solid green 1px;
         }
         .btn-unsubscribe {
-          border: solid red 1px;
+          // border: solid red 1px;
         }
       }
-      &__card-body {
+      &__myCard-body {
         padding: 7px;
 
         &__address {
@@ -130,6 +150,10 @@
         }
         &__slots {
           font-weight: bold;
+        }
+        hr{
+          // border:solid pink 1px;
+          margin:4px;
         }
       }
     }
