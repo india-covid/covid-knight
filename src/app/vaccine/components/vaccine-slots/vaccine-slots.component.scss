@@ -21,10 +21,8 @@
     }
   }
 }
-.myCard-list {
-  // border:solid red;
-  padding-bottom: 200px;
 
+.slots-head{
   .filters{
     // border:solid red;
     &__title{
@@ -82,14 +80,23 @@
         }
       }
     }
-  }
+
+
   .app-btn{
     width: auto!important;
   }
+  }
+
+}
+.slots-body {
+  // border:solid red;
+  padding-bottom: 200px;
+
 }
 .myCard {
   height: 100vh;
-  overflow: auto ;
+  overflow-y: scroll ;
+  overflow-x: hidden;
   // border:solid green;
   width: 100%;
   box-shadow: none !important;
@@ -191,3 +198,34 @@
   }
 }
 }
+
+.success{
+  color:var(--app-color-success)!important;
+}
+.danger{
+  color:var(--app-color-danger)!important
+}
+.warning{
+  color:rgb(228, 199, 39);
+}
+
+
+//header animation
+
+
+
+.header {
+  transition: transform 0.4s;
+}
+
+.header-show {
+  // transform: translate3d(0, -100%, 0);
+  margin-top:-100px;
+}
+
+.header-hide {
+  margin-top:0;
+  transform: none;
+}
+
+

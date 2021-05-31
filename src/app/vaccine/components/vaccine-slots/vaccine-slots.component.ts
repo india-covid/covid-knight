@@ -1,4 +1,4 @@
-import { forkJoin, timer, of, Observable, } from 'rxjs';
+import { forkJoin, timer, of, Observable, Subject, } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import { AuthService } from 'src/app/core/auth.service';
@@ -7,7 +7,7 @@ import { CenterWithSessions } from './../../models/center.model';
 import { VaccineSession } from './../../models/vaccine-session.model';
 import { Subscriptions } from './../../models/subscriptions';
 import { SubscriptionService } from './../../services/subscription.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
@@ -15,10 +15,14 @@ import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
 import { trigger, transition, animate, style, state, sequence } from '@angular/animations';
 import { shareReplay } from 'rxjs/operators';
+
+
+
 export enum QueryType {
   PIN = 'pincode',
   DISTRICT = 'districtId',
 }
+
 
 @Component({
   selector: 'app-vaccine-slots',
@@ -28,24 +32,26 @@ export enum QueryType {
 })
 export class VaccineSlotsComponent implements OnInit {
   QueryType = QueryType;
+  @ViewChild('header') header!:ElementRef;
+
   queryData: any | null = null;
 
+  private subscribedCenters:SubscribedCenter[]=[];
 
   centers:Center[]=[];
   centersSessions:VaccineSession[]=[];
+  centersWithSession: any[]=[];
 
   isCenterEmpty:boolean=false;
 
-  centersWithSession: any[]=[];
-  private subscribedCenters:SubscribedCenter[]=[];
-  dateRange: string[] = [];
+ dateRange: string[] = [];
 
-  activeDay: number = 0;
-  activeDate:string='';
-  totalDatesToShow:number=7;
+   activeDay: number = 0;
+   activeDate:string='';
+  private totalDatesToShow:number=7;
 
 //filters
-dose: string = 'Dose 1';
+  dose: string = 'Dose 1';
   vaccineType: string = "Vaccine(2)"
   vaccines:any = {
     'COVAXIN': { name: 'COVAXIN', checked: true },
@@ -53,6 +59,7 @@ dose: string = 'Dose 1';
   }
   age:string="Age";
   hospitalName:string='';
+
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -67,14 +74,13 @@ dose: string = 'Dose 1';
     this.getSubscribedCenters();
   }
 
-  async getSubscribedCenters() {
+   getSubscribedCenters() {
   this.subscriptionService.getSubscriptionCenters().subscribe((data)=>{
     this.subscribedCenters = data;
     this.getRouteParams();
   })
 
   }
-
 
   getRouteParams() {
     this.route.queryParams.subscribe((params) => {
@@ -116,11 +122,11 @@ dose: string = 'Dose 1';
   ngOnInit() {
     // console.log(this.subscription.centers);
     this.generateDays(this.totalDatesToShow);
-
   }
   generateDays(days: number) {
     //generate dates from today to n days
     this.activeDate =   DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
+    console.log("active date is ",this.activeDate);
 
     const dateMove = new Date();
     while (days > 0) {
@@ -134,12 +140,13 @@ dose: string = 'Dose 1';
   getSessionsForDay(day: number) {
     this.activeDay = day;
     this.activeDate =   DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-
     console.log(this.queryData);
     var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
     if(this.centersWithSession[0][date]){
+
       return
     }
+    console.log("not for this date",this.activeDate);
     if(this.queryData.queryType==this.QueryType.PIN){
       this.getSessionsByPincode(this.queryData[this.QueryType.PIN], day);
     }else{
@@ -200,27 +207,17 @@ dose: string = 'Dose 1';
       }
   }
 
-  getAgeLimit(center:any){
+
+
+   mergeCenterAndSessions() {
+
     var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
-      return center[date]?center[date].minAgeLimit+"+":'-';
-  }
-
-  getAvailableCapacity(center:any){
-    var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
-    return center[date]?.availableCapacity || '0' ;
-  }
-
-
-  async mergeCenterAndSessions() {
-    while(!this.centers){
-
-    }
-    var date =  DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
-    let newArray  = this.centers.map(t1 => ({...t1, [date]:this.centersSessions.find(t2 => t2.centerId === t1._id)||null}));
+    let newArray  = this.centers.map(t1 => ({...t1, [date]:this.centersSessions.find(t2 => t2.centerId === t1._id)||[]}));
 
     this.centersWithSession = newArray;
     this.centers = newArray;
     console.log("centers with session ",this.centersWithSession);
+
     this.spinner.hide();
   }
 
@@ -245,8 +242,7 @@ dose: string = 'Dose 1';
       .subscribe((sessions) => {
        this.centersSessions = sessions;
         console.log('CENTER SESSIONS', this.centersSessions);
-          this.mergeCenterAndSessions();
-
+        this.mergeCenterAndSessions();
       });
   }
 
@@ -316,4 +312,41 @@ dose: string = 'Dose 1';
     }
     console.log(this.vaccines);
   }
+
+
+
+
+  //header animation
+lastScroll:number=0;;
+@HostListener('window:scroll', ['$event'])
+    scrollHandler(event:any) {
+      const header = this.header.nativeElement;
+      const scrollUp='show-header';
+      const scrollDown = 'hide-header';
+      console.log("Scroll Event");
+      const currentScroll = window.pageYOffset;
+      console.log(currentScroll,window);
+      if (currentScroll <= 0) {
+        header.classList.remove(scrollUp);
+        return;
+      }
+
+      if (currentScroll > this.lastScroll && !header.classList.contains(scrollDown)) {
+        // down
+        header.classList.remove(scrollUp);
+        header.classList.add(scrollDown);
+        console.log("adding header up");
+      } else if (
+        currentScroll < this.lastScroll &&
+        header.classList.contains(scrollDown)
+      ) {
+        // up
+        header.classList.remove(scrollDown);
+        header.classList.add(scrollUp);
+      }
+      this.lastScroll = currentScroll;
+
+    }
+
+
 }

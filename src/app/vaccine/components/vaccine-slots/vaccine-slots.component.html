@@ -1,15 +1,16 @@
 <div class="slots-wrapper">
-  <app-header-back headerText="Subscribe Centers" routeTo="/auth-home"></app-header-back>
-  <div class="date-slider">
-    <div class="slider">
-      <div class="slider__item" *ngFor="let date of dateRange; let i = index" [class.slider__active]="i == activeDay">
-        <button class="btn slider__item__btn" (click)="getSessionsForDay(i)">
-          {{ date }}
-        </button>
+  <div class="slots-head header" #header>
+
+    <app-header-back headerText="Subscribe Centers" routeTo="/auth-home"></app-header-back>
+    <div class="date-slider">
+      <div class="slider">
+        <div class="slider__item" *ngFor="let date of dateRange; let i = index" [class.slider__active]="i == activeDay">
+          <button class="btn slider__item__btn" (click)="getSessionsForDay(i)">
+            {{ date }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="myCard-list" *ngIf="!isCenterEmpty">
     <div class="filters">
       <p class="filters__title">Filters</p>
       <div class="row filters__menu">
@@ -110,9 +111,18 @@
       </div>
     </div>
 
-    <div class="myCard" >
+  </div>
+
+
+
+
+
+
+  <div class="slots-body" >
+
+    <div class="myCard" *ngIf="!isCenterEmpty" (scroll)="scrollHandler($event)" >
       <div *ngFor="let center of centersWithSession">
-        <div class="myCard__item" *ngIf="center[activeDate] && center[activeDate]!=null">
+        <div class="myCard__item">
           <div class="myCard__item__content">
             <div class="myCard__item__content__myCard-head">
               <div class="myCard__item__content__myCard-head__text">
@@ -143,8 +153,26 @@
               <div class="myCard__item__content__myCard-body__slots">
                 <div class="myCard__item__content__myCard-body__slots__item">
                   <div>
-                    <span>Available Slots: </span><span> {{ getAvailableCapacity(center) }} </span> |
-                    <span>Age: </span><span> {{ getAgeLimit(center) }}</span>
+                    <div class="row align-items-stretch">
+                      <div class="col">
+                        <span>Dose1: </span><span [ngClass]="center[this.activeDate]?.availableCapacityDose1>0?'success':'danger'"> {{ center[this.activeDate]?.availableCapacityDose1||0}} Slots </span>
+
+                      </div>
+                      <div class="col">
+                        <span>Vaccine:</span> <span class="warning">  {{ center[this.activeDate]?.vaccine || '-'}} </span><br>
+
+                      </div>
+                    </div>
+                     <div class="row">
+                      <div class="col">
+                        <span>Dose2: </span><span [ngClass]="center[this.activeDate]?.availableCapacityDose1>0?'success':'danger'"> {{ center[this.activeDate]?.availableCapacityDose2||0}} Slots  </span><br>
+
+                      </div>
+                      <div class="col">
+                        <span>Age: </span><span>  {{ center[this.activeDate]?.minAgeLimit||'-'}}<span *ngIf="center[this.activeDate]?.minAgeLimit">+</span></span>
+
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -153,14 +181,18 @@
         </div>
       </div>
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
-    </div>
-  </div>
-  <div class="no-centers" *ngIf="isCenterEmpty || centersSessions.length===0">
-    <div class="no-centers__content">
-      <div class="no-centers__content__img">
-        <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
+
+
+      <div class="no-centers" *ngIf="isCenterEmpty">
+        <div class="no-centers__content">
+          <div class="no-centers__content__img">
+            <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
+          </div>
+          <div class="no-centers__content__text">No Centers Found</div>
+        </div>
       </div>
-      <div class="no-centers__content__text">No Centers Found</div>
+
     </div>
   </div>
+
 </div>
