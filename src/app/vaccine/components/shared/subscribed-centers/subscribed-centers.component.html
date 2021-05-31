@@ -1,5 +1,5 @@
 <div class="center-list" [@enterAnimationRight]>
-  <app-header-back headerText="Subscribed Centers List" routeTo="/auth-home"></app-header-back>
+  <app-header-back headerText="Subscribed Centers List" [routeTo]="routeTo"></app-header-back>
     <div class="myCard-list">
       <div class="myCard" *ngIf="subscribedCenters.length>0">
         <ng-container *ngFor="let center of subscribedCenters">

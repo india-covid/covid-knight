@@ -22,6 +22,10 @@
   }
 }
 
+.slots-wrapper{
+
+}
+
 .slots-head{
   .filters{
     // border:solid red;
@@ -90,17 +94,22 @@
 }
 .slots-body {
   // border:solid red;
-  padding-bottom: 200px;
 
 }
+.myCard:last-child{
+  margin-bottom:100px;
+}
 .myCard {
+  padding-bottom: 300px !important;
   height: 100vh;
   overflow-y: scroll ;
-  overflow-x: hidden;
   // border:solid green;
   width: 100%;
   box-shadow: none !important;
   align-items: center;
+  &__card-wrapper{
+
+  }
   &__item {
     margin: 0 auto;
     min-width: 360px;
@@ -133,10 +142,10 @@
         }
         background-color: black; //rgb(92, 174, 250); ;
         .btn-subscribe {
-          // border: solid green 1px;
+          border: solid green 2px;
         }
         .btn-unsubscribe {
-          // border: solid red 1px;
+          border: solid red 1px;
         }
       }
       &__myCard-body {
@@ -145,6 +154,7 @@
         &__address {
           display: flex;
           // border:solid red;
+          font-weight: bold;;
           align-items: center;
           justify-content: flex-start;
           &__icon {
@@ -226,6 +236,49 @@
 .header-hide {
   margin-top:0;
   transform: none;
+}
+
+.modal-body{
+  &__title{
+    text-align: center;
+    font-weight:bold ;
+  }
+  &__button{
+    text-align: center;
+  }
+  &__link{
+    text-align: center;
+    margin-top:10px;
+  }
+}
+
+
+.apply-changes-show{
+  display: block !important;
+}
+.apply-changes-hide{
+  display: none !important;
+}
+
+.apply-changes{
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color: var(--app-color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding:10px;
+  margin:0;
+  font-weight: bold;
+  -webkit-transition: bottom 0.3s ease;
+  transition: bottom .3s ease;
+  p{
+    margin:0;
+    padding:0;
+  }
 }
 
 

@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
 import { Component, OnInit ,Input  } from '@angular/core';
 import {Location} from '@angular/common';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-header-back',
@@ -12,10 +12,11 @@ export class HeaderBackComponent implements OnInit {
   @Input() routeTo: string|null =null;
   active:boolean=true;
 
-  constructor(private _location:Location,private router:Router) {
+  constructor(private _location:Location,private router:Router,private route:ActivatedRoute) {
     if(router.url=='/'){
       this.active=false;
     }
+
    }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class HeaderBackComponent implements OnInit {
 
     goBack(){
       console.log("ROUTING TO ",this.routeTo);
-      if(this.routeTo){
+      if(this.routeTo && this.routeTo!=""){
         this.router.navigate([this.routeTo])
       }else{
          this._location.back();

@@ -21,7 +21,7 @@
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
               aria-labelledby="button-triggers-manual">
-              <li role="menuitem" (click)="changeDose('Dose 1')" >
+              <li role="menuitem" (click)="changeDose(DOSE.DOSE2)" >
                 <a class="dropdown-item">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" id="dose1" name="dose" />
@@ -29,7 +29,7 @@
                   </div>
                 </a>
               </li>
-              <li role="menuitem" (click)="changeDose('Dose 2')">
+              <li role="menuitem" (click)="changeDose(DOSE.DOSE2)">
                 <a class="dropdown-item form-check">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" id="dose2" name="dose" />
@@ -121,7 +121,7 @@
   <div class="slots-body" >
 
     <div class="myCard" *ngIf="!isCenterEmpty"  >
-      <div *ngFor="let center of centersWithSession">
+      <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccines">
         <div class="myCard__item">
           <div class="myCard__item__content">
             <div class="myCard__item__content__myCard-head">
@@ -129,16 +129,22 @@
                 {{ center.name }}
               </div>
 
-              <div class="myCard__item__content__myCard-head__button" *ngIf="center.subscribed">
+              <div class="myCard__item__content__myCard-head__button" *ngIf="center.subscribed=='temp'">
+                <button class="app-btn btn-unsubscribe" (click)="removeSubscribe(center)">
+                  Unsubscribe
+                </button>
+              </div>
+              <div class="myCard__item__content__myCard-head__button" *ngIf="center.subscribed && center.subscribed!=='temp'">
                 <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center)">
                   Unsubscribe
                 </button>
               </div>
               <div class="myCard__item__content__myCard-head__button" *ngIf="!center.subscribed">
-                <button class="app-btn btn-subscribe" (click)="subscribeCenter(center)">
+                <button class="app-btn btn-subscribe" (click)="addSubscribe(center)">
                   Subscribe
                 </button>
               </div>
+
             </div>
             <div class="myCard__item__content__myCard-body">
               <div class="myCard__item__content__myCard-body__address">
@@ -193,6 +199,35 @@
       </div>
 
     </div>
+    <div class="apply-changes" (click)="applySubscribeChanges()" [ngClass]="newTotalSubscribe?'apply-changes-show':'apply-changes-hide'">
+      <p><i></i>NEXT click to save subscribed ({{newTotalSubscribe }}) Centers  </p>
+    </div>
   </div>
+
+
+
+<!-- subscription limit reached modal content -->
+<ng-template #limitReachedTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body__title">
+      <p>You have already subscribe to {{accountTotalSubscribe }} centers in your account and {{newTotalSubscribe}} centers now, Due to high traffic you can only  subscribe to max {{MAXSUBSCRIPTION}} centers.</p>
+
+    </div>
+
+    <div class="modal-body__button">
+      <button (click)="modalRef.hide()" class="app-btn ">Ok</button>
+    </div>
+    <div class="modal-body__link">
+      <a  (click)="modalRef.hide()" routerLink="/subscribed">Show all Subscribed Centers</a>
+    </div>
+    </div>
+</ng-template>
+
 
 </div>

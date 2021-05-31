@@ -1,3 +1,5 @@
+import { SubscribedCenter } from './../../models/subscribedCenter';
+import { SubscriptionService } from './../../services/subscription.service';
 import { AuthService } from 'src/app/core/auth.service';
 import { Component, OnInit, } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -28,8 +30,11 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class VaccineAuthHomeComponent implements OnInit {
   user:User;
-  constructor(private authService:AuthService) {
+  subscribedCenters:SubscribedCenter[]=[];
+
+  constructor(private authService:AuthService,private subscriptionService:SubscriptionService) {
     this.user = this.authService.getCurrentUser();
+    this.getSubscribedCenters();
    }
   ngOnInit() {
   }
@@ -39,4 +44,10 @@ export class VaccineAuthHomeComponent implements OnInit {
     console.log("LOGOUT");
   }
 
+  getSubscribedCenters() {
+    this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
+      this.subscribedCenters = data;
+      console.log(data);
+    });
+  }
 }

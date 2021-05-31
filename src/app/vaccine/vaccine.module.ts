@@ -1,3 +1,4 @@
+import { FilterCenterPipe } from './pipes/filter-center.pipe';
 import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
 import { SubscribedCenter } from './models/subscribedCenter';
 import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
@@ -20,6 +21,7 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     HeaderBackComponent,
     VaccineSlotsComponent,
     VaccineAuthHomeComponent,
-    SubscribedCentersComponent
+    SubscribedCentersComponent,
+    FilterCenterPipe
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     NgxSpinnerModule,
     BsDropdownModule,
     AccordionModule.forRoot(),
+    ModalModule.forRoot()
 
   ]
 })

@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 
 @Component({
@@ -34,10 +35,12 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class SubscribedCentersComponent implements OnInit {
   subscribedCenters: SubscribedCenter[] = [];
+  routeTo:string="";
   constructor(
     private storageService: LocalStorageService,
     private subscriptionService: SubscriptionService,
-    private spinner:NgxSpinnerService
+    private spinner:NgxSpinnerService,
+    private route:ActivatedRoute
   ) {
     this.spinner.show();
     this.subscriptionService
@@ -47,6 +50,12 @@ export class SubscribedCentersComponent implements OnInit {
         this.spinner.hide();
         this.subscribedCenters = subscribedCenters;
       });
+
+      this.route.queryParams.subscribe((params) => {
+        if(params.routeTo){
+          this.routeTo = params.routeTo;
+        }
+      })
   }
 
   ngOnInit() {}
