@@ -110,6 +110,9 @@ export class VaccineSlotsComponent implements OnInit {
         forkJoin(centers$, centersSessions$).subscribe((response) => {
           // all observables have been completed
           this.centers = response[0];
+          if(this.centers.length===0){
+            this.isCenterEmpty=true;
+          }
           this.centersSessions = response[1];
           this.mergeCenterAndSessions();
         });
@@ -164,28 +167,7 @@ export class VaccineSlotsComponent implements OnInit {
     }
   }
 
-  getCentersWithPincdoe(pincode: string) {
-    //get all centers with pincode
-    this.vaccineRestService.centersByPinCode(pincode).subscribe((sessions) => {
-      if (sessions.length > 0) {
-        // this.centersSessions = sessions;
-      } else {
-      }
-    });
-  }
 
-  getCentersWithDistricId(districtId: string) {
-    //get all center with district id
-    this.vaccineRestService
-      .centersByDistrictId(districtId)
-      .subscribe((centers) => {
-        //  this.centers = centers;
-        if (centers.length === 0) {
-          this.isCenterEmpty == true;
-        }
-        this.addSubscribedKeyToCenters();
-      });
-  }
 
   addSubscribedKeyToCenters() {
     // adds subscribe key to each center with true or false

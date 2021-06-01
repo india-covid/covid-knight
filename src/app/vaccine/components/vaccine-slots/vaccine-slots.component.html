@@ -147,7 +147,14 @@
 
 
   <div class="slots-body" >
-
+    <div class="no-centers" *ngIf="isCenterEmpty || centersWithSession.length===0">
+      <div class="no-centers__content">
+        <div class="no-centers__content__img">
+          <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
+        </div>
+        <div class="no-centers__content__text">No Centers Found</div>
+      </div>
+    </div>
     <div class="myCard" *ngIf="!isCenterEmpty"  >
       <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccineType:age:activeDate">
         <div class="myCard__item">
@@ -217,14 +224,7 @@
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
 
 
-      <div class="no-centers" *ngIf="isCenterEmpty">
-        <div class="no-centers__content">
-          <div class="no-centers__content__img">
-            <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
-          </div>
-          <div class="no-centers__content__text">No Centers Found</div>
-        </div>
-      </div>
+
 
     </div>
     <div class="apply-changes" (click)="applySubscribeChanges()" [ngClass]="newTotalSubscribe?'apply-changes-show':'apply-changes-hide'">
