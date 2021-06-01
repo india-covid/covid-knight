@@ -82,21 +82,26 @@ export class VaccineSlotsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private modalService: BsModalService
   ) {
-    this.spinner.show();
     this.getSubscribedCenters();
   }
 
   getSubscribedCenters() {
+    this.spinner.show();
     this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
       this.subscribedCenters = data;
       this.accountTotalSubscribe = data.length;
-      this.getRouteParams();
+      this.queryData = {...this.route.snapshot.queryParams}
+      if(!this.queryData.queryType) {
+        this.router.navigate(['/home']);
+        this.spinner.hide();
+        return;
+      }
+
+      this.getRouteParams(this.queryData);
     });
   }
 
-  getRouteParams() {
-    this.route.queryParams.subscribe((params) => {
-      this.queryData = params;
+  getRouteParams(params: any) {
       if (params.queryType == this.QueryType.PIN) {
         //if query type is pincode
         const centers$ = this.vaccineRestService
@@ -130,7 +135,6 @@ export class VaccineSlotsComponent implements OnInit {
           this.mergeCenterAndSessions();
         });
       }
-    });
   }
 
   ngOnInit() {
@@ -271,6 +275,8 @@ export class VaccineSlotsComponent implements OnInit {
           this.router.navigate(['/home']);
         });
   }
+
+
   openLimitReachedModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template,Object.assign({}, { class: 'limitReachedModal' }));
   }

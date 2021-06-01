@@ -4,6 +4,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { Title } from '@angular/platform-browser';
+import { SubscriptionService } from './vaccine/services/subscription.service';
+import { take, takeLast } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,22 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   title = 'Vaccine Finder';
-  constructor(private storageService: LocalStorageService,
+  constructor(private subscriptionService: SubscriptionService,
+    private router: Router,
     private titleService: Title) {
     this.titleService.setTitle('Vaccine Finder');
   }
-  ngOnInit(){
 
+  ngOnInit(){
+    this.wizardCheck();
+  }
+
+
+  wizardCheck() {
+    this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
+      if(res && !res.expired) {
+        this.router.navigate(['subscription'])
+      }
+    });
   }
 }
