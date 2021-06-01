@@ -5,7 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import { AuthService } from 'src/app/core/auth.service';
 import { User } from './../../../core/models/user.model';
-import { CenterWithSessions } from './../../models/center.model';
+import { CenterWithSessions, DOSE, AGE } from './../../models/center.model';
 import { VaccineSession } from './../../models/vaccine-session.model';
 import { Subscriptions } from './../../models/subscriptions';
 import { SubscriptionService } from './../../services/subscription.service';
@@ -34,15 +34,9 @@ import {
 } from '@angular/animations';
 import { shareReplay } from 'rxjs/operators';
 
-
 export enum QueryType {
   PIN = 'pincode',
   DISTRICT = 'districtId',
-}
-
-export enum DOSE{
-  DOSE1="Dose-1",
-  DOSE2="Dose-1"
 }
 
 
@@ -55,9 +49,10 @@ export enum DOSE{
 export class VaccineSlotsComponent implements OnInit {
   QueryType = QueryType;
   DOSE=DOSE;
+  AGE=AGE;
   queryData: any | null = null;
 
-   MAXSUBSCRIPTION:number=environment.maxSubscription;
+   readonly MAXSUBSCRIPTION:number=environment.maxSubscription;
    accountTotalSubscribe :number=0
 
   @ViewChild('header') header!: ElementRef<HTMLElement>;
@@ -79,13 +74,13 @@ export class VaccineSlotsComponent implements OnInit {
   activeDate: string = '';
   private totalDatesToShow: number = 7;
   //filters
-  dose: string = DOSE.DOSE1;
+  dose: string = DOSE.ALL;
   vaccineType: string = 'Vaccine(2)';
   vaccines: any = {
     COVAXIN: { name: 'COVAXIN', checked: true },
     COVIESHIELD: { name: 'COVISHIELD', checked: true },
   };
-  age: string = 'Age';
+  age: string = AGE.ALL;
   hospitalName: string = '';
 
 

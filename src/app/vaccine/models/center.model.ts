@@ -31,3 +31,15 @@ export enum FeeType {
   PAID = 'Paid',
   UNKNOWN = 'Unknown',
 }
+
+
+export enum DOSE{
+  DOSE1="Dose-1",
+  DOSE2="Dose-2",
+  ALL="All Dose"
+}
+export enum AGE{
+  AGE1="18",
+  AGE2="45",
+  ALL="All Age"
+}
