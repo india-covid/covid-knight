@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
-import { User } from './core/models/user.model';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { Title } from '@angular/platform-browser';
 
