@@ -14,21 +14,11 @@ export class AppComponent implements OnInit {
   title = 'Vaccine Finder';
   constructor(private storageService: LocalStorageService,
     private spinner: NgxSpinnerService,
-    private titleService: Title,
-    private router: Router, private authService: AuthService) {
+    private titleService: Title) {
     this.spinner.show();
-    //this.getUserStatus();
     this.titleService.setTitle('Vaccine Finder');
   }
-
   ngOnInit(){
-    this.authService.user$.subscribe((user) => {
-      if(user && user.phoneNumber) {
-        this.storageService.set("User", user);
-        this.router.navigate(["/home"])
-      }
-      this.spinner.hide();
-    });
-  }
 
+  }
 }
