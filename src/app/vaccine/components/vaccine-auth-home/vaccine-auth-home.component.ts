@@ -33,7 +33,9 @@ export class VaccineAuthHomeComponent implements OnInit {
   user:User;
   subscribedCenters:SubscribedCenter[]=[];
 
-  constructor(private authService:AuthService,private subscriptionService:SubscriptionService,private router:Router) {
+  constructor(private authService:AuthService,
+    private router: Router,
+    private subscriptionService:SubscriptionService) {
     this.user = this.authService.getCurrentUser();
     this.getSubscribedCenters();
    }
@@ -41,16 +43,14 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   logout(){
-    this.authService.logout().subscribe(()=>{
+    this.authService.logout().subscribe(() => {
       this.router.navigate(['/']);
     });
-    console.log("LOGOUT");
   }
 
   getSubscribedCenters() {
     this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
       this.subscribedCenters = data;
-      console.log(data);
     });
   }
 }

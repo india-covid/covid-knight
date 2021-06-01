@@ -3,7 +3,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
- enum MENUITEMS{
+enum MENUITEMS {
   HOME = 'home',
   CONTACT = 'contact',
   DONATE = 'donate'
@@ -14,20 +14,20 @@ import {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  active=true;
+  active = true;
   MENUITEMS = MENUITEMS;
-  activeMenuItem:MENUITEMS=MENUITEMS.HOME;
+  activeMenuItem: MENUITEMS = MENUITEMS.HOME;
 
-    changeMenu(menuItem:MENUITEMS){
-      this.activeMenuItem = menuItem;
-    }
+  changeMenu(menuItem: MENUITEMS) {
+    this.activeMenuItem = menuItem;
+  }
 
-  constructor(router:Router) {
-    if(router.url!='/'){
-      this.active==false;
+  constructor(router: Router) {
+    if (router.url != '/') {
+      this.active == false;
     }
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

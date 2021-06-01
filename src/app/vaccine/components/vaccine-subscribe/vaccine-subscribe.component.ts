@@ -1,16 +1,13 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import * as DayJs from 'dayjs';
 import { NgOtpInputComponent } from 'ng-otp-input/lib/components/ng-otp-input/ng-otp-input.component';
-import { forkJoin, Subscription } from 'rxjs';
-import { mergeAll, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { isNonEmptyArray } from 'src/app/core/utils';
-import { Center, CenterWithSessions } from '../../models/center.model';
+import { Center } from '../../models/center.model';
 import { VaccineSession } from '../../models/vaccine-session.model';
 import { SubscriptionService } from '../../services/subscription.service';
-import { NgOtpInputModule } from 'ng-otp-input'
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from '../../../../environments/environment'
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -23,17 +20,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class VaccineSubscribeComponent implements OnInit, OnDestroy {
 
     private navigationExtras!:NavigationExtras;
-  constructor(private storageService: LocalStorageService,
+  constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
     private router: Router,
     private spinner:NgxSpinnerService
     ) {
-      this.route.queryParams.subscribe((params) => {
+      this.subs.add(this.route.queryParams.subscribe((params) => {
         this.navigationExtras=params;
-        console.log(this.navigationExtras);
-      })
+      }));
     }
 
   loading = false;
@@ -96,8 +92,6 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     }
     this.spinner.show();
     this.loading = true;
-    console.log( this.wizardResult.phoneNumber);
-    console.log(this.otp);
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
@@ -105,15 +99,11 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     }).subscribe(res => {
       this.spinner.hide();
       this.isOtpWrong=false;
-
-      console.log("OTP CORRECT GO TO NEXT PAGE",this.navigationExtras);
        this.router.navigate(["/slots"],{queryParams:this.navigationExtras})
-
 
     }, err => {
       this.spinner.hide();
       this.isOtpWrong=true;
-      console.log('WRONG OTP! clear');
       this.loading = false;
       this.isOtpLengthValid = false;
       this.ngOtpInputRef?.otpForm.enable();

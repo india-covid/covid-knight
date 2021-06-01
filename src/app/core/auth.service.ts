@@ -6,8 +6,8 @@ import { tap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { UserRegisterLogin } from './models/auth.model';
 import { User } from './models/user.model';
-import {catchError, map} from 'rxjs/operators';
-import {Observable, of, ReplaySubject,throwError} from "rxjs";
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of, ReplaySubject, throwError } from "rxjs";
 import { CookieService } from 'ngx-cookie';
 import { NgxSpinnerService } from "ngx-spinner";
 import { LocalStorageService } from 'src/app/core/localstorage.service';
@@ -19,7 +19,7 @@ export class AuthService {
   private authMainLoginUrl = '/auth'
   private _userSubject = new ReplaySubject<User>();
 
-  constructor( private router:Router, private storageService: LocalStorageService, private spinner: NgxSpinnerService,private httpClient: HttpClient, private cookieService: CookieService) {
+  constructor(private router: Router, private storageService: LocalStorageService, private spinner: NgxSpinnerService, private httpClient: HttpClient, private cookieService: CookieService) {
     this._userSubject = new ReplaySubject<User>();
   }
 
@@ -31,14 +31,6 @@ export class AuthService {
     const url = environment.apiBase + '/auth/status';
     return this.httpClient.get<User>(url).pipe(tap(user => {
       this._userSubject.next(user);
-    }),
-    catchError((error) => {
-      this.spinner.hide();
-      this.storageService.delete("User");
-      console.log('No valid token found')
-      console.error(error.error.message);
-      this.router.navigate(['/']);
-      return throwError(error);
     })
     );
   }
@@ -46,9 +38,13 @@ export class AuthService {
   logout() {
     const url = environment.apiBase + '/auth/logout';
     return this.httpClient.post(url, undefined, { responseType: 'text' }).pipe(tap(() => {
-      this.cookieService.remove('Authorization');
-      this.storageService.delete("User");
+      this.clearCreds();
     }))
+  }
+
+  clearCreds() {
+    this.cookieService.remove('Authorization');
+    this.storageService.delete("User");
   }
 
   vaccineLoginOrSignup(authInfo: UserRegisterLogin) {
@@ -60,7 +56,7 @@ export class AuthService {
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
       const { token, ...user } = body;
       if (token?.token) {
-        this.storageService.set("User",user);
+        this.storageService.set("User", user);
         this.cookieService.put('Authorization', token.token, { expires: token.expiresIn + '' });
       }
       this._userSubject.next(user);
@@ -80,14 +76,14 @@ export class AuthService {
   }
 
   requestOtp(phoneNumber?: string) {
-    if(!phoneNumber) {
-     return of(null);
+    if (!phoneNumber) {
+      return of(null);
     }
     const url = environment.apiBase + `${this.authMainLoginUrl}` + '/otp/request';
     return this.httpClient.post<any>(url, { phoneNumber, production: environment.production }); // pass countryCode if not india
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     return this.storageService.get('User');
   }
 

@@ -49,7 +49,6 @@ export class CentersByDistrictSelectorComponent implements OnInit {
   }
 
   onDistrictChange(district: District) {
-    console.log(district);
     this.districtSelected.emit({ districtId: district._id})
 
     // this._districtSubject.next(district._id);

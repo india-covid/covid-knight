@@ -1,39 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 import { User } from './core/models/user.model';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'covid-frontend';
-  constructor(   private storageService: LocalStorageService,private spinner: NgxSpinnerService, private router: Router,private authService: AuthService) {
+export class AppComponent implements OnInit {
+  title = 'Vaccine Finder';
+  constructor(private storageService: LocalStorageService,
+    private spinner: NgxSpinnerService,
+    private titleService: Title,
+    private router: Router, private authService: AuthService) {
     this.spinner.show();
-    this.getUserStatus();
+    //this.getUserStatus();
+    this.titleService.setTitle('Vaccine Finder');
   }
 
-  dummyLogin() {
-    const authInfo = {phoneNumber: '9620032593', otp: '1111'}
-    this.authService.vaccineLoginOrSignup(authInfo).subscribe(console.log)
-  }
-
-  getUserStatus() {
-    this.authService.getStatus().subscribe((data)=>{
-      console.log(data);
+  ngOnInit(){
+    this.authService.getStatus().subscribe((user) => {
+      if(user && user.phoneNumber) {
+        this.storageService.set("User", user);
+        this.router.navigate(["/home"])
+      }
       this.spinner.hide();
-      this.storageService.set("User",data);
-     this.router.navigate(["/auth-home"])
+      this.storageService.set("User",user);
+     this.router.navigate(["/home"])
     });
   }
-
-  dummyLogout() {
-    this.authService.logout().subscribe(console.log);
-  }
-
 
 }

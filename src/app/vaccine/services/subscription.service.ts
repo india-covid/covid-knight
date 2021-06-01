@@ -50,12 +50,10 @@ export class SubscriptionService {
     return this.http.get<SubscribedCenter[]>(url);
   }
   postSubscriptionCenter(subscription:Subscriptions){
-    console.log("post subscription ",subscription);
     const url = environment.apiBase + `${this.vaccineBase}/subscriptions`;
     return this.http.post(url,subscription);
   }
   deleteSubscriptionCenter(subscriptionId:string){
-    console.log("delete subscription",subscriptionId);
     const url = environment.apiBase + `${this.vaccineBase}/subscriptions/subscription/${subscriptionId}`;
     return this.http.delete(url);
   }

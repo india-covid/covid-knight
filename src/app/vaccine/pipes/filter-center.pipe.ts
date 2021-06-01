@@ -8,7 +8,6 @@ import { Center } from '../models/center.model';
 export class FilterCenterPipe implements PipeTransform {
  VACCINES=VACCINES;
   transform(centers: Center[], hospitalName: string,dose:string,vaccineType:any,age:string,activeDate:string): any {
-    console.log("got filters ",hospitalName,dose,vaccineType,activeDate)
     let doseType:string;
     if(dose == DOSE.DOSE1){
       doseType ='1';

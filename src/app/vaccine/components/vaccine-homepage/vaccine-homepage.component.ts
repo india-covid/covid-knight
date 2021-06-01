@@ -8,14 +8,12 @@ import { VaccineRestService } from '../../services/vaccine-rest.service';
   styleUrls: ['./vaccine-homepage.component.scss']
 })
 export class VaccineHomepageComponent implements OnInit {
-  constructor(private vaccineService: VaccineRestService, private router: Router){
+  constructor(private vaccineService: VaccineRestService,
+     private router: Router) {
   }
-  ngOnInit(){
+  ngOnInit() {
+
   }
-
-
-
-
   wizardDone() {
     this.router.navigate(['subscription']);
   }

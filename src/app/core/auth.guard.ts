@@ -1,7 +1,8 @@
 import { AuthService } from 'src/app/core/auth.service';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,17 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authService:AuthService,
+    private authService: AuthService,
+  ) { }
 
-  ) {}
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-  ): Observable<boolean> | Promise<boolean> | boolean {
-
-    const user = this.authService.getCurrentUser();
-    if(user && user.phoneNumber){
-      return true;
-    }else{
-      console.log("NOT AUTHETICATED, Redirecting to default")
-      this.router.navigate(['/']);
-      return false;
-    }
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.authService.user$.pipe(map(user => user && Boolean(user.phoneNumber),
+      tap(loggedIn => {
+        if (loggedIn) {
+          return;
+        }
+        this.authService.clearCreds();
+        this.router.navigate(['/']);
+      })));
   }
 }

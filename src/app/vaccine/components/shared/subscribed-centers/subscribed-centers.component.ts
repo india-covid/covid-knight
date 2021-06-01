@@ -46,7 +46,6 @@ export class SubscribedCentersComponent implements OnInit {
     this.subscriptionService
       .getSubscriptionCenters()
       .subscribe((subscribedCenters) => {
-        console.log(subscribedCenters);
         this.spinner.hide();
         this.subscribedCenters = subscribedCenters;
       });
@@ -67,8 +66,6 @@ export class SubscribedCentersComponent implements OnInit {
     this.subscriptionService
       .deleteSubscriptionCenter(subscriptionId)
       .subscribe((data) => {
-        console.log('posted success ', data);
-
         this.subscribedCenters.splice(index, 1);
       });
   }
