@@ -1,18 +1,16 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import * as DayJs from 'dayjs';
 import { NgOtpInputComponent } from 'ng-otp-input/lib/components/ng-otp-input/ng-otp-input.component';
-import { forkJoin, Subscription } from 'rxjs';
-import { mergeAll, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { isNonEmptyArray } from 'src/app/core/utils';
-import { Center, CenterWithSessions } from '../../models/center.model';
+import { Center } from '../../models/center.model';
 import { VaccineSession } from '../../models/vaccine-session.model';
 import { SubscriptionService } from '../../services/subscription.service';
-import { NgOtpInputModule } from 'ng-otp-input'
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from '../../../../environments/environment'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-vaccine-subscribe',
@@ -21,22 +19,31 @@ import { environment } from '../../../../environments/environment'
 })
 export class VaccineSubscribeComponent implements OnInit, OnDestroy {
 
-  constructor(private storageService: LocalStorageService,
+    private navigationExtras!:NavigationExtras;
+  constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
-    private router: Router) { }
+    private router: Router,
+    private storageService: LocalStorageService,
+    private spinner:NgxSpinnerService
+    ) {
+      this.subs.add(this.route.queryParams.subscribe((params) => {
+        this.navigationExtras=params;
+      }));
+    }
 
   loading = false;
   otpLength = environment.otpLength;
   private subs: Subscription = new Subscription();
   wizardResult: { phoneNumber?: string, countryCode?: string, centers?: Center[], minLeft?: number, secLeft?: number } = {};
-  centers: CenterWithSessions[] = [];
+  centers: Center[] = [];
   now = DayJs();
   threeDaysFromNow = [new Date(), DayJs().add(1, 'day').toDate(), DayJs().add(2, 'day').toDate()]
   sessionsInfo: { [centerIdDate: string]: VaccineSession } = {};
   isOtpLengthValid = false
   otp: string = ''
+  isOtpWrong:boolean =false;
   @ViewChild('ngOtpInput') ngOtpInputRef: NgOtpInputComponent | null = null;
 
   ngOnInit(): void {
@@ -59,7 +66,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
   }
 
   sessionInfo(center: Center) {
-    return this.subscriptionService.getDetailedCenterInfo(center);
+    return this.subscriptionService.getDetailedCenterInfo(center,0);
   }
 
   ngOnDestroy() {
@@ -84,19 +91,19 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     if (!this.isOtpLengthValid) {
       return;
     }
+    this.spinner.show();
     this.loading = true;
-
-    console.log(this.otp);
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
-      subscriptions: { centerIds: this.centers.map(c => c._id) }
     }).subscribe(res => {
-      console.log("OTP CORRECT GO TO NEXT PAGE");
-      // this.router.navigate(['/subscriptions/dashboard]);
-
+      this.spinner.hide();
+      this.isOtpWrong=false;
+      this.storageService.delete('subscription');
+      this.router.navigate(["slots"],{queryParams:this.navigationExtras});
     }, err => {
-      console.log('WRONG OTP! clear');
+      this.spinner.hide();
+      this.isOtpWrong=true;
       this.loading = false;
       this.isOtpLengthValid = false;
       this.ngOtpInputRef?.otpForm.enable();

@@ -1,30 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth.service';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
+import { Title } from '@angular/platform-browser';
+import { SubscriptionService } from './vaccine/services/subscription.service';
+import { take, takeLast } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'covid-frontend';
-
-  constructor(private authService: AuthService) {
-
+export class AppComponent implements OnInit {
+  title = 'Vaccine Finder';
+  constructor(private subscriptionService: SubscriptionService,
+    private storageService: LocalStorageService,
+    private router: Router,
+    private titleService: Title) {
+    this.titleService.setTitle('Vaccine Finder');
   }
 
-  dummyLogin() {
-    const authInfo = {phoneNumber: '9620032593', otp: '1111'}
-    this.authService.vaccineLoginOrSignup(authInfo).subscribe(console.log)
-  }
-
-  dummyGetStatus() {
-    this.authService.getStatus().subscribe(console.log);
-  }
-
-  dummyLogout() {
-    this.authService.logout().subscribe(console.log);
+  ngOnInit(){
+    this.wizardCheck();
   }
 
 
+  wizardCheck() {
+    this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
+      if(res && typeof res.expired !== 'boolean') {
+        this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'})
+      }else {
+        this.storageService.delete('subscription');
+        this.router.navigate(['home']);
+      }
+    });
+  }
 }
