@@ -57,7 +57,7 @@ export class VaccineSlotsComponent implements OnInit {
    accountTotalSubscribe :number=0
 
   @ViewChild('header') header!: ElementRef<HTMLElement>;
-@ViewChild('limitReachedTemplate') limitReachedTemplate!:TemplateRef<any>;
+  @ViewChild('limitReachedTemplate') limitReachedTemplate!:TemplateRef<any>;
   private subscribedCenters: SubscribedCenter[] = [];
 
   private newSubscribeCenters: Center[] = [];
@@ -228,14 +228,6 @@ export class VaccineSlotsComponent implements OnInit {
     });
   }
 
-  isVisible(center: any) {
-    var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    if (center[date]) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   mergeCenterAndSessions() {
     var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
@@ -317,20 +309,7 @@ export class VaccineSlotsComponent implements OnInit {
   openLimitReachedModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template,Object.assign({}, { class: 'limitReachedModal' }));
   }
-  // subscribeCenter(center: Center) {
-  //   // this.subscribedCenters.push(center);
-  //   console.log(this.centersWithSession);
-  //   let index = this.centersWithSession.findIndex(
-  //     (c: Center) => c._id === center._id
-  //   );
-  //   this.centersWithSession[index].subscribed = 'temp';
 
-  //   this.subscriptionService
-  //     .postSubscriptionCenter({ centers: [center] })
-  //     .subscribe((data) => {
-  //       console.log('posted success ', data);
-  //     });
-  // }
 
   UnSubscribeCenter(check_center: Center) {
     let index = this.centersWithSession.findIndex(
@@ -371,37 +350,37 @@ export class VaccineSlotsComponent implements OnInit {
     this.vaccineType=vacc;
   }
 
-  //header animation
-  lastScroll: number = 0;
-  @HostListener('window:scroll', ['$event'])
-  scrollHandler(event: any) {
-    const header = this.header.nativeElement;
-    const scrollUp = 'show-header';
-    const scrollDown = 'hide-header';
-    console.log('Scroll Event');
-    const currentScroll = window.pageYOffset;
-    console.log(currentScroll, window);
-    if (currentScroll <= 0) {
-      header.classList.remove(scrollUp);
-      return;
-    }
+  // //header animation
+  // lastScroll: number = 0;
+  // @HostListener('window:scroll', ['$event'])
+  // scrollHandler(event: any) {
+  //   const header = this.header.nativeElement;
+  //   const scrollUp = 'show-header';
+  //   const scrollDown = 'hide-header';
+  //   console.log('Scroll Event');
+  //   const currentScroll = window.pageYOffset;
+  //   console.log(currentScroll, window);
+  //   if (currentScroll <= 0) {
+  //     header.classList.remove(scrollUp);
+  //     return;
+  //   }
 
-    if (
-      currentScroll > this.lastScroll &&
-      !header.classList.contains(scrollDown)
-    ) {
-      // down
-      header.classList.remove(scrollUp);
-      header.classList.add(scrollDown);
-      console.log('adding header up');
-    } else if (
-      currentScroll < this.lastScroll &&
-      header.classList.contains(scrollDown)
-    ) {
-      // up
-      header.classList.remove(scrollDown);
-      header.classList.add(scrollUp);
-    }
-    this.lastScroll = currentScroll;
-  }
+  //   if (
+  //     currentScroll > this.lastScroll &&
+  //     !header.classList.contains(scrollDown)
+  //   ) {
+  //     // down
+  //     header.classList.remove(scrollUp);
+  //     header.classList.add(scrollDown);
+  //     console.log('adding header up');
+  //   } else if (
+  //     currentScroll < this.lastScroll &&
+  //     header.classList.contains(scrollDown)
+  //   ) {
+  //     // up
+  //     header.classList.remove(scrollDown);
+  //     header.classList.add(scrollUp);
+  //   }
+  //   this.lastScroll = currentScroll;
+  // }
 }

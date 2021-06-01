@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import { SubscriptionService } from './../../services/subscription.service';
 import { AuthService } from 'src/app/core/auth.service';
@@ -32,7 +33,7 @@ export class VaccineAuthHomeComponent implements OnInit {
   user:User;
   subscribedCenters:SubscribedCenter[]=[];
 
-  constructor(private authService:AuthService,private subscriptionService:SubscriptionService) {
+  constructor(private authService:AuthService,private subscriptionService:SubscriptionService,private router:Router) {
     this.user = this.authService.getCurrentUser();
     this.getSubscribedCenters();
    }
@@ -40,7 +41,9 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   logout(){
-    this.authService.logout().subscribe(console.log);
+    this.authService.logout().subscribe(()=>{
+      this.router.navigate(['/']);
+    });
     console.log("LOGOUT");
   }
 

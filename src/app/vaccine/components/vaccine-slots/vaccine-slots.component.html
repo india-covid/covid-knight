@@ -13,8 +13,8 @@
     </div>
     <div class="filters">
       <p class="filters__title">Filters</p>
-      <div class="row filters__menu">
-        <div class="col">
+      <div class="filters__menu">
+        <div class="">
           <div class="btn-group" dropdown #doseDropDown="bs-dropdown" [autoClose]="true">
             <button dropdownToggle type="button" class="app-btn dropdown-toggle">
               {{ dose }}<span class="caret"></span>
@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div class="col">
+        <div class="">
           <div class="btn-group" dropdown #vaccineDropDown="bs-dropdown" [autoClose]="true">
             <button dropdownToggle type="button" class="app-btn dropdown-toggle">
               {{ vaccineType=='All'?vaccineType + ' Vaccines':vaccineType }}<span class="caret"></span>
@@ -95,7 +95,7 @@
             </ul>
           </div>
         </div>
-        <div class="col">
+        <div class="">
           <div class="btn-group" dropdown #ageDropDown="bs-dropdown" [autoClose]="true">
             <button dropdownToggle type="button" class="app-btn dropdown-toggle">
               {{ age!=AGE.ALL?age+"+":age }}<span class="caret"></span>

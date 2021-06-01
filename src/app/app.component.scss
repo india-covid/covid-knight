@@ -65,8 +65,8 @@ $text-muted-color: var(--app-color-light-tint);
       // border:solid red;
       &__icon {
         // border:solid green;
-        height: 70px;
-        width: 70px;
+        height: 60px;
+        width: 60px;
         position: relative;
         top: -3px;
         img {
@@ -78,7 +78,7 @@ $text-muted-color: var(--app-color-light-tint);
         margin-left: 10px;
         // border:solid blue;
         &__text {
-          font-size: 1.8rem;
+          font-size: 1.6rem;
           padding: 0;
           margin: 0;
           white-space: nowrap;

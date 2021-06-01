@@ -12,7 +12,9 @@ $text-muted-color: var(--app-color-light-tint);
   height: 100vh;
   width:100vw;
   .empty-space {
-    background-color: $stage1-bg-color;
+    padding-bottom:20px;
+
+    // background-color: $stage1-bg-color;
     width: 50%;
     &__icon{
       position: relative;
@@ -21,7 +23,7 @@ $text-muted-color: var(--app-color-light-tint);
     &__image-wrapper {
       height:100%;
       background-image: url("../../../../assets/img/s3.jpg");
-      background-color:  $stage1-bg-color;
+      // background-color:  $stage1-bg-color;
     }
   }
 }
@@ -30,6 +32,7 @@ $text-muted-color: var(--app-color-light-tint);
   width:50%;
   background-color:rgba(0, 0, 0, 0.603);
   // background-color:rgba(90, 160, 252, 0.486); ;
+
 }
 
 .homepage {
@@ -69,8 +72,8 @@ $text-muted-color: var(--app-color-light-tint);
       // border:solid red;
       &__icon {
         // border:solid green;
-        height: 70px;
-        width: 70px;
+        height: 60px;
+        width: 60px;
         position: relative;
         top: -3px;
         img {
@@ -82,7 +85,7 @@ $text-muted-color: var(--app-color-light-tint);
         margin-left: 10px;
         // border:solid blue;
         &__text {
-          font-size:1.8rem;
+          font-size:1.6rem;
           padding: 0;
           margin: 0;
           white-space: nowrap;
@@ -99,9 +102,10 @@ $text-muted-color: var(--app-color-light-tint);
     }
     .body {
       font-size: 20px;
-      padding: 20px;
+      padding:20px 20px 0px 20px;
       color: $text-color;
       margin-top: 20px;
+
       &__non-profit {
         font-size: 1.02rem;
         color: $text-muted-color;

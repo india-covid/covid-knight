@@ -28,7 +28,7 @@
 
 .slots-head{
   .filters{
-    // border:solid red;
+
     &__title{
       // border:solid yellow;
       margin:0;
@@ -38,7 +38,9 @@
     }
     .app-btn{
       background-color: var(--app-color-primary);
-      border:none !important
+      border:none !important;
+      width:auto !important;
+      text-transform: none !important;
     }
     ul{
       padding:0;
@@ -47,13 +49,11 @@
         margin:0;
       }
     }
-    .row{
+    &__menu{
       // border:solid green ;
-      margin:0;
-      .col{
-        // border:solid blue;
-        text-align: center;
-      }
+      display: flex !important;
+      justify-content: space-evenly;
+
     }
     &__search-bar{
       padding:0px 20px 0px 20px;
@@ -112,8 +112,9 @@
   }
   &__item {
     margin: 0 auto;
-    min-width: 360px;
-    max-width: 360px;
+    // min-width: 360px;
+     max-width: 360px;
+    width:90%;
     // border:solid red;
     margin-top: 15px;
     border-radius: 5px;
