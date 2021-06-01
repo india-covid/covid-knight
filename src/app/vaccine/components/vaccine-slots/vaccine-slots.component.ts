@@ -5,7 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import { AuthService } from 'src/app/core/auth.service';
 import { User } from './../../../core/models/user.model';
-import { CenterWithSessions, DOSE, AGE } from './../../models/center.model';
+import { CenterWithSessions, DOSE, AGE,VACCINES } from './../../models/center.model';
 import { VaccineSession } from './../../models/vaccine-session.model';
 import { Subscriptions } from './../../models/subscriptions';
 import { SubscriptionService } from './../../services/subscription.service';
@@ -50,6 +50,7 @@ export class VaccineSlotsComponent implements OnInit {
   QueryType = QueryType;
   DOSE=DOSE;
   AGE=AGE;
+  VACCINES=VACCINES;
   queryData: any | null = null;
 
    readonly MAXSUBSCRIPTION:number=environment.maxSubscription;
@@ -75,11 +76,9 @@ export class VaccineSlotsComponent implements OnInit {
   private totalDatesToShow: number = 7;
   //filters
   dose: string = DOSE.ALL;
-  vaccineType: string = 'Vaccine(2)';
-  vaccines: any = {
-    COVAXIN: { name: 'COVAXIN', checked: true },
-    COVIESHIELD: { name: 'COVISHIELD', checked: true },
-  };
+
+  vaccineType: string =this.VACCINES.ALL;
+
   age: string = AGE.ALL;
   hospitalName: string = '';
 
@@ -368,25 +367,8 @@ export class VaccineSlotsComponent implements OnInit {
     console.log(this.age);
   }
 
-  vaccineTypeChange(): void {
-    let all = true;
-    for (let key in this.vaccines) {
-      if (!this.vaccines[key].checked) {
-        all = false;
-      }
-    }
-    if (all) {
-      this.vaccineType = 'Vaccine(2)';
-    } else {
-      if (this.vaccines['COVAXIN'].checked) {
-        this.vaccineType = 'COVAXIN';
-      } else if (this.vaccines['COVIESHIELD'].checked) {
-        this.vaccineType = 'COVIESHIELD';
-      } else {
-        this.vaccineType = 'Vaccine(0)';
-      }
-    }
-    console.log(this.vaccines);
+  vaccineTypeChange(vacc:any): void {
+    this.vaccineType=vacc;
   }
 
   //header animation
