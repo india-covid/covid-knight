@@ -15,6 +15,7 @@ import { take, takeLast } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'Vaccine Finder';
   constructor(private subscriptionService: SubscriptionService,
+    private storageService: LocalStorageService,
     private router: Router,
     private titleService: Title) {
     this.titleService.setTitle('Vaccine Finder');
@@ -27,8 +28,11 @@ export class AppComponent implements OnInit {
 
   wizardCheck() {
     this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
-      if(res && !res.expired) {
-        this.router.navigate(['subscription'])
+      if(res && typeof res.expired !== 'boolean') {
+        this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'})
+      }else {
+        this.storageService.delete('subscription');
+        this.router.navigate(['home']);
       }
     });
   }
