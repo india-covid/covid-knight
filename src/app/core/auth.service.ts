@@ -41,6 +41,7 @@ export class AuthService {
   logout() {
     const url = environment.apiBase + '/auth/logout';
     return this.httpClient.post(url, undefined, { responseType: 'text' }).pipe(tap(() => {
+      this._userSubject.next(null);
       this.clearCreds();
     }))
   }

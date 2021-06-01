@@ -25,6 +25,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
     private router: Router,
+    private storageService: LocalStorageService,
     private spinner:NgxSpinnerService
     ) {
       this.subs.add(this.route.queryParams.subscribe((params) => {
@@ -96,11 +97,10 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
     }).subscribe(res => {
-
       this.spinner.hide();
       this.isOtpWrong=false;
-      this.router.navigate(["slots"],{queryParams:this.navigationExtras})
-
+      this.storageService.delete('subscription');
+      this.router.navigate(["slots"],{queryParams:this.navigationExtras});
     }, err => {
       this.spinner.hide();
       this.isOtpWrong=true;

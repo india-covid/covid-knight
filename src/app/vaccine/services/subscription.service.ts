@@ -9,7 +9,7 @@ import { VaccineRestService } from './vaccine-rest.service';
 import { Center } from '../models/center.model';
 import { environment } from 'src/environments/environment';
 import { Subscriptions } from './../models/subscriptions';
-const OTP_EXPIRE_MIN = 5;
+const OTP_EXPIRE_MIN = 3;
 @Injectable({
   providedIn: 'root'
 })

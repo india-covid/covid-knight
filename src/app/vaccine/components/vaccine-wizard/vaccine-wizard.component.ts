@@ -55,9 +55,7 @@ export class VaccineWizardComponent implements OnInit {
     private storageService: LocalStorageService,
     private router: Router,
     private spinner: NgxSpinnerService) {
-
     this.user = this.storageService.get("User");
-
   }
   ngOnInit(): void {
     //  this.user = this.storageService.get("subscription");
@@ -154,15 +152,9 @@ export class VaccineWizardComponent implements OnInit {
 
 
   private saveCurrentResults(phoneNumber: string = '', naviagationExtras: NavigationExtras) {
-    // this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber,  , centers: this.selectedCenters});
-    this.storageService.set('subscription', { phoneNumber: phoneNumber, countryCode: "IN", centers: [] })
-    // this.storageService.set('wizardState', {tab:this.activeTab,phoneNumber:phoneNumber, countryCode:countryCode ,pincode:this.pincode,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict,centers: this.selectedCenters});
-
+    this.storageService.set('subscription', {time: new Date().getTime() / 1000, phoneNumber,  centers: this.selectedCenters});
     this.spinner.hide();
-    // this.done.next(true);
     this.router.navigate(['/subscription'], naviagationExtras);
-
-
   }
 
   private get _ping$() {

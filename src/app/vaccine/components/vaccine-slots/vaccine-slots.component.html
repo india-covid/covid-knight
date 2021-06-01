@@ -228,7 +228,7 @@
 
     </div>
     <div class="apply-changes" (click)="applySubscribeChanges()" [ngClass]="newTotalSubscribe?'apply-changes-show':'apply-changes-hide'">
-      <p><i></i>NEXT click to save subscribed ({{newTotalSubscribe }}) Centers  </p>
+      <p><i></i>Subscribe to {{newTotalSubscribe }} {{ newTotalSubscribe === 1 ? 'Center' : 'Centers' }}  </p>
     </div>
   </div>
 
