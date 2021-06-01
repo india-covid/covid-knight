@@ -13,9 +13,7 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent implements OnInit {
   title = 'Vaccine Finder';
   constructor(private storageService: LocalStorageService,
-    private spinner: NgxSpinnerService,
     private titleService: Title) {
-    this.spinner.show();
     this.titleService.setTitle('Vaccine Finder');
   }
   ngOnInit(){
