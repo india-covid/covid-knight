@@ -19,20 +19,24 @@ export class AuthService {
   private authMainLoginUrl = '/auth'
   private _userSubject = new ReplaySubject<User>();
 
-  constructor(private router: Router, private storageService: LocalStorageService, private spinner: NgxSpinnerService, private httpClient: HttpClient, private cookieService: CookieService) {
+  constructor(private router: Router,
+    private storageService: LocalStorageService,
+    private spinner: NgxSpinnerService,
+    private httpClient: HttpClient,
+    private cookieService: CookieService) {
     this._userSubject = new ReplaySubject<User>();
+    this._getStatus();
   }
 
   public get user$() {
     return this._userSubject.asObservable();
   }
 
-  getStatus() {
+ private _getStatus() {
     const url = environment.apiBase + '/auth/status';
-    return this.httpClient.get<User>(url).pipe(tap(user => {
+    return this.httpClient.get<User>(url).subscribe(user => {
       this._userSubject.next(user);
-    })
-    );
+    });
   }
 
   logout() {

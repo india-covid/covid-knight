@@ -95,11 +95,11 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
-      subscriptions: { centerIds: this.centers.map(c => c._id) }
     }).subscribe(res => {
+
       this.spinner.hide();
       this.isOtpWrong=false;
-       this.router.navigate(["/slots"],{queryParams:this.navigationExtras})
+      this.router.navigate(["slots"],{queryParams:this.navigationExtras})
 
     }, err => {
       this.spinner.hide();

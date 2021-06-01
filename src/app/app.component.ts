@@ -23,14 +23,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.authService.getStatus().subscribe((user) => {
+    this.authService.user$.subscribe((user) => {
       if(user && user.phoneNumber) {
         this.storageService.set("User", user);
         this.router.navigate(["/home"])
       }
       this.spinner.hide();
-      this.storageService.set("User",user);
-     this.router.navigate(["/home"])
     });
   }
 
