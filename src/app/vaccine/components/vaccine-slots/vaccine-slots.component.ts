@@ -106,11 +106,11 @@ export class VaccineSlotsComponent implements OnInit {
         //if query type is pincode
         const centers$ = this.vaccineRestService
           .centersByPinCode(params.pincode)
-          .pipe(shareReplay()); //this.getCentersWithPincdoe(params[this.QueryType.PIN]);
+          .pipe(shareReplay());
         const centersSessions$ = this.vaccineRestService.getSessionsByPincode(
           params.pincode,
           DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
-        ); //this.getSessionsByPincode(params[this.QueryType.PIN], this.activeDay);
+        );
 
         forkJoin(centers$, centersSessions$).subscribe((response) => {
           // all observables have been completed
@@ -134,6 +134,9 @@ export class VaccineSlotsComponent implements OnInit {
         forkJoin(centers$, centersSessions$).subscribe((response) => {
           // all observables have been completed
           this.centers = response[0];
+          if(this.centers.length===0){
+            this.isCenterEmpty==true;
+          }
           this.centersSessions = response[1];
           this.mergeCenterAndSessions();
         });
@@ -143,6 +146,7 @@ export class VaccineSlotsComponent implements OnInit {
   ngOnInit() {
     this.generateDays(this.totalDatesToShow);
   }
+
   generateDays(days: number) {
     //generate dates from today to n days
     this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
@@ -155,9 +159,13 @@ export class VaccineSlotsComponent implements OnInit {
   }
 
   getSessionsForDay(day: number) {
+
     this.activeDay = day;
     this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
     var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
+    if(this.isCenterEmpty){
+      return
+    }
     if (this.centersWithSession[0][date]) {
       return;
     }
