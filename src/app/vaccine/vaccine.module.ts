@@ -1,3 +1,8 @@
+import { FilterCenterPipe } from './pipes/filter-center.pipe';
+import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
+import { SubscribedCenter } from './models/subscribedCenter';
+import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
+import { VaccineSlotsComponent } from './components/vaccine-slots/vaccine-slots.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VaccineRoutingModule } from './vaccine-routing.module';
@@ -14,7 +19,9 @@ import { HeaderComponent } from './../shared/components/shared/header/header.com
 import { HeaderBackComponent } from './../shared/components/shared/header-back/header-back.component';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { EmptySpaceComponent } from './components/shared/empty-space/empty-space.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,10 @@ import { EmptySpaceComponent } from './components/shared/empty-space/empty-space
     VaccineSubscribeComponent,
     HeaderComponent,
     HeaderBackComponent,
-    // EmptySpaceComponent
+    VaccineSlotsComponent,
+    VaccineAuthHomeComponent,
+    SubscribedCentersComponent,
+    FilterCenterPipe
   ],
   imports: [
     CommonModule,
@@ -35,7 +45,11 @@ import { EmptySpaceComponent } from './components/shared/empty-space/empty-space
     NgSelectModule,
     NgxIntlTelInputModule,
     NgOtpInputModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BsDropdownModule,
+    AccordionModule.forRoot(),
+    ModalModule.forRoot()
+
   ]
 })
 export class VaccineModule { }

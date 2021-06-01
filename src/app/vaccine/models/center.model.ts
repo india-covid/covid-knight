@@ -15,17 +15,38 @@ export interface Center {
   name: string;
   stateId: string;
   districtId: string;
+  subscribed:boolean;
+  subscriptionId:string
 }
 
 
 
 // only an ui helper
 export interface CenterWithSessions extends Center{
-  sessions: VaccineSession[];
+  date:VaccineSession[];
 }
 
 export enum FeeType {
   FREE = 'Free',
   PAID = 'Paid',
   UNKNOWN = 'Unknown',
+}
+
+
+export enum DOSE{
+  DOSE1="Dose-1",
+  DOSE2="Dose-2",
+  ALL="All Dose"
+}
+export enum AGE{
+  AGE1="18",
+  AGE2="45",
+  ALL="All Age"
+}
+
+export enum VACCINES{
+  VACCINE1="COVAXIN",
+  VACCINE2="COVISHIELD",
+  ALL="All"
+
 }

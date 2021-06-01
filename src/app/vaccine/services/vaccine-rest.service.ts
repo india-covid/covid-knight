@@ -1,3 +1,4 @@
+import { Subscriptions } from './../models/subscriptions';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -64,6 +65,18 @@ export class VaccineRestService {
     const url = environment.apiBase + `${this.vaccineBase}/sessions/${date}/center/${centerId}`;
     return this.http.get<VaccineSession[]>(url);
   }
+
+  getSessionsByPincode(pin: string, date: string): Observable<VaccineSession[]> {
+    const url = environment.apiBase + `${this.vaccineBase}/sessions/${date}/pin/${pin}`;
+    return this.http.get<VaccineSession[]>(url);
+  }
+
+
+  getSessionsByDistrictId(districtId: string, date: string) {
+    const url = environment.apiBase + `${this.vaccineBase}/sessions/${date}/district/${districtId}`;
+    return this.http.get<VaccineSession[]>(url);
+  }
+
 
 
 

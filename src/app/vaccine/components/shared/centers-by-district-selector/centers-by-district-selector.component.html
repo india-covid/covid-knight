@@ -11,7 +11,7 @@
    </ng-select>
   </div>
 
-  <div class="centers-selector__center mt-2">
+  <div class="centers-selector__center mt-2 hidden">
     <ng-select  class="center-selector selector" placeholder="Select center/hospital" notFoundText="No centers match the above criteria" [multiple]="true" (ngModelChange)="onCenterChange($event)" [clearable]="false"  ngModel>
       <ng-option *ngFor="let center of centers$ | async" [value]="center"> {{ center.name }}, {{ center.blockName }}</ng-option>
    </ng-select>

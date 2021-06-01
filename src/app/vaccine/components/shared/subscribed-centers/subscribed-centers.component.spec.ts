@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EmptySpaceComponent } from './empty-space.component';
+import { SubscribedCentersComponent } from './subscribed-centers.component';
 
-describe('EmptySpaceComponent', () => {
-  let component: EmptySpaceComponent;
-  let fixture: ComponentFixture<EmptySpaceComponent>;
+describe('SubscribedCentersComponent', () => {
+  let component: SubscribedCentersComponent;
+  let fixture: ComponentFixture<SubscribedCentersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptySpaceComponent ]
+      declarations: [ SubscribedCentersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmptySpaceComponent);
+    fixture = TestBed.createComponent(SubscribedCentersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

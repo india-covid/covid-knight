@@ -1,3 +1,4 @@
+import { District } from 'src/app/vaccine/models/district.model';
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
@@ -5,7 +6,6 @@ import { isNonEmptyArray } from 'src/app/core/utils';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
-
 @Component({
   selector: 'app-centers-by-pin-selector',
   templateUrl: './centers-by-pin-selector.component.html',
@@ -16,6 +16,8 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
 
   @Input() pincodeLength = 6;
   @Output() centersSelected = new EventEmitter<{ centers: Center[], pincode: string }>()
+  @Output() pinEntered = new EventEmitter<{ pincode:string }>()
+
   @Input() pincode: string = '';
   private _pincodeChangedSubject = new Subject<string>();
   centers$: Observable<Center[]>;
@@ -46,6 +48,9 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
 
   onCenterSelected(centers: Center[]) {
     this.centersSelected.emit({ pincode: this.pincode, centers });
+  }
+  pinChange(pincode:string){
+    this.pinEntered.emit({ pincode: pincode });
   }
 
 }
