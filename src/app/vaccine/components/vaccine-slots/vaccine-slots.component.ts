@@ -1,13 +1,10 @@
-import { FilterCenterPipe } from './../../pipes/filter-center.pipe';
+
 import { environment } from 'src/environments/environment';
-import { forkJoin, timer, of, Observable, Subject } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
-import { AuthService } from 'src/app/core/auth.service';
-import { User } from './../../../core/models/user.model';
-import { CenterWithSessions, DOSE, AGE,VACCINES } from './../../models/center.model';
+import {  DOSE, AGE,VACCINES } from './../../models/center.model';
 import { VaccineSession } from './../../models/vaccine-session.model';
-import { Subscriptions } from './../../models/subscriptions';
 import { SubscriptionService } from './../../services/subscription.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {
@@ -22,24 +19,13 @@ import {
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
-import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
-import {
-  trigger,
-  transition,
-  animate,
-  style,
-  state,
-  sequence,
-} from '@angular/animations';
 import { shareReplay } from 'rxjs/operators';
 
 export enum QueryType {
   PIN = 'pincode',
   DISTRICT = 'districtId',
 }
-
-
 
 @Component({
   selector: 'app-vaccine-slots',
@@ -93,8 +79,6 @@ export class VaccineSlotsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private vaccineRestService: VaccineRestService,
-    private storageService: LocalStorageService,
-    private authService: AuthService,
     private spinner: NgxSpinnerService,
     private modalService: BsModalService
   ) {
@@ -106,7 +90,6 @@ export class VaccineSlotsComponent implements OnInit {
     this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
       this.subscribedCenters = data;
       this.accountTotalSubscribe = data.length;
-      console.log(data);
       this.getRouteParams();
     });
   }
@@ -128,7 +111,6 @@ export class VaccineSlotsComponent implements OnInit {
           // all observables have been completed
           this.centers = response[0];
           this.centersSessions = response[1];
-          console.log('got both ', this.centers, this.centersSessions);
           this.mergeCenterAndSessions();
         });
       } else if (params.queryType == this.QueryType.DISTRICT) {
@@ -145,7 +127,6 @@ export class VaccineSlotsComponent implements OnInit {
           // all observables have been completed
           this.centers = response[0];
           this.centersSessions = response[1];
-          console.log('got both ', this.centers, this.centersSessions);
           this.mergeCenterAndSessions();
         });
       }
@@ -153,14 +134,11 @@ export class VaccineSlotsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.subscription.centers);
     this.generateDays(this.totalDatesToShow);
   }
   generateDays(days: number) {
     //generate dates from today to n days
     this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    console.log('active date is ', this.activeDate);
-
     const dateMove = new Date();
     while (days > 0) {
       this.dateRange.push(DayJs(dateMove).format('DD MMM')); // '05 May'
@@ -172,12 +150,10 @@ export class VaccineSlotsComponent implements OnInit {
   getSessionsForDay(day: number) {
     this.activeDay = day;
     this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    console.log(this.queryData);
     var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
     if (this.centersWithSession[0][date]) {
       return;
     }
-    console.log('not for this date', this.activeDate);
     if (this.queryData.queryType == this.QueryType.PIN) {
       this.getSessionsByPincode(this.queryData[this.QueryType.PIN], day);
     } else {
@@ -193,9 +169,7 @@ export class VaccineSlotsComponent implements OnInit {
     this.vaccineRestService.centersByPinCode(pincode).subscribe((sessions) => {
       if (sessions.length > 0) {
         // this.centersSessions = sessions;
-        console.log('CENTER SESSIONS', this.centersSessions);
       } else {
-        console.log('no sessions found for date');
       }
     });
   }
@@ -210,8 +184,6 @@ export class VaccineSlotsComponent implements OnInit {
           this.isCenterEmpty == true;
         }
         this.addSubscribedKeyToCenters();
-
-        console.log('CENTERS ', centers);
       });
   }
 
@@ -246,8 +218,6 @@ export class VaccineSlotsComponent implements OnInit {
 
     this.centersWithSession = newArray;
     this.centers = newArray;
-    console.log('centers with session ', this.centersWithSession);
-
     this.spinner.hide();
   }
 
@@ -256,7 +226,6 @@ export class VaccineSlotsComponent implements OnInit {
       .getSessionsByPincode(pincode, DayJs().add(day, 'day').format('DDMMYYYY'))
       .subscribe((sessions) => {
         this.centersSessions = sessions;
-        console.log('CENTER SESSIONS', this.centersSessions);
         this.mergeCenterAndSessions();
       });
   }
@@ -269,14 +238,12 @@ export class VaccineSlotsComponent implements OnInit {
       )
       .subscribe((sessions) => {
         this.centersSessions = sessions;
-        console.log('CENTER SESSIONS', this.centersSessions);
         this.mergeCenterAndSessions();
       });
   }
 
   addSubscribe(center: Center) {
     if(this.accountTotalSubscribe+this.newTotalSubscribe>=this.MAXSUBSCRIPTION){
-      console.log("you can nto subscribe more then 3 centers");
       this.openLimitReachedModal(this.limitReachedTemplate);
       return;
     }
@@ -305,32 +272,17 @@ export class VaccineSlotsComponent implements OnInit {
 
   applySubscribeChanges() {
     this.spinner.show();
-    console.log('new subscribe ', this.newSubscribeCenters);
     this.subscriptionService
         .postSubscriptionCenter({ centers:this.newSubscribeCenters })
         .subscribe((data) => {
           this.spinner.hide();
-          console.log('posted success ', data);
-          this.router.navigate(['/auth-home']);
+          this.router.navigate(['/home']);
         });
   }
   openLimitReachedModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template,Object.assign({}, { class: 'limitReachedModal' }));
   }
-  // subscribeCenter(center: Center) {
-  //   // this.subscribedCenters.push(center);
-  //   console.log(this.centersWithSession);
-  //   let index = this.centersWithSession.findIndex(
-  //     (c: Center) => c._id === center._id
-  //   );
-  //   this.centersWithSession[index].subscribed = 'temp';
 
-  //   this.subscriptionService
-  //     .postSubscriptionCenter({ centers: [center] })
-  //     .subscribe((data) => {
-  //       console.log('posted success ', data);
-  //     });
-  // }
 
   UnSubscribeCenter(check_center: Center) {
     let index = this.centersWithSession.findIndex(
@@ -341,7 +293,6 @@ export class VaccineSlotsComponent implements OnInit {
     this.subscriptionService
       .deleteSubscriptionCenter(check_center._id)
       .subscribe((data) => {
-        console.log('posted success ', data);
         let indexNew = this.subscribedCenters.findIndex(
           (c: any) => c.name === check_center.name
         );
@@ -359,12 +310,10 @@ export class VaccineSlotsComponent implements OnInit {
   //filters
   changeDose(name: any): void {
     this.dose = name;
-    console.log(this.dose);
   }
   //filters
   changeAge(age: any): void {
     this.age = age;
-    console.log(this.age);
   }
 
   vaccineTypeChange(vacc:any): void {
@@ -378,9 +327,7 @@ export class VaccineSlotsComponent implements OnInit {
     const header = this.header.nativeElement;
     const scrollUp = 'show-header';
     const scrollDown = 'hide-header';
-    console.log('Scroll Event');
     const currentScroll = window.pageYOffset;
-    console.log(currentScroll, window);
     if (currentScroll <= 0) {
       header.classList.remove(scrollUp);
       return;
@@ -393,7 +340,6 @@ export class VaccineSlotsComponent implements OnInit {
       // down
       header.classList.remove(scrollUp);
       header.classList.add(scrollDown);
-      console.log('adding header up');
     } else if (
       currentScroll < this.lastScroll &&
       header.classList.contains(scrollDown)

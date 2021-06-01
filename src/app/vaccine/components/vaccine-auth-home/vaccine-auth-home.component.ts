@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/core/auth.service';
 import { Component, OnInit, } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-vaccine-auth-home',
   templateUrl: './vaccine-auth-home.component.html',
@@ -32,7 +33,9 @@ export class VaccineAuthHomeComponent implements OnInit {
   user:User;
   subscribedCenters:SubscribedCenter[]=[];
 
-  constructor(private authService:AuthService,private subscriptionService:SubscriptionService) {
+  constructor(private authService:AuthService,
+    private router: Router,
+    private subscriptionService:SubscriptionService) {
     this.user = this.authService.getCurrentUser();
     this.getSubscribedCenters();
    }
@@ -40,14 +43,14 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   logout(){
-    this.authService.logout().subscribe(console.log);
-    console.log("LOGOUT");
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/']);
+    });
   }
 
   getSubscribedCenters() {
     this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
       this.subscribedCenters = data;
-      console.log(data);
     });
   }
 }

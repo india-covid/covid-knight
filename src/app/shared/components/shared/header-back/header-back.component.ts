@@ -23,7 +23,6 @@ export class HeaderBackComponent implements OnInit {
   }
 
     goBack(){
-      console.log("ROUTING TO ",this.routeTo);
       if(this.routeTo && this.routeTo!=""){
         this.router.navigate([this.routeTo])
       }else{

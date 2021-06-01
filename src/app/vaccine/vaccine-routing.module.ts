@@ -39,7 +39,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'auth-home',
+    path: 'home',
     component: VaccineAuthHomeComponent,
     canActivate: [AuthGuard]
 

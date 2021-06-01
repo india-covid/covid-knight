@@ -1,12 +1,8 @@
 import { User } from './../../../core/models/user.model';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
 import { Center } from '../../models/center.model';
-import { ValidationErrors } from '@angular/forms';
-import { isNonEmptyArray } from 'src/app/core/utils';
 import { AuthService } from 'src/app/core/auth.service';
-import { concatMap, map, switchMap, take } from 'rxjs/operators';
-import * as DayJs from 'dayjs';
+import { switchMap, take } from 'rxjs/operators';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { District } from 'src/app/vaccine/models/district.model';
 import { State } from 'src/app/vaccine/models/state.model';
@@ -25,19 +21,19 @@ enum WizardTabs {
   animations: [
     trigger(
       'enterAnimationLeft', [
-        transition(':enter', [
-          style({transform: 'translateX(-100%)', opacity: 0}),
-          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
     ),
     trigger(
       'enterAnimationRight', [
-        transition(':enter', [
-          style({transform: 'translateX(100%)', opacity: 0}),
-          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
     )
   ],
 })
@@ -45,26 +41,26 @@ export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;
   activeTab: WizardTabs = WizardTabs.DISTRICT;
   selectedCenters: Center[] = [];
-  selectedState:State|null|undefined=null;
-  selectedDistrict:District|null|undefined=null;
-  pincode:string='';
-  districtId:string|null=null;
+  selectedState: State | null | undefined = null;
+  selectedDistrict: District | null | undefined = null;
+  pincode: string = '';
+  districtId: string | null = null;
   phone: any;
   @Output() done = new EventEmitter<boolean>();
 
   private _phoneNumber: { number?: string; countryCode?: string, } = {}
   subscribing = false;
-  user:User|null=null;
+  user: User | null = null;
   constructor(private authService: AuthService,
     private storageService: LocalStorageService,
     private router: Router,
     private spinner: NgxSpinnerService) {
 
-      this.user = this.storageService.get("User");
+    this.user = this.storageService.get("User");
 
-    }
+  }
   ngOnInit(): void {
-  //  this.user = this.storageService.get("subscription");
+    //  this.user = this.storageService.get("subscription");
 
   }
 
@@ -72,25 +68,24 @@ export class VaccineWizardComponent implements OnInit {
     // perform other here
     this.selectedCenters = [];
     this.activeTab = tab;
-    this.pincode='';
-    this.districtId=null;
+    this.pincode = '';
+    this.districtId = null;
   }
 
-  pinEntered(p:any){
-    console.log(p);
-    this.pincode=p.pincode;
+  pinEntered(p: any) {
+
+    this.pincode = p.pincode;
   }
-  districtSelected(districtId:any){
-    console.log(districtId.districtId);
+  districtSelected(districtId: any) {
     this.districtId = districtId.districtId;
   }
 
-  centersSelected({ centers}: { centers: Center[] }) {
+  centersSelected({ centers }: { centers: Center[] }) {
 
     this.selectedCenters = centers;
   };
 
-  onPhoneChange(phone: { number: string, countryCode: string}, errors?: any) {
+  onPhoneChange(phone: { number: string, countryCode: string }, errors?: any) {
     if (errors) {
       return this._phoneNumber = {};
     }
@@ -102,86 +97,84 @@ export class VaccineWizardComponent implements OnInit {
   }
 
   get isSubscribeButtonEnabled() {
-    if(this.user?.phoneNumber){
-      if(this.pincode.length===6 || this.districtId){
+    if (this.user?.phoneNumber) {
+      if (this.pincode.length === 6 || this.districtId) {
         return true;
-      }else{
-      return false;
+      } else {
+        return false;
       }
-    }else if((this.pincode.length===6 || this.districtId) &&  this._phoneNumber?.number){
+    } else if ((this.pincode.length === 6 || this.districtId) && this._phoneNumber?.number) {
       return true;
-    }else{
+    } else {
       return false;
     }
 
   }
 
 
-  registerUser(naviagationExtras:NavigationExtras) {
+  registerUser(naviagationExtras: NavigationExtras) {
     this.spinner.show();
 
     if (!this.isSubscribeButtonEnabled) {
       return;
     }
-   this.subscribing = true;
-   this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber.number)), take(1)).subscribe(results => {
-      this.saveCurrentResults(this._phoneNumber.number,naviagationExtras);
-   });
+    this.subscribing = true;
+    this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber.number)), take(1)).subscribe(results => {
+      this.saveCurrentResults(this._phoneNumber.number, naviagationExtras);
+    });
   }
 
-  goToSlots(){
+  goToSlots() {
     let queryType;
-    if(this.pincode.length===6){
-      queryType='pincode';
-    }else if(this.districtId){
-      queryType='districtId'
-    }else{
+    if (this.pincode.length === 6) {
+      queryType = 'pincode';
+    } else if (this.districtId) {
+      queryType = 'districtId'
+    } else {
       return;
     }
-    let naviagationExtras:NavigationExtras={
-      queryParams:{
-        pincode:this.pincode,
-        districtId:this.districtId,
-        queryType:queryType
+    let naviagationExtras: NavigationExtras = {
+      queryParams: {
+        pincode: this.pincode,
+        districtId: this.districtId,
+        queryType: queryType
       }
     }
-    if(this.user?.phoneNumber){
-      this.router.navigate(["/slots"],naviagationExtras)
-    }else{
-   this.registerUser(naviagationExtras);
+    if (this.user?.phoneNumber) {
+      this.router.navigate(["/slots"], naviagationExtras)
+    } else {
+      this.registerUser(naviagationExtras);
     }
 
   }
 
-  goToSelecteCentersList(){
+  goToSelecteCentersList() {
     this.router.navigate(['/selected-centers']);
   }
 
 
-  private saveCurrentResults(phoneNumber: string = '',naviagationExtras:NavigationExtras) {
+  private saveCurrentResults(phoneNumber: string = '', naviagationExtras: NavigationExtras) {
     // this.storageService.set('subscription', {time: DayJs().unix(), phoneNumber,  , centers: this.selectedCenters});
-    this.storageService.set('subscription',{phoneNumber:phoneNumber,countryCode:"IN",centers:[]})
+    this.storageService.set('subscription', { phoneNumber: phoneNumber, countryCode: "IN", centers: [] })
     // this.storageService.set('wizardState', {tab:this.activeTab,phoneNumber:phoneNumber, countryCode:countryCode ,pincode:this.pincode,selectedState:this.selectedState,selectedDistrict:this.selectedDistrict,centers: this.selectedCenters});
 
     this.spinner.hide();
     // this.done.next(true);
-    console.log(naviagationExtras)
-    this.router.navigate(['/subscription'],naviagationExtras);
+    this.router.navigate(['/subscription'], naviagationExtras);
 
 
   }
 
-  private get  _ping$() {
-   return this.authService
+  private get _ping$() {
+    return this.authService
       .ping({ phoneNumber: this._phoneNumber?.number, centers: this.selectedCenters.map(c => c._id) }, 'subscribe')
   }
 
-  logout(){
-    console.log("LOGOUT");
-    this.authService.logout().subscribe(()=>{
-      this.storageService.set("subscription",{});
-    this.user=null;
-    this.router.navigate(['/']);
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.storageService.set("subscription", {});
+      this.user = null;
+      this.router.navigate(['/']);
 
     });
   }
