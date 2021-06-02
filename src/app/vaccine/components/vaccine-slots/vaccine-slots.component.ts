@@ -178,27 +178,6 @@ export class VaccineSlotsComponent implements OnInit {
     }
   }
 
-  getSessionsForDay(day: number) {
-    this.showCentersList=false;
-    this.activeDay = day;
-    this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    setTimeout(()=>{
-      this.showCentersList=true;
-
-    },100)
-    if(this.isCenterEmpty || this.centersWithSession[0][this.activeDate]){
-      return
-    }
-
-    if (this.queryData.queryType == this.QueryType.PIN) {
-      this.getSessionsByPincode(this.queryData[this.QueryType.PIN], day);
-    } else {
-      this.getSessionsByDistrictId(
-        this.queryData[this.QueryType.DISTRICT],
-        day
-      );
-    }
-  }
 
 
 
@@ -216,17 +195,7 @@ export class VaccineSlotsComponent implements OnInit {
   }
 
 
-  mergeCenterAndSessions() {
-    var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    let newArray = this.centers.map((t1) => ({
-      ...t1,
-      [date]: this.centersSessions.find((t2) => t2.centerId === t1._id) || [],
-    }));
 
-    this.centersWithSession = newArray;
-    this.centers = newArray;
-    this.spinner.hide();
-  }
 
   getSessionsByPincode(pincode: string, day: number) {
     this.vaccineRestService
@@ -248,6 +217,43 @@ export class VaccineSlotsComponent implements OnInit {
         this.mergeCenterAndSessions();
       });
   }
+
+  mergeCenterAndSessions() {
+    var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
+    let newArray = this.centers.map((t1) => ({
+      ...t1,
+      [date]: this.centersSessions.find((t2) => t2.centerId === t1._id) || [],
+    }));
+
+    this.centersWithSession = newArray;
+    this.centers = newArray;
+    this.spinner.hide();
+    this.showCentersList=true;
+  }
+
+  getSessionsForDay(day: number) {
+    this.showCentersList=false;
+    this.activeDay = day;
+    this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
+
+    if(this.isCenterEmpty || this.centersWithSession[0][this.activeDate]){
+      setTimeout(()=>{
+        this.showCentersList=true;
+
+      },50);
+      return
+    }
+
+    if (this.queryData.queryType == this.QueryType.PIN) {
+      this.getSessionsByPincode(this.queryData[this.QueryType.PIN], day);
+    } else {
+      this.getSessionsByDistrictId(
+        this.queryData[this.QueryType.DISTRICT],
+        day
+      );
+    }
+  }
+
 
   addSubscribe(center: Center) {
     if(this.accountTotalSubscribe+this.newTotalSubscribe>=this.MAXSUBSCRIPTION){
@@ -316,11 +322,11 @@ export class VaccineSlotsComponent implements OnInit {
     );
   }
 
-  //filters
+  //handle filters
   changeDose(name: any): void {
     this.dose = name;
   }
-  //filters
+
   changeAge(age: any): void {
     this.age = age;
   }
@@ -329,34 +335,4 @@ export class VaccineSlotsComponent implements OnInit {
     this.vaccineType=vacc;
   }
 
-  //header animation
-  lastScroll: number = 0;
-  @HostListener('window:scroll', ['$event'])
-  scrollHandler(event: any) {
-    const header = this.header.nativeElement;
-    const scrollUp = 'show-header';
-    const scrollDown = 'hide-header';
-    const currentScroll = window.pageYOffset;
-    if (currentScroll <= 0) {
-      header.classList.remove(scrollUp);
-      return;
-    }
-
-    if (
-      currentScroll > this.lastScroll &&
-      !header.classList.contains(scrollDown)
-    ) {
-      // down
-      header.classList.remove(scrollUp);
-      header.classList.add(scrollDown);
-    } else if (
-      currentScroll < this.lastScroll &&
-      header.classList.contains(scrollDown)
-    ) {
-      // up
-      header.classList.remove(scrollDown);
-      header.classList.add(scrollUp);
-    }
-    this.lastScroll = currentScroll;
-  }
 }

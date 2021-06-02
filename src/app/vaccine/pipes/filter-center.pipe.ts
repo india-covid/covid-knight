@@ -7,7 +7,7 @@ import { Center } from '../models/center.model';
 })
 export class FilterCenterPipe implements PipeTransform {
  VACCINES=VACCINES;
-  transform(centers: Center[], hospitalName: string,dose:string,vaccineType:any,age:string,activeDate:string): any {
+  transform(centers: any[], hospitalName: string,dose:string,vaccineType:any,age:string,activeDate:string): any {
     let doseType:string;
     if(dose == DOSE.DOSE1){
       doseType ='1';
@@ -16,7 +16,7 @@ export class FilterCenterPipe implements PipeTransform {
     }else if(dose == DOSE.ALL){
       doseType ='all'
     }
-    return centers.filter((center:any) => {
+    let result = centers.filter((center:any) => {
         if(
           this.checkCenterName(center,hospitalName,activeDate) &&
           this.checkDoseType(center,doseType,activeDate) &&
@@ -29,6 +29,10 @@ export class FilterCenterPipe implements PipeTransform {
         }
 
     });
+    if (result.length==0){
+      result = [{name:"noMatch"}];
+    }
+    return result;
   }
 
     checkCenterName(center:any,centerName:string,activeDate:string){

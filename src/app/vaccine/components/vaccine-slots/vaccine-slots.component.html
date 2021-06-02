@@ -147,7 +147,7 @@
 
 
   <div class="slots-body" >
-    <div class="no-centers" *ngIf="isCenterEmpty">
+    <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]>
       <div class="no-centers__content">
         <div class="no-centers__content__img">
           <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
@@ -155,9 +155,18 @@
         <div class="no-centers__content__text">No Centers Found</div>
       </div>
     </div>
-    <div class="myCard" *ngIf="!isCenterEmpty && showCentersList" [@enterAnimationRight] >
+    <div class="myCard" *ngIf="!isCenterEmpty && showCentersList && centersWithSession.length!==0" [@enterAnimationRight] >
       <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccineType:age:activeDate" >
-        <div class="myCard__item">
+        <div class="no-centers" *ngIf="center.name=='noMatch'"  [@enterAnimationRight]>
+          <div class="no-centers__content">
+            <div class="no-centers__content__img">
+              <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
+            </div>
+            <div class="no-centers__content__text">No Match Found</div>
+          </div>
+        </div>
+
+        <div class="myCard__item"  *ngIf="center.name!='noMatch'"  [@enterAnimationRight]>
           <div class="myCard__item__content">
             <div class="myCard__item__content__myCard-head">
               <div class="myCard__item__content__myCard-head__text">

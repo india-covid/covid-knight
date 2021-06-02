@@ -71,6 +71,9 @@ export class SubscribedCentersComponent implements OnInit {
       .deleteSubscriptionCenter(subscriptionId)
       .subscribe((data) => {
         this.subscribedCenters.splice(index, 1);
+        if(this.subscribedCenters.length===0){
+          this.isNoCenterSubscribed=true;
+        }
       });
   }
 
