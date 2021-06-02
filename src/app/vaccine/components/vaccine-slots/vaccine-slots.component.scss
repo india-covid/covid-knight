@@ -26,7 +26,7 @@
 .slots-wrapper{
   position: relative;
   min-height:500px;
-  // border:solid blue;
+  border:solid blue;
   // height:100vh;
   overflow: hidden;
 }
@@ -99,7 +99,7 @@
 }
 .slots-body {
    height: calc( 100% - 220px );
-  // border:solid red;
+  border:solid red;
   overflow: auto ;
   padding-bottom:100px;
 }
