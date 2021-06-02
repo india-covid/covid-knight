@@ -6,8 +6,6 @@ import { Center } from 'src/app/vaccine/models/center.model';
 import { District } from 'src/app/vaccine/models/district.model';
 import { State } from 'src/app/vaccine/models/state.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
-import { LocalStorageService } from 'src/app/core/localstorage.service';
-import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-centers-by-district-selector',
   templateUrl: './centers-by-district-selector.component.html',
@@ -25,17 +23,14 @@ export class CentersByDistrictSelectorComponent implements OnInit {
   districts$: Observable<District[]>
   centers$: Observable<Center[]>
   selectedCenters: Center[] = [];
-  user:User|null =null;
 
-  constructor(private vaccineRestService: VaccineRestService,
-    private storageService: LocalStorageService,
-    private spinner: NgxSpinnerService) {
+  constructor(private vaccineRestService: VaccineRestService) {
     this.districts$ = this._stateSubject.pipe(tap(() => this.selectedCenters = []),switchMap(stateId => this.vaccineRestService.getDistrictByState$(stateId)));
     this.centers$ = this._districtSubject.pipe(switchMap(districtId => this.vaccineRestService.centersByDistrictId(districtId)));
   }
 
   ngOnInit(): void {
-    this.user= this.storageService.get("user");
+
   }
 
   get allStates$() {

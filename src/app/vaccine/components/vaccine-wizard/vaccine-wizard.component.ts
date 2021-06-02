@@ -55,10 +55,13 @@ export class VaccineWizardComponent implements OnInit {
     private storageService: LocalStorageService,
     private router: Router,
     private spinner: NgxSpinnerService) {
-    this.user = this.storageService.get("User");
+
   }
   ngOnInit(): void {
     //  this.user = this.storageService.get("subscription");
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    })
 
   }
 
