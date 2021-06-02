@@ -47,19 +47,23 @@ $text-muted-color: var(--app-color-light-tint);
   // border: solid green;
   &__layer {
     background-color: rgba(0, 0, 0, 0.2);
-    height: 100%;
+     min-height: calc(100vh - 80px);
     padding-top: 20%;
+    // border:solid blue;
     position: relative;
+    padding-bottom:30px;
+
   }
   &__info-wrapper {
+    // border:solid red;
+
     background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 88.5vh;
+     min-height: calc(100vh - 80px);
     text-align: center;
     align-items: center;
-
     &__head {
       align-items: center;
       padding: 0;
@@ -101,7 +105,8 @@ $text-muted-color: var(--app-color-light-tint);
       }
     }
     .body {
-      font-size: 20px;
+
+      font-size: 18px;
       padding:20px 20px 0px 20px;
       color: $text-color;
       margin-top: 20px;
@@ -124,6 +129,7 @@ $text-muted-color: var(--app-color-light-tint);
           margin: 0;
         }
       }
+
     }
     .last-sync {
       width: 150px;
@@ -137,8 +143,28 @@ $text-muted-color: var(--app-color-light-tint);
         border-radius: 20px;
       }
     }
+    &__credits{
+      position: absolute;
+      bottom:0;
+      p{
+        padding:5px;
+        margin:0;
+      }
+      text-align: center;
+      font-weight: bold;
+      width:100%;
+      &__icon{
+        position: relative;
+        bottom:-3px;
+      }
+    }
+
   }
+
   &__container {
+    position: relative;
+    // border:solid red;
+    padding-bottom:50px;
     // min-height: 97vh;
     margin: 0px auto;
     // padding: 30px 30px 0px 30px;
@@ -158,7 +184,12 @@ $text-muted-color: var(--app-color-light-tint);
   }
   &__credits{
     position: absolute;
-    bottom:0;
+    bottom:0px;
+    p{
+      margin:0;
+      padding:0;
+    }
+    display: none;
     padding:10px;
     text-align: center;
     font-weight: bold;
@@ -179,22 +210,32 @@ $text-muted-color: var(--app-color-light-tint);
   .info-wrapper-small{
     display: none;
   }
-
+  .homepage__credits{
+    display: block;
+  }
+.homepage{
+  &__container{
+    min-height: calc(100vh - 80px) !important;
+   }
+}
 }
 
 @media screen and (max-width: 740px) {
   .homepage{
-    &__credits{
-      color:white ;
-      font-weight:100;
-      a{
-        font-weight:bold;
-        color:white
-      }
+    &__info-wrapper{
+      &__credits{
+        color:white ;
+        font-weight:100;
+        a{
+          font-weight:bold;
+          color:white
+        }
 
+      }
     }
+    &__container{
+      min-height:calc(100vh - 40px);
+     }
   }
-  .homepage__container{
-    min-height: 97vh;
-  }
+
 }
