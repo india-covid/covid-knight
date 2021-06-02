@@ -120,8 +120,6 @@ export class VaccineWizardComponent implements OnInit {
       return;
     }
     this.subscribing = true;
-    console.log(typeof(this._phoneNumber.number?.toString()));
-
     this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber.number?.toString())), take(1)).subscribe(results => {
       this.saveCurrentResults(this._phoneNumber.number, naviagationExtras);
     });
