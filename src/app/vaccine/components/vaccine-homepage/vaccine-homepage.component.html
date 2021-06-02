@@ -19,7 +19,7 @@
             Get free vaccine availability alerts on your phone, <b>18+ & 45+ </b>.
         </div>
         <p class="body__non-profit body__text__muted p-2  mt-1"> Non profit, if this helped you please considering donating.</p>
-        <a href="#container"><button class="btn btn-lg pt-2 body__action-btn">
+        <a href="#get-started"><button class="btn btn-lg pt-2 body__action-btn" >
             <b>Select your Area Now</b>
           </button></a>
       </div>
@@ -27,14 +27,19 @@
         Last sync from cowin
         <p class="last-sync__text mt-2">2 min ago</p>
       </div>
+      <div class="homepage__info-wrapper__credits">
+        <p>Made with love <i class="ri-heart-fill homepage__info-wrapper__credits__icon" style="color:red"></i> by <a href="https://www.linkedin.com/in/rahul-shinde11/" target="_blank"> Rahul</a> & <a href="https://www.linkedin.com/in/ranjit-kumar-pandit-4686a9142/" target="_blank">Ranjit</a> </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="homepage__container" id="get-started">
+    <h2 class="text-center homepage__container__heading"> <i  class="ri-map-pin-user-fill homepage__container__heading__icon"></i>Select your center</h2>
+    <app-vaccine-wizard (done)="wizardDone()"></app-vaccine-wizard>
+    <div class="homepage__credits">
+      <p>Made with love <i class="ri-heart-fill auth-home__credits__icon" style="color:red"></i> by <a href="https://www.linkedin.com/in/rahul-shinde11/" target="_blank"> Rahul</a> & <a href="https://www.linkedin.com/in/ranjit-kumar-pandit-4686a9142/" target="_blank">Ranjit</a> </p>
     </div>
   </div>
 
-  <div class="homepage__container" id="container">
-    <h2 class="text-center homepage__container__heading"> <i  class="ri-map-pin-user-fill homepage__container__heading__icon"></i>Select your center</h2>
-    <app-vaccine-wizard (done)="wizardDone()"></app-vaccine-wizard>
-  </div>
-  <div class="homepage__credits">
-    <p>Made with love <i class="ri-heart-fill auth-home__credits__icon" style="color:red"></i> by <a href="https://www.linkedin.com/in/rahul-shinde11/" target="_blank"> Rahul</a> & <a href="https://www.linkedin.com/in/ranjit-kumar-pandit-4686a9142/" target="_blank">Ranjit</a> </p>
-  </div>
 </div>

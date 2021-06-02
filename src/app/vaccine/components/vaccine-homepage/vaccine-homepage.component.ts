@@ -1,3 +1,4 @@
+import { User } from './../../../core/models/user.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,7 +14,6 @@ import { VaccineRestService } from '../../services/vaccine-rest.service';
 export class VaccineHomepageComponent implements  OnDestroy {
 
   authSub: Subscription;
-
   constructor(
     private authService: AuthService,
     private spinner: NgxSpinnerService,

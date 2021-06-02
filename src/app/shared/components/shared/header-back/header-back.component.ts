@@ -13,7 +13,7 @@ export class HeaderBackComponent implements OnInit {
   active:boolean=true;
 
   constructor(private _location:Location,private router:Router,private route:ActivatedRoute) {
-    if(router.url=='/'){
+    if(router.url.split("#")[0]=='/'){
       this.active=false;
     }
 

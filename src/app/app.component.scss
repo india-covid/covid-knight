@@ -3,7 +3,7 @@
   justify-content: space-between;
   height: 100vh;
   width: 100vw;
-  overflow: hidden ;
+  overflow: auto ;
   &__empty-wrapper {
     // border:solid  green;
     width: 50%;
@@ -19,8 +19,6 @@
     // background-color: rgba(0, 0, 0, 0.808);
 
     &__main{
-      position: relative;
-      overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     background-color: white;
     height:100vh;
@@ -45,6 +43,8 @@ $text-muted-color: var(--app-color-light-tint);
     height: 100%;
     padding-top: 20%;
     position: relative;
+    overflow: scroll;
+
   }
   &__info-wrapper {
     // background-image:url('../../../../../assets/img/s3.jpg');
