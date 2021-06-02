@@ -59,8 +59,8 @@ export class AuthService {
     const url = environment.apiBase + this.authMainLoginUrl;
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
       const { token, ...user } = body;
-      if (token?.token && !environment.production) {
-        this.storageService.set("User", user);
+      if (token?.token) {
+        //this.storageService.set("User", user);
         this.cookieService.put('Authorization', token.token, { expires: token.expiresIn + '' });
       }
       this._userSubject.next(user);
