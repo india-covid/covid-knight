@@ -70,7 +70,6 @@ export class VaccineAuthHomeComponent implements OnInit {
 
    setHeight(){
     this.renderer.setStyle(this.authHomeBody?.nativeElement, 'height', (window.innerHeight-50)+"px");
-    console.log(this.authHomeBody?.nativeElement,window.innerHeight);
   }
 
   ngAfterViewInit() {

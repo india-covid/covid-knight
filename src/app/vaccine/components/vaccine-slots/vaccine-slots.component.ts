@@ -64,6 +64,8 @@ export class VaccineSlotsComponent implements OnInit {
 
   @ViewChild('header') header!: ElementRef<HTMLElement>;
   @ViewChild('limitReachedTemplate') limitReachedTemplate!:TemplateRef<any>;
+  @ViewChild('slots') slots:ElementRef|null=null;
+
   private subscribedCenters: SubscribedCenter[] = [];
 
   private newSubscribeCenters: Center[] = [];
@@ -96,7 +98,6 @@ export class VaccineSlotsComponent implements OnInit {
   };
   showCentersList:boolean=true;
 
-  @ViewChild('slotsBody') slotsBody:ElementRef|null=null;
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -344,8 +345,7 @@ export class VaccineSlotsComponent implements OnInit {
   //set height dynamically
 
   setHeight(){
-    this.renderer.setStyle(this.slotsBody?.nativeElement, 'height', (window.innerHeight-220)+"px");
-    console.log(this.slotsBody?.nativeElement,window.innerHeight);
+    this.renderer.setStyle(this.slots?.nativeElement, 'height', window.innerHeight+"px");
   }
 
   ngAfterViewInit() {
