@@ -104,7 +104,7 @@ export class VaccineWizardComponent implements OnInit {
       } else {
         return false;
       }
-    } else if ((this.pincode.length === 6 || this.districtId) && this._phoneNumber?.number) {
+    } else if ((this.pincode.length === 6 || this.districtId) && this._phoneNumber?.number?.toString().length===10) {
       return true;
     } else {
       return false;

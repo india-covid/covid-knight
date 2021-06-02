@@ -49,7 +49,7 @@ export class SubscribedCentersComponent implements OnInit {
       .subscribe((subscribedCenters) => {
         this.spinner.hide();
         if(subscribedCenters.length===0){
-          this.isNoCenterSubscribed==true;
+          this.isNoCenterSubscribed=true;
         }
         this.subscribedCenters = subscribedCenters;
       });
@@ -77,10 +77,9 @@ export class SubscribedCentersComponent implements OnInit {
       });
   }
 
-  getRemainingTime(t1:string,t2:string) {
-    const date1 = DayJs(t1);
-    const date2 = DayJs(t2);
-
+  getRemainingTime(to:string) {
+    const date1 = DayJs();
+    const date2 = DayJs(to);
     let hours = date2.diff(date1, 'hours');
     const days = Math.floor(hours / 24);
     hours = hours - days * 24;

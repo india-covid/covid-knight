@@ -46,14 +46,14 @@
           </div>
         </div>
       </div>
-      <div class="myCard col col-lg-12 col-md-12 myCard__card2" routerLink="/add-subscription">
+      <div class="myCard col col-lg-12 col-md-12 myCard__card2" [class.disabled]="MAXSUBSCRIPTION===subscribedCenters.length" (click)="addCenter()">
         <div class="myCard__content">
           <p class="myCard__content__text">Add More Centers</p>
           <p class="myCard__content__text-large">Add</p>
           <div class="myCard__content__icon">
             <img src="../../../assets/icons/add.svg" class="myCard__content__icon__image" alt="" />
           </div>
-          <!-- <p class="myCard__content__text-small">See All</p> -->
+          <p class="myCard__content__text-small">{{subscribedCenters.length}} /{{MAXSUBSCRIPTION}}</p>
         </div>
       </div>
     </div>
@@ -83,4 +83,25 @@
       <p>Made with love <i class="ri-heart-fill auth-home__credits__icon" style="color:red"></i> by <a href="https://www.linkedin.com/in/rahul-shinde11/" target="_blank"> Rahul</a> & <a href="https://www.linkedin.com/in/ranjit-kumar-pandit-4686a9142/" target="_blank">Ranjit</a> </p>
     </div>
   </div>
+    <!-- subscription limit reached modal content -->
+    <ng-template #limitReachedTemplate>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body__title">
+          <p>
+           Due to heavy traffic, You can only subscribe to {{MAXSUBSCRIPTION}} centers
+          </p>
+        </div>
+
+        <div class="modal-body__button">
+          <button (click)="modalRef.hide()" class="app-btn">Ok</button>
+        </div>
+
+      </div>
+    </ng-template>
 </main>

@@ -125,7 +125,8 @@
   }
   &__credits{
     position: absolute;
-    bottom:0;
+    bottom:10px;
+    display: none;;
     padding:10px;
     text-align: center;
     font-weight: bold;
@@ -139,3 +140,25 @@
 
 }
 
+
+.modal-body{
+  &__title{
+    text-align: center;
+    font-weight:bold ;
+  }
+  &__button{
+    text-align: center;
+  }
+  &__link{
+    text-align: center;
+    margin-top:10px;
+  }
+}
+
+
+@media screen and (max-width: 740px) {
+  .auth-home__body__credits{
+    display: block;
+  }
+
+}

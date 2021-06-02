@@ -13,9 +13,12 @@
 body {
   font-family: "Lato", sans-serif;
   scroll-behavior: smooth;
+overflow: hidden;
 }
 html{
   scroll-behavior: smooth;
+  overflow: hidden;
+
 }
 div{
   scroll-behavior: smooth;

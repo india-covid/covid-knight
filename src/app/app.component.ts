@@ -14,7 +14,7 @@ import { take, takeLast } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('APP') APP:ElementRef|null=null;
+    @ViewChild('appContainer') appContainer:ElementRef|null=null;
   title = 'Vaccine Finder';
   constructor(private subscriptionService: SubscriptionService,
     private storageService: LocalStorageService,
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     //set height dynamically
 
     setHeight(){
-      this.renderer.setStyle(this.APP?.nativeElement, 'height', window.innerHeight+"px");
+      this.renderer.setStyle(this.appContainer?.nativeElement, 'height', (window.innerHeight - 0)+"px");
     }
 
     ngAfterViewInit() {
