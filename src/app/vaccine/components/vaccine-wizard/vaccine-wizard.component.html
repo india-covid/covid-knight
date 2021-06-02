@@ -34,7 +34,7 @@
 
 
   <div class="wizard__phone-number d-flex mt-4" [class.hidden]="user?.phoneNumber" *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
-    <input type="text"
+    <input type="number"
        #phoneNumber="ngModel"
       placeholder="Enter Mobile Number"
       (ngModelChange)="onPhoneChange({number: $event, countryCode: 'IN'}, phoneNumber.errors)"
@@ -42,7 +42,7 @@
   </div>
 
   <div class="wizard__phone-number d-flex mt-4"  [class.hidden]="user?.phoneNumber"  *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
-    <input type="text"
+    <input type="number"
        #phoneNumber="ngModel"
       placeholder="Enter Mobile Number"
       (ngModelChange)="onPhoneChange({number: $event, countryCode: 'IN'}, phoneNumber.errors)"
