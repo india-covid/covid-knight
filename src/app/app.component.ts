@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from './core/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
@@ -13,10 +13,14 @@ import { take, takeLast } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+    @ViewChild('APP') APP:ElementRef|null=null;
   title = 'Vaccine Finder';
   constructor(private subscriptionService: SubscriptionService,
     private storageService: LocalStorageService,
-    private router: Router) {
+    private router: Router,
+    private renderer:Renderer2,
+    ) {
   }
 
   ngOnInit(){
@@ -34,4 +38,14 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+    //set height dynamically
+
+    setHeight(){
+      this.renderer.setStyle(this.APP?.nativeElement, 'height', window.innerHeight+"px");
+    }
+
+    ngAfterViewInit() {
+     this.setHeight();
+    }
 }

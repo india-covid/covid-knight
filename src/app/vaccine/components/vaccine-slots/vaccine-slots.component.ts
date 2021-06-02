@@ -106,7 +106,7 @@ export class VaccineSlotsComponent implements OnInit {
     private renderer:Renderer2,
     private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
   ) {
     this.getSubscribedCenters();
   }
