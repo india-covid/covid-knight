@@ -1,9 +1,9 @@
 <main class="wizard" [@enterAnimationRight]>
-  <app-header-back routeTo="/home" headerText="Select Area"></app-header-back>
 
 
   <!-- Tabs -->
   <div class="wizard__content">
+    <app-header-back routeTo="/home" headerText="Select Area"></app-header-back>
   <div class="wizard__tabs">
     <div class="wizard__tab left text-center" [ngClass]="WizardTabs.PIN === activeTab ? 'left' : 'right'">
       <div (click)="changeTab(WizardTabs.PIN)" class="wizard__tab-button"

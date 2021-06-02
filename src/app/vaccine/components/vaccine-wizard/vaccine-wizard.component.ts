@@ -175,8 +175,5 @@ export class VaccineWizardComponent implements OnInit {
     });
   }
 
-  scrollToBottom() {
-    let el = this.myElement.nativeElement.querySelector('subscribe');
-    el.scrollIntoView();
-  }
+
 }
