@@ -51,7 +51,8 @@ $text-muted-color: var(--app-color-light-tint);
     background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
 
     //  min-height: calc(100vh - 80px);
-    height:calc( 100% - 80px);
+    // height:calc( 100% - 80px);
+    height:100%;
     padding-top: 20%;
     // border:solid blue;
     position: relative;
@@ -60,7 +61,7 @@ $text-muted-color: var(--app-color-light-tint);
   }
   &__info-wrapper {
     border:solid red;
-    height: calc(100vh - calc(100vh - 100%)) ;
+    // height: calc(100vh - calc(100vh - 100%)) ;
 
     width: 100%;
 
