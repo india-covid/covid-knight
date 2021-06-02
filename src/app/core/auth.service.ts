@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { UserRegisterLogin } from './models/auth.model';
 import { User } from './models/user.model';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, filter } from 'rxjs/operators';
 import { BehaviorSubject, of } from "rxjs";
 import { CookieService } from 'ngx-cookie';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   public get user$() {
-    return this._userSubject.asObservable();
+    return this._userSubject.asObservable().pipe(filter(user => Boolean(user)));
   }
 
  private _getStatus() {
@@ -59,7 +59,7 @@ export class AuthService {
     const url = environment.apiBase + this.authMainLoginUrl;
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
       const { token, ...user } = body;
-      if (token?.token) {
+      if (token?.token && !environment.production) {
         this.storageService.set("User", user);
         this.cookieService.put('Authorization', token.token, { expires: token.expiresIn + '' });
       }
