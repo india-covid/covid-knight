@@ -156,6 +156,18 @@ $text-muted-color: var(--app-color-light-tint);
 
   &__alerts-info {
   }
+  &__credits{
+    position: absolute;
+    bottom:0;
+    padding:10px;
+    text-align: center;
+    font-weight: bold;
+    width:100%;
+    &__icon{
+      position: relative;
+      bottom:-3px;
+    }
+  }
 }
 
 .flex {

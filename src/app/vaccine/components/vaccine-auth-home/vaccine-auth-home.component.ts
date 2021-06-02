@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import { SubscriptionService } from './../../services/subscription.service';
@@ -36,7 +37,7 @@ export class VaccineAuthHomeComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router: Router,
-    private subscriptionService: SubscriptionService) {
+    private subscriptionService: SubscriptionService,private spinner:NgxSpinnerService) {
     this.getSubscribedCenters();
     this.authService.user$.pipe(take(1)).subscribe(user => {
       this.user = user;
@@ -48,13 +49,16 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   logout() {
+    this.spinner.show();
     this.authService.logout().subscribe(() => {
+      this.spinner.hide();
       this.router.navigate(['/']);
     });
   }
 
   getSubscribedCenters() {
     this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
+      this.spinner.hide();
       this.subscribedCenters = data;
     });
   }

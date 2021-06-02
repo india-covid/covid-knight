@@ -35,6 +35,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 })
 export class SubscribedCentersComponent implements OnInit {
   subscribedCenters: SubscribedCenter[] = [];
+  isNoCenterSubscribed:boolean=false;
   routeTo:string="";
   constructor(
     private storageService: LocalStorageService,
@@ -47,6 +48,9 @@ export class SubscribedCentersComponent implements OnInit {
       .getSubscriptionCenters()
       .subscribe((subscribedCenters) => {
         this.spinner.hide();
+        if(subscribedCenters.length===0){
+          this.isNoCenterSubscribed==true;
+        }
         this.subscribedCenters = subscribedCenters;
       });
 
@@ -67,6 +71,9 @@ export class SubscribedCentersComponent implements OnInit {
       .deleteSubscriptionCenter(subscriptionId)
       .subscribe((data) => {
         this.subscribedCenters.splice(index, 1);
+        if(this.subscribedCenters.length===0){
+          this.isNoCenterSubscribed=true;
+        }
       });
   }
 

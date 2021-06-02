@@ -84,7 +84,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     }
     this.isOtpLengthValid = true
     this.otp = otp
-    this.ngOtpInputRef?.otpForm.disable();
+    // this.ngOtpInputRef?.otpForm.disable();
   }
 
   signUpUser() {

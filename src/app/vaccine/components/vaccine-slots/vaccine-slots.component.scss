@@ -23,7 +23,10 @@
 }
 
 .slots-wrapper{
-
+  position: relative;
+  // border:solid blue;
+  height:100vh;
+  overflow: hidden;
 }
 
 .slots-head{
@@ -60,10 +63,10 @@
       margin-top:10px;
       margin-bottom:5px;
       // border:solid green;
-      .input-wrapper{
+      &__input-wrapper{
         position: relative;
         // border:solid green;
-        input{
+        &__input{
           width:100%;
           padding:7px;
           border:solid 1px #7aafec;
@@ -72,11 +75,11 @@
           transition: cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.2s;
 
         }
-        input:focus{
+        &__input:focus{
 
           border:solid 2px rgb(0, 119, 255);
         }
-        .cross-icon{
+        &__cross-icon{
           position: absolute;
           right:15px;
           top:16px;
@@ -93,17 +96,14 @@
 
 }
 .slots-body {
-  // border:solid red;
+  height: 100%;;
+  overflow: auto ;
+}
 
-}
-.myCard:last-child{
-  margin-bottom:100px;
-}
 .myCard {
-  padding-bottom: 300px !important;
-  height: 100vh;
-  overflow-y: scroll ;
+
   // border:solid green;
+  margin-bottom:400px;
   width: 100%;
   box-shadow: none !important;
   align-items: center;
@@ -255,10 +255,13 @@
 
 
 .apply-changes-show{
-  display: block !important;
+  // display: flex !important;
+  bottom:0 !important
 }
 .apply-changes-hide{
-  display: none !important;
+  // display: none !important;
+  bottom:-100px !important;
+
 }
 
 .apply-changes{
@@ -266,6 +269,8 @@
   bottom:0;
   left:0;
   right:0;
+  box-shadow: 10px 10px 20px rgba(34, 236, 44, 0.548), 10px 6px 6px rgba(106, 255, 61, 0.678);
+
   background-color: var(--app-color-success);
   display: flex;
   align-items: center;
@@ -276,6 +281,7 @@
   font-weight: bold;
   -webkit-transition: bottom 0.3s ease;
   transition: bottom .3s ease;
+  z-index:2;
   p{
     margin:0;
     padding:0;

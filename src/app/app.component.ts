@@ -16,9 +16,7 @@ export class AppComponent implements OnInit {
   title = 'Vaccine Finder';
   constructor(private subscriptionService: SubscriptionService,
     private storageService: LocalStorageService,
-    private router: Router,
-    private titleService: Title) {
-    this.titleService.setTitle('Vaccine Finder');
+    private router: Router) {
   }
 
   ngOnInit(){

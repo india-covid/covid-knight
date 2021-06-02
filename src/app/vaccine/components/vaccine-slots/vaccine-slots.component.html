@@ -1,6 +1,6 @@
 <div class="slots-wrapper">
-  <div class="slots-head header" #header>
 
+  <div class="slots-head header" #header>
     <app-header-back headerText="Subscribe Centers" routeTo="/home"></app-header-back>
     <div class="date-slider">
       <div class="slider">
@@ -132,9 +132,9 @@
       </div>
 
       <div class="filters__search-bar">
-        <div class="input-wrapper">
-          <input type="text" placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
-          <i class="fa fa-times cross-icon" *ngIf="hospitalName.length>0"></i>
+        <div class="filters__search-bar__input-wrapper">
+          <input class="filters__search-bar__input-wrapper__input" type="text" placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
+          <i class="fa fa-times filters__search-bar__input-wrapper__cross-icon" *ngIf="hospitalName.length>0"></i>
         </div>
       </div>
     </div>
@@ -147,7 +147,7 @@
 
 
   <div class="slots-body" >
-    <div class="no-centers" *ngIf="isCenterEmpty">
+    <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]>
       <div class="no-centers__content">
         <div class="no-centers__content__img">
           <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
@@ -155,9 +155,18 @@
         <div class="no-centers__content__text">No Centers Found</div>
       </div>
     </div>
-    <div class="myCard" *ngIf="!isCenterEmpty"  >
-      <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccineType:age:activeDate">
-        <div class="myCard__item">
+    <div class="myCard" *ngIf="!isCenterEmpty && showCentersList && centersWithSession.length!==0" [@enterAnimationRight] >
+      <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccineType:age:activeDate" >
+        <div class="no-centers" *ngIf="center.name=='noMatch'"  [@enterAnimationRight]>
+          <div class="no-centers__content">
+            <div class="no-centers__content__img">
+              <img class="no-centers__content__img__image" src="../../../assets/img/no-data.png" alt="" />
+            </div>
+            <div class="no-centers__content__text">No Match Found</div>
+          </div>
+        </div>
+
+        <div class="myCard__item"  *ngIf="center.name!='noMatch'"  [@enterAnimationRight]>
           <div class="myCard__item__content">
             <div class="myCard__item__content__myCard-head">
               <div class="myCard__item__content__myCard-head__text">
@@ -222,14 +231,14 @@
         </div>
       </div>
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
-
-
-
-
     </div>
+
+
     <div class="apply-changes" (click)="applySubscribeChanges()" [ngClass]="newTotalSubscribe?'apply-changes-show':'apply-changes-hide'">
       <p><i></i>Subscribe to {{newTotalSubscribe }} {{ newTotalSubscribe === 1 ? 'Center' : 'Centers' }}  </p>
     </div>
+
+
   </div>
 
 
