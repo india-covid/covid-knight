@@ -1,5 +1,28 @@
 <div class="slots-wrapper" #slots>
 
+
+<!-- subscription limit reached modal content -->
+<ng-template #limitReachedTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body__title">
+      <p>You have already subscribe to {{accountTotalSubscribe }} centers in your account and {{newTotalSubscribe}} centers now, Due to high traffic you can only  subscribe to max {{MAXSUBSCRIPTION}} centers.</p>
+
+    </div>
+
+    <div class="modal-body__button">
+      <button (click)="modalRef.hide()" class="app-btn ">Ok</button>
+    </div>
+    <div class="modal-body__link">
+      <a  (click)="modalRef.hide()" routerLink="/subscribed">Show all Subscribed Centers</a>
+    </div>
+    </div>
+</ng-template>
   <div class="slots-head header" #header>
     <app-header-back headerText="Subscribe Centers" routeTo="/home"></app-header-back>
     <div class="date-slider">
@@ -242,29 +265,6 @@
   </div>
 
 
-
-<!-- subscription limit reached modal content -->
-<ng-template #limitReachedTemplate>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="modal-body__title">
-      <p>You have already subscribe to {{accountTotalSubscribe }} centers in your account and {{newTotalSubscribe}} centers now, Due to high traffic you can only  subscribe to max {{MAXSUBSCRIPTION}} centers.</p>
-
-    </div>
-
-    <div class="modal-body__button">
-      <button (click)="modalRef.hide()" class="app-btn ">Ok</button>
-    </div>
-    <div class="modal-body__link">
-      <a  (click)="modalRef.hide()" routerLink="/subscribed">Show all Subscribed Centers</a>
-    </div>
-    </div>
-</ng-template>
 
 
 </div>
