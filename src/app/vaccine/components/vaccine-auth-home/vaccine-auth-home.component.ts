@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/auth.service';
 import { Component, OnInit, } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-vaccine-auth-home',
   templateUrl: './vaccine-auth-home.component.html',
@@ -13,40 +14,41 @@ import { User } from 'src/app/core/models/user.model';
   animations: [
     trigger(
       'enterAnimationLeft', [
-        transition(':enter', [
-          style({transform: 'translateX(-100%)', opacity: 0}),
-          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
     ),
     trigger(
       'enterAnimationRight', [
-        transition(':enter', [
-          style({transform: 'translateX(100%)', opacity: 0}),
-          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
     )
   ],
 
 })
 export class VaccineAuthHomeComponent implements OnInit {
-  user:User;
-  subscribedCenters:SubscribedCenter[]=[];
+  user: User | null = null;
+  subscribedCenters: SubscribedCenter[] = [];
 
-  constructor(private authService:AuthService,
+  constructor(private authService: AuthService,
     private router: Router,
-    private spinner:NgxSpinnerService,
-    private subscriptionService:SubscriptionService) {
-      //this.spinner.show();
-      this.getSubscribedCenters();
-    this.user = this.authService.getCurrentUser();
-   }
+    private subscriptionService: SubscriptionService,private spinner:NgxSpinnerService) {
+    this.getSubscribedCenters();
+    this.authService.user$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    })
+
+
+  }
   ngOnInit() {
   }
 
-  logout(){
-    this.spinner.show();
+  logout() {
     this.authService.logout().subscribe(() => {
       this.spinner.hide();
       this.router.navigate(['/']);

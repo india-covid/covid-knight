@@ -16,7 +16,7 @@
     </div>
 
     <div class="subscribe__otp d-flex mt-5">
-      <ng-otp-input #ngOtpInput class="mx-auto" (onInputChange)="onOtpChange($event)" [config]="{length:otpLength}"></ng-otp-input>
+      <ng-otp-input  #ngOtpInput class="mx-auto" (onInputChange)="onOtpChange($event)" [config]="{length:otpLength, allowNumbersOnly: true}"></ng-otp-input>
     </div>
 
     <div class="subscribe__invalid-otp mt-4" *ngIf="isOtpWrong">
