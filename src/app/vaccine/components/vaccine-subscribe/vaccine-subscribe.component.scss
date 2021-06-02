@@ -1,5 +1,5 @@
 .subscribe {
-  margin-top:2rem;
+  // margin-top:2rem;
   height:100vh;
   &__header {
     height: 16rem;
@@ -7,8 +7,8 @@
   &__image{
     // border:solid red;
     text-align: center;
-    padding:10px;
-    min-height:100px;
+    // padding:0px 10px 10px 10px;;
+    min-height:120px;
   }
   &__number{
     &__text{

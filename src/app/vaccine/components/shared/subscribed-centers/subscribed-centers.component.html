@@ -33,7 +33,7 @@
         </ng-container>
         <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
       </div>
-      <div class="no-centers-selected" *ngIf="subscribedCenters.length===0">
+      <div class="no-centers-selected" *ngIf="isNoCenterSubscribed">
         <div class="no-centers-selected__img">
           <img class="no-centers-selected__img__image" src="../../../assets/img/no-data.png" alt="">
         </div>

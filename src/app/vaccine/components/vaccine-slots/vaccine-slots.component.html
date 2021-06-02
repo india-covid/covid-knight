@@ -1,6 +1,6 @@
 <div class="slots-wrapper">
-  <div class="slots-head header" #header>
 
+  <div class="slots-head header" #header>
     <app-header-back headerText="Subscribe Centers" routeTo="/home"></app-header-back>
     <div class="date-slider">
       <div class="slider">
@@ -132,9 +132,9 @@
       </div>
 
       <div class="filters__search-bar">
-        <div class="input-wrapper">
-          <input type="text" placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
-          <i class="fa fa-times cross-icon" *ngIf="hospitalName.length>0"></i>
+        <div class="filters__search-bar__input-wrapper">
+          <input class="filters__search-bar__input-wrapper__input" type="text" placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
+          <i class="fa fa-times filters__search-bar__input-wrapper__cross-icon" *ngIf="hospitalName.length>0"></i>
         </div>
       </div>
     </div>
@@ -155,8 +155,8 @@
         <div class="no-centers__content__text">No Centers Found</div>
       </div>
     </div>
-    <div class="myCard" *ngIf="!isCenterEmpty"  >
-      <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccineType:age:activeDate">
+    <div class="myCard" *ngIf="!isCenterEmpty && showCentersList" [@enterAnimationRight] >
+      <div class="myCard__card-wrapper" *ngFor="let center of centersWithSession | filterCenter:hospitalName:dose:vaccineType:age:activeDate" >
         <div class="myCard__item">
           <div class="myCard__item__content">
             <div class="myCard__item__content__myCard-head">
@@ -222,14 +222,14 @@
         </div>
       </div>
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
-
-
-
-
     </div>
+
+
     <div class="apply-changes" (click)="applySubscribeChanges()" [ngClass]="newTotalSubscribe?'apply-changes-show':'apply-changes-hide'">
       <p><i></i>Subscribe to {{newTotalSubscribe }} {{ newTotalSubscribe === 1 ? 'Center' : 'Centers' }}  </p>
     </div>
+
+
   </div>
 
 

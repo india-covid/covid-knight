@@ -21,6 +21,7 @@ import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import * as DayJs from 'dayjs';
 import { shareReplay } from 'rxjs/operators';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 export enum QueryType {
   PIN = 'pincode',
@@ -31,6 +32,24 @@ export enum QueryType {
   selector: 'app-vaccine-slots',
   templateUrl: './vaccine-slots.component.html',
   styleUrls: ['./vaccine-slots.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimationLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('100ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
+    ),
+    trigger(
+      'enterAnimationRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('100ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
+    )
+  ],
 })
 export class VaccineSlotsComponent implements OnInit {
   QueryType = QueryType;
@@ -74,6 +93,7 @@ export class VaccineSlotsComponent implements OnInit {
     backdrop: true,
     ignoreBackdropClick: false
   };
+  showCentersList:boolean=true;
   constructor(
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
@@ -159,16 +179,17 @@ export class VaccineSlotsComponent implements OnInit {
   }
 
   getSessionsForDay(day: number) {
-
+    this.showCentersList=false;
     this.activeDay = day;
     this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
-    if(this.isCenterEmpty){
+    setTimeout(()=>{
+      this.showCentersList=true;
+
+    },100)
+    if(this.isCenterEmpty || this.centersWithSession[0][this.activeDate]){
       return
     }
-    if (this.centersWithSession[0][date]) {
-      return;
-    }
+
     if (this.queryData.queryType == this.QueryType.PIN) {
       this.getSessionsByPincode(this.queryData[this.QueryType.PIN], day);
     } else {

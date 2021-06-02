@@ -1,72 +1,81 @@
 <main class="auth-home" [@enterAnimationLeft]>
-  <div class="auth-home__header" >
+  <div class="auth-home__header">
     <div class="auth-home__user-info-wrapper">
       <!-- *ngIf="user?.phoneNumber" -->
-      <div class="auth-home__user-info"  >
-
+      <div class="auth-home__user-info">
         <div class="auth-home__user-info__phone">
           <p class="text">Current User</p>
-          <p class="phone">
-            +91 {{user.phoneNumber}}
-          </p>
+          <p class="phone">+91 {{ user.phoneNumber }}</p>
         </div>
         <div class="auth-home__user-info__logout">
-          <button class="auth-home__user-info__logout__button app-btn"  (click)="logout()">Logout</button>
+          <ng-template #popTemplate>
+            <button class="auth-home__user-info__logout__button btn btn-default" (click)="logout()">
+              Logout
+            </button><br>
+            <!-- <button class="auth-home__user-info__logout__button btn btn-default" >
+              Contact Us
+            </button> -->
+          </ng-template>
+          <i type="button" class="ri-more-2-fill icon" [popover]="popTemplate"
+            popoverTitle="Profile"
+            [adaptivePosition]="false"
+            [outsideClick]="true"
+            placement="bottom right">
+
+          </i>
+
         </div>
       </div>
     </div>
-   </div>
+  </div>
 
-  <div  class="auth-home__body" >
+  <div class="auth-home__body">
     <!-- <app-subscribed-centers></app-subscribed-centers> -->
-      <div class="align-items-center">
-
-        <div class="myCard col col-lg-12 col-md-12 myCard__card1" routerLink="/subscribed"  >
-            <div class="myCard__content">
-              <p class="myCard__content__text">Centers Subscribed</p>
-              <p class="myCard__content__text-large">{{subscribedCenters.length}}</p>
-              <p class="myCard__content__text-small">See All</p>
-              <div class="myCard__content__icon">
-                <img src="../../../assets/icons/bell.svg" class="myCard__content__icon__image" alt="">
-              </div>
-          </div>
-        </div>
-        <div class="myCard col col-lg-12 col-md-12 myCard__card2" routerLink="/add-subscription" >
-            <div class="myCard__content">
-              <p class="myCard__content__text">Add More Centers</p>
-              <p class="myCard__content__text-large">Add</p>
-              <div class="myCard__content__icon">
-                <img src="../../../assets/icons/add.svg" class="myCard__content__icon__image" alt="">
-              </div>
-              <!-- <p class="myCard__content__text-small">See All</p> -->
+    <div class="align-items-center">
+      <div class="myCard col col-lg-12 col-md-12 myCard__card1" routerLink="/subscribed">
+        <div class="myCard__content">
+          <p class="myCard__content__text">Centers Subscribed</p>
+          <p class="myCard__content__text-large">
+            {{ subscribedCenters.length }}
+          </p>
+          <p class="myCard__content__text-small">See All</p>
+          <div class="myCard__content__icon">
+            <img src="../../../assets/icons/bell.svg" class="myCard__content__icon__image" alt="" />
           </div>
         </div>
       </div>
-      <div class="align-items-center">
-        <div class="myCard col col-lg-12 col-md-12 myCard__card3" >
-            <div class="myCard__content">
-              <p class="myCard__content__text">Share With Friends</p>
-              <p class="myCard__content__text-large">Share</p>
-              <!-- <p class="myCard__content__text-small">See All</p> -->
-              <div class="myCard__content__icon">
-                <img src="../../../assets/icons/share.svg" class="myCard__content__icon__image" alt="">
-              </div>
+      <div class="myCard col col-lg-12 col-md-12 myCard__card2" routerLink="/add-subscription">
+        <div class="myCard__content">
+          <p class="myCard__content__text">Add More Centers</p>
+          <p class="myCard__content__text-large">Add</p>
+          <div class="myCard__content__icon">
+            <img src="../../../assets/icons/add.svg" class="myCard__content__icon__image" alt="" />
           </div>
+          <!-- <p class="myCard__content__text-small">See All</p> -->
         </div>
-        <div class="myCard col col-lg-12 col-md-12 myCard__card4" >
-            <div class="myCard__content">
-              <p class="myCard__content__text">Help us Survive</p>
-              <p class="myCard__content__text-large">Donate</p>
-              <!-- <p class="myCard__content__text-small">See All</p> -->
-              <div class="myCard__content__icon">
-                <img src="../../../assets/icons/heart.svg" class="myCard__content__icon__image" alt="">
-              </div>
+      </div>
+    </div>
+    <div class="align-items-center">
+      <div class="myCard col col-lg-12 col-md-12 myCard__card3">
+        <div class="myCard__content">
+          <p class="myCard__content__text">Share With Friends</p>
+          <p class="myCard__content__text-large">Share</p>
+          <!-- <p class="myCard__content__text-small">See All</p> -->
+          <div class="myCard__content__icon">
+            <img src="../../../assets/icons/share.svg" class="myCard__content__icon__image" alt="" />
           </div>
         </div>
       </div>
-
-
+      <div class="myCard col col-lg-12 col-md-12 myCard__card4">
+        <div class="myCard__content">
+          <p class="myCard__content__text">Help us Survive</p>
+          <p class="myCard__content__text-large">Donate</p>
+          <!-- <p class="myCard__content__text-small">See All</p> -->
+          <div class="myCard__content__icon">
+            <img src="../../../assets/icons/heart.svg" class="myCard__content__icon__image" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
-
-
