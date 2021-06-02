@@ -49,25 +49,14 @@ $text-muted-color: var(--app-color-light-tint);
   &__layer {
     // background-color: rgba(0, 0, 0, 0.2);
     background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
-
-    //  min-height: calc(100vh - 80px);
-    // height:calc( 100% - 80px);
     height:100%;
     padding-top: 20%;
-    // border:solid blue;
     position: relative;
     padding-bottom:30px;
-
   }
   &__info-wrapper {
-    border:solid red;
-    // height: calc(100vh - calc(100vh - 100%)) ;
-
+    min-height: 500px ;
     width: 100%;
-
-     //height: calc(100vh - 80px);
-    // height:100%;
-
     text-align: center;
     align-items: center;
     &__head {
@@ -169,11 +158,9 @@ $text-muted-color: var(--app-color-light-tint);
 
   &__container {
     position: relative;
-    // border:solid red;
-    padding-bottom:50px;
-    // min-height: 97vh;
+    min-height: 97vh;
     margin: 0px auto;
-    // padding: 30px 30px 0px 30px;
+    margin-bottom:130px;
     &__heading {
       padding: 20px 0px 40px 0px;
       font-size: 1.6rem;

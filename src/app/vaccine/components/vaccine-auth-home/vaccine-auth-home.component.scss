@@ -40,6 +40,8 @@
   padding:10px;
   // border:solid green;
   text-align: center;
+  position: relative;
+  min-height:600px;
 .col{
   // border:solid blue;
 }
@@ -122,19 +124,19 @@
 
     }
   }
-
-}
-&__credits{
-  position: absolute;
-  bottom:0;
-  padding:10px;
-  text-align: center;
-  font-weight: bold;
-  width:100%;
-  &__icon{
-    position: relative;
-    bottom:-3px;
+  &__credits{
+    position: absolute;
+    bottom:0;
+    padding:10px;
+    text-align: center;
+    font-weight: bold;
+    width:100%;
+    &__icon{
+      position: relative;
+      bottom:-3px;
+    }
   }
 }
+
 }
 

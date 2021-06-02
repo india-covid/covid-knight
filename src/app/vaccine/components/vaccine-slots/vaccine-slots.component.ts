@@ -13,6 +13,7 @@ import {
   HostListener,
   Input,
   OnInit,
+  Renderer2,
   ViewChild,
   TemplateRef
 } from '@angular/core';
@@ -94,10 +95,14 @@ export class VaccineSlotsComponent implements OnInit {
     ignoreBackdropClick: false
   };
   showCentersList:boolean=true;
+
+  @ViewChild('slotsBody') slotsBody:ElementRef|null=null;
+
   constructor(
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
     private router: Router,
+    private renderer:Renderer2,
     private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private modalService: BsModalService
@@ -335,4 +340,15 @@ export class VaccineSlotsComponent implements OnInit {
     this.vaccineType=vacc;
   }
 
+
+  //set height dynamically
+
+  setHeight(){
+    this.renderer.setStyle(this.slotsBody?.nativeElement, 'height', (window.innerHeight-220)+"px");
+    console.log(this.slotsBody?.nativeElement,window.innerHeight);
+  }
+
+  ngAfterViewInit() {
+   this.setHeight();
+  }
 }

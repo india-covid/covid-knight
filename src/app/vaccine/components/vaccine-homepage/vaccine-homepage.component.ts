@@ -13,7 +13,6 @@ import { VaccineRestService } from '../../services/vaccine-rest.service';
 export class VaccineHomepageComponent implements  OnDestroy {
 
   authSub: Subscription;
-  heightVal=0;
   @ViewChild('infoWrapper') infoWrapper:ElementRef|null=null;
   constructor(
     private authService: AuthService,
@@ -35,14 +34,12 @@ export class VaccineHomepageComponent implements  OnDestroy {
   ngOnDestroy() {
     this.authSub.unsubscribe();
   }
-  resetHeight(){
 
-    this.renderer.setStyle(this.infoWrapper?.nativeElement, 'height', (window.innerHeight-80)+"px");
-    console.log(this.infoWrapper?.nativeElement,window.innerHeight);
+  setHeight(){
+    this.renderer.setStyle(this.infoWrapper?.nativeElement, 'height', (window.innerHeight-80)+"px");//80 - for header height
   }
 
   ngAfterViewInit() {
-    // window.addEventListener("resize", this.resetHeight);
-   this.resetHeight();
+   this.setHeight();
   }
 }

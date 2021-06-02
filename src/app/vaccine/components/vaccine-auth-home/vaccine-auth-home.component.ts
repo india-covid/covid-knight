@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import { SubscriptionService } from './../../services/subscription.service';
 import { AuthService } from 'src/app/core/auth.service';
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit,Renderer2 ,ViewChild,ElementRef} from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
 import { take } from 'rxjs/operators';
@@ -34,9 +34,11 @@ import { take } from 'rxjs/operators';
 export class VaccineAuthHomeComponent implements OnInit {
   user: User | null = null;
   subscribedCenters: SubscribedCenter[] = [];
+  @ViewChild('authHomeBody') authHomeBody:ElementRef|null=null;
 
   constructor(private authService: AuthService,
     private router: Router,
+    private renderer:Renderer2,
     private subscriptionService: SubscriptionService,private spinner:NgxSpinnerService) {
     this.getSubscribedCenters();
     this.authService.user$.pipe(take(1)).subscribe(user => {
@@ -61,5 +63,17 @@ export class VaccineAuthHomeComponent implements OnInit {
       this.spinner.hide();
       this.subscribedCenters = data;
     });
+  }
+
+
+   //set height dynamically
+
+   setHeight(){
+    this.renderer.setStyle(this.authHomeBody?.nativeElement, 'height', (window.innerHeight-50)+"px");
+    console.log(this.authHomeBody?.nativeElement,window.innerHeight);
+  }
+
+  ngAfterViewInit() {
+   this.setHeight();
   }
 }
