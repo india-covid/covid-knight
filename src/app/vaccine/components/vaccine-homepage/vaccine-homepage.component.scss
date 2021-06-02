@@ -44,10 +44,14 @@ $text-muted-color: var(--app-color-light-tint);
   margin: 0 auto;
   overflow: hidden;
   overflow-y: scroll;
+
   // border: solid green;
   &__layer {
-    background-color: rgba(0, 0, 0, 0.2);
-     min-height: calc(100vh - 80px);
+    // background-color: rgba(0, 0, 0, 0.2);
+    background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
+
+    //  min-height: calc(100vh - 80px);
+    height:calc( 100% - 80px);
     padding-top: 20%;
     // border:solid blue;
     position: relative;
@@ -55,13 +59,14 @@ $text-muted-color: var(--app-color-light-tint);
 
   }
   &__info-wrapper {
-    // border:solid red;
+    border:solid red;
+    height: -webkit-fill-available ;
 
-    background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
-    background-size: cover;
-    background-position: center;
     width: 100%;
-     min-height: calc(100vh - 80px);
+
+     //height: calc(100vh - 80px);
+    // height:100%;
+
     text-align: center;
     align-items: center;
     &__head {

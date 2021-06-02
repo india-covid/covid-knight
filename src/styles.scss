@@ -13,18 +13,12 @@
 body {
   font-family: "Lato", sans-serif;
   scroll-behavior: smooth;
-  min-height: 100vh;
-  min-height: -webkit-fill-available !important;
-  border:solid red;
 }
 html{
-  height: -webkit-fill-available !important;
   scroll-behavior: smooth;
 }
 div{
   scroll-behavior: smooth;
-  min-height: -webkit-fill-available  !important;
-
 }
 
 ////////////////////////////////////////////////////// css for ng-select////////////////////////////////////////////////////////////
