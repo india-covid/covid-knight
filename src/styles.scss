@@ -14,14 +14,16 @@ body {
   font-family: "Lato", sans-serif;
   scroll-behavior: smooth;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
+  min-height: -webkit-fill-available o !important;
 }
 html{
-  height: -webkit-fill-available;
+  height: -webkit-fill-available !important;
   scroll-behavior: smooth;
 }
 div{
   scroll-behavior: smooth;
+  min-height: -webkit-fill-available o !important;
+
 }
 
 ////////////////////////////////////////////////////// css for ng-select////////////////////////////////////////////////////////////
