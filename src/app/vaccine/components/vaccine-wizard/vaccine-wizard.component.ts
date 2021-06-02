@@ -1,5 +1,5 @@
 import { User } from './../../../core/models/user.model';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter,ElementRef, Output } from '@angular/core';
 import { Center } from '../../models/center.model';
 import { AuthService } from 'src/app/core/auth.service';
 import { switchMap, take } from 'rxjs/operators';
@@ -54,6 +54,7 @@ export class VaccineWizardComponent implements OnInit {
   constructor(private authService: AuthService,
     private storageService: LocalStorageService,
     private router: Router,
+    private myElement: ElementRef,
     private spinner: NgxSpinnerService) {
 
   }
@@ -172,5 +173,10 @@ export class VaccineWizardComponent implements OnInit {
       this.router.navigate(['/']);
 
     });
+  }
+
+  scrollToBottom() {
+    let el = this.myElement.nativeElement.querySelector('subscribe');
+    el.scrollIntoView();
   }
 }

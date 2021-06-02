@@ -42,4 +42,6 @@ export class VaccineHomepageComponent implements  OnDestroy {
   ngAfterViewInit() {
    this.setHeight();
   }
+
+
 }

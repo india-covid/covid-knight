@@ -5,28 +5,6 @@ $head-text-color: var(--app-color-light);
 $text-color: var(--app-color-light);
 $text-muted-color: var(--app-color-light-tint);
 
-.app-wrapper {
-  // border: solid red;
-  display: flex;
-  justify-content: space-between;
-  height: 100vh;
-  width:100vw;
-  .empty-space {
-    padding-bottom:20px;
-
-    // background-color: $stage1-bg-color;
-    width: 50%;
-    &__icon{
-      position: relative;
-      bottom:-3px;
-    }
-    &__image-wrapper {
-      height:100%;
-      background-image: url("../../../../assets/img/s3.jpg");
-      // background-color:  $stage1-bg-color;
-    }
-  }
-}
 
 .homepage-wrapper{
   width:50%;
@@ -159,9 +137,9 @@ $text-muted-color: var(--app-color-light-tint);
 
   &__container {
     position: relative;
-    min-height: 97vh;
+    min-height: 750px;
     margin: 0px auto;
-    margin-bottom:130px;
+    // padding-bottom:130px;
     &__heading {
       padding: 20px 0px 40px 0px;
       font-size: 1.6rem;
@@ -191,11 +169,6 @@ $text-muted-color: var(--app-color-light-tint);
   .homepage__credits{
     display: block;
   }
-.homepage{
-  &__container{
-    min-height: calc(100vh - 80px) !important;
-   }
-}
 }
 
 @media screen and (max-width: 740px) {
@@ -211,9 +184,7 @@ $text-muted-color: var(--app-color-light-tint);
 
       }
     }
-    &__container{
-      min-height:calc(100vh - 40px);
-     }
+
   }
 
 }

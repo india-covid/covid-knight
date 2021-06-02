@@ -1,5 +1,5 @@
 import { District } from 'src/app/vaccine/models/district.model';
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { isNonEmptyArray } from 'src/app/core/utils';
@@ -18,6 +18,7 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   @Output() centersSelected = new EventEmitter<{ centers: Center[], pincode: string }>()
   @Output() pinEntered = new EventEmitter<{ pincode:string }>()
 
+  @ViewChild('selector') selector!:ElementRef;
   @Input() pincode: string = '';
   private _pincodeChangedSubject = new Subject<string>();
   centers$: Observable<Center[]>;
@@ -52,5 +53,8 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   pinChange(pincode:string){
     this.pinEntered.emit({ pincode: pincode });
   }
-
+  scrollToBottom() {
+    let el = this.selector.nativeElement;
+    el.scrollIntoView();
+  }
 }
