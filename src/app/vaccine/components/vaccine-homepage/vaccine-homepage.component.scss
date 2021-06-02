@@ -60,7 +60,7 @@ $text-muted-color: var(--app-color-light-tint);
   }
   &__info-wrapper {
     border:solid red;
-    height: -webkit-fill-available ;
+    height: calc(100vh - calc(100vh - 100%)) ;
 
     width: 100%;
 
