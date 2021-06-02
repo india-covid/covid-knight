@@ -55,6 +55,7 @@ export class AuthService {
     if (!authInfo.phoneNumber || !authInfo.otp) {
       throw new Error('Missing fields');
     }
+    authInfo.phoneNumber = String(authInfo.phoneNumber);
     authInfo.otp = btoa(authInfo.otp);
     const url = environment.apiBase + this.authMainLoginUrl;
 
@@ -84,6 +85,7 @@ export class AuthService {
     if (!phoneNumber) {
       return of(null);
     }
+    phoneNumber = String(phoneNumber);
     const url = environment.apiBase + `${this.authMainLoginUrl}` + '/otp/request';
     return this.httpClient.post<any>(url, { phoneNumber, production: environment.production }); // pass countryCode if not india
   }
