@@ -93,6 +93,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     }
     this.spinner.show();
     this.loading = true;
+
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,

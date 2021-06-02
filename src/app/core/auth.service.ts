@@ -57,6 +57,7 @@ export class AuthService {
     }
     authInfo.otp = btoa(authInfo.otp);
     const url = environment.apiBase + this.authMainLoginUrl;
+
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
       const { token, ...user } = body;
       if (token?.token) {
