@@ -344,11 +344,11 @@ export class VaccineSlotsComponent implements OnInit {
 
   //set height dynamically
 
-  setHeight(){
-    this.renderer.setStyle(this.slots?.nativeElement, 'height', window.innerHeight+"px");
-  }
+  // setHeight(){
+  //   this.renderer.setStyle(this.slots?.nativeElement, 'height', window.innerHeight+"px");
+  // }
 
-  ngAfterViewInit() {
-   this.setHeight();
-  }
+  // ngAfterViewInit() {
+  //  this.setHeight();
+  // }
 }

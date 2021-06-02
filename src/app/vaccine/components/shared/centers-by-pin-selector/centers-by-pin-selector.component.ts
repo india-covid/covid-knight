@@ -19,6 +19,8 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   @Output() pinEntered = new EventEmitter<{ pincode:string }>()
 
   @ViewChild('selector') selector!:ElementRef;
+  @ViewChild('pinInput') pinInput!: ElementRef;
+
   @Input() pincode: string = '';
   private _pincodeChangedSubject = new Subject<string>();
   centers$: Observable<Center[]>;
@@ -51,6 +53,9 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
     this.centersSelected.emit({ pincode: this.pincode, centers });
   }
   pinChange(pincode:string){
+    if(pincode.length===6){
+      this.pinInput.nativeElement.blur()
+    }
     this.pinEntered.emit({ pincode: pincode });
   }
   scrollToBottom() {

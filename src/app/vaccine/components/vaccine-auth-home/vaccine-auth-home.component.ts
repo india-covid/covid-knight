@@ -96,11 +96,11 @@ export class VaccineAuthHomeComponent implements OnInit {
 
    //set height dynamically
 
-   setHeight(){
-    this.renderer.setStyle(this.authHomeBody?.nativeElement, 'height', (window.innerHeight-50)+"px");
-  }
+  //  setHeight(){
+  //   this.renderer.setStyle(this.authHomeBody?.nativeElement, 'height', (window.innerHeight-50)+"px");
+  // }
 
-  ngAfterViewInit() {
-   this.setHeight();
-  }
+  // ngAfterViewInit() {
+  //  this.setHeight();
+  // }
 }
