@@ -9,11 +9,15 @@
 @import "theme/theme.scss";
 
 
+
 body {
   font-family: "Lato", sans-serif;
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 html{
+  height: -webkit-fill-available;
   scroll-behavior: smooth;
 }
 div{
