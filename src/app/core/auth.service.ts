@@ -87,8 +87,4 @@ export class AuthService {
     return this.httpClient.post<any>(url, { phoneNumber, production: environment.production }); // pass countryCode if not india
   }
 
-  getCurrentUser() {
-    return this.storageService.get('User');
-  }
-
 }
