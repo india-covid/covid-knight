@@ -183,7 +183,17 @@ $text-muted-color: var(--app-color-light-tint);
 }
 
 @media screen and (max-width: 740px) {
+  .homepage{
+    &__credits{
+      color:white ;
+      font-weight:100;
+      a{
+        font-weight:bold;
+        color:white
+      }
 
+    }
+  }
   .homepage__container{
     min-height: 97vh;
   }
