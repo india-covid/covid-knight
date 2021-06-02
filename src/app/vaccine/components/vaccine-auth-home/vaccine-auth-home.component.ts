@@ -49,6 +49,7 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   logout() {
+    this.spinner.show();
     this.authService.logout().subscribe(() => {
       this.spinner.hide();
       this.router.navigate(['/']);
