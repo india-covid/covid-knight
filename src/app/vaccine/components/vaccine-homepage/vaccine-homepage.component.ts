@@ -35,13 +35,13 @@ export class VaccineHomepageComponent implements  OnDestroy {
     this.authSub.unsubscribe();
   }
 
-  // setHeight(){
-  //   this.renderer.setStyle(this.infoWrapper?.nativeElement, 'height', (window.innerHeight-80)+"px");//80 - for header height
-  // }
+  setHeight(){
+    this.renderer.setStyle(this.infoWrapper?.nativeElement, 'height', (window.innerHeight-80)+"px");//80 - for header height
+  }
 
-  // ngAfterViewInit() {
-  //  this.setHeight();
-  // }
+  ngAfterViewInit() {
+   this.setHeight();
+  }
 
 
 }

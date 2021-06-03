@@ -16,6 +16,7 @@ $text-muted-color: var(--app-color-light-tint);
 .homepage {
   overflow: scroll;
   height:100%;
+  min-height:80vh;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
   background-color: white;;
   position: relative;
@@ -34,7 +35,7 @@ $text-muted-color: var(--app-color-light-tint);
   &__info-wrapper {
     background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
 
-    min-height: 500px ;
+    min-height: 550px ;
     width: 100%;
     text-align: center;
     align-items: center;
