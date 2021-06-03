@@ -73,7 +73,7 @@ export class SubscribedCentersComponent implements OnInit {
           (center) => center._id === subscriptionId
         );
     this.unsubscribedCenters.push(this.subscribedCenters[index]);
-    let center = this.unsubscribedCenters[index];
+    let center = this.subscribedCenters[index];
     this.subscribedCenters.splice(index, 1);
 
     this.subscriptionService
