@@ -1,0 +1,44 @@
+.contact{
+  padding-top:30px;
+  min-height:90vh;
+  &__head{
+    &__title{
+      &--text{
+        font-size: 1.7rem;
+        text-align: center;
+        font-weight: bold;
+      }
+      &--icon{
+        margin:3px;
+        position: relative;
+        bottom:-4px;
+      }
+    }
+  }
+  &__body{
+    padding:20px;
+    font-weight: bold;
+    &__form{
+      &__message{
+        &--textarea{
+          font-family: 'Courier New', Courier, monospace;
+        }
+      }
+      &__submit{
+        text-align: center;
+        width: 100%;
+
+        &--button{
+
+        }
+      }
+    }
+  }
+}
+
+.modal-body{
+  &__button{
+    text-align: center;
+
+  }
+}

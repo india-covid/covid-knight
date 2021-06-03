@@ -1,3 +1,4 @@
+import { catchError, map, tap  } from 'rxjs/operators';
 import { Subscriptions } from './../models/subscriptions';
 
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +9,7 @@ import { Center } from '../models/center.model';
 import { District } from '../models/district.model';
 import { State } from '../models/state.model';
 import { VaccineSession } from '../models/vaccine-session.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -78,6 +80,13 @@ export class VaccineRestService {
   }
 
 
+  submitForm(title:string,phone:string,email:string,messageText:string) {
+    const url = environment.apiBase + '/users/contact';
+    const now = new Date();
+    const details = {title:title,phoneNumber:phone,email:email,message:messageText, time: now.toISOString() }
+    const contactObj = btoa(JSON.stringify(details));
+    return this.http.post<any>(url, { message:contactObj });
+  }
 
 
 }

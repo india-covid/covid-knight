@@ -1,17 +1,18 @@
 
 <div class="header" *ngIf="active" >
   <div class="header__content" [ngClass]="[activeMenuItem]" >
-    <div class="header__item" (click)="changeMenu(MENUITEMS.HOME)"  [class.header__item__active]="activeMenuItem ==='home'" >
+    <a id="#home" class="header__item" (click)="changeMenu(MENUITEMS.HOME)"  [class.header__item__active]="activeMenuItem ==='home'" >
       <i class="ri-home-3-fill header__item__icon"></i>
       <p class="header__item__label" >Home</p>
-    </div>
-    <div class="header__item" (click)="changeMenu(MENUITEMS.CONTACT)" [class.header__item__active]="activeMenuItem ==='contact'">
+    </a>
+    <a href="#contact" class="header__item" (click)="changeMenu(MENUITEMS.CONTACT)" [class.header__item__active]="activeMenuItem ==='contact'">
       <i class="ri-phone-fill header__item__icon"></i>
-      <p class="header__item__label">Contact</p>
-    </div>
-    <div class="header__item"  (click)="changeMenu(MENUITEMS.DONATE)"  [class.header__item__active]="activeMenuItem ==='donate'">
+      <p  class="header__item__label">Contact</p>
+    </a>
+    <a href="#donate" class="header__item"  (click)="changeMenu(MENUITEMS.DONATE)"  [class.header__item__active]="activeMenuItem ==='donate'">
       <i class="ri-hand-heart-fill header__item__icon"></i>
       <p class="header__item__label">Donate</p>
-    </div>
+    </a>
   </div>
+
 </div>

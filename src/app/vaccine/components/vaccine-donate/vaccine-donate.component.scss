@@ -1,0 +1,41 @@
+.donate{
+  background-color: rgba(110, 176, 252, 0.055);
+  min-height:100vh;
+  padding-top:50px;
+  &__head{
+    text-align: center;
+    &--title{
+      font-weight: bold;
+    }
+    &--slogan{
+      margin-top:-15px;
+    }
+  }
+  &__body{
+    &__image{
+      min-width:200px;
+      width:90%;
+      margin:auto;
+      &--img{
+        height:100%;
+        width:100%;
+      }
+    }
+    &__title{
+      padding:10px;
+      &--text{
+        font-size: 1.2rem;
+        // border:solid red;
+        text-align: center;
+        text-justify:distribute-all-lines;
+      }
+    }
+    &__button{
+      text-align: center;
+      &--icon{
+        margin:3px;
+      }
+    }
+
+  }
+}

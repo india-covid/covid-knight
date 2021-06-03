@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { VaccineRestService } from '../../services/vaccine-rest.service';
+
 @Component({
   selector: 'app-vaccine-homepage',
   templateUrl: './vaccine-homepage.component.html',
@@ -18,6 +19,7 @@ export class VaccineHomepageComponent implements  OnDestroy {
     private authService: AuthService,
     private spinner: NgxSpinnerService,
     private router: Router,
+
     private renderer:Renderer2) {
     this.authSub = this.authService.user$.subscribe((user) => {
       if (user && user.phoneNumber) {

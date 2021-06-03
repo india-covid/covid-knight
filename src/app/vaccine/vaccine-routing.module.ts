@@ -1,3 +1,4 @@
+import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { VaccineWizardComponent } from './components/vaccine-wizard/vaccine-wizard.component';
 import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
 import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
@@ -43,6 +44,10 @@ const routes: Routes = [
     component: VaccineAuthHomeComponent,
     canActivate: [AuthGuard]
 
+  },
+  {
+    path: 'donate',
+    component: VaccineDonateComponent,
   },
 ];
 @NgModule({

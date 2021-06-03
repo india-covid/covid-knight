@@ -21,7 +21,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true,}
+    {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true, }
   ],
   bootstrap: [AppComponent]
 })
