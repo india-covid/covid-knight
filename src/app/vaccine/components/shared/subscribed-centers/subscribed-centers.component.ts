@@ -9,6 +9,8 @@ import * as DayJs from 'dayjs';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
+import { ToastrService } from 'ngx-toastr';
+import { Center } from 'src/app/vaccine/models/center.model';
 
 @Component({
   selector: 'app-subscribed-centers',
@@ -41,7 +43,9 @@ export class SubscribedCentersComponent implements OnInit {
     private storageService: LocalStorageService,
     private subscriptionService: SubscriptionService,
     private spinner:NgxSpinnerService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private toastr: ToastrService
+
   ) {
     this.spinner.show();
     this.subscriptionService
@@ -63,17 +67,31 @@ export class SubscribedCentersComponent implements OnInit {
 
   ngOnInit() {}
 
+  unsubscribedCenters:SubscribedCenter[]=[];
   UnSubscribeCenter(subscriptionId: string) {
      let index = this.subscribedCenters.findIndex(
           (center) => center._id === subscriptionId
         );
+    this.unsubscribedCenters.push(this.subscribedCenters[index]);
+    let center = this.unsubscribedCenters[index];
+    this.subscribedCenters.splice(index, 1);
+
     this.subscriptionService
       .deleteSubscriptionCenter(subscriptionId)
       .subscribe((data) => {
-        this.subscribedCenters.splice(index, 1);
+        this.unsubscribedCenters.shift();
+        this.toastr.success(center.center.name, 'Unsubscribed successfully',{
+          positionClass: 'toast-bottom-right',
+          timeOut:2000
+       });
         if(this.subscribedCenters.length===0){
           this.isNoCenterSubscribed=true;
         }
+
+      },(err)=>{
+        this.subscribedCenters.push(this.unsubscribedCenters[0]);
+        this.unsubscribedCenters.shift();
+        this.toastr.error('Can not unsubscribe', 'Please ty again in some time');
       });
   }
 
