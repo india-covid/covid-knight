@@ -50,10 +50,14 @@ const routes: Routes = [
   {
     path: 'donate',
     component: VaccineDonateComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'contact',
     component: VaccineContactComponent,
+    canActivate: [AuthGuard]
+
   },
 ];
 @NgModule({

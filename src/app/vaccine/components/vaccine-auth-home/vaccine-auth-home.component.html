@@ -11,11 +11,12 @@
         </div>
         <div class="auth-home__user-info__logout">
           <ng-template #popTemplate>
-            <button class="auth-home__user-info__logout__button btn btn-default" (click)="logout()">
-              Logout
-            </button><br>
             <button class="auth-home__user-info__logout__button btn btn-default" routerLink="/contact">
               Contact Us
+            </button>
+            <br>
+            <button class="auth-home__user-info__logout__button btn btn-default" (click)="logout()">
+              Logout
             </button>
           </ng-template>
           <i type="button" class="ri-more-2-fill icon" [popover]="popTemplate"

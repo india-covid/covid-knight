@@ -3,6 +3,10 @@ import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.servic
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { User } from 'src/app/core/models/user.model';
+import { AuthService } from 'src/app/core/auth.service';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vaccine-contact',
@@ -41,11 +45,15 @@ export class VaccineContactComponent implements OnInit {
     ignoreBackdropClick: true,
   };
 
-
   constructor(private vaccineService:VaccineRestService,
     private modalService: BsModalService,
-    private spinner:NgxSpinnerService
-    ) { }
+    private spinner:NgxSpinnerService,
+    private authService: AuthService,
+    ) {
+   this.authService.user$.pipe(take(1)).subscribe((user) => {
+        this.emailOrPhone = user?.phoneNumber||'';
+      });
+    }
 
   ngOnInit() {
   }
