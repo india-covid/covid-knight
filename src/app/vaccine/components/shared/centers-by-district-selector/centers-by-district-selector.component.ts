@@ -58,7 +58,7 @@ export class CentersByDistrictSelectorComponent implements OnInit {
 
   scrollToBottom() {
     let el = this.selector.nativeElement;
-    el.scrollIntoView();
+    // el.scrollIntoView();
   }
 
 }
