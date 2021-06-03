@@ -277,8 +277,6 @@ export class VaccineSlotsComponent implements OnInit {
 
   //add to subscribe array
   addSubscribe(center: Center) {
-    console.log('add subscriber');
-
     this.newSubscribeCenters.push(center);
     let index = this.centersWithSession.findIndex(
       (c: Center) => c._id === center._id
@@ -303,7 +301,6 @@ export class VaccineSlotsComponent implements OnInit {
   }
   removeAllSubscribe(){
     let newSubscribe = this.newSubscribeCenters;
-    console.log('remove all ',newSubscribe);
     for(let center of newSubscribe){
       let index = this.centersWithSessionFiltered.findIndex(
         (c: any) => c.name === center.name
@@ -324,7 +321,6 @@ export class VaccineSlotsComponent implements OnInit {
   //apply subscribe
   applySubscribeChanges() {
     this.spinner.show();
-    console.log(this.newSubscribeCenters);
     this.subscriptionService
       .postSubscriptionCenter({ centers: this.newSubscribeCenters })
       .subscribe((data) => {
@@ -387,6 +383,5 @@ export class VaccineSlotsComponent implements OnInit {
 
   applyFilters(){
     this.centersWithSessionFiltered = this.filterCenterPipe.transform(this.centersWithSession,this.hospitalName,this.dose,this.vaccineType,this.age,this.activeDate)
-    // console.log(this.centersWithSessionFiltered);
   }
 }

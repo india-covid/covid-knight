@@ -59,4 +59,5 @@ export class VaccineContactComponent implements OnInit {
     );
   }
 
+
 }
