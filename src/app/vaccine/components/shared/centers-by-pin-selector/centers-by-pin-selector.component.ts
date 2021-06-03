@@ -60,6 +60,6 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   }
   scrollToBottom() {
     let el = this.selector.nativeElement;
-    el.scrollIntoView();
+    // el.scrollIntoView();
   }
 }
