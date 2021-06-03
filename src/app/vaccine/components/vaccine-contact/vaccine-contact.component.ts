@@ -2,11 +2,30 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-vaccine-contact',
   templateUrl: './vaccine-contact.component.html',
-  styleUrls: ['./vaccine-contact.component.scss']
+  styleUrls: ['./vaccine-contact.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimationLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
+    ),
+    trigger(
+      'enterAnimationRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ]
+    )
+  ],
 })
 export class VaccineContactComponent implements OnInit {
   @ViewChild('submitSuccess') submitSuccess!: TemplateRef<any>;

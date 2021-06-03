@@ -1,3 +1,4 @@
+import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
 import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { VaccineWizardComponent } from './components/vaccine-wizard/vaccine-wizard.component';
 import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
@@ -8,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VaccineHomepageComponent } from './components/vaccine-homepage/vaccine-homepage.component';
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -48,6 +50,10 @@ const routes: Routes = [
   {
     path: 'donate',
     component: VaccineDonateComponent,
+  },
+  {
+    path: 'contact',
+    component: VaccineContactComponent,
   },
 ];
 @NgModule({
