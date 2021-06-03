@@ -20,6 +20,9 @@ export class HeaderComponent implements OnInit {
 
   changeMenu(menuItem: MENUITEMS) {
     this.activeMenuItem = menuItem;
+    setTimeout(()=>{
+      this.activeMenuItem = MENUITEMS.HOME;
+    },1000)
   }
 
   constructor(router: Router) {
@@ -29,5 +32,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void { }
+
 }

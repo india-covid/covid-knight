@@ -137,14 +137,28 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     &__content {
       width: 100%;
+      .checkedCenter{
+        background-color: #3da822 !important;
+
+      }
       &__myCard-head {
         border-radius: 5px;
         padding: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &__button{
+          color:white;
+          .subscribe-check-label{
+            position: relative;
+            top:-2px;
+            font-size:1rem;
+            font-weight:bold;
+          }
+        }
         .app-btn {
           width: auto !important;
+          white-space: nowrap;
           // border: solid gray 1px;
         }
         &__text {
@@ -256,7 +270,20 @@
     font-weight:bold ;
   }
   &__button{
+    .row{
+      .btn{
+        min-width:100px;
+      }
+      .btn-success{
+        box-shadow: #60ff3091 0px 7px 15px -5px, rgba(107, 248, 41, 0.425) 0px 8px 16px -8px;
+      }
+      .btn-info{
+        box-shadow: #30c4ff73 0px 7px 15px -5px, rgba(41, 183, 248, 0.322) 0px 8px 16px -8px;
+      }
+      text-align: center;
+    }
     text-align: center;
+
   }
   &__link{
     text-align: center;
@@ -280,12 +307,12 @@
   bottom:0;
   left:0;
   right:0;
-  box-shadow: 10px 10px 20px rgba(34, 236, 44, 0.548), 10px 6px 6px rgba(106, 255, 61, 0.678);
+  // box-shadow: 10px 10px 20px rgba(34, 236, 44, 0.548), 10px 6px 6px rgba(106, 255, 61, 0.678);
 
-  background-color: var(--app-color-success);
+  background-color:rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
   padding:10px;
   margin:0;
@@ -293,6 +320,16 @@
   -webkit-transition: bottom 0.3s ease;
   transition: bottom .3s ease;
   z-index:2;
+  .btn{
+    font-weight:bold;
+  }
+
+  .btn-danger{
+    width:30%;
+  }
+  .btn-success{
+    width:60%;
+  }
   p{
     margin:0;
     padding:0;

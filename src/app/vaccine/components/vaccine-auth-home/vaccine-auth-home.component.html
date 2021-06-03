@@ -11,12 +11,13 @@
         </div>
         <div class="auth-home__user-info__logout">
           <ng-template #popTemplate>
+            <button class="auth-home__user-info__logout__button btn btn-default" routerLink="/contact">
+              Contact Us
+            </button>
+            <br>
             <button class="auth-home__user-info__logout__button btn btn-default" (click)="logout()">
               Logout
-            </button><br>
-            <!-- <button class="auth-home__user-info__logout__button btn btn-default" >
-              Contact Us
-            </button> -->
+            </button>
           </ng-template>
           <i type="button" class="ri-more-2-fill icon" [popover]="popTemplate"
             popoverTitle="Profile"
@@ -47,18 +48,19 @@
         </div>
       </div>
       <div class="myCard col col-lg-12 col-md-12 myCard__card2" [class.disabled]="MAXSUBSCRIPTION===subscribedCenters.length" (click)="addCenter()">
-        <div class="myCard__content">
+          <div class="myCard__content">
           <p class="myCard__content__text">Add More Centers</p>
           <p class="myCard__content__text-large">Add</p>
           <div class="myCard__content__icon">
             <img src="../../../assets/icons/add.svg" class="myCard__content__icon__image" alt="" />
           </div>
-          <p class="myCard__content__text-small">{{subscribedCenters.length}} /{{MAXSUBSCRIPTION}}</p>
+          <!-- <p class="myCard__content__text-small">{{subscribedCenters.length}} /{{MAXSUBSCRIPTION}}</p> -->
         </div>
       </div>
     </div>
     <div class="align-items-center">
       <div class="myCard col col-lg-12 col-md-12 myCard__card3">
+        <a [href]="shareMessageEncoded" data-action="share/whatsapp/share" >
         <div class="myCard__content">
           <p class="myCard__content__text">Share With Friends</p>
           <p class="myCard__content__text-large">Share</p>
@@ -67,8 +69,10 @@
             <img src="../../../assets/icons/share.svg" class="myCard__content__icon__image" alt="" />
           </div>
         </div>
+      </a>
       </div>
-      <div class="myCard col col-lg-12 col-md-12 myCard__card4">
+      <div class="myCard col col-lg-12 col-md-12 myCard__card4" routerLink="/donate">
+        <!-- <a href="https://rzp.io/l/vaccinewatcher" target="_blank"> -->
         <div class="myCard__content">
           <p class="myCard__content__text">Help us Survive</p>
           <p class="myCard__content__text-large">Donate</p>
@@ -77,6 +81,7 @@
             <img src="../../../assets/icons/heart.svg" class="myCard__content__icon__image" alt="" />
           </div>
         </div>
+        <!-- </a> -->
       </div>
     </div>
     <div class="auth-home__body__credits">
@@ -94,12 +99,20 @@
       <div class="modal-body">
         <div class="modal-body__title">
           <p>
-           Due to heavy traffic, You can only subscribe to {{MAXSUBSCRIPTION}} centers
+            Due to high running cost( messaging, servers ,etc..) we can only give  {{MAXSUBSCRIPTION}} center subscriptions per user.
+            If you would like us to serve you more please donate
           </p>
         </div>
 
         <div class="modal-body__button">
-          <button (click)="modalRef.hide()" class="app-btn">Ok</button>
+          <div class="row container">
+            <div class="col">
+              <button (click)="modalRef.hide()" class="btn btn-info">Ok</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-success"><i class="ri-hand-heart-fill m-2"></i>Donate</button>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -148,7 +148,18 @@
     font-weight:bold ;
   }
   &__button{
-    text-align: center;
+    .row{
+      .btn{
+        min-width:100px;
+      }
+      .btn-success{
+        box-shadow: #60ff30af 0px 13px 27px -5px, rgba(107, 248, 41, 0.479) 0px 8px 16px -8px;
+      }
+      .btn-info{
+        box-shadow: #30c4ffaf 0px 13px 27px -5px, rgba(41, 183, 248, 0.479) 0px 8px 16px -8px;
+      }
+      text-align: center;
+    }
   }
   &__link{
     text-align: center;

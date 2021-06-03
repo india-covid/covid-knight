@@ -1,3 +1,5 @@
+import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
+import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { FilterCenterPipe } from './pipes/filter-center.pipe';
 import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
 import { SubscribedCenter } from './models/subscribedCenter';
@@ -23,7 +25,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
-
 @NgModule({
   declarations: [
     VaccineHomepageComponent,
@@ -37,7 +38,10 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     VaccineSlotsComponent,
     VaccineAuthHomeComponent,
     SubscribedCentersComponent,
-    FilterCenterPipe
+    FilterCenterPipe,
+    VaccineDonateComponent,
+    VaccineContactComponent
+
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,10 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot()
+
+  ],
+  providers:[
+  FilterCenterPipe
 
   ]
 })

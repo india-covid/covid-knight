@@ -1,0 +1,58 @@
+<app-header-back headerText="Contact Us"></app-header-back>
+
+<div class="contact" id="contact" [@enterAnimationRight]>
+  <div class="contact__head">
+    <div class="contact__head__title">
+      <p class="contact__head__title--text"><i class="ri-message-2-line contact__head__title--icon"></i>Contact Us</p>
+    </div>
+  </div>
+  <div class="contact__body">
+    <div class="contact__body__form">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Enter Message Title (optional)" [(ngModel)]="contactTitle">
+      </div>
+      <div class="form-group contact__body__form__emailOrPhone">
+        <label>Email/Phone</label>
+        <input type="text" class="form-control" placeholder="Enter Email/Phone (optional)" [(ngModel)]="emailOrPhone">
+      </div>
+      <div class="form-group contact__body__form__message">
+        <label>Message</label>
+        <textarea class="form-control form-group contact__body__form__message--textarea" rows="5" cols="50" placeholder="Enter your message"
+          [(ngModel)]="messageText"></textarea>
+      </div>
+      <small *ngIf="messageText.length>500">Please enter message within 500 characters</small>
+      <div class="contact__body__form__submit mt-5">
+        <button type="submit" [disabled]="messageText.length==0 || messageText.length>500"
+          [class.disabled-btn]="messageText.length==0 || messageText.length>500"
+          class="app-btn contact__body__form__submit--button" (click)="submitContact()">Submit</button>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #submitSuccess>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Message Sended</h4>
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-body__title">
+        <p>
+         Thank You for contacting us. We have got your message. We will respond you soon.
+        </p>
+      </div>
+
+      <div class="modal-body__button mt-4">
+      <button class="app-btn" (click)="modalRef.hide();"> <a href="#home">OK</a></button>
+      </div>
+    </div>
+  </ng-template>
+</div>

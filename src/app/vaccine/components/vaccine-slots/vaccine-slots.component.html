@@ -1,10 +1,16 @@
 <div class="slots-wrapper" #slots>
-  <app-header-back headerText="Subscribe Centers" routeTo="/home"></app-header-back>
+  <app-header-back
+    headerText="Subscribe Centers"
+    routeTo="/home"
+  ></app-header-back>
   <div class="slots-head header" #header>
-
     <div class="date-slider">
       <div class="slider">
-        <div class="slider__item" *ngFor="let date of dateRange; let i = index" [class.slider__active]="i == activeDay">
+        <div
+          class="slider__item"
+          *ngFor="let date of dateRange; let i = index"
+          [class.slider__active]="i == activeDay"
+        >
           <button class="btn slider__item__btn" (click)="getSessionsForDay(i)">
             {{ date }}
           </button>
@@ -15,39 +21,69 @@
       <p class="filters__title">Filters</p>
       <div class="filters__menu">
         <div class="">
-          <div class="btn-group" dropdown #doseDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
+          <div
+            class="btn-group"
+            dropdown
+            #doseDropDown="bs-dropdown"
+            [autoClose]="true"
+          >
+            <button
+              dropdownToggle
+              type="button"
+              class="app-btn dropdown-toggle"
+            >
               {{ dose }}<span class="caret"></span>
             </button>
-            <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
-              aria-labelledby="button-triggers-manual">
+            <ul
+              id="dropdown-triggers-manual"
+              *dropdownMenu
+              class="dropdown-menu"
+              role="menu"
+              aria-labelledby="button-triggers-manual"
+            >
               <li role="menuitem" (click)="changeDose(DOSE.ALL)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="allDose" name="doseRadio" checked />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="allDose"
+                      name="doseRadio"
+                      checked
+                    />
                     <label class="form-check-label" for="allDose">{{
                       DOSE.ALL
-                      }}</label>
+                    }}</label>
                   </div>
                 </a>
               </li>
               <li role="menuitem" (click)="changeDose(DOSE.DOSE1)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="dose1" name="doseRadio" />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="dose1"
+                      name="doseRadio"
+                    />
                     <label class="form-check-label" for="dose1">{{
                       DOSE.DOSE1
-                      }}</label>
+                    }}</label>
                   </div>
                 </a>
               </li>
               <li role="menuitem" (click)="changeDose(DOSE.DOSE2)">
                 <a class="dropdown-item form-check">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="dose2" name="doseRadio" />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="dose2"
+                      name="doseRadio"
+                    />
                     <label class="form-check-label" for="dose2">{{
                       DOSE.DOSE2
-                      }}</label>
+                    }}</label>
                   </div>
                 </a>
               </li>
@@ -56,38 +92,76 @@
         </div>
 
         <div class="">
-          <div class="btn-group" dropdown #vaccineDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
+          <div
+            class="btn-group"
+            dropdown
+            #vaccineDropDown="bs-dropdown"
+            [autoClose]="true"
+          >
+            <button
+              dropdownToggle
+              type="button"
+              class="app-btn dropdown-toggle"
+            >
               {{ vaccineType == "All" ? vaccineType + " Vaccines" : vaccineType
               }}<span class="caret"></span>
             </button>
-            <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
-              aria-labelledby="button-triggers-manual">
+            <ul
+              id="dropdown-triggers-manual"
+              *dropdownMenu
+              class="dropdown-menu"
+              role="menu"
+              aria-labelledby="button-triggers-manual"
+            >
               <li role="menuitem" (click)="vaccineTypeChange(VACCINES.ALL)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="allVaccine" name="vaccine" value="covaxin"
-                      checked />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="allVaccine"
+                      name="vaccine"
+                      value="covaxin"
+                      checked
+                    />
                     <label class="form-check-label" for="allVaccine">
                       {{ VACCINES.ALL }} Vaccines
                     </label>
                   </div>
                 </a>
               </li>
-              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.VACCINE1)">
+              <li
+                role="menuitem"
+                (click)="vaccineTypeChange(VACCINES.VACCINE1)"
+              >
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="vaccine1" name="vaccine" value="true" />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="vaccine1"
+                      name="vaccine"
+                      value="true"
+                    />
                     <label class="form-check-label" for="vaccine1">
                       {{ VACCINES.VACCINE1 }}
                     </label>
                   </div>
                 </a>
               </li>
-              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.VACCINE2)">
+              <li
+                role="menuitem"
+                (click)="vaccineTypeChange(VACCINES.VACCINE2)"
+              >
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="vaccine2" name="vaccine" value="true" />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="vaccine2"
+                      name="vaccine"
+                      value="true"
+                    />
                     <label class="form-check-label" for="vaccine2">
                       {{ VACCINES.VACCINE2 }}
                     </label>
@@ -98,35 +172,69 @@
           </div>
         </div>
         <div class="">
-          <div class="btn-group" dropdown #ageDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
+          <div
+            class="btn-group"
+            dropdown
+            #ageDropDown="bs-dropdown"
+            [autoClose]="true"
+          >
+            <button
+              dropdownToggle
+              type="button"
+              class="app-btn dropdown-toggle"
+            >
               {{ age != AGE.ALL ? age + "+" : age }}<span class="caret"></span>
             </button>
-            <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
-              aria-labelledby="button-triggers-manual">
+            <ul
+              id="dropdown-triggers-manual"
+              *dropdownMenu
+              class="dropdown-menu"
+              role="menu"
+              aria-labelledby="button-triggers-manual"
+            >
               <li role="menuitem" (click)="changeAge(AGE.ALL)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="allAge" name="age" checked />
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="allAge"
+                      name="age"
+                      checked
+                    />
                     <label class="form-check-label" for="allAge" name="age">{{
                       AGE.ALL
-                      }}</label>
+                    }}</label>
                   </div>
                 </a>
               </li>
               <li role="menuitem" (click)="changeAge(AGE.AGE1)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="age1" name="age" />
-                    <label class="form-check-label" for="age1" name="age">{{ AGE.AGE1 }}+</label>
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="age1"
+                      name="age"
+                    />
+                    <label class="form-check-label" for="age1" name="age"
+                      >{{ AGE.AGE1 }}+</label
+                    >
                   </div>
                 </a>
               </li>
               <li role="menuitem" (click)="changeAge(AGE.AGE2)">
                 <a class="dropdown-item form-check">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="age2" name="age" />
-                    <label class="form-check-label" for="age2">{{ AGE.AGE2 }}+</label>
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="age2"
+                      name="age"
+                    />
+                    <label class="form-check-label" for="age2"
+                      >{{ AGE.AGE2 }}+</label
+                    >
                   </div>
                 </a>
               </li>
@@ -137,9 +245,17 @@
 
       <div class="filters__search-bar">
         <div class="filters__search-bar__input-wrapper">
-          <input class="filters__search-bar__input-wrapper__input" type="text" placeholder="Search By Hospital Name"
-            [(ngModel)]="hospitalName" />
-          <i class="fa fa-times filters__search-bar__input-wrapper__cross-icon" *ngIf="hospitalName.length > 0"></i>
+          <input
+            class="filters__search-bar__input-wrapper__input"
+            type="text"
+            (input)="hospitalInput()"
+            placeholder="Search By Hospital Name"
+            [(ngModel)]="hospitalName"
+          />
+          <i
+            class="fa fa-times filters__search-bar__input-wrapper__cross-icon"
+            *ngIf="hospitalName.length > 0"
+          ></i>
         </div>
       </div>
     </div>
@@ -149,49 +265,90 @@
     <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]>
       <div class="no-centers__content">
         <div class="no-centers__content__img">
-          <img class="no-centers__content__img__image" src="../../../assets/img/no-data.svg" alt="" />
+          <img
+            class="no-centers__content__img__image"
+            src="../../../assets/img/no-data.svg"
+            alt=""
+          />
         </div>
         <div class="no-centers__content__text">No Centers Found</div>
       </div>
     </div>
-    <div class="myCard" *ngIf="
+    <div
+      class="myCard"
+      *ngIf="
         !isCenterEmpty && showCentersList && centersWithSession.length !== 0
-      " [@enterAnimationRight]>
-      <div class="myCard__card-wrapper" *ngFor="
-          let center of centersWithSession
-            | filterCenter: hospitalName:dose:vaccineType:age:activeDate;let i=index
-        ">
-        <div class="no-centers" *ngIf="center.name == 'noMatch'" [@enterAnimationRight]>
+      "
+      [@enterAnimationRight]
+    >
+      <!-- | filterCenter: hospitalName:dose:vaccineType:age:activeDate -->
+      <div
+        class="myCard__card-wrapper"
+        *ngFor="let center of centersWithSessionFiltered; let i = index"
+      >
+        <div
+          class="no-centers"
+          *ngIf="center.name == 'noMatch'"
+          [@enterAnimationRight]
+        >
           <div class="no-centers__content">
             <div class="no-centers__content__img">
-              <img class="no-centers__content__img__image" src="../../../assets/img/no-data.svg" alt="" />
+              <img
+                class="no-centers__content__img__image"
+                src="../../../assets/img/no-data.svg"
+                alt=""
+              />
             </div>
             <div class="no-centers__content__text">No Match Found</div>
           </div>
         </div>
 
-        <div class="myCard__item" [class.lastCard]="(centersWithSession.length-1)==i" *ngIf="center.name != 'noMatch'" [@enterAnimationRight]>
+        <div
+          class="myCard__item"
+          [class.lastCard]="centersWithSession.length - 1 == i"
+          *ngIf="center.name != 'noMatch'"
+          [@enterAnimationRight]
+        >
           <div class="myCard__item__content">
-            <div class="myCard__item__content__myCard-head">
+            <div
+              class="myCard__item__content__myCard-head"
+              [class.checkedCenter]="center.subscribed == 'temp'
+              "
+            >
               <div class="myCard__item__content__myCard-head__text">
                 {{ center.name }}
               </div>
 
-              <div class="myCard__item__content__myCard-head__button" *ngIf="center.subscribed == 'temp'">
-                <button class="app-btn btn-unsubscribe" (click)="removeSubscribe(center)">
-                  Unsubscribe
+              <!-- <div class="myCard__item__content__myCard-head__button" *ngIf="center.subscribed == 'temp'">
+                <input type="checkbox" class="app-btn btn-unsubscribe" [checked]="center.subscribed" (click)="removeSubscribe(center)"/>
+
+              </div> -->
+              <div
+                class="myCard__item__content__myCard-head__button"
+                *ngIf="center.subscribed && center.subscribed !== 'temp'"
+              >
+                <button class="app-btn btn-unsubscribe">
+                  Already Subsribed
                 </button>
               </div>
-              <div class="myCard__item__content__myCard-head__button"
-                *ngIf="center.subscribed && center.subscribed !== 'temp'">
-                <button class="app-btn btn-unsubscribe" (click)="UnSubscribeCenter(center)">
-                  Unsubscribe
-                </button>
-              </div>
-              <div class="myCard__item__content__myCard-head__button" *ngIf="!center.subscribed">
-                <button class="app-btn btn-subscribe" (click)="addSubscribe(center)">
-                  Subscribe
-                </button>
+              <div
+                class="myCard__item__content__myCard-head__button form-check"
+                *ngIf="!center.subscribed || center.subscribed == 'temp'"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  (change)="changeSubscribe($event, center)"
+                  [id]="center._id"
+                  [checked]="center.subscribed == 'temp'"
+                  name="subscribe"
+                />
+                <label
+                  class="form-check-label subscribe-check-label"
+                  [for]="center._id"
+                  name="subscribe"
+                  >Select</label
+                >
               </div>
             </div>
             <div class="myCard__item__content__myCard-body">
@@ -209,13 +366,16 @@
                   <div>
                     <div class="row align-items-stretch">
                       <div class="col">
-                        <span>Dose1: </span><span [ngClass]="
+                        <span>Dose1: </span
+                        ><span
+                          [ngClass]="
                             center[this.activeDate]?.availableCapacityDose1 > 0
                               ? 'success'
                               : 'danger'
-                          ">
+                          "
+                        >
                           {{
-                          center[this.activeDate]?.availableCapacityDose1 || 0
+                            center[this.activeDate]?.availableCapacityDose1 || 0
                           }}
                           Slots
                         </span>
@@ -223,25 +383,34 @@
                       <div class="col">
                         <span>Vaccine:</span>
                         <span class="warning">
-                          {{ center[this.activeDate]?.vaccine || "-" }} </span><br />
+                          {{ center[this.activeDate]?.vaccine || "-" }} </span
+                        ><br />
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
-                        <span>Dose2: </span><span [ngClass]="
+                        <span>Dose2: </span
+                        ><span
+                          [ngClass]="
                             center[this.activeDate]?.availableCapacityDose2 > 0
                               ? 'success'
                               : 'danger'
-                          ">
+                          "
+                        >
                           {{
-                          center[this.activeDate]?.availableCapacityDose2 || 0
+                            center[this.activeDate]?.availableCapacityDose2 || 0
                           }}
-                          Slots </span><br />
+                          Slots </span
+                        ><br />
                       </div>
                       <div class="col">
-                        <span>Age: </span><span>
+                        <span>Age: </span
+                        ><span>
                           {{ center[this.activeDate]?.minAgeLimit || "-"
-                          }}<span *ngIf="center[this.activeDate]?.minAgeLimit">+</span></span>
+                          }}<span *ngIf="center[this.activeDate]?.minAgeLimit"
+                            >+</span
+                          ></span
+                        >
                       </div>
                     </div>
                   </div>
@@ -253,40 +422,58 @@
       </div>
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
     </div>
-
-
   </div>
   <!-- subscription limit reached modal content -->
   <ng-template #limitReachedTemplate>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div class="modal-body__title">
         <p>
-          You have already subscribe to {{ accountTotalSubscribe }} centers in
-          your account and {{ newTotalSubscribe }} centers now, Due to high
-          traffic you can only subscribe to max {{ MAXSUBSCRIPTION }} centers.
+          Due to high running cost (messaging, servers ,etc..) we can only give
+          {{ MAXSUBSCRIPTION }} center subscriptions per user. ({{
+            subscribedCenters.length
+          }}
+           center already subscribed with your account).If you would like us to
+          serve you more please donate.
         </p>
       </div>
 
       <div class="modal-body__button">
-        <button (click)="modalRef.hide()" class="app-btn">Ok</button>
-      </div>
-      <div class="modal-body__link">
-        <a (click)="modalRef.hide()" routerLink="/subscribed">Show all Subscribed Centers</a>
+        <div class="row container">
+          <div class="col">
+            <button (click)="modalRef.hide()" class="btn btn-info">Ok</button>
+          </div>
+          <div class="col">
+            <a href="https://rzp.io/l/vaccinewatcher" target="_blank"
+              ><button class="btn btn-success">
+                <i class="ri-hand-heart-fill m-2"></i>Donate
+              </button></a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </ng-template>
-  <div class="apply-changes" (click)="applySubscribeChanges()" [ngClass]="
-  newTotalSubscribe ? 'apply-changes-show' : 'apply-changes-hide'
-">
-<p>
-  <i></i>Subscribe to {{ newTotalSubscribe }}
-  {{ newTotalSubscribe === 1 ? "Center" : "Centers" }}
-</p>
-</div>
+  <div
+    class="apply-changes row"
+
+    [ngClass]="newTotalSubscribe ? 'apply-changes-show' : 'apply-changes-hide'"
+  >
+
+  <button class="btn btn-danger" (click)="removeAllSubscribe()">Unselect All</button>
+    <button class="btn btn-success"  (click)="applySubscribeChanges()">
+      <i></i>Subscribe to {{ newTotalSubscribe }}
+      {{ newTotalSubscribe === 1 ? "Center" : "Centers" }}
+    </button>
+  </div>
 </div>

@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
   }
 
     //set height dynamically
-
     setHeight(){
       this.renderer.setStyle(this.appContainer?.nativeElement, 'height', (window.innerHeight - 0)+"px");
     }
