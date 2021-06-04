@@ -3,8 +3,8 @@ $head-text-color: var(--app-color-dark);
 $text-color: var(--app-color-dark);
 
 .auth-home{
-  overflow: auto;
-  position: relative;
+  overflow: scroll;
+  // position: relative;
   height:100%;
   width:100%;
   overflow-x: hidden;
@@ -47,15 +47,15 @@ $text-color: var(--app-color-dark);
 
   }
 &__body{
-  padding:10px;
-  padding-bottom: 30px;;
+  // padding:10px;
+  padding-bottom: 70px;;
   text-align: center;
   position: relative;
-  min-height:600px;
+ // min-height:600px;
   overflow: scroll;
-  height:calc( 100% - 50px );
+  min-height:calc( 100% - 50px );
   &__head {
-    padding-top: 20px;
+    padding-top: 40px;
     &__main{
       align-items: center;
       display: flex;
@@ -102,17 +102,19 @@ $text-color: var(--app-color-dark);
 
   }
   &__main{
-    margin-top:60px;
+    margin-top:30px;
+    padding:0 20px 20px 20px;
+    // border:solid green;
   }
 
   .myCard{
     height:100px;
-    max-width:300px;
+    max-width:400px;
     // min-width:100px;
-    margin:20px auto;
+    margin:30px auto;
     color:white;
     border-radius:5px;
-    position: relative;
+    // position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,16 +189,20 @@ $text-color: var(--app-color-dark);
   &__credits{
     position: absolute;
     bottom:10px;
+    left:0;
+    right:0;
     display: none;;
     padding:10px;
     text-align: center;
     font-weight: bold;
+    // border:solid red;
     width:100%;
     &__icon{
       position: relative;
       bottom:-3px;
     }
   }
+
 }
 
 }
