@@ -46,8 +46,8 @@ maxSubReached(maxSub:number,currentSub:number){
 messageSended(){
 
     Swal.fire({
-      title: 'Message Sended',
-      text:'Thank You for contacting us. We have got your message. We will respond you soon.',
+      title: 'Message Sent',
+      text:'Thank You for contacting us. We will get back to you soon',
       icon:'success',
       confirmButtonText: `OK `,
     }).then((result) => {
