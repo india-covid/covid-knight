@@ -20,10 +20,8 @@ maxSubReached(maxSub:number,currentSub:number){
     html:
     `<div class="modal-body__title">
     <b>
-      Due to high running cost (messaging, servers ,etc..) we can only give
-       ${maxSub}  center subscriptions per user. (${currentSub}
-       center already subscribed with your account).If you would like us to
-      serve you more please donate.
+    Due to high running cost (messaging & servers) we can only provide <b>${maxSub}</b> centers subscriptions per user.
+    Any donations will help us remove this limit and add more features.
     </b>
   </div>`,
     focusConfirm: false,
