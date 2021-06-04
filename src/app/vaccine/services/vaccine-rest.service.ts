@@ -94,7 +94,7 @@ export class VaccineRestService {
 
  private _startLastSyncChecker() {
     const url = environment.apiBase + '/vaccine/sessions/last-sync';
-    timer(0, 5000).pipe(switchMap(() => this.http.get<{message: string}>(url))).subscribe(({message}) => {
+    timer(0, 1000 * 30).pipe(switchMap(() => this.http.get<{message: string}>(url))).subscribe(({message}) => {
       this._lastSyncTime = message;
     });
   }
