@@ -51,7 +51,7 @@ export class VaccineAuthHomeComponent implements OnInit {
     ignoreBackdropClick: false,
   };
   shareMessage: string =
-    'Hey,take a look at this.\n https://vaccine.india-covid.info/';
+    'I found this website which sends free personalised vaccine availability alerts based on centers/hospitals on whatsapp. Have a look or share it with someone who might need it.\n https://vaccine.india-covid.info/';
   readonly shareMessageEncoded = this.dom.bypassSecurityTrustUrl(
     'whatsapp://send?text=' + window.encodeURIComponent(this.shareMessage)
   );
@@ -105,6 +105,8 @@ export class VaccineAuthHomeComponent implements OnInit {
     );
   }
 
-
+  lastSyncTime() {
+    return this.vaccineRestService.lastSyncTime();
+  }
 
 }

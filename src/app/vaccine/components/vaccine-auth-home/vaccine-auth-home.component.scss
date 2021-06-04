@@ -1,16 +1,20 @@
+
+$head-text-color: var(--app-color-dark);
+$text-color: var(--app-color-dark);
+
 .auth-home{
   overflow: auto;
   position: relative;
   height:100%;
+  width:100%;
+  overflow-x: hidden;
   &__user-info{
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     display: flex;
     padding:10px;
     padding-left:20px;
     padding-right:20px;
     align-items: center;
-    // margin-top:-15px;
     justify-content: space-between;
     &__phone{
       p{
@@ -32,19 +36,75 @@
         width:auto !important;
         border:none;
         font-size:.9rem;
+        &--icon{
+          margin:3px;
+          font-size:1.2rem;
+          position: relative;
+          bottom: -3px;;
+        }
       }
     }
 
   }
 &__body{
   padding:10px;
-  // border:solid green;
+  padding-bottom: 30px;;
   text-align: center;
   position: relative;
   min-height:600px;
-.col{
-  // border:solid blue;
-}
+  overflow: scroll;
+  height:90%;
+  &__head {
+    padding-top: 20px;
+    &__main{
+      align-items: center;
+      display: flex;
+      max-width: 460px;
+      margin: 0px auto;
+      justify-content: center;
+      font-weight: bold;
+      color: $head-text-color;
+      width:100%;
+    }
+    // border:solid red;
+    &__icon {
+      // border:solid green;
+      height: 60px;
+      width: 60px;
+      position: relative;
+      top: -3px;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+    &__title {
+      margin-left: 10px;
+      // border:solid blue;
+      &__text {
+        font-size:1.6rem;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        padding-right:4px;
+        text-overflow:ellipse;
+      }
+      &__slogan {
+        // border:solid yellow;
+        padding: 0;
+        margin: 0;
+        position:relative ;
+        top:-3px;
+        font-size: 15px;
+        color:#6d6d6d;
+      }
+    }
+
+  }
+  &__main{
+    margin-top:60px;
+  }
+
   .myCard{
     height:100px;
     max-width:300px;
@@ -141,6 +201,10 @@
 
 }
 
+
+.flex {
+  display: flex;
+}
 
 .modal-body{
   &__title{

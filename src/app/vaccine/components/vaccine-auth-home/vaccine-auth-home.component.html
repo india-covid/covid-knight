@@ -9,14 +9,15 @@
             +91 {{user?.phoneNumber}}
           </p>
         </div>
+
         <div class="auth-home__user-info__logout">
           <ng-template #popTemplate>
             <button class="auth-home__user-info__logout__button btn btn-default" routerLink="/contact">
-              Contact Us
+              <i class="ri-phone-line auth-home__user-info__logout__button--icon"></i>  Contact Us
             </button>
             <br>
             <button class="auth-home__user-info__logout__button btn btn-default" (click)="logout()">
-              Logout
+              <i class="ri-logout-box-line auth-home__user-info__logout__button--icon"></i> Logout
             </button>
           </ng-template>
           <i type="button" class="ri-more-2-fill icon" [popover]="popTemplate"
@@ -36,7 +37,21 @@
   ></div>
 
   <div class="auth-home__body"  #authHomeBody>
-    <div class="align-items-center">
+    <div class="auth-home__body__head">
+      <div class="auth-home__body__head__main">
+        <div class="auth-home__body__head__icon">
+          <img src="../../assets/icons/shield.png" alt="" />
+        </div>
+        <div class="auth-home__body__head__title">
+          <p class="auth-home__body__head__title__text">VACCINE WATCHER</p>
+          <p class="auth-home__body__head__title__slogan">Lets get vaccinated (:</p>
+        </div>
+      </div>
+      <div class="auth-home__body__last-sync">
+        <app-last-sync></app-last-sync>
+      </div>
+    </div>
+    <div class="align-items-center auth-home__body__main">
       <div class="myCard col col-lg-12 col-md-12 myCard__card1" routerLink="/subscribed">
         <div class="myCard__content">
           <p class="myCard__content__text">Centers Subscribed</p>

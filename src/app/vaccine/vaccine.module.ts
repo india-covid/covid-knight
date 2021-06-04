@@ -1,3 +1,4 @@
+import { LastSyncComponent } from './components/shared/last-sync/last-sync.component';
 import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
 import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { FilterCenterPipe } from './pipes/filter-center.pipe';
@@ -40,7 +41,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     SubscribedCentersComponent,
     FilterCenterPipe,
     VaccineDonateComponent,
-    VaccineContactComponent
+    VaccineContactComponent,
+    LastSyncComponent
 
   ],
   imports: [
