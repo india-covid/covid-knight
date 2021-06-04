@@ -39,7 +39,7 @@ enum WizardTabs {
 })
 export class VaccineWizardComponent implements OnInit {
   WizardTabs = WizardTabs;
-  activeTab: WizardTabs = WizardTabs.DISTRICT;
+  activeTab: WizardTabs = WizardTabs.PIN;
   selectedCenters: Center[] = [];
   selectedState: State | null | undefined = null;
   selectedDistrict: District | null | undefined = null;
