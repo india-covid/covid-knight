@@ -24,7 +24,6 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 @NgModule({
   declarations: [
@@ -42,7 +41,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     FilterCenterPipe,
     VaccineDonateComponent,
     VaccineContactComponent,
-    LastSyncComponent
+    LastSyncComponent,
 
   ],
   imports: [
@@ -55,7 +54,6 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     NgxSpinnerModule,
     BsDropdownModule,
     AccordionModule.forRoot(),
-    ModalModule.forRoot(),
     PopoverModule.forRoot()
 
   ],

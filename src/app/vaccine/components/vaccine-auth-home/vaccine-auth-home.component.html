@@ -105,33 +105,5 @@
       <p>Made with love <i class="ri-heart-fill auth-home__credits__icon" style="color:red"></i> by <a href="https://www.linkedin.com/in/rahul-shinde11/" target="_blank"> Rahul</a> & <a href="https://www.linkedin.com/in/ranjit-kumar-pandit-4686a9142/" target="_blank">Ranjit</a> </p>
     </div>
   </div>
-    <!-- subscription limit reached modal content -->
-    <ng-template #limitReachedTemplate>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-body__title">
-          <p>
-            Due to high running cost(messaging & servers) we can only provide {{MAXSUBSCRIPTION}} subscriptions per user.
-            Any donations will help us remove this limit and add more features.
-          </p>
-        </div>
 
-        <div class="modal-body__button">
-          <div class="row container">
-            <div class="col">
-              <button (click)="modalRef.hide()" class="btn btn-info">No thanks</button>
-            </div>
-            <div class="col">
-              <button class="btn btn-success"><i class="ri-hand-heart-fill m-2"></i>Donate</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </ng-template>
 </main>

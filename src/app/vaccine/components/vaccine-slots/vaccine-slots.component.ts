@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { FilterCenterPipe } from './../../pipes/filter-center.pipe';
 
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,6 @@ import {
 } from './../../models/center.model';
 import { VaccineSession } from './../../models/vaccine-session.model';
 import { SubscriptionService } from './../../services/subscription.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {
   Component,
   ElementRef,
@@ -29,6 +29,9 @@ import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.servic
 import * as DayJs from 'dayjs';
 import { shareReplay } from 'rxjs/operators';
 import { trigger, style, animate, transition } from '@angular/animations';
+
+
+
 export enum QueryType {
   PIN = 'pincode',
   DISTRICT = 'districtId',
@@ -90,12 +93,6 @@ export class VaccineSlotsComponent implements OnInit {
   age: string = AGE.ALL;
   hospitalName: string = '';
 
-  //modal
-  modalRef!: BsModalRef;
-  modalConfig = {
-    backdrop: true,
-    ignoreBackdropClick: false,
-  };
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -104,8 +101,8 @@ export class VaccineSlotsComponent implements OnInit {
     private renderer: Renderer2,
     private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
-    private modalService: BsModalService,
-    private filterCenterPipe:FilterCenterPipe
+    private filterCenterPipe:FilterCenterPipe,
+    private alertService:AlertService,
   ) {
     this.getSubscribedCenters();
   }
@@ -135,7 +132,7 @@ export class VaccineSlotsComponent implements OnInit {
         params.pincode,
         DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
       );
-      this.joinFetchCenterSession(centers$, centersSessions$);
+      this.joinFetchCenterSession(centers$, centersSessions$,params.pincode);
     } else if (params.queryType == this.QueryType.DISTRICT) {
       //if query type is district
       const centers$ = this.vaccineRestService.centersByDistrictId(
@@ -145,7 +142,7 @@ export class VaccineSlotsComponent implements OnInit {
         params.districtId,
         DayJs().add(this.activeDay, 'day').format('DDMMYYYY')
       );
-      this.joinFetchCenterSession(centers$, centersSessions$);
+      this.joinFetchCenterSession(centers$, centersSessions$,params.districtId);
     }
   }
 
@@ -168,13 +165,15 @@ export class VaccineSlotsComponent implements OnInit {
   //fetch initial center and session
   joinFetchCenterSession(
     centers$: Observable<Center[]>,
-    centersSessions$: Observable<VaccineSession[]>
+    centersSessions$: Observable<VaccineSession[]>,
+    area:string
   ) {
     forkJoin(centers$, centersSessions$).subscribe((response) => {
       // all observables have been completed
       this.centers = response[0];
       if (this.centers.length === 0) {
         this.isCenterEmpty == true;
+        this.alertService.noCenters(area);
       } else {
         this.addSubscribedKeyToCenters();
       }
@@ -265,7 +264,7 @@ export class VaccineSlotsComponent implements OnInit {
         this.MAXSUBSCRIPTION
       ) {
         e.target.checked = false;
-        this.openLimitReachedModal(this.limitReachedTemplate);
+       this.alertService.maxSubReached(this.MAXSUBSCRIPTION,this.subscribedCenters.length);
         return;
       }
       this.addSubscribe(center);
@@ -329,28 +328,8 @@ export class VaccineSlotsComponent implements OnInit {
       });
   }
 
-  openLimitReachedModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: 'limitReachedModal' })
-    );
-  }
 
-  // UnSubscribeCenter(center: Center,index:number) {
-  //   console.log(center,index);
 
-  //   this.centersWithSession[index].subscribed = false;
-
-  //   this.subscriptionService
-  //     .deleteSubscriptionCenter(center._id)
-  //     .subscribe((data) => {
-  //       let indexNew = this.subscribedCenters.findIndex(
-  //         (c: any) => c.name === center.name
-  //       );
-  //       this.subscribedCenters.splice(indexNew,1);
-  //       this.accountTotalSubscribe=this.subscribedCenters.length;
-  //        });
-  // }
 
   checkIfCenterIsSelected(check_center: Center) {
     return this.subscribedCenters.find(

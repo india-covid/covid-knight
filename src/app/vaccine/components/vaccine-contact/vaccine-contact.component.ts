@@ -1,7 +1,7 @@
+import { AlertService } from './../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/auth.service';
@@ -38,17 +38,11 @@ export class VaccineContactComponent implements OnInit {
     emailOrPhone:string='';
     messageText:string='';
 
-    //modal
-  modalRef!: BsModalRef;
-  modalConfig = {
-    backdrop: true,
-    ignoreBackdropClick: true,
-  };
-
-  constructor(private vaccineService:VaccineRestService,
-    private modalService: BsModalService,
+  constructor(
+    private vaccineService:VaccineRestService,
     private spinner:NgxSpinnerService,
     private authService: AuthService,
+    private alertService:AlertService
     ) {
    this.authService.user$.pipe(take(1)).subscribe((user) => {
         this.emailOrPhone = user?.phoneNumber||'';
@@ -70,20 +64,16 @@ export class VaccineContactComponent implements OnInit {
     }
     this.vaccineService.submitForm(this.contactTitle,phone,email,this.messageText).subscribe((response)=>{
       this.spinner.hide();
-      this.openSumitSuccessModal(this.submitSuccess);
+      this.openSumitSuccessModal();
       this.contactTitle='';
       this.emailOrPhone='';
       this.messageText='';
-      window.location.href="#home";
     })
   }
 
 
-  openSumitSuccessModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: 'submitSuccessModel' })
-    );
+  openSumitSuccessModal() {
+    this.alertService.messageSended();
   }
 
 

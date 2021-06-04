@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { environment } from './../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -14,9 +15,10 @@ import {
 import { trigger, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
 import { take } from 'rxjs/operators';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VaccineRestService } from '../../services/vaccine-rest.service';
+
+
 
 @Component({
   selector: 'app-vaccine-auth-home',
@@ -45,11 +47,7 @@ export class VaccineAuthHomeComponent implements OnInit {
   @ViewChild('authHomeBody') authHomeBody: ElementRef | null = null;
   @ViewChild('limitReachedTemplate') limitReachedTemplate!: TemplateRef<any>;
 
-  modalRef!: BsModalRef;
-  modalConfig = {
-    backdrop: true,
-    ignoreBackdropClick: false,
-  };
+
   shareMessage: string =
     'I found this website which sends free personalised vaccine availability alerts based on centers/hospitals on whatsapp. Have a look or share it with someone who might need it.\n https://vaccine.india-covid.info/';
   readonly shareMessageEncoded = this.dom.bypassSecurityTrustUrl(
@@ -59,11 +57,11 @@ export class VaccineAuthHomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private modalService: BsModalService,
     private subscriptionService: SubscriptionService,
     private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private dom: DomSanitizer,
+    private alertService:AlertService,
   ) {
     this.getSubscribedCenters();
     this.authService.user$.pipe(take(1)).subscribe((user) => {
@@ -93,17 +91,12 @@ export class VaccineAuthHomeComponent implements OnInit {
       return;
     }
     if (this.subscribedCenters.length >= this.MAXSUBSCRIPTION) {
-      this.openLimitReachedModal(this.limitReachedTemplate);
+      this.alertService.maxSubReached(this.MAXSUBSCRIPTION,this.subscribedCenters.length);
       return;
     }
     this.router.navigate(['/add-subscription']);
   }
-  openLimitReachedModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: 'limitReachedModal' })
-    );
-  }
+
 
   lastSyncTime() {
     return this.vaccineRestService.lastSyncTime();

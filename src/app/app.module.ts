@@ -1,4 +1,4 @@
-import { LastSyncComponent } from './vaccine/components/shared/last-sync/last-sync.component';
+// import { LastSyncComponent } from './vaccine/components/shared/last-sync/last-sync.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,9 +12,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
-    AppComponent,
-    LastSyncComponent
-  ],
+    AppComponent
+    ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
