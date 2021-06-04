@@ -1,8 +1,8 @@
+import { SharedModule } from './../shared/components/shared.module';
 import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
 import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { FilterCenterPipe } from './pipes/filter-center.pipe';
 import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
-import { SubscribedCenter } from './models/subscribedCenter';
 import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
 import { VaccineSlotsComponent } from './components/vaccine-slots/vaccine-slots.component';
 import { NgModule } from '@angular/core';
@@ -23,8 +23,9 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+
+
 @NgModule({
   declarations: [
     VaccineHomepageComponent,
@@ -40,7 +41,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     SubscribedCentersComponent,
     FilterCenterPipe,
     VaccineDonateComponent,
-    VaccineContactComponent
+    VaccineContactComponent,
+
 
   ],
   imports: [
@@ -53,8 +55,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     NgxSpinnerModule,
     BsDropdownModule,
     AccordionModule.forRoot(),
-    ModalModule.forRoot(),
-    PopoverModule.forRoot()
+    PopoverModule.forRoot(),
+    SharedModule
 
   ],
   providers:[

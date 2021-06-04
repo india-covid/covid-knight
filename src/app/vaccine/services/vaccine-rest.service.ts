@@ -1,9 +1,9 @@
-import { catchError, map, tap  } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Subscriptions } from './../models/subscriptions';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Observable, ReplaySubject, } from 'rxjs';
+import {   Observable, ReplaySubject, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Center } from '../models/center.model';
 import { District } from '../models/district.model';
@@ -21,7 +21,10 @@ export class VaccineRestService {
 
   constructor(private http: HttpClient) {
     this._prefetchStates();
+    this._startLastSyncChecker();
   }
+
+  private _lastSyncTime: string = '';
 
 
   centersByPinCode(pin: number | string): Observable<Center[]> {
@@ -86,6 +89,18 @@ export class VaccineRestService {
     const details = {title:title,phoneNumber:phone,email:email,message:messageText, time: now.toISOString() }
     const contactObj = btoa(JSON.stringify(details));
     return this.http.post<any>(url, { message:contactObj });
+  }
+
+
+ private _startLastSyncChecker() {
+    const url = environment.apiBase + '/vaccine/sessions/last-sync';
+    timer(0, 1000 * 30).pipe(switchMap(() => this.http.get<{message: string}>(url))).subscribe(({message}) => {
+      this._lastSyncTime = message;
+    });
+  }
+
+  lastSyncTime() {
+    return this._lastSyncTime;
   }
 
 

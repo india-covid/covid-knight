@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { User } from './../../../core/models/user.model';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,18 +16,26 @@ export class VaccineHomepageComponent implements  OnDestroy {
 
   authSub: Subscription;
   @ViewChild('infoWrapper') infoWrapper:ElementRef|null=null;
+
+
+
   constructor(
     private authService: AuthService,
+    private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private router: Router,
-
-    private renderer:Renderer2) {
+    private renderer:Renderer2,
+     private alertService:AlertService ) {
     this.authSub = this.authService.user$.subscribe((user) => {
       if (user && user.phoneNumber) {
         this.router.navigate(["/home"])
       }
       this.spinner.hide();
     });
+  }
+
+  lastSyncTime() {
+    return this.vaccineRestService.lastSyncTime();
   }
 
   wizardDone() {

@@ -423,47 +423,7 @@
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
     </div>
   </div>
-  <!-- subscription limit reached modal content -->
-  <ng-template #limitReachedTemplate>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Subscription Limit Reached</h4>
-      <button
-        type="button"
-        class="close pull-right"
-        aria-label="Close"
-        (click)="modalRef.hide()"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-body__title">
-        <p>
-          Due to high running cost (messaging, servers ,etc..) we can only give
-          {{ MAXSUBSCRIPTION }} center subscriptions per user. ({{
-            subscribedCenters.length
-          }}
-           center already subscribed with your account).If you would like us to
-          serve you more please donate.
-        </p>
-      </div>
 
-      <div class="modal-body__button">
-        <div class="row container">
-          <div class="col">
-            <button (click)="modalRef.hide()" class="btn btn-info">Ok</button>
-          </div>
-          <div class="col">
-            <a href="https://rzp.io/l/vaccinewatcher" target="_blank"
-              ><button class="btn btn-success">
-                <i class="ri-hand-heart-fill m-2"></i>Donate
-              </button></a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-template>
   <div
     class="apply-changes row"
 
