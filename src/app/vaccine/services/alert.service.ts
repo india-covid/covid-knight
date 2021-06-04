@@ -30,7 +30,7 @@ maxSubReached(maxSub:number,currentSub:number){
     reverseButtons: true,
 
     confirmButtonText:
-    '<i class="ri-hand-heart-fill"></i> Donate',
+    '<i class="ri-hand-heart-fill"></i> <b>Donate</b>',
     showDenyButton:true,
     denyButtonText:'<i class="fa fa-thumbs-down">Ok</i>',
   }).then((result) => {

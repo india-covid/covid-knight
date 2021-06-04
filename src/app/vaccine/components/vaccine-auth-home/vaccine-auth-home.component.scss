@@ -53,7 +53,7 @@ $text-color: var(--app-color-dark);
   position: relative;
   min-height:600px;
   overflow: scroll;
-  height:90%;
+  height:calc( 100% - 50px );
   &__head {
     padding-top: 20px;
     &__main{
