@@ -16,6 +16,7 @@ import { User } from 'src/app/core/models/user.model';
 import { take } from 'rxjs/operators';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DomSanitizer } from '@angular/platform-browser';
+import { VaccineRestService } from '../../services/vaccine-rest.service';
 
 @Component({
   selector: 'app-vaccine-auth-home',
@@ -60,6 +61,7 @@ export class VaccineAuthHomeComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService,
     private subscriptionService: SubscriptionService,
+    private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private dom: DomSanitizer,
   ) {

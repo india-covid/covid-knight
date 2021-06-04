@@ -6,6 +6,7 @@ import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { Title } from '@angular/platform-browser';
 import { SubscriptionService } from './vaccine/services/subscription.service';
 import { take, takeLast } from 'rxjs/operators';
+import { VaccineRestService } from './vaccine/services/vaccine-rest.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,17 @@ export class AppComponent implements OnInit {
   constructor(private subscriptionService: SubscriptionService,
     private storageService: LocalStorageService,
     private router: Router,
+    private vaccineRestService: VaccineRestService,
     private renderer:Renderer2,
     ) {
   }
 
   ngOnInit(){
     this.wizardCheck();
+  }
+
+  lastSyncTime() {
+    return this.vaccineRestService.lastSyncTime();
   }
 
 

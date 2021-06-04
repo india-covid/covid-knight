@@ -15,11 +15,14 @@ export class VaccineHomepageComponent implements  OnDestroy {
 
   authSub: Subscription;
   @ViewChild('infoWrapper') infoWrapper:ElementRef|null=null;
+
+
+
   constructor(
     private authService: AuthService,
+    private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private router: Router,
-
     private renderer:Renderer2) {
     this.authSub = this.authService.user$.subscribe((user) => {
       if (user && user.phoneNumber) {
@@ -27,6 +30,10 @@ export class VaccineHomepageComponent implements  OnDestroy {
       }
       this.spinner.hide();
     });
+  }
+
+  lastSyncTime() {
+    return this.vaccineRestService.lastSyncTime();
   }
 
   wizardDone() {

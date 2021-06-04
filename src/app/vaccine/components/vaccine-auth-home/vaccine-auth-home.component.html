@@ -4,7 +4,7 @@
       <!-- *ngIf="user?.phoneNumber" -->
       <div class="auth-home__user-info">
         <div class="auth-home__user-info__phone">
-          <p class="text ml-0">Logged in as</p>
+          <p class="text ml-0">Sending alerts to</p>
           <p class="phone">
             +91 {{user?.phoneNumber}}
           </p>
@@ -29,6 +29,11 @@
       </div>
     </div>
   </div>
+
+  <div class="auth-home__log"
+
+
+  ></div>
 
   <div class="auth-home__body"  #authHomeBody>
     <div class="align-items-center">
@@ -59,7 +64,7 @@
       <div class="myCard col col-lg-12 col-md-12 myCard__card3">
         <a [href]="shareMessageEncoded" data-action="share/whatsapp/share" >
         <div class="myCard__content">
-          <p class="myCard__content__text">Share With Friends</p>
+
           <p class="myCard__content__text-large">Share</p>
           <!-- <p class="myCard__content__text-small">See All</p> -->
           <div class="myCard__content__icon">
@@ -96,15 +101,15 @@
       <div class="modal-body">
         <div class="modal-body__title">
           <p>
-            Due to high running cost( messaging, servers ,etc..) we can only give  {{MAXSUBSCRIPTION}} center subscriptions per user.
-            If you would like us to serve you more please donate
+            Due to high running cost(messaging & servers) we can only provide {{MAXSUBSCRIPTION}} subscriptions per user.
+            Any donations will help us remove this limit and add more features.
           </p>
         </div>
 
         <div class="modal-body__button">
           <div class="row container">
             <div class="col">
-              <button (click)="modalRef.hide()" class="btn btn-info">Ok</button>
+              <button (click)="modalRef.hide()" class="btn btn-info">No thanks</button>
             </div>
             <div class="col">
               <button class="btn btn-success"><i class="ri-hand-heart-fill m-2"></i>Donate</button>
