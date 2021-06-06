@@ -62,8 +62,8 @@ export class AuthService {
     return this.httpClient.post<any>(url, authInfo).pipe(tap(body => {
       const { token, ...user } = body;
       if (token?.token) {
-        //this.storageService.set("User", user);
-        this.cookieService.put('Authorization', token.token, { expires: token.expiresIn + '' });
+        const expireDate = DayJs().add(token.expiresIn, 'seconds')
+        this.cookieService.put('Authorization', token.token, { expires: expireDate.toDate().toUTCString(), sameSite: true, secure: true  });
       }
       this._userSubject.next(user);
     }));
