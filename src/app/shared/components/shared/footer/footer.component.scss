@@ -24,29 +24,29 @@
   }
 }
 
-.telegram-mobile{
-display: none;
-}
-.telegram-desktop{
-display: none;
-}
+// .telegram-mobile{
+// display: none;
+// }
+// .telegram-desktop{
+// display: none;
+// }
 
 
-@media screen and (min-width: 740px) {
-  .telegram-desktop{
-    display: block;
-  }
-  .telegram-mobile{
-    display:none;
-  }
-}
+// @media screen and (min-width: 740px) {
+//   .telegram-desktop{
+//     display: block;
+//   }
+//   .telegram-mobile{
+//     display:none;
+//   }
+// }
 
-@media screen and (max-width: 740px) {
-  .telegram-desktop{
-    display: none;
-  }
-  .telegram-mobile{
-    display:block;
-  }
-}
+// @media screen and (max-width: 740px) {
+//   .telegram-desktop{
+//     display: none;
+//   }
+//   .telegram-mobile{
+//     display:block;
+//   }
+// }
 
