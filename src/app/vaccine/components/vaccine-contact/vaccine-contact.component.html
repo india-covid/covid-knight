@@ -13,22 +13,25 @@
         <input type="text" class="form-control" placeholder="Enter Message Title (optional)" [(ngModel)]="contactTitle">
       </div>
       <div class="form-group contact__body__form__emailOrPhone">
-        <label>Email/Phone</label>
-        <input type="text" class="form-control" placeholder="Enter Email/Phone (optional)" [(ngModel)]="emailOrPhone">
+        <label>Email/Phone <b style="color:red">*</b></label>
+        <input type="text" class="form-control" placeholder="Enter Email/Phone" [(ngModel)]="emailOrPhone">
       </div>
       <div class="form-group contact__body__form__message">
-        <label>Message</label>
+        <label>Message <b style="color:red">*</b></label>
         <textarea class="form-control form-group contact__body__form__message--textarea" rows="5" cols="50" placeholder="Enter your message"
           [(ngModel)]="messageText"></textarea>
       </div>
       <small *ngIf="messageText.length>500">Please enter message within 500 characters</small>
       <div class="contact__body__form__submit mt-5">
-        <button type="submit" [disabled]="messageText.length==0 || messageText.length>500"
-          [class.disabled-btn]="messageText.length==0 || messageText.length>500"
+        <button type="submit" [disabled]="!isSubmitEnabled"
+          [class.disabled-btn]="!isSubmitEnabled"
           class="app-btn contact__body__form__submit--button" (click)="submitContact()">Submit</button>
       </div>
 
     </div>
-  </div>
 
+  </div>
+  <div class="contact__body__credits" *ngIf="showCred">
+    <app-footer></app-footer>
+  </div>
 </div>

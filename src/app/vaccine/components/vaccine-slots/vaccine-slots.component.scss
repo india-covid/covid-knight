@@ -147,15 +147,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        &__button{
-          color:white;
+
           .subscribe-check-label{
             position: relative;
             top:0px;
             font-size:1rem;
             font-weight:bold;
+            color: white ;
           }
-        }
+
         .app-btn {
           width: auto !important;
           white-space: nowrap;
@@ -175,6 +175,11 @@
         }
       }
       &__myCard-body {
+        .row{
+          .col{
+            // height:30px;
+          }
+        }
         padding: 7px;
 
         &__address {

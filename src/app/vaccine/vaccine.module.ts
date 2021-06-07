@@ -1,3 +1,4 @@
+import { VaccineHowToComponent } from './components/vaccine-how-to/vaccine-how-to.component';
 import { SharedModule } from './../shared/components/shared.module';
 import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
 import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
@@ -42,7 +43,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     FilterCenterPipe,
     VaccineDonateComponent,
     VaccineContactComponent,
-
+    VaccineHowToComponent
 
   ],
   imports: [

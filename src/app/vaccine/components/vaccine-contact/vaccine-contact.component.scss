@@ -1,7 +1,8 @@
 .contact{
   padding-top:30px;
-  padding-bottom:200px;
-  min-height:90vh;
+  padding-bottom:150px;
+  position: relative;
+
   &__head{
     &__title{
       &--text{
@@ -18,6 +19,7 @@
   }
   &__body{
     padding:20px;
+    padding-bottom:100px;
     font-weight: bold;
     &__form{
       &__message{
@@ -34,6 +36,13 @@
         }
       }
     }
+    &__credits{
+      position: absolute;
+      bottom:20px;
+      width: 100%;;
+      text-align: center;
+      display: none;
+    }
   }
 }
 
@@ -42,5 +51,15 @@
   &__button{
     text-align: center;
 
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .contact{
+    &__body{
+      &__credits {
+        display: block;
+    }
+  }
   }
 }

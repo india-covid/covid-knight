@@ -4,9 +4,9 @@
       <!-- *ngIf="user?.phoneNumber" -->
       <div class="auth-home__user-info">
         <div class="auth-home__user-info__phone">
-          <p class="text ml-0">Sending alerts to</p>
+          <p class="text ml-0 font-weight-bold">Logged in as</p>
           <p class="phone">
-            +91 {{user?.phoneNumber}}
+            {{user?.phoneNumber}}
           </p>
         </div>
 
@@ -75,8 +75,18 @@
           <!-- <p class="myCard__content__text-small">{{subscribedCenters.length}} /{{MAXSUBSCRIPTION}}</p> -->
         </div>
       </div>
+      <div class="myCard col col-lg-12 col-md-12 myCard__card3" [class.disabled]="MAXSUBSCRIPTION===subscribedCenters.length" routerLink="/add-subscription">
+        <div class="myCard__content">
+        <p class="myCard__content__text">Slots Availability</p>
+        <p class="myCard__content__text-large">Check</p>
+        <div class="myCard__content__icon">
+          <img src="../../../assets/icons/availability.svg" class="myCard__content__icon__image" alt="" />
+        </div>
+        <!-- <p class="myCard__content__text-small">{{subscribedCenters.length}} /{{MAXSUBSCRIPTION}}</p> -->
+      </div>
+    </div>
     <div class="align-items-center">
-      <div class="myCard col col-lg-12 col-md-12 myCard__card3">
+      <div class="myCard col col-lg-12 col-md-12 myCard__card4">
         <a [href]="shareMessageEncoded" data-action="share/whatsapp/share" >
         <div class="myCard__content">
 
@@ -88,7 +98,7 @@
         </div>
       </a>
       </div>
-      <div class="myCard col col-lg-12 col-md-12 myCard__card4" routerLink="/donate">
+      <div class="myCard col col-lg-12 col-md-12 myCard__card5" routerLink="/donate">
         <!-- <a href="https://rzp.io/l/vaccinewatcher" target="_blank"> -->
         <div class="myCard__content">
           <p class="myCard__content__text">Help us Survive</p>
@@ -103,7 +113,7 @@
     </div>
   </div>
   <div class="auth-home__body__credits">
-    <p>Made with love <i class="ri-heart-fill auth-home__credits__icon" style="color:red"></i> by <a href="https://www.linkedin.com/in/rahul-shinde11/" target="_blank"> Rahul</a> & <a href="https://www.linkedin.com/in/ranjit-kumar-pandit-4686a9142/" target="_blank">Ranjit</a> </p>
+    <app-footer></app-footer>
   </div>
 
   </div>

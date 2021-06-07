@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 import { Center } from 'src/app/vaccine/models/center.model';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-subscribed-centers',
@@ -48,15 +49,14 @@ export class SubscribedCentersComponent implements OnInit {
 
   ) {
     this.spinner.show();
-    this.subscriptionService
-      .getSubscriptionCenters()
-      .subscribe((subscribedCenters) => {
+
+      this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
         this.spinner.hide();
         if(subscribedCenters.length===0){
           this.isNoCenterSubscribed=true;
         }
         this.subscribedCenters = subscribedCenters;
-      });
+      })
 
       this.route.queryParams.subscribe((params) => {
         if(params.routeTo){

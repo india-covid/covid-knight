@@ -1,5 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import { AuthService } from './core/auth.service';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
@@ -7,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { SubscriptionService } from './vaccine/services/subscription.service';
 import { take, takeLast } from 'rxjs/operators';
 import { VaccineRestService } from './vaccine/services/vaccine-rest.service';
+import { User } from './core/models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +17,15 @@ export class AppComponent implements OnInit {
 
     @ViewChild('appContainer') appContainer:ElementRef|null=null;
   title = 'Vaccine Finder';
+  user:User|null=null;
+  showSelectArea:boolean=true;
   constructor(private subscriptionService: SubscriptionService,
     private storageService: LocalStorageService,
     private router: Router,
     private vaccineRestService: VaccineRestService,
     private renderer:Renderer2,
     ) {
+
   }
 
   ngOnInit(){
@@ -52,5 +55,10 @@ export class AppComponent implements OnInit {
 
     ngAfterViewInit() {
      this.setHeight();
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event:any) {
+      this.setHeight();
     }
 }

@@ -4,7 +4,8 @@
   width: 100vw;
   margin:0;
   padding: 0;
-  overflow: scroll ;
+  overflow: auto ;
+  // height: 100%;
   // border:solid green;
   &__empty-wrapper {
     // border:solid  green;
@@ -44,13 +45,13 @@ $text-muted-color: var(--app-color-light-tint);
   background-color:var(--app-color-primary-tint);
   position: relative;
   height:100%;
-  // border: solid green;
+  overflow: auto;
   &__layer {
     background-color:rgba(0, 0, 0, 0.3);
 
     padding-top: 20%;
-    // min-height: 100vh;
     height:100%;
+    min-height:600px;
     position: relative;
     padding-bottom:50px;
     // border:solid green;
@@ -147,24 +148,10 @@ $text-muted-color: var(--app-color-light-tint);
 
   &__credits{
     position: absolute;
-    bottom:0;
+    bottom:20px;
     color:white;
-
-    p{
-      padding:5px;
-      margin:0;
-    }
-    a{
-      font-weight: bold;
-      color:white;
-    }
-
     text-align: center;
-    width:100%;
-    &__icon{
-      position: relative;
-      bottom:-3px;
-    }
+    width: 100%;;
   }
 }
 

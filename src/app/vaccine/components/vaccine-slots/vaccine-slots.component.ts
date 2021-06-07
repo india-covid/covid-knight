@@ -27,7 +27,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import * as DayJs from 'dayjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, take } from 'rxjs/operators';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 
@@ -109,9 +109,9 @@ export class VaccineSlotsComponent implements OnInit {
 
   getSubscribedCenters() {
     this.spinner.show();
-    this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
-      this.subscribedCenters = data;
-      this.accountTotalSubscribe = data.length;
+    this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
+      this.subscribedCenters = subscribedCenters;
+      this.accountTotalSubscribe = subscribedCenters.length;
       this.queryData = { ...this.route.snapshot.queryParams };
       if (!this.queryData.queryType) {
         this.router.navigate(['/home']);
@@ -120,6 +120,20 @@ export class VaccineSlotsComponent implements OnInit {
       }
       this.getRouteParams(this.queryData); //get query type
     });
+
+  // getSubscribedCenters() {
+
+    // this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
+    //   this.subscribedCenters = data;
+    //   this.accountTotalSubscribe = data.length;
+    //   this.queryData = { ...this.route.snapshot.queryParams };
+    //   if (!this.queryData.queryType) {
+    //     this.router.navigate(['/home']);
+    //     this.spinner.hide();
+    //     return;
+    //   }
+    //   this.getRouteParams(this.queryData); //get query type
+    // });
   }
 
   getRouteParams(params: any) {
@@ -185,6 +199,7 @@ export class VaccineSlotsComponent implements OnInit {
   //add subscribed key on center
   addSubscribedKeyToCenters() {
     this.centers.map((center, index) => {
+
       var rc = this.checkIfCenterIsSelected(center);
       if (rc) {
         this.centers[index].subscribed = true;
@@ -227,6 +242,7 @@ export class VaccineSlotsComponent implements OnInit {
 
     this.centersWithSession = newArray;
     this.centers = newArray;
+
     this.spinner.hide();
     this.showCentersList = true;
     this.applyFilters();
@@ -324,6 +340,7 @@ export class VaccineSlotsComponent implements OnInit {
       .postSubscriptionCenter({ centers: this.newSubscribeCenters })
       .subscribe((data) => {
         this.spinner.hide();
+        this.subscriptionService.getSubscriptionCenters();
         this.router.navigate(['/home']);
       });
   }

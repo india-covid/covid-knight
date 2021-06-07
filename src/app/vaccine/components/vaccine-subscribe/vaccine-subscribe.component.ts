@@ -1,3 +1,4 @@
+import { SubscribedCenter } from './../../models/subscribedCenter';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import * as DayJs from 'dayjs';
@@ -98,6 +99,7 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
     }).subscribe(res => {
+      this.subscriptionService.getSubscriptionCenters();
       this.spinner.hide();
       this.isOtpWrong=false;
       this.storageService.delete('subscription');

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertService } from './../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
@@ -37,13 +38,17 @@ export class VaccineContactComponent implements OnInit {
     contactTitle:string='';
     emailOrPhone:string='';
     messageText:string='';
-
+  showCred =false;
   constructor(
     private vaccineService:VaccineRestService,
     private spinner:NgxSpinnerService,
     private authService: AuthService,
-    private alertService:AlertService
+    private alertService:AlertService,
+    private router:Router
     ) {
+      if(router.url.split("#")[0]!='/'){
+        this.showCred=true;
+      }
    this.authService.user$.pipe(take(1)).subscribe((user) => {
         this.emailOrPhone = user?.phoneNumber||'';
       });
@@ -52,6 +57,25 @@ export class VaccineContactComponent implements OnInit {
   ngOnInit() {
   }
 
+    validateEmail(email:string){
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+     get isSubmitEnabled(){
+      let phoneEntered = /^[0-9]*[.]?[0-9]*$/.test(this.emailOrPhone);
+      let phone='';
+      let email='';
+      if(phoneEntered){
+        phone = this.emailOrPhone;
+      }else{
+        email=this.emailOrPhone;
+      }
+      if ((this.validateEmail(email) || phone.length==10) && (this.messageText.length>0 && this.messageText.length<500)){
+        return true;
+      }
+      return false;
+    }
   submitContact(){
     this.spinner.show();
     let phoneEntered = /^[0-9]*[.]?[0-9]*$/.test(this.emailOrPhone);
