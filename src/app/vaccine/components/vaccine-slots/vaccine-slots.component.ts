@@ -109,7 +109,7 @@ export class VaccineSlotsComponent implements OnInit {
 
   getSubscribedCenters() {
     this.spinner.show();
-    this.subscriptionService.subscribedCenters$.pipe(take(1)).subscribe((subscribedCenters) => {
+    this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
       this.subscribedCenters = subscribedCenters;
       this.accountTotalSubscribe = subscribedCenters.length;
       this.queryData = { ...this.route.snapshot.queryParams };

@@ -49,14 +49,14 @@ export class SubscribedCentersComponent implements OnInit {
 
   ) {
     this.spinner.show();
-    this.subscriptionService.subscribedCenters$.pipe(take(1)).subscribe((subscribedCenters) => {
+
+      this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
         this.spinner.hide();
         if(subscribedCenters.length===0){
           this.isNoCenterSubscribed=true;
         }
         this.subscribedCenters = subscribedCenters;
-      });
-      this.subscriptionService._subscribedCenters.asObservable().pipe(filter(centers => Boolean(centers)));
+      })
 
       this.route.queryParams.subscribe((params) => {
         if(params.routeTo){

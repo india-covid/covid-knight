@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertService } from './../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
@@ -37,13 +38,17 @@ export class VaccineContactComponent implements OnInit {
     contactTitle:string='';
     emailOrPhone:string='';
     messageText:string='';
-
+  showCred =false;
   constructor(
     private vaccineService:VaccineRestService,
     private spinner:NgxSpinnerService,
     private authService: AuthService,
-    private alertService:AlertService
+    private alertService:AlertService,
+    private router:Router
     ) {
+      if(router.url.split("#")[0]!='/'){
+        this.showCred=true;
+      }
    this.authService.user$.pipe(take(1)).subscribe((user) => {
         this.emailOrPhone = user?.phoneNumber||'';
       });
