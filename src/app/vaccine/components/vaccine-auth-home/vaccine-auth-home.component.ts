@@ -45,7 +45,6 @@ export class VaccineAuthHomeComponent implements OnInit {
   isSubscriptionLoaded: boolean = false;
   readonly MAXSUBSCRIPTION = environment.maxSubscription;
   @ViewChild('authHomeBody') authHomeBody: ElementRef | null = null;
-  @ViewChild('limitReachedTemplate') limitReachedTemplate!: TemplateRef<any>;
 
 
   shareMessage: string =
@@ -79,11 +78,14 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   getSubscribedCenters() {
-    this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
-      this.spinner.hide();
+
+    this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
       this.isSubscriptionLoaded = true;
-      this.subscribedCenters = data;
+      this.spinner.hide();
+
+      this.subscribedCenters = subscribedCenters;
     });
+
   }
 
   addCenter() {

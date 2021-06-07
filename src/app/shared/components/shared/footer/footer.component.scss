@@ -1,0 +1,52 @@
+.footer{
+  // position: absolute;
+  // bottom:20px;
+  color:inherit;
+
+  p{
+    padding:5px;
+    margin:0;
+  }
+  a{
+    text-decoration: none;
+    font-weight: bold;
+    color:inherit
+  }
+
+  text-align: center;
+  width:100%;
+  &__icon{
+    position: relative;
+    bottom:-3px;
+  }
+  &--img{
+    width:20px;
+  }
+}
+
+.telegram-mobile{
+display: none;
+}
+.telegram-desktop{
+display: none;
+}
+
+
+@media screen and (min-width: 740px) {
+  .telegram-desktop{
+    display: block;
+  }
+  .telegram-mobile{
+    display:none;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .telegram-desktop{
+    display: none;
+  }
+  .telegram-mobile{
+    display:block;
+  }
+}
+

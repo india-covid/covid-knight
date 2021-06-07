@@ -103,28 +103,25 @@ background-color: var(--app-color-medium) !important;
   border-bottom: 2px solid rgb(29, 122, 209);
 }
 
+@media screen and (min-width: 740px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+      ::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
 
-// ::-webkit-scrollbar {
-//   width: 5px;
-// }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgb(209, 209, 209);
+  }
 
-// /* Track */
-// ::-webkit-scrollbar-track {
-//   background: #ffffff;
-// }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(158, 158, 158);
+  }
+}
 
-// /* Handle */
-// ::-webkit-scrollbar-thumb {
-//   border-radius: 6px;
-//   background: rgb(209, 209, 209);
-// }
-
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: rgb(158, 158, 158);
-// }
-
-.hidden{
+  .hidden{
   display: none !important;
 }
 

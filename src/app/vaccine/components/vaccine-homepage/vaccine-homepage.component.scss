@@ -14,7 +14,7 @@ $text-muted-color: var(--app-color-light-tint);
 }
 
 .homepage {
-  overflow: scroll;
+  overflow: auto;
   height:100%;
   min-height:80vh;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
@@ -24,7 +24,6 @@ $text-muted-color: var(--app-color-light-tint);
   overflow: hidden;
   overflow-y: scroll;
 
-  // border: solid green;
   &__layer {
     background-color: rgba(0, 0, 0, 0.2);
     height:100%;
@@ -33,9 +32,9 @@ $text-muted-color: var(--app-color-light-tint);
     padding-bottom:30px;
   }
   &__info-wrapper {
-    background-color: $stage1-bg-color; // url("../../../../assets/img/s3.jpg");
-
-    min-height: 550px ;
+    background-color: $stage1-bg-color;
+    height:calc( 100% - 80px);
+    min-height: 500px ;
     width: 100%;
     text-align: center;
     align-items: center;
@@ -113,26 +112,20 @@ $text-muted-color: var(--app-color-light-tint);
     }
     &__credits{
       position: absolute;
-      bottom:0;
-      p{
-        padding:5px;
-        margin:0;
-      }
+      bottom:10px;
+      color:white;
+
       text-align: center;
       font-weight: bold;
       width:100%;
-      &__icon{
-        position: relative;
-        bottom:-3px;
-      }
+
     }
 
   }
 
   &__container {
     position: relative;
-    // min-height: 750px;
-    // height:100%;
+
     margin: 0px auto;
     &__wizard{
       padding-top:30px;
@@ -157,21 +150,9 @@ $text-muted-color: var(--app-color-light-tint);
   }
 
   &__credits{
-    position: absolute;
-    bottom:10;
-    p{
-      padding:5px;
-      margin:0;
-    }
-    text-align: center;
-    font-weight: bold;
-    width:100%;
-    &__icon{
-      position: relative;
-      bottom:-3px;
-    }
+    color:black;
+    margin-bottom:10px;
   }
-
 }
 
 .flex {
@@ -184,23 +165,14 @@ $text-muted-color: var(--app-color-light-tint);
     display: none;
   }
   .homepage__credits{
-    display: block;
+    display: none;
   }
 }
 
 @media screen and (max-width: 740px) {
   .homepage{
-    &__info-wrapper{
-      &__credits{
-        color:white ;
-        font-weight:100;
-        a{
-          font-weight:bold;
-          color:white
-        }
 
-      }
-    }
+
 
   }
 

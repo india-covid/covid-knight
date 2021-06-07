@@ -1,12 +1,12 @@
+import { Center } from 'src/app/vaccine/models/center.model';
 import { SubscribedCenter } from './../models/subscribedCenter';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, timer, of, } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, timer, of, BehaviorSubject, } from 'rxjs';
+import { filter, map, catchError } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
 import { VaccineRestService } from './vaccine-rest.service';
-import { Center } from '../models/center.model';
 import { environment } from 'src/environments/environment';
 import { Subscriptions } from './../models/subscriptions';
 const OTP_EXPIRE_MIN = 3;
@@ -16,9 +16,13 @@ const OTP_EXPIRE_MIN = 3;
 export class SubscriptionService {
   private readonly vaccineBase = '/vaccine'
 
-  constructor(private http: HttpClient,private storageService: LocalStorageService, private vaccineRestService: VaccineRestService) { }
+  constructor(private http: HttpClient,private storageService: LocalStorageService, private vaccineRestService: VaccineRestService) {
+    this.getSubscriptionCenters();
+   }
   private _secondInterval = timer(0, 1000);
   private storageKey = 'subscription';
+   _subscribedCenters = new BehaviorSubject<SubscribedCenter[]>([]);
+   subscribedCenters$ = this._subscribedCenters.asObservable();
 
   get wizardResult() {
     return this._secondInterval.pipe(map(() => {
@@ -47,12 +51,15 @@ export class SubscriptionService {
 
   getSubscriptionCenters(){
     const url = environment.apiBase + `${this.vaccineBase}/subscriptions`;
-    return this.http.get<SubscribedCenter[]>(url);
+    return this.http.get<SubscribedCenter[]>(url).subscribe((centers:SubscribedCenter[])=>{
+      this._subscribedCenters.next(centers);
+    })
   }
   postSubscriptionCenter(subscription:Subscriptions){
     const url = environment.apiBase + `${this.vaccineBase}/subscriptions`;
     return this.http.post(url,subscription);
   }
+
   deleteSubscriptionCenter(subscriptionId:string){
     const url = environment.apiBase + `${this.vaccineBase}/subscriptions/subscription/${subscriptionId}`;
     return this.http.delete(url);

@@ -146,10 +146,8 @@ $text-color: var(--app-color-dark);
       }
       &__icon{
         position: absolute;
-        // border:solid red;
         display: flex;
         width:60px;
-        // height:50px;
         bottom:12px;
         right:10px;
         z-index:1;
@@ -161,27 +159,28 @@ $text-color: var(--app-color-dark);
       }
     }
     &__card1{
-      // background: linear-gradient(82.59deg, #00c48c 0%, #00a173 100%);
       background: linear-gradient(81.67deg, #0084f4 0%, #1a4da2 100%);
       box-shadow: #0082f481 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     }
     &__card2{
-      // background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
       background: linear-gradient(to right, #2575fc 0%, #6a11cb 100%);
       box-shadow: #6b11cb86 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     }
     &__card3{
       background: linear-gradient(69.83deg, #0084f4 0%, #00c48c 100%);
-      // background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
       box-shadow: #4facfeaf 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     }
     &__card4{
-      // background: linear-gradient(81.67deg, #ff647c 0%, #1f5dc5 100%);
-      // background: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: #667eeab9 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    }
+    &__card5{
+       background: linear-gradient(to right, #4facfe 0%, #0083fe 100%);
       box-shadow: #667eeab9 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     }

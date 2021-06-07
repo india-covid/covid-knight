@@ -4,6 +4,10 @@
   &__header {
     height: 16rem;
   }
+  &__body{
+    min-height:300px;
+    padding:10px;
+  }
   &__image{
     // border:solid red;
     text-align: center;

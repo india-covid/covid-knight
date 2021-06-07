@@ -25,7 +25,7 @@
 
 
     <div class="subscribe__confirm d-flex mt-5">
-      <button [disabled]="!isOtpLengthValid" (click)="signUpUser()" class="app-btn mx-auto"> Confirm </button>
+      <button [disabled]="!isOtpLengthValid" [class.disabled-btn]="!isOtpLengthValid" (click)="signUpUser()" class="app-btn mx-auto"> Confirm </button>
     </div>
   </div>
 </div>

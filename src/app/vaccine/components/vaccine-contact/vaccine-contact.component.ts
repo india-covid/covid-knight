@@ -52,6 +52,25 @@ export class VaccineContactComponent implements OnInit {
   ngOnInit() {
   }
 
+    validateEmail(email:string){
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+     get isSubmitEnabled(){
+      let phoneEntered = /^[0-9]*[.]?[0-9]*$/.test(this.emailOrPhone);
+      let phone='';
+      let email='';
+      if(phoneEntered){
+        phone = this.emailOrPhone;
+      }else{
+        email=this.emailOrPhone;
+      }
+      if ((this.validateEmail(email) || phone.length==10) && (this.messageText.length>0 && this.messageText.length<500)){
+        return true;
+      }
+      return false;
+    }
   submitContact(){
     this.spinner.show();
     let phoneEntered = /^[0-9]*[.]?[0-9]*$/.test(this.emailOrPhone);
