@@ -192,6 +192,8 @@ export class VaccineSlotsComponent implements OnInit {
         this.addSubscribedKeyToCenters();
       }
       this.centersSessions = response[1];
+      // console.log("session is ",this.centersSessions);
+
       this.mergeCenterAndSessions();
     });
   }
@@ -217,6 +219,7 @@ export class VaccineSlotsComponent implements OnInit {
       .getSessionsByPincode(pincode, DayJs().add(day, 'day').format('DDMMYYYY'))
       .subscribe((sessions) => {
         this.centersSessions = sessions;
+
         this.mergeCenterAndSessions();
       });
   }
@@ -237,12 +240,18 @@ export class VaccineSlotsComponent implements OnInit {
     var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
     let newArray = this.centers.map((t1) => ({
       ...t1,
-      [date]: this.centersSessions.find((t2) => t2.centerId === t1._id) || [],
+      [date]: this.centersSessions.map((t2) => {
+        if(t2.centerId === t1._id){
+          return t2;
+        }
+        return {minAgeLimit:false};
+      }).filter((d)=>d.minAgeLimit).sort((a, b) => Number(a.minAgeLimit) - Number(b.minAgeLimit)) || [],
     }));
 
     this.centersWithSession = newArray;
-    this.centers = newArray;
+    // console.log(this.centersWithSession);
 
+    this.centers = newArray;
     this.spinner.hide();
     this.showCentersList = true;
     this.applyFilters();
@@ -256,7 +265,7 @@ export class VaccineSlotsComponent implements OnInit {
     if (this.isCenterEmpty || this.centersWithSession[0][this.activeDate]) {
       setTimeout(() => {
         this.showCentersList = true;
-      }, 50);
+      }, 0);
       return;
     }
 
@@ -379,5 +388,7 @@ export class VaccineSlotsComponent implements OnInit {
 
   applyFilters(){
     this.centersWithSessionFiltered = this.filterCenterPipe.transform(this.centersWithSession,this.hospitalName,this.dose,this.vaccineType,this.age,this.activeDate)
+    // console.log(this.centersWithSessionFiltered );
+
   }
 }

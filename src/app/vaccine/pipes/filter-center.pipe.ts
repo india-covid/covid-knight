@@ -40,16 +40,13 @@ export class FilterCenterPipe implements PipeTransform {
     }
 
     checkAge(center:any,age:string,activeDate:string){
-     return (age!='All Age'?(center[activeDate]?center[activeDate].minAgeLimit==parseInt(age):true):true)
+     return (age!='All Age'?((center[activeDate][0]?center[activeDate][0].minAgeLimit==parseInt(age):false) || (center[activeDate][1]?center[activeDate][1].minAgeLimit==parseInt(age):false) ):true)
     }
     checkDoseType(center:any,doseType:string,activeDate:string){
-      return (doseType!='all'?(center[activeDate]?center[activeDate]['availableCapacityDose'+doseType]:true):true);
+      return (doseType!='all'?((center[activeDate][0]?center[activeDate][0]['availableCapacityDose'+doseType]:false) || (center[activeDate][1]?center[activeDate][1]['availableCapacityDose'+doseType]:false)):true);
     }
 
     vaccineType(center:any,vaccineType:VACCINES,activeDate:string){
-
-
-      return (vaccineType!='All'?(center[activeDate]?center[activeDate].vaccine===vaccineType:true):true);
-
+      return (vaccineType!='All'?((center[activeDate][0]?center[activeDate][0].vaccine===vaccineType:false) || (center[activeDate][1]?center[activeDate][1].vaccine===vaccineType:false)):true);
     }
  }

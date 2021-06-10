@@ -121,10 +121,12 @@
   &__card-wrapper{
 
   }
+
+
   &__item {
     margin: 0 auto;
     // min-width: 360px;
-     max-width: 360px;
+     max-width: 400px;
     width:90%;
     // border:solid red;
     margin-top: 15px;
@@ -199,6 +201,10 @@
         &__slots {
           font-weight: bold;
         }
+        &__no-slots{
+          color:red;
+          text-align: center;
+        }
         hr{
           // border:solid pink 1px;
           margin:4px;
@@ -250,7 +256,11 @@
   color:rgb(228, 199, 39);
 }
 
-
+.skeleton-loader{
+  max-width: 400px;
+  width:90%;
+  margin:40px auto;
+}
 //header animation
 
 
