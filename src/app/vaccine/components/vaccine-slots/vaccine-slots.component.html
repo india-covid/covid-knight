@@ -153,10 +153,18 @@
         <div class="no-centers__content__text">No Centers Found</div>
       </div>
     </div>
+
+    <div class="skeleton-loader" *ngIf="!showCentersList">
+      <ngx-skeleton-loader count="7" animation="pulse" [theme]="{
+      height: '110px',
+      'background-color': '#d4d4d4'
+    }"></ngx-skeleton-loader>
+    </div>
+
     <div class="myCard" *ngIf="
         !isCenterEmpty && showCentersList && centersWithSession.length !== 0
       " [@enterAnimationRight]>
-      <!-- | filterCenter: hospitalName:dose:vaccineType:age:activeDate -->
+
       <div class="myCard__card-wrapper" *ngFor="let center of centersWithSessionFiltered; let i = index">
         <div class="no-centers" *ngIf="center.name == 'noMatch'" [@enterAnimationRight]>
           <div class="no-centers__content">
@@ -166,6 +174,8 @@
             <div class="no-centers__content__text">No Match Found</div>
           </div>
         </div>
+
+
 
         <div class="myCard__item" [class.lastCard]="centersWithSession.length - 1 == i" *ngIf="center.name != 'noMatch'"
           [@enterAnimationRight]>
@@ -203,17 +213,17 @@
               </div>
               <hr />
               <div class="myCard__item__content__myCard-body__slots">
-                <div class="myCard__item__content__myCard-body__slots__item">
+                <div class="myCard__item__content__myCard-body__slots__item" *ngFor="let session of center[this.activeDate]">
                   <div>
                     <div class="row">
                       <div class="col">
                         <span>Dose1: </span><span [ngClass]="
-                            center[this.activeDate]?.availableCapacityDose1 > 0
+                        session?.availableCapacityDose1 > 0
                               ? 'success'
                               : 'danger'
                           ">
                           {{
-                          center[this.activeDate]?.availableCapacityDose1 || 0
+                            session?.availableCapacityDose1 || 0
                           }}
                           Slots
                         </span>
@@ -221,30 +231,38 @@
                       <div class="col">
                         <span>Vaccine:</span>
                         <span class="warning">
-                          {{ center[this.activeDate]?.vaccine || "-" }} </span><br />
+                          {{ session?.vaccine || "-" }} </span><br />
                       </div>
                     </div>
                     <div class="row">
                       <div class="col ">
                         <span>Dose2: </span><span [ngClass]="
-                            center[this.activeDate]?.availableCapacityDose2 > 0
+                        session?.availableCapacityDose2 > 0
                               ? 'success'
                               : 'danger'
                           ">
                           {{
-                          center[this.activeDate]?.availableCapacityDose2 || 0
+                            session?.availableCapacityDose2 || 0
                           }}
                           Slots </span><br />
                       </div>
                       <div class="col">
                         <span>Age: </span><span>
-                          {{ center[this.activeDate]?.minAgeLimit || "-"
-                          }}<span *ngIf="center[this.activeDate]?.minAgeLimit">+</span></span>
+                          {{ session?.minAgeLimit || "-"
+                          }}<span *ngIf="session?.minAgeLimit">+</span></span>
                       </div>
                     </div>
 
                   </div>
+                  <hr>
                 </div>
+
+                <div class="myCard__item__content__myCard-body__slots myCard__item__content__myCard-body__no-slots">
+                  <div class="myCard__item__content__myCard-body__slots__item " *ngIf="center[this.activeDate].length==0">
+                    No available Slots
+              </div>
+              </div>
+
               </div>
             </div>
           </div>

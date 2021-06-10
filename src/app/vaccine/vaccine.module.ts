@@ -25,6 +25,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @NgModule({
@@ -44,7 +45,6 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     VaccineDonateComponent,
     VaccineContactComponent,
     VaccineHowToComponent
-
   ],
   imports: [
     CommonModule,
@@ -57,7 +57,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     BsDropdownModule,
     AccordionModule.forRoot(),
     PopoverModule.forRoot(),
-    SharedModule
+    NgxSkeletonLoaderModule,
+        SharedModule
 
   ],
   providers:[
