@@ -3,5 +3,5 @@ export interface Subscriptions {
   // countryCode:string,
   // phoneNumber:string,
   // _id:string,
-  centers?:Center[]
+  centers?:string[]
 }
