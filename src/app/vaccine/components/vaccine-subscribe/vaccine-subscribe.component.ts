@@ -20,6 +20,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class VaccineSubscribeComponent implements OnInit, OnDestroy {
 
+    authSub:Subscription;
     private navigationExtras!:NavigationExtras;
   constructor(
     private route: ActivatedRoute,
@@ -29,9 +30,16 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     private storageService: LocalStorageService,
     private spinner:NgxSpinnerService
     ) {
+      this.authSub = this.authService.user$.subscribe((user) => {
+        if (user && user.phoneNumber) {
+          this.router.navigate(["/home"])
+        }
+        this.spinner.hide();
+      });
       this.subs.add(this.route.queryParams.subscribe((params) => {
         this.navigationExtras=params;
       }));
+
     }
 
   loading = false;
