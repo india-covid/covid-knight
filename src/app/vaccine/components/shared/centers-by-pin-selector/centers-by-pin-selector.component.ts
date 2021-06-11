@@ -54,7 +54,7 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   }
   pinChange(pincode:string){
     if(pincode.length===6){
-      this.pinInput.nativeElement.blur()
+      // this.pinInput.nativeElement.blur()
     }
     this.pinEntered.emit({ pincode: pincode });
   }

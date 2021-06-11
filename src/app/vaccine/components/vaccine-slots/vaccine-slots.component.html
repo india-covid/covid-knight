@@ -217,6 +217,13 @@
                   <div>
                     <div class="row">
                       <div class="col">
+                        <span>Age: </span><span>
+                          {{ session?.minAgeLimit || "-"
+                          }}<span *ngIf="session?.minAgeLimit">+</span></span>
+
+
+                      </div>
+                      <div class="col">
                         <span>Dose1: </span><span [ngClass]="
                         session?.availableCapacityDose1 > 0
                               ? 'success'
@@ -227,15 +234,16 @@
                           }}
                           Slots
                         </span>
-                      </div>
-                      <div class="col">
-                        <span>Vaccine:</span>
-                        <span class="warning">
-                          {{ session?.vaccine || "-" }} </span><br />
+
                       </div>
                     </div>
                     <div class="row">
                       <div class="col ">
+                        <span>Vaccine:</span>
+                        <span class="warning">
+                          {{ session?.vaccine || "-" }} </span><br />
+                      </div>
+                      <div class="col">
                         <span>Dose2: </span><span [ngClass]="
                         session?.availableCapacityDose2 > 0
                               ? 'success'
@@ -245,11 +253,7 @@
                             session?.availableCapacityDose2 || 0
                           }}
                           Slots </span><br />
-                      </div>
-                      <div class="col">
-                        <span>Age: </span><span>
-                          {{ session?.minAgeLimit || "-"
-                          }}<span *ngIf="session?.minAgeLimit">+</span></span>
+
                       </div>
                     </div>
 

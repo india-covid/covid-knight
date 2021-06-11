@@ -192,7 +192,6 @@ export class VaccineSlotsComponent implements OnInit {
         this.addSubscribedKeyToCenters();
       }
       this.centersSessions = response[1];
-      // console.log("session is ",this.centersSessions);
 
       this.mergeCenterAndSessions();
     });
@@ -236,6 +235,8 @@ export class VaccineSlotsComponent implements OnInit {
       });
   }
 
+  n:any;
+  m:any;
   mergeCenterAndSessions() {
     var date = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
     let newArray = this.centers.map((t1) => ({
@@ -247,11 +248,16 @@ export class VaccineSlotsComponent implements OnInit {
         return {minAgeLimit:false};
       }).filter((d)=>d.minAgeLimit).sort((a, b) => Number(a.minAgeLimit) - Number(b.minAgeLimit)) || [],
     }));
-
+    newArray.sort((a,b)=>{
+       this.n = a;
+        this.m = b;
+      let c = this.n[this.activeDate][0]?.minAgeLimit || 0;
+      let d = this.m[this.activeDate][0]?.minAgeLimit ||0 ;
+      return Number(d)-Number(c);
+    });
     this.centersWithSession = newArray;
-    // console.log(this.centersWithSession);
-
     this.centers = newArray;
+
     this.spinner.hide();
     this.showCentersList = true;
     this.applyFilters();
@@ -263,6 +269,8 @@ export class VaccineSlotsComponent implements OnInit {
     this.activeDate = DayJs().add(this.activeDay, 'day').format('DDMMYYYY');
 
     if (this.isCenterEmpty || this.centersWithSession[0][this.activeDate]) {
+      this.applyFilters();
+
       setTimeout(() => {
         this.showCentersList = true;
       }, 0);
@@ -345,8 +353,9 @@ export class VaccineSlotsComponent implements OnInit {
   //apply subscribe
   applySubscribeChanges() {
     this.spinner.show();
+    let centersId =this.newSubscribeCenters.map(a => a._id);
     this.subscriptionService
-      .postSubscriptionCenter({ centers: this.newSubscribeCenters })
+      .postSubscriptionCenter({ centers: centersId })
       .subscribe((data) => {
         this.spinner.hide();
         this.subscriptionService.getSubscriptionCenters();
@@ -388,7 +397,5 @@ export class VaccineSlotsComponent implements OnInit {
 
   applyFilters(){
     this.centersWithSessionFiltered = this.filterCenterPipe.transform(this.centersWithSession,this.hospitalName,this.dose,this.vaccineType,this.age,this.activeDate)
-    // console.log(this.centersWithSessionFiltered );
-
   }
 }
