@@ -196,11 +196,12 @@
             margin-right: 6px;
           }
           &__text {
-            font-size: 1rem;
+            font-size: 0.9rem;
           }
         }
         &__slots {
-          font-weight: bold;
+          // font-weight: bold;
+          font-size: 0.9rem;;
         }
         &__no-slots{
           color:red;
@@ -209,6 +210,9 @@
         hr{
           // border:solid pink 1px;
           margin:4px;
+        }
+        .vaccineType{
+          font-size: 0.7rem;
         }
       }
     }
