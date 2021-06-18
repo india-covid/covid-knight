@@ -14,7 +14,8 @@ $text-muted-color:#d9d9d9;// var(--app-color-light-tint);
   padding: 0;
   overflow: auto ;
   // height: 100%;
-  // //border:solid green;
+  min-height:560px;
+  // border:solid green;
   &__empty-wrapper {
     //border:solid  pink;
     width: 50%;
@@ -22,13 +23,13 @@ $text-muted-color:#d9d9d9;// var(--app-color-light-tint);
     background-color: rgb(13, 108, 185);
     overflow: auto;
     height:100vh;
-    min-height: 750px;
+    // min-height: 750px;
   }
   &__app-content{
     // //border:solid blue;
     background-color: rgb(13, 108, 185);
     height:100vh;
-    min-height: 750px;
+    // min-height: 750px;
     overflow: hidden;
     width:50%;
     // background-color: rgba(0, 0, 0, 0.808);
@@ -50,26 +51,26 @@ $text-muted-color:#d9d9d9;// var(--app-color-light-tint);
   overflow: auto;
   //border:solid yellow;
   &__layer {
-    background-color:rgba(0, 0, 0, 0.3);
 
-    padding-top: 20%;
+    // padding-top: 20%;
     height:100%;
     // min-height:700px;
     position: relative;
-    padding-bottom:50px;
-  //  border:solid blue;
+    // padding-bottom:50px;
+    // border:solid blue;
   }
   &__image-wrapper{
     height:100%;
   }
   &__info-wrapper {
+    background-color:rgba(0, 0, 0, 0.3);
     letter-spacing: 1.5px;;
     width: 100%;
     // min-height: 100vh;
     text-align: center;
     align-items: center;
-    height:100%;
-    //border:solid red;
+    min-height:100%;
+    // border:solid red;
     &__head {
       align-items: center;
       padding: 0;
@@ -153,7 +154,7 @@ $text-muted-color:#d9d9d9;// var(--app-color-light-tint);
   }
 
   &__credits{
-    position: absolute;
+    // position: absolute;
     bottom:20px;
     color:white;
     text-align: center;

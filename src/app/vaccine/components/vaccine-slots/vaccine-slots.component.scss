@@ -152,7 +152,7 @@
 
           .subscribe-check-label{
             position: relative;
-            top:0px;
+             bottom:-2px;
             font-size:1rem;
             font-weight:bold;
             color: white ;
@@ -174,7 +174,6 @@
         }
         .btn-unsubscribe {
           border: solid red 1px;
-          background-color:black !important;
         }
       }
       &__myCard-body {
@@ -354,4 +353,8 @@
     margin:0;
     padding:0;
   }
+}
+
+.flex{
+  display: flex;
 }

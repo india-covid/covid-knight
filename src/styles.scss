@@ -70,7 +70,14 @@ div{
  }
 
 
-
+ .app-btn-wa{
+  width:150px;
+  padding:7px;
+  background: var(--wa-btn-bg-color);
+  color:white;
+  border-radius:5px;
+  font-weight: bold;
+ }
  .app-btn{
   width:150px;
   padding:7px;

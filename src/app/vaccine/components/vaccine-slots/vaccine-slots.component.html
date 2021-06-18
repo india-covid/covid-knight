@@ -204,7 +204,7 @@
                 </button>
               </div>
 
-              <div class="form-check"  *ngIf="!center.subscribed ||  center.subscribed == 'temp'">
+              <div class="form-check flex"  *ngIf="!center.subscribed ||  center.subscribed == 'temp'">
                   <input type="checkbox" class="form-check-input" (change)="changeSubscribe($event, center)"
                   [id]="center._id" [checked]="center.subscribed == 'temp'" name="subscribe" />
                   <span class="subscribe-check-label" >Select</span>

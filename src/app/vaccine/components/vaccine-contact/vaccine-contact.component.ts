@@ -71,7 +71,7 @@ export class VaccineContactComponent implements OnInit {
       }else{
         email=this.emailOrPhone;
       }
-      if ((this.validateEmail(email) || phone.length==10) && (this.messageText.length>0 && this.messageText.length<500)){
+      if ((this.validateEmail(email) || phone.length>=10) && (this.messageText.length>0 && this.messageText.length<500)){
         return true;
       }
       return false;
