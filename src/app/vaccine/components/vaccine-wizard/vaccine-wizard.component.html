@@ -59,13 +59,13 @@
   </div> -->
 
   <div class="div subscribe d-flex mt-5" *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
-    <button class="mx-auto app-btn" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="goToSlots()"
+    <button class="mx-auto app-btn-wa" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="goToSlots()"
       [disabled]="!isSubscribeButtonEnabled || subscribing">
       NEXT
     </button>
   </div>
   <div class="div subscribe d-flex mt-5" *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
-    <button class="mx-auto app-btn" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="goToSlots()"
+    <button class="mx-auto app-btn-wa" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="goToSlots()"
       [disabled]="!isSubscribeButtonEnabled || subscribing">
       NEXT
     </button>
