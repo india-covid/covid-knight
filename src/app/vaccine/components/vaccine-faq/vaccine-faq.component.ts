@@ -33,7 +33,7 @@ export class VaccineFaqComponent implements OnInit {
       {
         question: 'What about privacy?',
         answer:
-          `We do not collect any other information other than WhatsApp number. Phone numbers are automatically deleted after the notification subscription expires. We do not run any kind of ads. You can support us by <a href="https://vaccine.india-covid.info/#donate" target="_blank">donating</a>.`,
+          `We do not collect any other information other than WhatsApp number. Phone numbers are automatically deleted after the notification subscription expires. We do not run any kind of ads. You can support us by <a href="https://rzp.io/l/UUbrXGrnLj" target="_blank">donating</a>.`,
       },
       {
         question: 'Can I Stop the notifications?',
