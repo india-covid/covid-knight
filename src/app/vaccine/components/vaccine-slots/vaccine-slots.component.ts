@@ -2,7 +2,7 @@ import { AlertService } from './../../services/alert.service';
 import { FilterCenterPipe } from './../../pipes/filter-center.pipe';
 
 import { environment } from 'src/environments/environment';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import {
@@ -27,7 +27,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import * as DayJs from 'dayjs';
-import { shareReplay, take } from 'rxjs/operators';
+import { shareReplay, take, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 
@@ -92,7 +92,7 @@ export class VaccineSlotsComponent implements OnInit {
   vaccineType: string = this.VACCINES.ALL;
   age: string = AGE.ALL;
   hospitalName: string = '';
-
+  hospitalUpdate = new Subject<string>();
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -105,6 +105,7 @@ export class VaccineSlotsComponent implements OnInit {
     private alertService:AlertService,
   ) {
     this.getSubscribedCenters();
+    this.listenHospital();
   }
 
   getSubscribedCenters() {
@@ -404,8 +405,14 @@ export class VaccineSlotsComponent implements OnInit {
     this.applyFilters();
 
   }
-  hospitalInput(){
-    this.applyFilters();
+  listenHospital(){
+    this.hospitalUpdate.pipe(
+      debounceTime(300),
+      distinctUntilChanged())
+      .subscribe(value => {
+        this.hospitalName = value;
+        this.applyFilters();
+      });
   }
 
   applyFilters(){

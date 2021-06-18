@@ -146,7 +146,7 @@
 
       <div class="filters__search-bar">
         <div class="filters__search-bar__input-wrapper">
-          <input class="filters__search-bar__input-wrapper__input" type="text" (input)="hospitalInput()"
+          <input class="filters__search-bar__input-wrapper__input" type="text" (ngModelChange)="this.hospitalUpdate.next($event)"
             placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
           <i class="fa fa-times filters__search-bar__input-wrapper__cross-icon" *ngIf="hospitalName.length > 0"></i>
         </div>
