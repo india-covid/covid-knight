@@ -48,11 +48,9 @@ export class VaccineAuthHomeComponent implements OnInit {
 
 
   shareMessage: string =
-    `Covid Knight is a website that sends free vaccine alerts on WhatsApp in real-time. You can also check vaccine availability here for all ages and all  types of vaccines.
-    Share it with your friends and family.
-    https://vaccine.india-covid.info/`;
+    `Covid Knight is a website that sends free vaccine alerts on WhatsApp in real-time. You can also check vaccine availability here for all ages and all  types of vaccines. Share it with your friends and family.`;
   readonly shareMessageEncoded =
-    'whatsapp://send?text=' + window.encodeURIComponent(this.shareMessage)
+    'whatsapp://send?text=' + window.encodeURIComponent(this.shareMessage+'https://vaccine.india-covid.info/')
 
 
   constructor(
