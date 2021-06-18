@@ -62,7 +62,7 @@ export class VaccineSlotsComponent implements OnInit {
   AGE = AGE;
   VACCINES = VACCINES;
   queryData: any | null = null;
-
+  filterComplete:boolean=false;
   readonly MAXSUBSCRIPTION: number = environment.maxSubscription;
   accountTotalSubscribe: number = 0;
 
@@ -268,8 +268,12 @@ export class VaccineSlotsComponent implements OnInit {
     this.centers = newArray;
 
     this.spinner.hide();
-    this.showCentersList = true;
     this.applyFilters();
+    this.showCentersList = true;
+    setTimeout(()=>{
+      this.filterComplete=true;
+    },1000)
+
   }
 
   getSessionsForDay(day: number) {
@@ -281,7 +285,7 @@ export class VaccineSlotsComponent implements OnInit {
       this.applyFilters();
 
       setTimeout(() => {
-        this.showCentersList = true;
+       this.showCentersList = true;
       }, 0);
       return;
     }

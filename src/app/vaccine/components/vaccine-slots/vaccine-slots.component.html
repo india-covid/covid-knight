@@ -155,7 +155,7 @@
   </div>
 
   <div class="slots-body" #slotsBody>
-    <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]>
+    <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]  [@.disabled]="!filterComplete">
       <div class="no-centers__content">
         <div class="no-centers__content__img">
           <img class="no-centers__content__img__image" src="../../../assets/img/no-data.svg" alt="" />
@@ -172,8 +172,7 @@
     </div>
 
     <div class="myCard" *ngIf="
-        !isCenterEmpty && showCentersList && centersWithSession.length !== 0
-      " [@enterAnimationRight]>
+        !isCenterEmpty && showCentersList && centersWithSession.length !== 0" [@enterAnimationRight] [@.disabled]="!filterComplete">
 
       <div class="myCard__card-wrapper" *ngFor="let center of centersWithSessionFiltered; let i = index">
         <div class="no-centers" *ngIf="center.name == 'noMatch'" [@enterAnimationRight]>
@@ -188,7 +187,7 @@
 
 
         <div class="myCard__item" [class.lastCard]="centersWithSession.length - 1 == i" *ngIf="center.name != 'noMatch'"
-          [@enterAnimationRight]>
+          [@enterAnimationRight] [@.disabled]="!filterComplete">
           <div class="myCard__item__content">
             <label [for]="center._id" name="subscribe" class="myCard__item__content__myCard-head form-check-label d-flex" [class.checkedCenter]="center.subscribed == 'temp'
               ">
