@@ -6,7 +6,7 @@ import {
 enum MENUITEMS {
   HOME = 'home',
   CONTACT = 'contact',
-  DONATE = 'donate'
+  FAQ = 'faq'
 }
 @Component({
   selector: 'app-header',

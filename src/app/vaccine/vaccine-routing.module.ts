@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VaccineHomepageComponent } from './components/vaccine-homepage/vaccine-homepage.component';
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
+import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,12 @@ const routes: Routes = [
   {
     path: 'contact',
     component: VaccineContactComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'faq',
+    component: VaccineFaqComponent,
     canActivate: [AuthGuard]
 
   },
