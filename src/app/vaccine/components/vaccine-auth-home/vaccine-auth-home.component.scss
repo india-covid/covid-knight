@@ -69,8 +69,8 @@ $text-color: var(--app-color-dark);
     // border:solid red;
     &__icon {
       // border:solid green;
-      height: 60px;
-      width: 60px;
+      height:80px;
+      width: 80px;
       position: relative;
       top: -3px;
       img {
@@ -236,9 +236,14 @@ $text-color: var(--app-color-dark);
   }
 }
 
-
+.auth-home__body__head{
+  display: none;
+}
 @media screen and (max-width: 740px) {
   .auth-home__body__credits{
+    display: block;
+  }
+  .auth-home__body__head{
     display: block;
   }
 

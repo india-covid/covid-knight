@@ -7,6 +7,7 @@ import { Center } from '../models/center.model';
 })
 export class FilterCenterPipe implements PipeTransform {
  VACCINES=VACCINES;
+ age='All Age';
   transform(centers: any[], hospitalName: string,dose:string,vaccineType:any,age:string,activeDate:string): any {
     let doseType:string;
     if(dose == DOSE.DOSE1){
@@ -16,6 +17,7 @@ export class FilterCenterPipe implements PipeTransform {
     }else if(dose == DOSE.ALL){
       doseType ='all'
     }
+    this.age= age;
     let result = centers.filter((center:any) => {
         if(
           this.checkCenterName(center,hospitalName,activeDate) &&
@@ -40,13 +42,33 @@ export class FilterCenterPipe implements PipeTransform {
     }
 
     checkAge(center:any,age:string,activeDate:string){
-     return (age!='All Age'?((center[activeDate][0]?center[activeDate][0].minAgeLimit==parseInt(age):false) || (center[activeDate][1]?center[activeDate][1].minAgeLimit==parseInt(age):false) ):true)
+     return (age!='All Age'?(this.checkSessions(center[activeDate],'minAgeLimit','===',parseInt(age)) ):true)
     }
     checkDoseType(center:any,doseType:string,activeDate:string){
-      return (doseType!='all'?((center[activeDate][0]?center[activeDate][0]['availableCapacityDose'+doseType]:false) || (center[activeDate][1]?center[activeDate][1]['availableCapacityDose'+doseType]:false)):true);
+      return (doseType!='all'?(this.checkSessions(center[activeDate],('availableCapacityDose'+doseType),">",0)):true);
     }
 
     vaccineType(center:any,vaccineType:VACCINES,activeDate:string){
-      return (vaccineType!='All'?((center[activeDate][0]?center[activeDate][0].vaccine===vaccineType:false) || (center[activeDate][1]?center[activeDate][1].vaccine===vaccineType:false)):true);
+      return (vaccineType!='All'?(this.checkSessions(center[activeDate],'vaccine','===',vaccineType)):true);
+    }
+
+    checkSessions(sessions:any,check:string,operator:string,operand:string|number){
+      for(let i=0;i<sessions.length;i++){
+        switch(operator){
+          case ">":
+            if(sessions[i] && sessions[i][check] && sessions[i][check]>operand &&  (this.age!=='All Age'?(sessions[i].minAgeLimit===parseInt(this.age)):true)){
+              return true;
+            }
+            break;
+          case "===":
+            if(sessions[i] && sessions[i][check] && sessions[i][check]===operand){
+              return true;
+            }
+            break;
+        }
+
+      }
+
+      return false;
     }
  }

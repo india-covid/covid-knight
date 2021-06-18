@@ -2,7 +2,7 @@ import { AlertService } from './../../services/alert.service';
 import { FilterCenterPipe } from './../../pipes/filter-center.pipe';
 
 import { environment } from 'src/environments/environment';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
 import {
@@ -27,7 +27,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import * as DayJs from 'dayjs';
-import { shareReplay, take } from 'rxjs/operators';
+import { shareReplay, take, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 
@@ -62,7 +62,7 @@ export class VaccineSlotsComponent implements OnInit {
   AGE = AGE;
   VACCINES = VACCINES;
   queryData: any | null = null;
-
+  filterComplete:boolean=false;
   readonly MAXSUBSCRIPTION: number = environment.maxSubscription;
   accountTotalSubscribe: number = 0;
 
@@ -92,7 +92,7 @@ export class VaccineSlotsComponent implements OnInit {
   vaccineType: string = this.VACCINES.ALL;
   age: string = AGE.ALL;
   hospitalName: string = '';
-
+  hospitalUpdate = new Subject<string>();
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -105,6 +105,7 @@ export class VaccineSlotsComponent implements OnInit {
     private alertService:AlertService,
   ) {
     this.getSubscribedCenters();
+    this.listenHospital();
   }
 
   getSubscribedCenters() {
@@ -255,12 +256,25 @@ export class VaccineSlotsComponent implements OnInit {
       let d = this.m[this.activeDate][0]?.minAgeLimit ||0 ;
       return Number(d)-Number(c);
     });
+    newArray.sort((a,b)=>{
+      this.n = a;
+       this.m = b;
+     let c = this.n[this.activeDate][0]?.availableCapacityDose1 || 0;
+     let d = this.n[this.activeDate][0]?.availableCapacityDose2 ||0 ;
+     let e = this.m[this.activeDate][1]?.availableCapacityDose1 || 0;
+     let f = this.m[this.activeDate][1]?.availableCapacityDose2 ||0 ;
+     return Number(e)-Number(c) ||  Number(f)-Number(d) ;
+   });
     this.centersWithSession = newArray;
     this.centers = newArray;
 
     this.spinner.hide();
-    this.showCentersList = true;
     this.applyFilters();
+    this.showCentersList = true;
+    setTimeout(()=>{
+      this.filterComplete=true;
+    },1000)
+
   }
 
   getSessionsForDay(day: number) {
@@ -272,7 +286,7 @@ export class VaccineSlotsComponent implements OnInit {
       this.applyFilters();
 
       setTimeout(() => {
-        this.showCentersList = true;
+       this.showCentersList = true;
       }, 0);
       return;
     }
@@ -386,13 +400,19 @@ export class VaccineSlotsComponent implements OnInit {
 
   }
 
-  vaccineTypeChange(vacc: any): void {
+  vaccineTypeChange(vacc:string): void {
     this.vaccineType = vacc;
     this.applyFilters();
 
   }
-  hospitalInput(){
-    this.applyFilters();
+  listenHospital(){
+    this.hospitalUpdate.pipe(
+      debounceTime(300),
+      distinctUntilChanged())
+      .subscribe(value => {
+        this.hospitalName = value;
+        this.applyFilters();
+      });
   }
 
   applyFilters(){

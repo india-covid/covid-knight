@@ -34,7 +34,7 @@ maxSubReached(maxSub:number,currentSub:number){
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-      window.open("https://rzp.io/l/vaccinewatcher");
+      window.open("https://rzp.io/l/UUbrXGrnLj");
     } else if (result.isDenied) {
 
     }

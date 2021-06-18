@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="filters">
+    <div class="filters mt-1">
       <p class="filters__title">Filters</p>
       <div class="filters__menu">
         <div class="">
@@ -93,6 +93,16 @@
                   </div>
                 </a>
               </li>
+              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.VACCINE3)">
+                <a class="dropdown-item">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="vaccine3" name="vaccine" value="true" />
+                    <label class="form-check-label" for="vaccine3">
+                      {{ VACCINES.VACCINE3 }}
+                    </label>
+                  </div>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -136,7 +146,7 @@
 
       <div class="filters__search-bar">
         <div class="filters__search-bar__input-wrapper">
-          <input class="filters__search-bar__input-wrapper__input" type="text" (input)="hospitalInput()"
+          <input class="filters__search-bar__input-wrapper__input" type="text" (ngModelChange)="this.hospitalUpdate.next($event)"
             placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
           <i class="fa fa-times filters__search-bar__input-wrapper__cross-icon" *ngIf="hospitalName.length > 0"></i>
         </div>
@@ -145,7 +155,7 @@
   </div>
 
   <div class="slots-body" #slotsBody>
-    <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]>
+    <div class="no-centers" *ngIf="isCenterEmpty" [@enterAnimationRight]  [@.disabled]="!filterComplete">
       <div class="no-centers__content">
         <div class="no-centers__content__img">
           <img class="no-centers__content__img__image" src="../../../assets/img/no-data.svg" alt="" />
@@ -162,8 +172,7 @@
     </div>
 
     <div class="myCard" *ngIf="
-        !isCenterEmpty && showCentersList && centersWithSession.length !== 0
-      " [@enterAnimationRight]>
+        !isCenterEmpty && showCentersList && centersWithSession.length !== 0" [@enterAnimationRight] [@.disabled]="!filterComplete">
 
       <div class="myCard__card-wrapper" *ngFor="let center of centersWithSessionFiltered; let i = index">
         <div class="no-centers" *ngIf="center.name == 'noMatch'" [@enterAnimationRight]>
@@ -178,7 +187,7 @@
 
 
         <div class="myCard__item" [class.lastCard]="centersWithSession.length - 1 == i" *ngIf="center.name != 'noMatch'"
-          [@enterAnimationRight]>
+          [@enterAnimationRight] [@.disabled]="!filterComplete">
           <div class="myCard__item__content">
             <label [for]="center._id" name="subscribe" class="myCard__item__content__myCard-head form-check-label d-flex" [class.checkedCenter]="center.subscribed == 'temp'
               ">
@@ -191,7 +200,7 @@
               <div class="myCard__item__content__myCard-head__button"
                 *ngIf="center.subscribed && center.subscribed !== 'temp'">
                 <button class="app-btn btn-unsubscribe">
-                  Already Subscribed
+                  Subscribed
                 </button>
               </div>
 
@@ -214,7 +223,7 @@
               <hr />
               <div class="myCard__item__content__myCard-body__slots">
                 <div class="myCard__item__content__myCard-body__slots__item" *ngFor="let session of center[this.activeDate]">
-                  <div>
+                  <div >
                     <div class="row">
                       <div class="col">
                         <span>Age: </span><span>

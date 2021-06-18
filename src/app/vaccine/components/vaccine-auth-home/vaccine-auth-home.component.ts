@@ -49,9 +49,9 @@ export class VaccineAuthHomeComponent implements OnInit {
 
   shareMessage: string =
     'I found this website which sends free personalised vaccine availability alerts based on centers/hospitals on whatsapp. Have a look or share it with someone who might need it.\n https://vaccine.india-covid.info/';
-  readonly shareMessageEncoded = this.dom.bypassSecurityTrustUrl(
+  readonly shareMessageEncoded =
     'whatsapp://send?text=' + window.encodeURIComponent(this.shareMessage)
-  );
+
 
   constructor(
     private authService: AuthService,
@@ -102,6 +102,20 @@ export class VaccineAuthHomeComponent implements OnInit {
 
   lastSyncTime() {
     return this.vaccineRestService.lastSyncTime();
+  }
+
+  share(){
+    if (navigator.share) {
+      navigator.share({
+        title: 'Covid Knight',
+        text: this.shareMessage,
+        url: 'https://vaccine.india-covid.info',
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }else{
+      window.open(this.shareMessageEncoded);
+    }
   }
 
 }

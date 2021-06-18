@@ -41,10 +41,10 @@
     <div class="auth-home__body__head">
       <div class="auth-home__body__head__main">
         <div class="auth-home__body__head__icon">
-          <img src="../../assets/icons/shield.png" alt="" />
+          <img src="../../assets/icons/knight.svg" alt="" />
         </div>
         <div class="auth-home__body__head__title">
-          <p class="auth-home__body__head__title__text">VACCINE WATCHER</p>
+          <p class="auth-home__body__head__title__text">Covid Knight</p>
           <p class="auth-home__body__head__title__slogan">Lets get vaccinated (:</p>
         </div>
       </div>
@@ -87,7 +87,7 @@
     </div>
     <div class="align-items-center">
       <div class="myCard col col-lg-12 col-md-12 myCard__card4">
-        <a [href]="shareMessageEncoded" data-action="share/whatsapp/share" >
+        <a (click)="share()" >
         <div class="myCard__content">
 
           <p class="myCard__content__text-large">Share</p>
