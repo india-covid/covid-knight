@@ -17,7 +17,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
         style({ transform: 'translateX(100%)', opacity: 0 }),
         animate('150ms', style({ transform: 'translateX(0)', opacity: 1 })),
       ]),
+
     ]),
+
   ],
 })
 export class VaccineFaqComponent implements OnInit {

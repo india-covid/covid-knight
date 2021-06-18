@@ -12,7 +12,7 @@
   <div class="faqs">
     <section class="faq" *ngFor="let faq of faqs; let i=index" (click)="onQuestionClick(i)">
       <h2 [ngClass]="{'faq_question': true, 'to-bottom': selectedRowIndex === i, 'to-top': selectedRowIndex !== i}">{{ faq.question }}</h2>
-      <div class="faq_answer" *ngIf="selectedRowIndex === i">{{ faq.answer }}</div>
+      <div class="faq_answer" *ngIf="selectedRowIndex === i" >{{ faq.answer }}</div>
     </section>
   </div>
 </div>
