@@ -47,6 +47,7 @@ export enum AGE{
 export enum VACCINES{
   VACCINE1="COVAXIN",
   VACCINE2="COVISHIELD",
-  ALL="All"
+  VACCINE3="Sputnik",
+  ALL="All",
 
 }

@@ -42,7 +42,7 @@
       margin:0;
       padding:5px;
       padding-left:25px;
-      font-weight:bold;
+      // font-weight:bold;
     }
     .app-btn{
       background-color: var(--app-color-primary);
@@ -225,7 +225,7 @@
 
 .no-centers{
   width:100%;
-
+  margin-top:100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -350,5 +350,3 @@
     padding:0;
   }
 }
-
-

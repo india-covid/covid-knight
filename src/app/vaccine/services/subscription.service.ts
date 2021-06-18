@@ -2,22 +2,27 @@ import { Center } from 'src/app/vaccine/models/center.model';
 import { SubscribedCenter } from './../models/subscribedCenter';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, timer, of, BehaviorSubject, } from 'rxjs';
+import { forkJoin, timer, of, BehaviorSubject, Subscription, } from 'rxjs';
 import { filter, map, catchError } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
 import { VaccineRestService } from './vaccine-rest.service';
 import { environment } from 'src/environments/environment';
 import { Subscriptions } from './../models/subscriptions';
+import { AuthService } from 'src/app/core/auth.service';
 const OTP_EXPIRE_MIN = 3;
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
   private readonly vaccineBase = '/vaccine'
-
-  constructor(private http: HttpClient,private storageService: LocalStorageService, private vaccineRestService: VaccineRestService) {
-    this.getSubscriptionCenters();
+  authSub:Subscription;
+  constructor(private authService:AuthService,private http: HttpClient,private storageService: LocalStorageService, private vaccineRestService: VaccineRestService) {
+    this.authSub = this.authService.user$.subscribe((user) => {
+      if (user && user.phoneNumber) {
+        this.getSubscriptionCenters();
+      }
+    });
    }
   private _secondInterval = timer(0, 1000);
   private storageKey = 'subscription';

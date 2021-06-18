@@ -50,9 +50,10 @@ $text-muted-color: var(--app-color-light-tint);
       // border:solid red;
       &__icon {
         // border:solid green;
-        height: 60px;
-        width: 60px;
+        height: 160px;
+        width: 160px;
         position: relative;
+        padding-left:5px;
         top: -3px;
         img {
           height: 100%;
@@ -63,7 +64,8 @@ $text-muted-color: var(--app-color-light-tint);
         margin-left: 10px;
         // border:solid blue;
         &__text {
-          font-size:1.6rem;
+          // font-size:calc(4vw + 10px);
+           font-size: min(calc(4vw + 10px), 30px);
           padding: 0;
           margin: 0;
           white-space: nowrap;

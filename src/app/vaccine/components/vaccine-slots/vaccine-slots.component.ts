@@ -255,6 +255,15 @@ export class VaccineSlotsComponent implements OnInit {
       let d = this.m[this.activeDate][0]?.minAgeLimit ||0 ;
       return Number(d)-Number(c);
     });
+    newArray.sort((a,b)=>{
+      this.n = a;
+       this.m = b;
+     let c = this.n[this.activeDate][0]?.availableCapacityDose1 || 0;
+     let d = this.n[this.activeDate][0]?.availableCapacityDose2 ||0 ;
+     let e = this.m[this.activeDate][1]?.availableCapacityDose1 || 0;
+     let f = this.m[this.activeDate][1]?.availableCapacityDose2 ||0 ;
+     return Number(e)-Number(c) ||  Number(f)-Number(d) ;
+   });
     this.centersWithSession = newArray;
     this.centers = newArray;
 
@@ -386,7 +395,7 @@ export class VaccineSlotsComponent implements OnInit {
 
   }
 
-  vaccineTypeChange(vacc: any): void {
+  vaccineTypeChange(vacc:string): void {
     this.vaccineType = vacc;
     this.applyFilters();
 
