@@ -5,14 +5,13 @@
       <i class="ri-home-3-fill header__item__icon"></i>
       <p class="header__item__label" >Home</p>
     </a>
-    <a href="#contact" class="header__item" (click)="changeMenu(MENUITEMS.CONTACT)" [class.header__item__active]="activeMenuItem ==='contact'">
-      <i class="ri-phone-fill header__item__icon"></i>
-      <p  class="header__item__label">Contact</p>
-    </a>
     <a href="#faq" class="header__item"  (click)="changeMenu(MENUITEMS.FAQ)"  [class.header__item__active]="activeMenuItem ==='faq'">
       <i class="ri-question-answer-fill header__item__icon"></i>
       <p class="header__item__label">FAQ</p>
     </a>
+    <a href="#contact" class="header__item" (click)="changeMenu(MENUITEMS.CONTACT)" [class.header__item__active]="activeMenuItem ==='contact'">
+      <i class="ri-phone-fill header__item__icon"></i>
+      <p  class="header__item__label">Contact</p>
+    </a>
   </div>
-
 </div>
