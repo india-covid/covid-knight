@@ -27,8 +27,8 @@ $text-muted-color:#d9d9d9;// var(--app-color-light-tint);
   &__app-content{
     // //border:solid blue;
     background-color: rgb(13, 108, 185);
-    height:100%;
-
+    height:100vh;
+    min-height: 750px;
     overflow: hidden;
     width:50%;
     // background-color: rgba(0, 0, 0, 0.808);
