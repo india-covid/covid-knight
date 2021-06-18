@@ -2,8 +2,8 @@ $action-button-color: var(--app-color-light);
 $action-button-bg-color: var(--app-color-dark-tint);
 $stage1-bg-color: var(--app-color-primary-tint);
 $head-text-color: var(--app-color-light);
-$text-color: var(--app-color-light);
-$text-muted-color: var(--app-color-light-tint);
+$text-color:#d9d9d9;// var(--app-color-light-tint);
+$text-muted-color: #d9d9d9;// var(--app-color-light-tint);
 
 
 .homepage-wrapper{
@@ -23,7 +23,7 @@ $text-muted-color: var(--app-color-light-tint);
   margin: 0 auto;
   overflow: hidden;
   overflow-y: scroll;
-
+  letter-spacing: 1.5px;;
   &__layer {
     background-color: rgba(0, 0, 0, 0.2);
     height:100%;
@@ -108,7 +108,7 @@ $text-muted-color: var(--app-color-light-tint);
 
     }
     .last-sync {
-     color:white !important;
+     color:$text-color !important;
      padding:10px;
      margin-top:30px;
     }

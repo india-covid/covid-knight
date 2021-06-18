@@ -2,6 +2,7 @@
   // position: absolute;
   // bottom:20px;
   color:inherit;
+  font-size: 14px;
 
   p{
     padding:5px;
@@ -12,8 +13,9 @@
     color:inherit;
   }
   .contributor{
-    font-weight: bold;
-    text-decoration: underline;
+    font-weight:600;
+    // text-decoration: underline;
+    letter-spacing: 2px;
   }
 
   text-align: center;
