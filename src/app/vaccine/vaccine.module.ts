@@ -26,7 +26,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
+import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     FilterCenterPipe,
     VaccineDonateComponent,
     VaccineContactComponent,
-    VaccineHowToComponent
+    VaccineHowToComponent,
+    VaccineFaqComponent
   ],
   imports: [
     CommonModule,
@@ -58,8 +59,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     AccordionModule.forRoot(),
     PopoverModule.forRoot(),
     NgxSkeletonLoaderModule,
-        SharedModule
-
+    SharedModule
   ],
   providers:[
   FilterCenterPipe
