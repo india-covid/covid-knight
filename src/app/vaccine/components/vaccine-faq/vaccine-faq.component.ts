@@ -36,6 +36,11 @@ export class VaccineFaqComponent implements OnInit {
           `We do not collect any other information other than WhatsApp number. Phone numbers are automatically deleted after the notification subscription expires. We do not run any kind of ads. You can support us by <a href="https://rzp.io/l/UUbrXGrnLj" target="_blank">donating</a>.`,
       },
       {
+        question: 'How do I subscribe to WhatsApp notifications?',
+        answer:
+          'Click on add centers, select your area, select all the the centers you want to subscribe to and click subscribe.',
+      },
+      {
         question: 'Can I Stop the notifications?',
         answer:
           `Yes, you can stop the notification anytime by visiting this website.`,
