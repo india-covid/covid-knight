@@ -124,7 +124,7 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
   deferredPrompt: any;
-  showButton = true;
+  showButton = false;
 
   @HostListener('window:beforeinstallprompt', ['$event'])
   onbeforeinstallprompt(e:any) {
