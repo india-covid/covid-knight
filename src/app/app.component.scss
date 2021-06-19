@@ -44,7 +44,7 @@ $text-muted-color: #d9d9d9; // var(--app-color-light-tint);
   //border:solid yellow;
   &__layer {
     padding-top: 30px;
-    height: 100%;
+    height: 100vh;
     // min-height:700px;
     position: relative;
     // padding-bottom:50px;
@@ -142,11 +142,12 @@ $text-muted-color: #d9d9d9; // var(--app-color-light-tint);
 
   &__credits {
     // position: absolute;
-    bottom: 20px;
     color: white;
     text-align: center;
     width: 100%;
     padding-top: 20px;
+    position: absolute; 
+    bottom: 20px; 
     //border:solid green;
   }
 }
