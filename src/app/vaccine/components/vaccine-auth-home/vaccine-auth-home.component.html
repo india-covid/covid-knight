@@ -9,6 +9,8 @@
             {{user?.phoneNumber}}
           </p>
         </div>
+        <button class="add-btn btn btn-success" (click)="addToHomeScreen()" *ngIf="showButton">Add App to Home Screen</button>
+
 
         <div class="auth-home__user-info__logout">
           <ng-template #popTemplate>
@@ -52,6 +54,8 @@
         <app-last-sync></app-last-sync>
       </div>
     </div>
+
+
     <div class="align-items-center auth-home__body__main">
       <div class="myCard col col-lg-12 col-md-12 myCard__card1" routerLink="/subscribed">
         <div class="myCard__content">

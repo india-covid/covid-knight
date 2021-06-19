@@ -11,6 +11,7 @@ $text-color: var(--app-color-dark);
   &__user-info{
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     display: flex;
+    position: relative;
     padding:10px;
     padding-left:20px;
     padding-right:20px;
@@ -247,5 +248,15 @@ $text-color: var(--app-color-dark);
   .auth-home__body__head{
     display: block;
   }
+
+}
+
+.add-btn{
+  height:35px;
+  overflow: hidden;
+  margin:5px;
+  width:160px;
+  position: absolute;
+  right:40px;
 
 }

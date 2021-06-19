@@ -11,6 +11,7 @@ import {
   ViewChild,
   ElementRef,
   TemplateRef,
+  HostListener,
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
@@ -45,6 +46,7 @@ export class VaccineAuthHomeComponent implements OnInit {
   isSubscriptionLoaded: boolean = false;
   readonly MAXSUBSCRIPTION = environment.maxSubscription;
   @ViewChild('authHomeBody') authHomeBody: ElementRef | null = null;
+  @ViewChild('addBtn') addBtn: ElementRef | null = null;
 
 
   shareMessage: string =
@@ -116,6 +118,39 @@ export class VaccineAuthHomeComponent implements OnInit {
     }else{
       window.open(this.shareMessageEncoded);
     }
+  }
+  ngAfterViewInit(){
+    // this.addToHomeScreenInit();
+  }
+
+  deferredPrompt: any;
+  showButton = true;
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  onbeforeinstallprompt(e:any) {
+    console.log(e);
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    this.deferredPrompt = e;
+    this.showButton = true;
+  }
+
+  addToHomeScreen() {
+    // hide our user interface that shows our A2HS button
+    this.showButton = false;
+    // Show the prompt
+    this.deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    this.deferredPrompt.userChoice
+      .then((choiceResult:any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        this.deferredPrompt = null;
+      });
   }
 
 }
