@@ -9,18 +9,16 @@
 @import "theme/theme.scss";
 @import "~ngx-toastr/toastr.css";
 
-
 body {
   font-family: "Helvetica", sans-serif;
   scroll-behavior: smooth;
-overflow: hidden;
+  overflow: hidden;
 }
-html{
+html {
   scroll-behavior: smooth;
   overflow: hidden;
-
 }
-div{
+div {
   scroll-behavior: smooth;
 }
 
@@ -61,51 +59,47 @@ div{
   }
 }
 
-
-
-.selector{
+.selector {
   border-bottom: 2px solid rgb(83, 82, 82);
   margin: auto;
-  margin-top:30px;
- }
+  margin-top: 30px;
+}
 
-
- .app-btn-wa{
-  width:150px;
-  padding:7px;
+.app-btn-wa {
+  width: 150px;
+  padding: 7px;
   background: var(--wa-btn-bg-color);
-  color:white;
-  border-radius:5px;
+  color: white;
+  border-radius: 5px;
   font-weight: bold;
- }
- .app-btn{
-  width:150px;
-  padding:7px;
+}
+.app-btn {
+  width: 150px;
+  padding: 7px;
   background: var(--btn-bg-color);
-  color:white;
-  border-radius:5px;
+  color: white;
+  border-radius: 5px;
   font-weight: bold;
 }
 
-.disabled-btn{
-background-color: var(--app-color-medium) !important;
+.disabled-btn {
+  background-color: var(--app-color-medium) !important;
 }
 
-.app-input{
-  color: black ;
-  border: none ;
-  background: none ;
-  border-bottom: 2px solid rgb(83, 82, 82) ;
-  outline: none ;
-  transition: 0.3s ease all ;
-  margin: auto ;
-  border-radius: 0 ;
-  padding:10px !important;
+.app-input {
+  color: black;
+  border: none;
+  background: none;
+  border-bottom: 2px solid rgb(83, 82, 82);
+  outline: none;
+  transition: 0.3s ease all;
+  margin: auto;
+  border-radius: 0;
+  padding: 10px !important;
   font-weight: 300;
 }
 
-
-.app-input:focus{
+.app-input:focus {
   box-shadow: none !important;
   border-bottom: 2px solid rgb(29, 122, 209);
 }
@@ -113,9 +107,9 @@ background-color: var(--app-color-medium) !important;
 @media screen and (min-width: 740px) {
   ::-webkit-scrollbar {
     width: 5px;
-    height:5px;
+    height: 5px;
   }
-      ::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background: #ffffff;
   }
 
@@ -129,15 +123,18 @@ background-color: var(--app-color-medium) !important;
   }
 }
 
-  .hidden{
+.hidden {
   display: none !important;
 }
 
-
-.limitReachedModal{
-  top:20%;
+.limitReachedModal {
+  top: 20%;
 }
 
-.submitSuccessModel{
-  top:20%;
+.submitSuccessModel {
+  top: 20%;
+}
+
+.form-control {
+  font-size: 15px;
 }
