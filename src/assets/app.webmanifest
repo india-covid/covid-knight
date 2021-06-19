@@ -1,0 +1,15 @@
+{
+  "background_color": "#0081e3",
+  "description": "Get free vaccine availability alerts on your WhatsApp, 18+ & 45+ .",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icons/knight.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Covid Knight Vaccine Alerts",
+  "short_name": "Covid Knight",
+  "start_url": "/home"
+}
