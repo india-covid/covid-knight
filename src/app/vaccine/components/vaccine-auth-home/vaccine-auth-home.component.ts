@@ -18,8 +18,7 @@ import { User } from 'src/app/core/models/user.model';
 import { take } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VaccineRestService } from '../../services/vaccine-rest.service';
-
-
+import { PwaService } from 'src/app/core/services/pwa/pwa.service';
 
 @Component({
   selector: 'app-vaccine-auth-home',
@@ -41,6 +40,7 @@ import { VaccineRestService } from '../../services/vaccine-rest.service';
   ],
 })
 export class VaccineAuthHomeComponent implements OnInit {
+
   user: User | null = null;
   subscribedCenters: SubscribedCenter[] = [];
   isSubscriptionLoaded: boolean = false;
@@ -63,6 +63,7 @@ export class VaccineAuthHomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private dom: DomSanitizer,
     private alertService:AlertService,
+    public Pwa:PwaService
   ) {
     this.getSubscribedCenters();
     this.authService.user$.pipe(take(1)).subscribe((user) => {
@@ -82,8 +83,9 @@ export class VaccineAuthHomeComponent implements OnInit {
   getSubscribedCenters() {
 
     this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
-      this.isSubscriptionLoaded = true;
       this.spinner.hide();
+      if(!subscribedCenters){return};
+      this.isSubscriptionLoaded = true;
 
       this.subscribedCenters = subscribedCenters;
     });
@@ -113,44 +115,10 @@ export class VaccineAuthHomeComponent implements OnInit {
         text: this.shareMessage,
         url: 'https://vaccine.india-covid.info',
       })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error sharing', error));
     }else{
       window.open(this.shareMessageEncoded);
     }
   }
-  ngAfterViewInit(){
-    // this.addToHomeScreenInit();
-  }
 
-  deferredPrompt: any;
-  showButton = false;
-
-  @HostListener('window:beforeinstallprompt', ['$event'])
-  onbeforeinstallprompt(e:any) {
-    console.log(e);
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    this.deferredPrompt = e;
-    this.showButton = true;
-  }
-
-  addToHomeScreen() {
-    // hide our user interface that shows our A2HS button
-    this.showButton = false;
-    // Show the prompt
-    this.deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt
-    this.deferredPrompt.userChoice
-      .then((choiceResult:any) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        this.deferredPrompt = null;
-      });
-  }
 
 }

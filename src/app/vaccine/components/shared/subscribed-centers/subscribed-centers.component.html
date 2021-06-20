@@ -7,7 +7,7 @@
             <div class="myCard__item__content">
               <div class="myCard__item__content__myCard-head">
                 <div class="myCard__item__content__myCard-head__text">
-                  {{center.center.name}}
+                  {{center.center.name }}
                 </div>
 
                 <div class="myCard__item__content__myCard-head__button">
@@ -18,12 +18,12 @@
               <div class="myCard__item__content__myCard-body">
                 <div class="myCard__item__content__myCard-body__address">
                   <div class="myCard__item__content__myCard-body__address__icon"><i class="ri-map-pin-user-line"></i></div>
-                  <div class="myCard__item__content__myCard-body__address__text">{{center.center.address}}</div>
+                  <div class="myCard__item__content__myCard-body__address__text">{{center.center.address}} - {{center.center.pincode }}</div>
                 </div>
                 <hr>
                 <div class="myCard__item__content__myCard-body__slots">
                   <div class="myCard__item__content__myCard-body__slots__item" >
-                    <div ><span>Subscription days left: </span><span> {{getRemainingTime(center.to)}} </span>  </div>
+                    <div ><span>Subscription days left: </span><b><span> {{getRemainingTime(center.to)}} </span> </b> </div>
                   </div>
                 </div>
 

@@ -1,5 +1,5 @@
 <div class="slots-wrapper" #slots>
-  <app-header-back headerText="Subscribe Centers" routeTo="/home"></app-header-back>
+  <app-header-back [headerText]="headerText" routeTo="/home"></app-header-back>
   <div class="slots-head header" #header>
     <div class="date-slider">
       <div class="slider">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="filters mt-1">
-      <p class="filters__title">Filters</p>
+      <!-- <p class="filters__title">Filters</p> -->
       <div class="filters__menu">
         <div class="">
           <div class="btn-group" dropdown #doseDropDown="bs-dropdown" [autoClose]="true">
@@ -147,7 +147,7 @@
       <div class="filters__search-bar">
         <div class="filters__search-bar__input-wrapper">
           <input class="filters__search-bar__input-wrapper__input" type="text" (ngModelChange)="this.hospitalUpdate.next($event)"
-            placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" />
+            placeholder="Search By Hospital/Center Name" [(ngModel)]="hospitalName" />
           <i class="fa fa-times filters__search-bar__input-wrapper__cross-icon" *ngIf="hospitalName.length > 0"></i>
         </div>
       </div>

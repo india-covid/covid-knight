@@ -26,7 +26,7 @@ export class SubscriptionService {
    }
   private _secondInterval = timer(0, 1000);
   private storageKey = 'subscription';
-   _subscribedCenters = new BehaviorSubject<SubscribedCenter[]>([]);
+   _subscribedCenters = new BehaviorSubject<SubscribedCenter[] | null>(null);
    subscribedCenters$ = this._subscribedCenters.asObservable();
 
   get wizardResult() {

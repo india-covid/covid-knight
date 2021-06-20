@@ -3,7 +3,7 @@ $head-text-color: var(--app-color-dark);
 $text-color: var(--app-color-dark);
 
 .auth-home{
-  overflow: scroll;
+  overflow: auto;
   // position: relative;
   height:100%;
   width:100%;
@@ -41,7 +41,8 @@ $text-color: var(--app-color-dark);
           margin:3px;
           font-size:1.2rem;
           position: relative;
-          bottom: -3px;;
+          bottom: -3px;
+          background-color: transparent;
         }
       }
     }
@@ -53,7 +54,7 @@ $text-color: var(--app-color-dark);
   text-align: center;
   position: relative;
  // min-height:600px;
-  overflow: scroll;
+  overflow: auto;
   min-height:calc( 100% - 50px );
   &__head {
     padding-top: 40px;
@@ -256,11 +257,140 @@ $text-color: var(--app-color-dark);
 }
 
 .add-btn{
-  height:35px;
+  // max-height:55px;
   overflow: hidden;
-  margin:5px;
-  width:160px;
+  margin:auto;
+  max-width:160px;
   position: absolute;
   right:40px;
-
+  // box-shadow: #a99bf0 0px 5px 12px -5px, rgba(41, 183, 248, 0.479) 0px 8px 8px -16px;
 }
+
+
+$neon: #00FFF8;
+
+/* Mixins */
+@mixin gradientBg($direction, $startColor, $endColor) {
+	background: $startColor;
+	background: -moz-linear-gradient($direction,  $startColor 0%, $endColor 80%,$endColor 100%);
+	background: -webkit-linear-gradient($direction,  $startColor 0%, $endColor 80%,$endColor 100%);
+	background: linear-gradient($direction,  $startColor 0%, $endColor 80%,$endColor 100%);
+}
+
+.pop-onhover.bg-gradient3 span,
+.pop-onhover.bg-gradient3:before {
+	@include gradientBg(180deg, #a99bf0, #b0a3f0);
+}
+
+a {
+	text-decoration: none;
+
+	&:hover,
+	&:focus,
+	&:active {
+	  text-decoration: none;
+  }
+}
+
+/* fancy Button */
+.fancy-button {
+	display: inline-block;
+	margin: 0px;
+	font-family: 'Heebo', Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	line-height: 14px;
+	color: #ffffff;
+
+	&.bg-gradient3 {
+		text-shadow: 0 0 1px #546082;
+	}
+
+	&:before {
+		content: '';
+		display: inline-block;
+		height: 30px;
+		position: absolute;
+		bottom: -1px;
+		left: 10px;
+		right: 10px;
+		z-index: -1;
+		border-radius: 2em;
+		filter: blur(14px) brightness(0.9);
+		transform-style: preserve-3d;
+		transition: all 0.3s ease-out;
+	}
+	i {
+		margin-top: -2px;
+		font-size: 1.265em;
+		vertical-align: middle;
+	}
+	span {
+		display: inline-block;
+		padding: 16px 20px;
+		border-radius: 50em;
+		position: relative;
+		z-index: 2;
+		will-change: transform, filter;
+		transform-style: preserve-3d;
+		transition: all 0.3s ease-out;
+	}
+	&:focus{
+		color: #ffffff;
+	}
+	&:hover {
+		color: #ffffff;
+
+		span {
+			filter: brightness(.9) contrast(1.2);
+			transform: scale(0.96);
+		}
+		&:before {
+			bottom: 3px;
+			filter: blur(6px) brightness(0.8);
+		}
+	}
+	&:active span {
+			filter: brightness(.75) contrast(1.7);
+		}
+	&.pop-onhover {
+		span {
+			border-radius: 4px;
+		}
+		&:before {
+			opacity: 0;
+			bottom: 10px;
+		}
+		&:hover {
+			&:before {
+				bottom: -7px;
+				opacity: 1;
+				filter: blur(16px);
+			}
+			span {
+				// transform: scale(1.03);
+				transform: scale(1);
+			}
+			&:active {
+				span {
+					filter: brightness(1) contrast(1);
+					transform: scale(1);
+					transition: all 0.2s ease-out;
+				}
+				&:before {
+					bottom: 0;
+					filter: blur(5px) brightness(0.85);
+					transition: all 0.2s ease-out;
+				}
+			}
+		}
+	}
+}
+
+.pop-onhover.bg-gradient3 span:hover{
+		@include gradientBg(120deg, #B9AEF0, #ADA1EB);
+}
+
+

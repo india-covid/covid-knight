@@ -4,11 +4,10 @@ $tab-border-color: var(--app-color-primary);
 
 
 .wizard {
-  // border:solid green;
   width: 100%;
-  height:100%;
+  // height:100%;
   position: relative;
-  min-height: 400px;
+  // min-height: 400px;
 
   &__user-info-wrapper{
     margin-bottom:50px;
@@ -23,9 +22,9 @@ $tab-border-color: var(--app-color-primary);
   }
 
   &__content{
-        padding: 0px 30px 0px 30px;
+        padding: 0px 30px 50px 30px;
         position: relative;
-        height:100%;
+        // height:0%;
   }
   &__tab {
     position: relative;
