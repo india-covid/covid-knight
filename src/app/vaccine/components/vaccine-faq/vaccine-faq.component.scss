@@ -39,9 +39,7 @@ $white: #ffffff;
   margin: 1.5rem;
   transition: all .3s ease;
   cursor: pointer;
-  background-color: $white;
   z-index: 1;
-  border-radius:5px;
   &:hover {
     box-shadow: 0 4px 14px rgba($black, .30);
   }
