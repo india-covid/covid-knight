@@ -56,6 +56,7 @@ export class VaccineWizardComponent implements OnInit {
     private router: Router,
     private myElement: ElementRef,
     private spinner: NgxSpinnerService) {
+      this.spinner.hide();
 
   }
   ngOnInit(): void {
