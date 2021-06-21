@@ -2,7 +2,7 @@ import { User } from 'src/app/core/models/user.model';
 import { HostListener, Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { AuthService } from '../../auth.service';
-import { take } from 'rxjs/operators';
+import { take, catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/vaccine/services/alert.service';
 
 @Injectable({
@@ -52,9 +52,11 @@ export class PwaService {
     this.deferredPrompt.userChoice
       .then((choiceResult:any) => {
         if (choiceResult.outcome === 'accepted') {
-          this.authService.ping({phoneNumber:this.user?.phoneNumber},'appInstalled');
+          this.authService.ping({phoneNumber:this.user?.phoneNumber,pwaData:choiceResult},'appInstalled').subscribe((data)=>{
+          },(err)=>{
+          })
         } else {
-          this.authService.ping({phoneNumber:this.user?.phoneNumber},'appInstallDeclined');
+          this.authService.ping({phoneNumber:this.user?.phoneNumber,pwaData:choiceResult},'appInstallDeclined');
         }
         this.deferredPrompt = null;
       });
