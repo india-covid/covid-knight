@@ -1,6 +1,6 @@
 import { AlertService } from './../../services/alert.service';
 import { FilterCenterPipe } from './../../pipes/filter-center.pipe';
-
+import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -91,9 +91,9 @@ export class VaccineSlotsComponent implements OnInit {
   private totalDatesToShow: number = 7;
 
   //filters
-  dose: string = DOSE.ALL;
-  vaccineType: string = this.VACCINES.ALL;
-  age: string = AGE.ALL;
+  dose: string = DOSE.ANY;
+  vaccineType: string = this.VACCINES.ANY;
+  age: string = AGE.ANY;
   hospitalName: string = '';
   hospitalUpdate = new Subject<string>();
 
@@ -116,7 +116,6 @@ export class VaccineSlotsComponent implements OnInit {
     this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
       this.spinner.hide();
       if(!subscribedCenters){return };
-      console.log(subscribedCenters);
       this.subscribedCenters = subscribedCenters;
       this.accountTotalSubscribe = subscribedCenters.length;
       this.queryData = { ...this.route.snapshot.queryParams };
@@ -254,14 +253,14 @@ export class VaccineSlotsComponent implements OnInit {
       let d = this.m[this.activeDate][0]?.minAgeLimit ||0 ;
       return Number(d)-Number(c);
     });
-    newArray.sort((a,b)=>{
-      this.n = a;
-       this.m = b;
-     let c = this.n[this.activeDate][0]?.availableCapacityDose1 || 0;
-     let d = this.n[this.activeDate][0]?.availableCapacityDose2 ||0 ;
-     let e = this.m[this.activeDate][1]?.availableCapacityDose1 || 0;
-     let f = this.m[this.activeDate][1]?.availableCapacityDose2 ||0 ;
-     return Number(e)-Number(c) ||  Number(f)-Number(d) ;
+    newArray.sort((a:any,b:any)=>{
+
+      for(let i=0;i<a[this.activeDate]?.length;i++){
+        if(a[this.activeDate][i].availableCapacity>0){
+          return -1;
+        }
+      }
+      return 1;
    });
     this.centersWithSession = newArray;
     this.centers = newArray;

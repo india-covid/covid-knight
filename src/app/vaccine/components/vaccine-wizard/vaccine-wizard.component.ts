@@ -45,7 +45,7 @@ export class VaccineWizardComponent implements OnInit {
   selectedDistrict: District | null | undefined = null;
   pincode: string|number = '';
   districtId: string | null = null;
-  phone: any;
+  phone: string='';
   @Output() done = new EventEmitter<boolean>();
 
   private _phoneNumber: { number?: string; countryCode?: string, } = {}

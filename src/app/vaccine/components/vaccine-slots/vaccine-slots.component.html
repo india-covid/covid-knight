@@ -20,32 +20,12 @@
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
               aria-labelledby="button-triggers-manual">
-              <li role="menuitem" (click)="changeDose(DOSE.ALL)">
+              <li role="menuitem"  *ngFor="let dose of DOSE | keyvalue;let i=index" (click)="changeDose(dose.value)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="allDose" name="doseRadio" checked />
-                    <label class="form-check-label" for="allDose">{{
-                      DOSE.ALL
-                      }}</label>
-                  </div>
-                </a>
-              </li>
-              <li role="menuitem" (click)="changeDose(DOSE.DOSE1)">
-                <a class="dropdown-item">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="dose1" name="doseRadio" />
-                    <label class="form-check-label" for="dose1">{{
-                      DOSE.DOSE1
-                      }}</label>
-                  </div>
-                </a>
-              </li>
-              <li role="menuitem" (click)="changeDose(DOSE.DOSE2)">
-                <a class="dropdown-item form-check">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="dose2" name="doseRadio" />
-                    <label class="form-check-label" for="dose2">{{
-                      DOSE.DOSE2
+                    <input type="radio" class="form-check-input" [id]="'dose'+i" name="doseRadio" [checked]="dose.value==DOSE.ANY" />
+                    <label class="form-check-label" [for]="'dose'+i">{{
+                      dose.value
                       }}</label>
                   </div>
                 </a>
@@ -57,85 +37,39 @@
         <div class="">
           <div class="btn-group" dropdown #vaccineDropDown="bs-dropdown" [autoClose]="true">
             <button dropdownToggle type="button" class="app-btn dropdown-toggle">
-              {{ vaccineType == "All" ? vaccineType + " Vaccines" : vaccineType
+              {{ vaccineType == VACCINES.ANY ? vaccineType + " Vaccines" : vaccineType
               }}<span class="caret"></span>
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
               aria-labelledby="button-triggers-manual">
-              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.ALL)">
+              <li role="menuitem"  *ngFor="let vaccine of VACCINES | keyvalue;let i=index"  (click)="vaccineTypeChange(vaccine.value)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="allVaccine" name="vaccine" value="covaxin"
-                      checked />
-                    <label class="form-check-label" for="allVaccine">
-                      {{ VACCINES.ALL }} Vaccines
+                    <input type="radio" class="form-check-input" [id]="'vaccine'+i" name="vaccine" value="covaxin"
+                      [checked]="vaccine.value==VACCINES.ANY" />
+                    <label class="form-check-label" [for]="'vaccine'+i">
+                      {{ vaccine.value }}{{ vaccine.value==VACCINES.ANY?' Vaccine':''}}
                     </label>
                   </div>
                 </a>
               </li>
-              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.VACCINE1)">
-                <a class="dropdown-item">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="vaccine1" name="vaccine" value="true" />
-                    <label class="form-check-label" for="vaccine1">
-                      {{ VACCINES.VACCINE1 }}
-                    </label>
-                  </div>
-                </a>
-              </li>
-              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.VACCINE2)">
-                <a class="dropdown-item">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="vaccine2" name="vaccine" value="true" />
-                    <label class="form-check-label" for="vaccine2">
-                      {{ VACCINES.VACCINE2 }}
-                    </label>
-                  </div>
-                </a>
-              </li>
-              <li role="menuitem" (click)="vaccineTypeChange(VACCINES.VACCINE3)">
-                <a class="dropdown-item">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="vaccine3" name="vaccine" value="true" />
-                    <label class="form-check-label" for="vaccine3">
-                      {{ VACCINES.VACCINE3 }}
-                    </label>
-                  </div>
-                </a>
-              </li>
+
             </ul>
           </div>
         </div>
         <div class="">
           <div class="btn-group" dropdown #ageDropDown="bs-dropdown" [autoClose]="true">
             <button dropdownToggle type="button" class="app-btn dropdown-toggle">
-              {{ age != AGE.ALL ? age + "+" : age }}<span class="caret"></span>
+              {{ age != AGE.ANY ? age + "+" : age }}<span class="caret"></span>
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
               aria-labelledby="button-triggers-manual">
-              <li role="menuitem" (click)="changeAge(AGE.ALL)">
+
+              <li role="menuitem" *ngFor="let age of AGE | keyvalue;let i=index" (click)="changeAge(age.value)">
                 <a class="dropdown-item">
                   <div class="form-check">
-                    <input type="radio" class="form-check-input" id="allAge" name="age" checked />
-                    <label class="form-check-label" for="allAge" name="age">{{
-                      AGE.ALL
-                      }}</label>
-                  </div>
-                </a>
-              </li>
-              <li role="menuitem" (click)="changeAge(AGE.AGE1)">
-                <a class="dropdown-item">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="age1" name="age" />
-                    <label class="form-check-label" for="age1" name="age">{{ AGE.AGE1 }}+</label>
-                  </div>
-                </a>
-              </li>
-              <li role="menuitem" (click)="changeAge(AGE.AGE2)">
-                <a class="dropdown-item form-check">
-                  <div class="form-check">
-                    <input type="radio" class="form-check-input" id="age2" name="age" />
-                    <label class="form-check-label" for="age2">{{ AGE.AGE2 }}+</label>
+                    <input type="radio" class="form-check-input" [id]="'age'+i" name="age" [checked]="age.value==AGE.ANY" />
+                    <label class="form-check-label" [for]="'age'+i" name="age">{{ age.value }} {{age.value == AGE.ANY?'':'+'}} </label>
                   </div>
                 </a>
               </li>
@@ -287,7 +221,7 @@
 
   <div class="apply-changes row" [ngClass]="newTotalSubscribe ? 'apply-changes-show' : 'apply-changes-hide'">
 
-    <button class="btn btn-danger" (click)="removeAllSubscribe()">Unselect All</button>
+    <button class="btn btn-danger"  (click)="removeAllSubscribe()">Unselect All</button>
     <button class="btn btn-success" (click)="applySubscribeChanges()">
       <i></i>Subscribe to {{ newTotalSubscribe }}
       {{ newTotalSubscribe === 1 ? "Center" : "Centers" }}

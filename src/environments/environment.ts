@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiBase: 'https://api.india-covid.info',
   otpLength: 4,
-  maxSubscription:5
+  maxSubscription:8
  // apiUrl: 'http://localhost:3000',
 };
 

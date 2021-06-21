@@ -34,20 +34,20 @@ export enum FeeType {
 
 
 export enum DOSE{
+  ANY="Any Dose",
   DOSE1="Dose-1",
   DOSE2="Dose-2",
-  ALL="All Dose"
 }
 export enum AGE{
   AGE1="18",
-  AGE2="45",
-  ALL="All Age"
+  ANY="Any Age",
+  AGE2="30",
+  AGE3="45",
 }
 
 export enum VACCINES{
+  ANY="Any",
   VACCINE1="COVAXIN",
   VACCINE2="COVISHIELD",
   VACCINE3="Sputnik",
-  ALL="All",
-
 }
