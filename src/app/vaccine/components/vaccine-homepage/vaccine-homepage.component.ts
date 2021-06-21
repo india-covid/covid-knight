@@ -13,11 +13,8 @@ import { VaccineRestService } from '../../services/vaccine-rest.service';
   styleUrls: ['./vaccine-homepage.component.scss']
 })
 export class VaccineHomepageComponent implements  OnDestroy {
-
   authSub: Subscription;
   @ViewChild('infoWrapper') infoWrapper:ElementRef|null=null;
-
-
 
   constructor(
     private authService: AuthService,
@@ -25,7 +22,7 @@ export class VaccineHomepageComponent implements  OnDestroy {
     private spinner: NgxSpinnerService,
     private router: Router,
     private renderer:Renderer2,
-     private alertService:AlertService ) {
+    private alertService:AlertService) {
     this.authSub = this.authService.user$.subscribe((user) => {
       if (user && user.phoneNumber) {
         this.router.navigate(["/home"])
@@ -45,7 +42,4 @@ export class VaccineHomepageComponent implements  OnDestroy {
   ngOnDestroy() {
     this.authSub.unsubscribe();
   }
-
-
-
 }

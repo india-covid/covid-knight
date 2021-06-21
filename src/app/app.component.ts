@@ -29,22 +29,15 @@ export class AppComponent implements OnInit {
     private renderer:Renderer2,
     public Pwa:PwaService,
     public conService:ConnectionService,
-    private metaTagService: Meta,
-    private spinner:NgxSpinnerService
+    private spinner:NgxSpinnerService,
+    private meta: Meta
     ) {
-
+      this.meta.addTags([
+        {name: 'description', content: 'Get vaccine availability alerts on your WhatsApp for free'},
+      ]);
   }
 
   ngOnInit(){
-    this.metaTagService.addTags([
-      { name: 'robots', content: 'index, follow' },
-
-      { charset: 'UTF-8' },
-      { name: 'theme-color', content: '#1976d2' },
-      { name: "mobile-web-app-capable", content: "yes" },
-      { name: "apple-mobile-web-app-capable", content: "yes" }
-    ]);
-
     this.wizardCheck();
   }
 
