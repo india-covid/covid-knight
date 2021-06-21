@@ -9,8 +9,7 @@
             {{user?.phoneNumber}}
           </p>
         </div>
-        <button class="add-btn btn btn-success" (click)="addToHomeScreen()" *ngIf="showButton">Add App to Home Screen</button>
-
+        <button  (click)="Pwa.addToHomeScreen($event)" *ngIf="Pwa.showButton" class="add-btn btn btn-default"><i style="position: relative;bottom:-3px;margin:3px" class="ri-install-fill"></i>Get App </button>
 
         <div class="auth-home__user-info__logout">
           <ng-template #popTemplate>

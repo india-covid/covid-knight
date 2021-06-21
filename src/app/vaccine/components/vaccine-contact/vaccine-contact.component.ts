@@ -52,6 +52,7 @@ export class VaccineContactComponent implements OnInit {
    this.authService.user$.pipe(take(1)).subscribe((user) => {
         this.emailOrPhone = user?.phoneNumber||'';
       });
+      this.spinner.hide();
     }
 
   ngOnInit() {

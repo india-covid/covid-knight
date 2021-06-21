@@ -7,6 +7,9 @@ import { SubscriptionService } from './vaccine/services/subscription.service';
 import { take, takeLast } from 'rxjs/operators';
 import { VaccineRestService } from './vaccine/services/vaccine-rest.service';
 import { User } from './core/models/user.model';
+import { PwaService } from './core/services/pwa/pwa.service';
+import { ConnectionService } from './core/services/connection/connection.service';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +27,24 @@ export class AppComponent implements OnInit {
     private router: Router,
     private vaccineRestService: VaccineRestService,
     private renderer:Renderer2,
+    public Pwa:PwaService,
+    public conService:ConnectionService,
+    private metaTagService: Meta,
+    private spinner:NgxSpinnerService
     ) {
 
   }
 
   ngOnInit(){
+    this.metaTagService.addTags([
+      { name: 'robots', content: 'index, follow' },
+
+      { charset: 'UTF-8' },
+      { name: 'theme-color', content: '#1976d2' },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-capable", content: "yes" }
+    ]);
+
     this.wizardCheck();
   }
 
@@ -38,13 +54,16 @@ export class AppComponent implements OnInit {
 
 
   wizardCheck() {
+    this.spinner.show();
     this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
       if(res && typeof res.expired !== 'boolean') {
         this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'})
       }else if(res && res.expired) {
         this.storageService.delete('subscription');
-        this.router.navigate(['home']);
+        this.spinner.hide();
+        this.router.navigate(['/home']);
       }
+
     });
   }
 
@@ -60,5 +79,8 @@ export class AppComponent implements OnInit {
     @HostListener('window:resize', ['$event'])
     onResize(event:any) {
       this.setHeight();
+    }
+    tryAgain(){
+      window.location.reload();
     }
 }

@@ -70,6 +70,9 @@ export class VaccineSlotsComponent implements OnInit {
   @ViewChild('limitReachedTemplate') limitReachedTemplate!: TemplateRef<any>;
   @ViewChild('slots') slots: ElementRef | null = null;
 
+
+    headerText:string="Select & Subscribe Centers"
+
    subscribedCenters: SubscribedCenter[] = [];
 
   private newSubscribeCenters: Center[] = [];
@@ -80,7 +83,7 @@ export class VaccineSlotsComponent implements OnInit {
   centersWithSession: any[] = [];
   centersWithSessionFiltered:any[]=[];
   isCenterEmpty: boolean = false;
-  showCentersList: boolean = true;
+  showCentersList: boolean = false;
 
   dateRange: string[] = [];
   activeDay: number = 0;
@@ -111,6 +114,9 @@ export class VaccineSlotsComponent implements OnInit {
   getSubscribedCenters() {
     this.spinner.show();
     this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
+      this.spinner.hide();
+      if(!subscribedCenters){return };
+      console.log(subscribedCenters);
       this.subscribedCenters = subscribedCenters;
       this.accountTotalSubscribe = subscribedCenters.length;
       this.queryData = { ...this.route.snapshot.queryParams };
@@ -122,19 +128,6 @@ export class VaccineSlotsComponent implements OnInit {
       this.getRouteParams(this.queryData); //get query type
     });
 
-  // getSubscribedCenters() {
-
-    // this.subscriptionService.getSubscriptionCenters().subscribe((data) => {
-    //   this.subscribedCenters = data;
-    //   this.accountTotalSubscribe = data.length;
-    //   this.queryData = { ...this.route.snapshot.queryParams };
-    //   if (!this.queryData.queryType) {
-    //     this.router.navigate(['/home']);
-    //     this.spinner.hide();
-    //     return;
-    //   }
-    //   this.getRouteParams(this.queryData); //get query type
-    // });
   }
 
   getRouteParams(params: any) {
@@ -178,6 +171,7 @@ export class VaccineSlotsComponent implements OnInit {
   }
 
   //fetch initial center and session
+  count:number=0;
   joinFetchCenterSession(
     centers$: Observable<Center[]>,
     centersSessions$: Observable<VaccineSession[]>,
@@ -188,7 +182,11 @@ export class VaccineSlotsComponent implements OnInit {
       this.centers = response[0];
       if (this.centers.length === 0) {
         this.isCenterEmpty == true;
-        this.alertService.noCenters(area);
+        if(this.count<=0){
+          this.alertService.noCenters(area);
+        }
+        this.count++;
+
       } else {
         this.addSubscribedKeyToCenters();
       }

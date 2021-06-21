@@ -1,31 +1,37 @@
-<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Covid Knight - Get free vaccine alerts </title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='https://fonts.googleapis.com/css?family=Helvetica' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Helvetica" rel="stylesheet">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <meta property="og:image" content="assets/icons/knight.png" />
-<meta property="og:title" content="Covid Knight" />
-<meta property="og:description" content="Get vaccine availability alerts on your WhatsApp for free" />
-<meta name="robots" content="index, follow" />
+  <meta property="og:image" content="assets/icons/knight.png"/>
+<meta property="og:title" content="Covid Knight"/>
+<meta property="og:description" content="Get vaccine availability alerts on your WhatsApp for free"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable", content:="yes">
+  <meta name="apple-mobile-web-app-capable", content="yes">
+  <link rel="canonical" href="https://vaccine.india-covid.info/"/>
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<link rel="manifest" href="assets/app.webmanifest">
-
+  <meta name="theme-color" content="#1976d2">
 </head>
 <body>
 
   <app-root>
 
   </app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 <style>
 
 </style>
 <script>
-
+ window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+  });
 </script>
 </html>

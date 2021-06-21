@@ -36,7 +36,8 @@
   <div class="wizard__phone-number d-flex mt-4" [class.hidden]="user?.phoneNumber" *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
     <input type="number"
        #phoneNumber="ngModel"
-      placeholder="Enter WhatsApp Number"
+       (keypress)="checkMaxLength()"
+      placeholder="Enter Your WhatsApp Number"
       (ngModelChange)="onPhoneChange({number: $event, countryCode: 'IN'}, phoneNumber.errors)"
       [(ngModel)]="phone" class="form-control app-input" digitOnly maxlength="10" minlength="10" />
   </div>
@@ -44,19 +45,11 @@
   <div class="wizard__phone-number d-flex mt-4"  [class.hidden]="user?.phoneNumber"  *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
     <input type="number"
        #phoneNumber="ngModel"
-      placeholder="Enter WhatsApp Number"
+      placeholder="Enter Your WhatsApp Number"
+      (keypress)="checkMaxLength()"
       (ngModelChange)="onPhoneChange({number: $event, countryCode: 'IN'}, phoneNumber.errors)"
       [(ngModel)]="phone" class="form-control app-input" digitOnly maxlength="10" minlength="10" />
   </div>
-  <!-- <div class="wizard__whatsapp-info mt-4 alert alert-info font-weight-normal"  *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
-    <span class="wizard__whatsapp-info--icon mr-2" ><i class="ri-information-line"></i></span>
-    <span class="wizard__whatsapp-info--text">We currently sends alerts on  Whatsapp</span>
-  </div>
-
-  <div class="wizard__whatsapp-info mt-4 alert alert-info font-weight-normal" *ngIf="activeTab === WizardTabs.DISTRICT" [@enterAnimationLeft]>
-    <span class="wizard__whatsapp-info--icon mr-2" ><i class="ri-information-line"></i></span>
-    <span class="wizard__whatsapp-info--text">We currently sends alerts on  Whatsapp </span>
-  </div> -->
 
   <div class="div subscribe d-flex mt-5" *ngIf="activeTab === WizardTabs.PIN" [@enterAnimationRight]>
     <button class="mx-auto app-btn-wa" [class.disabled-btn]="!isSubscribeButtonEnabled || subscribing" (click)="goToSlots()"

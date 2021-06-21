@@ -68,4 +68,17 @@ noCenters(area:string){
     }
   })
 }
+
+
+errorAlert(){
+  Swal.fire({
+    title: 'Error',
+    text:'Some error ocurred. Please try again later.',
+    icon:'error',
+    confirmButtonText: `OK `,
+  })
 }
+
+}
+
+

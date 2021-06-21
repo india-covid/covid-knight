@@ -43,7 +43,7 @@ export class VaccineWizardComponent implements OnInit {
   selectedCenters: Center[] = [];
   selectedState: State | null | undefined = null;
   selectedDistrict: District | null | undefined = null;
-  pincode: string = '';
+  pincode: string|number = '';
   districtId: string | null = null;
   phone: any;
   @Output() done = new EventEmitter<boolean>();
@@ -75,8 +75,8 @@ export class VaccineWizardComponent implements OnInit {
   }
 
   pinEntered(p: any) {
-
     this.pincode = p.pincode;
+
   }
   districtSelected(districtId: any) {
     this.districtId = districtId.districtId;
@@ -100,12 +100,12 @@ export class VaccineWizardComponent implements OnInit {
 
   get isSubscribeButtonEnabled() {
     if (this.user?.phoneNumber) {
-      if (this.pincode.length === 6 || this.districtId) {
+      if (this.pincode?.toString().length === 6 || this.districtId) {
         return true;
       } else {
         return false;
       }
-    } else if ((this.pincode.length === 6 || this.districtId) && this._phoneNumber?.number?.toString().length===10) {
+    } else if ((this.pincode?.toString().length === 6 || this.districtId) && this._phoneNumber?.number?.toString().length===10) {
       return true;
     } else {
       return false;
@@ -128,7 +128,7 @@ export class VaccineWizardComponent implements OnInit {
 
   goToSlots() {
     let queryType;
-    if (this.pincode.length === 6) {
+    if (this.pincode?.toString().length === 6) {
       queryType = 'pincode';
     } else if (this.districtId) {
       queryType = 'districtId'
@@ -175,5 +175,10 @@ export class VaccineWizardComponent implements OnInit {
     });
   }
 
-
+  checkMaxLength(){
+    if(this.phone?.toString().length>9){
+      return false;
+    }
+    return true;
+}
 }

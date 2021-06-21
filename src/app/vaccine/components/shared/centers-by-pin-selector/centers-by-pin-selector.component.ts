@@ -50,16 +50,22 @@ export class CentersByPinSelectorComponent implements OnInit, OnChanges {
   }
 
   onCenterSelected(centers: Center[]) {
-    this.centersSelected.emit({ pincode: this.pincode, centers });
+    this.centersSelected.emit({ pincode: this.pincode?.toString(), centers });
   }
-  pinChange(pincode:string){
-    if(pincode.length===6){
+  pinChange(pincode:number){
+    if(pincode?.toString().length  ===6){
       // this.pinInput.nativeElement.blur()
     }
-    this.pinEntered.emit({ pincode: pincode });
+    this.pinEntered.emit({ pincode: pincode?.toString() });
   }
   scrollToBottom() {
     let el = this.selector.nativeElement;
     // el.scrollIntoView();
   }
+  checkMaxLength(){
+    if(this.pincode?.toString().length>5){
+      return false;
+    }
+    return true;
+}
 }

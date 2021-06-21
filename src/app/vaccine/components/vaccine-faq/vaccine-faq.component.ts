@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-vaccine-faq',
@@ -26,7 +27,9 @@ export class VaccineFaqComponent implements OnInit {
   faqs: any = [];
   selectedRowIndex: number = -1;
 
-  constructor() {}
+  constructor(private spinner:NgxSpinnerService) {
+    this.spinner.hide();
+  }
 
   ngOnInit(): void {
     this.faqs = [

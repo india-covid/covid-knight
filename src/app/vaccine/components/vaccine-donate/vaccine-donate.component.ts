@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-vaccine-donate',
@@ -27,7 +28,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class VaccineDonateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spinner:NgxSpinnerService) {
+    this.spinner.hide();
+  }
 
   ngOnInit() {
   }

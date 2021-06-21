@@ -32,6 +32,35 @@ $text-muted-color: #d9d9d9; // var(--app-color-light-tint);
       background-color: white;
       height: 100%;
       overflow-x: hidden;
+      position: relative;
+      // border:solid pink;
+      &--no-connection{
+        position:absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background-color:rgba(0, 0, 0, 0.8);
+        z-index:1000;
+        &__icon-container{
+          width:100%;
+          &--icon{
+            font-size: 7rem;
+            color:lightgray;
+          }
+          &--text{
+            font-size:1.5rem;
+            color:lightgray;
+            }
+          &--btn{
+            color:white;
+            font-size:1.2rem;
+          }
+        }
+      }
     }
   }
 }
@@ -141,13 +170,11 @@ $text-muted-color: #d9d9d9; // var(--app-color-light-tint);
   }
 
   &__credits {
-    // position: absolute;
     color: white;
     text-align: center;
     width: 100%;
     padding-top: 20px;
-    position: absolute; 
-    bottom: 20px; 
+    // bottom: 20px;
     //border:solid green;
   }
 }

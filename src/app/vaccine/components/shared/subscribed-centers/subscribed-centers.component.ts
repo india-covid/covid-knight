@@ -52,6 +52,9 @@ export class SubscribedCentersComponent implements OnInit {
 
       this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
         this.spinner.hide();
+        if(!subscribedCenters){return };
+
+
         if(subscribedCenters.length===0){
           this.isNoCenterSubscribed=true;
         }

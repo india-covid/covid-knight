@@ -44,6 +44,13 @@
 
   <div class="app__app-content">
     <div class="app__app-content__main">
+      <div class="app__app-content__main--no-connection" *ngIf="!conService.isOnline">
+        <div class="app__app-content__main--no-connection__icon-container">
+          <i class="ri-wifi-off-line app__app-content__main--no-connection__icon-container--icon"></i>
+          <p class="app__app-content__main--no-connection__icon-container--text">Check Your Network</p>
+          <button class="btn btn-warning app__app-content__main--no-connection__icon-container--btn" (click)="tryAgain()">Try again</button>
+        </div>
+      </div>
       <router-outlet></router-outlet>
       <ngx-spinner [fullScreen]="false"></ngx-spinner>
     </div>
