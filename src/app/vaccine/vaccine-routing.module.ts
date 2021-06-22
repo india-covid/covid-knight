@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VaccineHomepageComponent } from './components/vaccine-homepage/vaccine-homepage.component';
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
 import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
+import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-policy/vaccine-privacy-policy.component'
 
 const routes: Routes = [
   {
@@ -66,6 +67,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 
   },
+  {
+    path: 'privacy-policy',
+    component: VaccinePrivacyPolicyComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

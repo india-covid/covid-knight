@@ -27,6 +27,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
+import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-policy/vaccine-privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.compon
     VaccineDonateComponent,
     VaccineContactComponent,
     VaccineHowToComponent,
-    VaccineFaqComponent
+    VaccineFaqComponent,
+    VaccinePrivacyPolicyComponent
   ],
   imports: [
     CommonModule,
