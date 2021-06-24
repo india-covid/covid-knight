@@ -127,7 +127,6 @@ export class VaccineSlotsComponent implements OnInit {
 
     // add another 20 items
     this.infiniteScrollConfig.sum += 20;
-    console.log('scroll down');
     this.addCenters();
   }
   // onScrollUp(){
@@ -141,7 +140,6 @@ export class VaccineSlotsComponent implements OnInit {
       if(!this.centersWithSessionFiltered[i]){return }
       this.mainArray.push(this.centersWithSessionFiltered[i]);
       count++;
-      console.log("adding",i);
     }
     this.infiniteScrollConfig.sum+=count;
   }
