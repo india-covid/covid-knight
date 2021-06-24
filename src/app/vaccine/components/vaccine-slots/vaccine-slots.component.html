@@ -106,9 +106,18 @@
     </div>
 
     <div class="myCard" *ngIf="
-        !isCenterEmpty && showCentersList && centersWithSession.length !== 0" [@enterAnimationRight] [@.disabled]="!filterComplete">
+        !isCenterEmpty && showCentersList && centersWithSession.length !== 0" [@enterAnimationRight] [@.disabled]="!filterComplete"
+        infinite-scroll
+        [infiniteScrollDistance]="infiniteScrollConfig.scrollDistance"
+        [infiniteScrollUpDistance]="infiniteScrollConfig.scrollUpDistance"
+        [infiniteScrollThrottle]="infiniteScrollConfig.throttle"
+        (scrolled)="onScrollDown()"
+        [scrollWindow]="false"
+        #list
+        >
+        <!-- <cdk-virtual-scroll-viewport [itemSize]="150" class="scroll-viewport"> -->
 
-      <div class="myCard__card-wrapper" *ngFor="let center of centersWithSessionFiltered; let i = index">
+      <div class="myCard__card-wrapper" *ngFor="let center of mainArray; let i = index"  >
         <div class="no-centers" *ngIf="center.name == 'noMatch'" [@enterAnimationRight]>
           <div class="no-centers__content">
             <div class="no-centers__content__img">
@@ -120,8 +129,8 @@
 
 
 
-        <div class="myCard__item" [class.lastCard]="centersWithSession.length - 1 == i" *ngIf="center.name != 'noMatch'"
-          [@enterAnimationRight] [@.disabled]="!filterComplete">
+        <div class="myCard__item" [class.lastCard]="centersWithSession.length - 1 == i" [class.firstCardEl]="i==0" *ngIf="center.name != 'noMatch'"
+          [@enterAnimationRight] [@.disabled]="!filterComplete" >
           <div class="myCard__item__content">
             <label [for]="center._id" name="subscribe" class="myCard__item__content__myCard-head form-check-label d-flex" [class.checkedCenter]="center.subscribed == 'temp'
               ">
@@ -215,6 +224,8 @@
           </div>
         </div>
       </div>
+    <!-- </cdk-virtual-scroll-viewport> -->
+
       <!-- <div class="no-slots" *ngIf="center.ssessions[0].length==0">No Slots</div> -->
     </div>
   </div>

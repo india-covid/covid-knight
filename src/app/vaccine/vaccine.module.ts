@@ -28,6 +28,10 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
 import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-policy/vaccine-privacy-policy.component';
+import { ScrollingModule } from '@angular/cdk/scrolling'
+import { BrowserModule } from '@angular/platform-browser';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [
@@ -61,8 +65,8 @@ import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-poli
     AccordionModule.forRoot(),
     PopoverModule.forRoot(),
     NgxSkeletonLoaderModule,
-    SharedModule
-  ],
+    SharedModule,
+    InfiniteScrollModule ],
   providers:[
   FilterCenterPipe
 

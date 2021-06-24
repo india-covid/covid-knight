@@ -69,6 +69,7 @@ export class VaccineSlotsComponent implements OnInit {
   @ViewChild('header') header!: ElementRef<HTMLElement>;
   @ViewChild('limitReachedTemplate') limitReachedTemplate!: TemplateRef<any>;
   @ViewChild('slots') slots: ElementRef | null = null;
+  @ViewChild('list') list: ElementRef | null = null;
 
 
     headerText:string="Select & Subscribe Centers"
@@ -97,6 +98,17 @@ export class VaccineSlotsComponent implements OnInit {
   hospitalName: string = '';
   hospitalUpdate = new Subject<string>();
 
+  infiniteScrollConfig={
+    throttle:10,
+    scrollDistance: 1.5,
+    scrollUpDistance : 1.5,
+    start: 0,
+    direction:'',
+    sum:10,
+    preLoad:10
+
+  }
+
   constructor(
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
@@ -111,6 +123,45 @@ export class VaccineSlotsComponent implements OnInit {
     this.listenHospital();
   }
 
+  mainArray:any=[];
+
+  onScrollDown() {
+
+    // add another 20 items
+    this.infiniteScrollConfig.start = this.infiniteScrollConfig.sum;
+    this.infiniteScrollConfig.sum += 20;
+    this.infiniteScrollConfig.direction = "down";
+    console.log('scroll down');
+    this.addCenters();
+  }
+  // onScrollUp(){
+  //   console.log("scroll up");
+  //   this.removeCenters();
+  // }
+
+  addCenters(){
+    let count =0;
+    for(let i = this.infiniteScrollConfig.sum;i<this.infiniteScrollConfig.preLoad+ this.infiniteScrollConfig.sum;i++){
+      if(!this.centersWithSessionFiltered[i]){return }
+      this.mainArray.push(this.centersWithSessionFiltered[i]);
+      count++;
+      console.log("adding",i);
+    }
+    this.infiniteScrollConfig.sum+=count;
+  }
+
+  // removeCenters(){
+  //   for(let i = this.infiniteScrollConfig.sum-1;i>this.infiniteScrollConfig.preLoad;i--){
+  //     console.log("removing",i);
+  //     if(this.mainArray[i]){
+  //       this.mainArray.pop();
+
+  //      }
+
+  //   }
+  //   this.infiniteScrollConfig.sum-=this.infiniteScrollConfig.preLoad;
+
+  // }
   getSubscribedCenters() {
     this.spinner.show();
     this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
@@ -246,8 +297,13 @@ export class VaccineSlotsComponent implements OnInit {
         return {minAgeLimit:false};
       }).filter((d)=>d.minAgeLimit).sort((a, b) => Number(a.minAgeLimit) - Number(b.minAgeLimit)) || [],
     }));
-
-
+    newArray.sort((a,b)=>{
+       this.n = a;
+        this.m = b;
+      let c = this.n[this.activeDate].length || 0;
+      let d = this.m[this.activeDate].length || 0 ;
+      return Number(d)-Number(c);
+    });
     newArray.sort((a:any,b:any)=>{
       let first=0;
       let second=0;
@@ -413,7 +469,19 @@ export class VaccineSlotsComponent implements OnInit {
       });
   }
 
+
   applyFilters(){
     this.centersWithSessionFiltered = this.filterCenterPipe.transform(this.centersWithSession,this.hospitalName,this.dose,this.vaccineType,this.age,this.activeDate)
+    this.mainArray =[];
+    this.infiniteScrollConfig.sum=this.infiniteScrollConfig.preLoad;
+
+    for(let i =0;i<=this.infiniteScrollConfig.preLoad;i++){
+      if(!this.centersWithSessionFiltered[i]){return }
+      this.mainArray.push(this.centersWithSessionFiltered[i])
+    }
+    setTimeout(()=>{
+      let el = this.list?.nativeElement;
+      el.scrollTo(0, 0);
+    },100)
   }
 }

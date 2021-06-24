@@ -99,23 +99,22 @@
 
 }
 .slots-body {
-   height: calc( 100% - 220px );
+   height: calc( 100% - 205px );
   // border:solid red;
   overflow: hidden;
 }
-.myCard:last-child{
-  // border:solid red;
-}
+
 
 .myCard {
   overflow: auto ;
 
-  padding-bottom:100px;
   // border:solid green;
   width: 100%;
   height:100%;
   box-shadow: none !important;
   align-items: center;
+  scroll-behavior: auto;
+  padding-bottom:100px;
   &__card-wrapper{
 
   }
@@ -360,3 +359,17 @@
 .flex{
   display: flex;
 }
+
+
+.scroll-viewport{
+  height:100%;
+  width: 100%;
+  // display: contents;
+  overflow: auto;
+
+  // border:solid green;
+}
+.scroll-viewport:last-child{
+  //  padding-bottom:100px;
+}
+
