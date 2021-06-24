@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { credits } from './credits.data';
 
 @Component({
-  selector: 'app-vaccine-privacy-policy',
-  templateUrl: './vaccine-privacy-policy.component.html',
-  styleUrls: ['./vaccine-privacy-policy.component.scss'],
+  selector: 'app-vaccine-credits',
+  templateUrl: './vaccine-credits.component.html',
+  styleUrls: ['./vaccine-credits.component.scss'],
   animations: [
     trigger('enterAnimationLeft', [
       transition(':enter', [
@@ -22,12 +23,15 @@ import { NgxSpinnerService } from 'ngx-spinner';
     ]),
   ],
 })
-export class VaccinePrivacyPolicyComponent implements OnInit {
+export class VaccineCreditsComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService) { }
+  credits = credits;
+
 
   ngOnInit(): void {
     this.spinner.hide();
   }
+
 
 }

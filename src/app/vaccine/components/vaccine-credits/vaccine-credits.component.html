@@ -1,0 +1,18 @@
+<div class="privacy-policy-main" [@enterAnimationRight]>
+  <app-header-back headerText="Credits"></app-header-back>
+  <div class="container">
+    <div class="credits">
+      <section class="credits">
+        <div class="credits__list credit-list" class="d-flex flex-column">
+          <div class="credit_list-item d-flex" class="mt-5 justify-content-center" *ngFor="let credit of credits">
+            <div class="credit-list__name">
+              <h2 class="text-center"> <a  [href]="credit.link" target="__blank">  {{ credit.name }}  </a></h2>
+              <span class="d-block text-center">  {{ credit.role }}  </span>
+            </div>
+            <div class="credit-list__role">
+          </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
