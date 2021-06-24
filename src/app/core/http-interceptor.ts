@@ -25,7 +25,6 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
         const jwt = this.cookieService.get('Authorization');
         if(!jwt) return next.handle(sendReq).pipe(
           catchError( err => {
-            console.log(err);
             if ((err instanceof HttpErrorResponse) && !req.url.includes('last-sync') && !req.url.includes('status') && err.status!=400) {
               this.conService.setOnline(false);
             }
@@ -37,7 +36,6 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
      }
      return next.handle(sendReq).pipe(
       catchError( err => {
-        console.log(err);
         if ((err instanceof HttpErrorResponse) && !req.url.includes('last-sync') && !req.url.includes('status') && err.status!=400) {
           this.conService.setOnline(false);
         }
