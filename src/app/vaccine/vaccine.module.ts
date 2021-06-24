@@ -28,14 +28,10 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
 import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-policy/vaccine-privacy-policy.component';
-<<<<<<< HEAD
-import { ScrollingModule } from '@angular/cdk/scrolling'
-import { BrowserModule } from '@angular/platform-browser';
+
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
-=======
 import { VaccineCreditsComponent } from './components/vaccine-credits/vaccine-credits.component';
->>>>>>> 18726d2ac38abcb880add0330fd779673af3cf0e
 
 @NgModule({
   declarations: [

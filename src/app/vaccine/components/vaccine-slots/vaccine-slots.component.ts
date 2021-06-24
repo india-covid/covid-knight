@@ -102,8 +102,6 @@ export class VaccineSlotsComponent implements OnInit {
     throttle:10,
     scrollDistance: 1.5,
     scrollUpDistance : 1.5,
-    start: 0,
-    direction:'',
     sum:10,
     preLoad:10
 
@@ -128,9 +126,7 @@ export class VaccineSlotsComponent implements OnInit {
   onScrollDown() {
 
     // add another 20 items
-    this.infiniteScrollConfig.start = this.infiniteScrollConfig.sum;
     this.infiniteScrollConfig.sum += 20;
-    this.infiniteScrollConfig.direction = "down";
     console.log('scroll down');
     this.addCenters();
   }
@@ -155,12 +151,9 @@ export class VaccineSlotsComponent implements OnInit {
   //     console.log("removing",i);
   //     if(this.mainArray[i]){
   //       this.mainArray.pop();
-
   //      }
-
   //   }
   //   this.infiniteScrollConfig.sum-=this.infiniteScrollConfig.preLoad;
-
   // }
   getSubscribedCenters() {
     this.spinner.show();
