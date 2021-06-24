@@ -11,6 +11,7 @@ import { VaccineHomepageComponent } from './components/vaccine-homepage/vaccine-
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
 import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
 import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-policy/vaccine-privacy-policy.component'
+import { VaccineCreditsComponent } from './components/vaccine-credits/vaccine-credits.component';
 
 const routes: Routes = [
   {
@@ -52,25 +53,23 @@ const routes: Routes = [
   {
     path: 'donate',
     component: VaccineDonateComponent,
-    canActivate: [AuthGuard]
-
   },
   {
     path: 'contact',
     component: VaccineContactComponent,
-    canActivate: [AuthGuard]
-
   },
   {
     path: 'faq',
     component: VaccineFaqComponent,
-    canActivate: [AuthGuard]
 
   },
   {
     path: 'privacy-policy',
-    component: VaccinePrivacyPolicyComponent,
-    canActivate: [AuthGuard]
+    component: VaccinePrivacyPolicyComponent
+  },
+  {
+    path: 'credits',
+    component: VaccineCreditsComponent
   }
 ];
 @NgModule({

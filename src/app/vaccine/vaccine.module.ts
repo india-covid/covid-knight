@@ -28,6 +28,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { VaccineFaqComponent } from './components/vaccine-faq/vaccine-faq.component';
 import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-policy/vaccine-privacy-policy.component';
+import { VaccineCreditsComponent } from './components/vaccine-credits/vaccine-credits.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { VaccinePrivacyPolicyComponent } from './components/vaccine-privacy-poli
     VaccineContactComponent,
     VaccineHowToComponent,
     VaccineFaqComponent,
-    VaccinePrivacyPolicyComponent
+    VaccinePrivacyPolicyComponent,
+    VaccineCreditsComponent
   ],
   imports: [
     CommonModule,

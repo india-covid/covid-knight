@@ -1,0 +1,28 @@
+
+$app-black: #232323; // TODO: Refactor variables
+
+.credits {
+  margin: 0.5rem;
+  &__header {
+    font-size: 1.5rem;
+    font-weight: 200;
+    padding: 1rem;
+    position: relative;
+  }
+  &__desc {
+    padding: 1rem;
+    border-top: 1px solid lighten(#232323, 60%);
+  }
+
+}
+
+.credit-list {
+ &__name {
+   h2 a {
+     color: var(--app-color-primary-shade);
+     padding-bottom: 1rem;
+
+   }
+ }
+}
+
