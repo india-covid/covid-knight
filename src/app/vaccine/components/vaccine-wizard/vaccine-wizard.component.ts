@@ -81,7 +81,6 @@ export class VaccineWizardComponent implements OnInit {
   }
   districtSelected(districtId: any) {
     this.districtId = districtId.districtId;
-    console.log("distrcit",districtId);
   }
 
   centersSelected({ centers }: { centers: Center[] }) {
