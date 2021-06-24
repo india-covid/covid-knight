@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
-
 @Component({
-  selector: 'app-vaccine-privacy-policy',
-  templateUrl: './vaccine-privacy-policy.component.html',
-  styleUrls: ['./vaccine-privacy-policy.component.scss'],
+  selector: 'app-vaccine-terms-condition',
+  templateUrl: './vaccine-terms-condition.component.html',
+  styleUrls: ['./vaccine-terms-condition.component.scss'],
   animations: [
     trigger(
       'enterAnimationLeft', [
@@ -32,7 +31,7 @@ import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations
     )
   ],
 })
-export class VaccinePrivacyPolicyComponent implements OnInit {
+export class VaccineTermsConditionComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService) { }
 

@@ -1,8 +1,17 @@
 
 $app-black: #232323; // TODO: Refactor variables
 
+.donate{
+  text-align: center;
+  padding-bottom: 220px;
+  &--btn{
+
+  }
+}
+
 .credits {
   margin: 0.5rem;
+  margin-top:-1.5rem;
   &__header {
     font-size: 1.5rem;
     font-weight: 200;
@@ -26,3 +35,6 @@ $app-black: #232323; // TODO: Refactor variables
  }
 }
 
+hr{
+  height:2px;
+}

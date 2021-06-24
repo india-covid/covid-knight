@@ -1,6 +1,8 @@
+import { paymentUrl } from './../../../core/data/razorpay.data';
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 
 @Component({
   selector: 'app-vaccine-donate',
@@ -10,24 +12,29 @@ import { NgxSpinnerService } from 'ngx-spinner';
     trigger(
       'enterAnimationLeft', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+        useAnimation(enterAnimationLeft, {
+          params: {
+            time: '150ms'
+          }
+        })
       ])
     ]
     ),
     trigger(
       'enterAnimationRight', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+        useAnimation(enterAnimationRight, {
+          params: {
+            time: '150ms'
+          }
+        })
       ])
     ]
     )
   ],
-
 })
 export class VaccineDonateComponent implements OnInit {
-
+  paymentUrl = paymentUrl;
   constructor(private spinner:NgxSpinnerService) {
     this.spinner.hide();
   }

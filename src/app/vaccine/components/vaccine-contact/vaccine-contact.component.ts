@@ -3,11 +3,12 @@ import { AlertService } from './../../services/alert.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/auth.service';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 
 @Component({
   selector: 'app-vaccine-contact',
@@ -17,16 +18,22 @@ import { Subscription } from 'rxjs';
     trigger(
       'enterAnimationLeft', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+        useAnimation(enterAnimationLeft, {
+          params: {
+            time: '150ms'
+          }
+        })
       ])
     ]
     ),
     trigger(
       'enterAnimationRight', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+        useAnimation(enterAnimationRight, {
+          params: {
+            time: '150ms'
+          }
+        })
       ])
     ]
     )

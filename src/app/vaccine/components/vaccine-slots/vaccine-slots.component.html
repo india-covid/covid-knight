@@ -15,7 +15,7 @@
       <div class="filters__menu">
         <div class="">
           <div class="btn-group" dropdown #doseDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
+            <button  dropdownToggle type="button" class="app-btn dropdown-toggle">
               {{ dose }}<span class="caret"></span>
             </button>
             <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
@@ -59,11 +59,11 @@
         </div>
         <div class="">
           <div class="btn-group" dropdown #ageDropDown="bs-dropdown" [autoClose]="true">
-            <button dropdownToggle type="button" class="app-btn dropdown-toggle">
+            <button id="button-alignment" dropdownToggle type="button" aria-controls="dropdown-alignment" class="app-btn dropdown-toggle">
               {{ age != AGE.ANY ? age + "+" : age }}<span class="caret"></span>
             </button>
-            <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
-              aria-labelledby="button-triggers-manual">
+            <ul id="button-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+            role="menu" aria-labelledby="button-alignment" >
 
               <li role="menuitem" *ngFor="let age of AGE | keyvalue;let i=index" (click)="changeAge(age.value)">
                 <a class="dropdown-item">

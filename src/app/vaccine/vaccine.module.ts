@@ -1,3 +1,4 @@
+import { VaccineTermsConditionComponent } from './components/vaccine-terms-condition/vaccine-terms-condition.component';
 import { VaccineHowToComponent } from './components/vaccine-how-to/vaccine-how-to.component';
 import { SharedModule } from './../shared/components/shared.module';
 import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
@@ -52,7 +53,8 @@ import { VaccineCreditsComponent } from './components/vaccine-credits/vaccine-cr
     VaccineHowToComponent,
     VaccineFaqComponent,
     VaccinePrivacyPolicyComponent,
-    VaccineCreditsComponent
+    VaccineCreditsComponent,
+    VaccineTermsConditionComponent
   ],
   imports: [
     CommonModule,

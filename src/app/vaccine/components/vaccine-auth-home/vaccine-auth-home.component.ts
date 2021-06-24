@@ -13,30 +13,41 @@ import {
   TemplateRef,
   HostListener,
 } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { User } from 'src/app/core/models/user.model';
 import { take } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VaccineRestService } from '../../services/vaccine-rest.service';
 import { PwaService } from 'src/app/core/services/pwa/pwa.service';
+import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 
 @Component({
   selector: 'app-vaccine-auth-home',
   templateUrl: './vaccine-auth-home.component.html',
   styleUrls: ['./vaccine-auth-home.component.scss'],
   animations: [
-    trigger('enterAnimationLeft', [
+    trigger(
+      'enterAnimationLeft', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 })),
-      ]),
-    ]),
-    trigger('enterAnimationRight', [
+        useAnimation(enterAnimationLeft, {
+          params: {
+            time: '150ms'
+          }
+        })
+      ])
+    ]
+    ),
+    trigger(
+      'enterAnimationRight', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 })),
-      ]),
-    ]),
+        useAnimation(enterAnimationRight, {
+          params: {
+            time: '150ms'
+          }
+        })
+      ])
+    ]
+    )
   ],
 })
 export class VaccineAuthHomeComponent implements OnInit {

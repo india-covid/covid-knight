@@ -70,14 +70,11 @@ $app-black: #232323;
   position: relative;
   height: 100%;
   overflow: auto;
-  //border:solid yellow;
   &__layer {
     padding-top: 30px;
-    height: 100vh;
-    // min-height:700px;
+
     position: relative;
-    // padding-bottom:50px;
-    // border:solid blue;
+
   }
   &__image-wrapper {
     height: 100%;
@@ -86,7 +83,6 @@ $app-black: #232323;
     background-color: rgba(0, 0, 0, 0.3);
     letter-spacing: 1.5px;
     width: 100%;
-    // min-height: 100vh;
     text-align: center;
     align-items: center;
     min-height: 100%;
@@ -170,7 +166,6 @@ $app-black: #232323;
   }
 
   &__credits {
-    position: absolute;
     color: white;
     text-align: center;
     width: 100%;
@@ -180,6 +175,9 @@ $app-black: #232323;
   }
 }
 
+.white{
+  color:white;
+}
 @media screen and (max-width: 810px) {
   .app__empty-wrapper {
     width: 45%;

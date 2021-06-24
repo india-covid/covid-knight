@@ -23,7 +23,7 @@ $text-muted-color: #d9d9d9;// var(--app-color-light-tint);
   margin: 0 auto;
   overflow: hidden;
   overflow-y: scroll;
-  letter-spacing: 1.5px;;
+  letter-spacing: 1.5px;
   &__layer {
     background-color: rgba(0, 0, 0, 0.2);
     height:100%;
@@ -154,8 +154,33 @@ $text-muted-color: #d9d9d9;// var(--app-color-light-tint);
     color:black;
     margin-bottom:10px;
   }
+
+}
+.fab{
+  position: fixed;
+  bottom:85px;
+  right:6%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+  border-radius: 50%;
+
+  &--button{
+
+    height:70px;
+    width:70px;
+    font-size: 2rem;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    background-color: var(--app-color-primary);
+  }
 }
 
+.white{
+  color:white;
+}
 .flex {
   display: flex;
 }

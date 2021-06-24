@@ -6,12 +6,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import * as DayJs from 'dayjs';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { filter, take } from 'rxjs/operators';
+import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 
 @Component({
   selector: 'app-subscribed-centers',
@@ -20,19 +21,25 @@ import { filter, take } from 'rxjs/operators';
   animations: [
     trigger(
       'enterAnimationLeft', [
-        transition(':enter', [
-          style({transform: 'translateX(-100%)', opacity: 0}),
-          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
-        ])
-      ]
+      transition(':enter', [
+        useAnimation(enterAnimationLeft, {
+          params: {
+            time: '150ms'
+          }
+        })
+      ])
+    ]
     ),
     trigger(
       'enterAnimationRight', [
-        transition(':enter', [
-          style({transform: 'translateX(100%)', opacity: 0}),
-          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
-        ])
-      ]
+      transition(':enter', [
+        useAnimation(enterAnimationRight, {
+          params: {
+            time: '150ms'
+          }
+        })
+      ])
+    ]
     )
   ],
 })

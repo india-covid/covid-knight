@@ -1,3 +1,4 @@
+import { paymentUrl } from './../../core/data/razorpay.data';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2'
@@ -34,7 +35,7 @@ maxSubReached(maxSub:number,currentSub:number){
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-      window.open("https://rzp.io/l/UUbrXGrnLj");
+      window.open(paymentUrl);
     } else if (result.isDenied) {
 
     }

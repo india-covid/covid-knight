@@ -1,9 +1,10 @@
+import { enterAnimationLeft,enterAnimationRight } from './../../../core/animations/pageAnimation';
 import { User } from './../../../core/models/user.model';
 import { Component, OnInit, EventEmitter,ElementRef, Output } from '@angular/core';
 import { Center } from '../../models/center.model';
 import { AuthService } from 'src/app/core/auth.service';
 import { switchMap, take } from 'rxjs/operators';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { District } from 'src/app/vaccine/models/district.model';
 import { State } from 'src/app/vaccine/models/state.model';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
@@ -22,16 +23,22 @@ enum WizardTabs {
     trigger(
       'enterAnimationLeft', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+        useAnimation(enterAnimationLeft, {
+          params: {
+            time: '150ms'
+          }
+        })
       ])
     ]
     ),
     trigger(
       'enterAnimationRight', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
+        useAnimation(enterAnimationRight, {
+          params: {
+            time: '150ms'
+          }
+        })
       ])
     ]
     )

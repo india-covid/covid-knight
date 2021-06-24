@@ -1,3 +1,4 @@
+import { VaccineTermsConditionComponent } from './components/vaccine-terms-condition/vaccine-terms-condition.component';
 import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
 import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { VaccineWizardComponent } from './components/vaccine-wizard/vaccine-wizard.component';
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     component: VaccinePrivacyPolicyComponent
+  },
+  {
+    path: 'terms-condition',
+    component: VaccineTermsConditionComponent
   },
   {
     path: 'credits',

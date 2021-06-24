@@ -17,6 +17,8 @@
     &__text-wrapper{
       display: flex;
       align-items: center;
+      position: relative;
+      top:-2px;
       &__text{
         font-size:1.2rem;
         font-weight: 400;

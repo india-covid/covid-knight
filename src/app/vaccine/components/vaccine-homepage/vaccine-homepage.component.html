@@ -1,5 +1,5 @@
 
-<div class="homepage" id="home">
+<div class="homepage" id="home"  (scroll)="onScroll($event)" [@enterAnimationLeft] #homepage>
   <app-header></app-header>
 
     <div class="homepage__info-wrapper info-wrapper-small" #infoWrapper>
@@ -16,10 +16,10 @@
       </div>
       <div class="body">
         <div class="body__text mt-2">
-          Get free vaccine availability alerts on your WhatsApp, <b>18+ & 45+ </b>.
+          Get free vaccine availability alerts on your WhatsApp, <b class="white">18+ & 45+ </b>.
         </div>
         <p class="body__non-profit body__text__muted p-2  mt-1"> We will send personalized vaccine alerts based on
-          centers/hospitals on WhatsApp</p>
+          centers/hospitals on <span class="white">WhatsApp</span> </p>
         <a href="#get-started"><button class="btn btn-lg pt-2 body__action-btn" >
             <b>Select your Area Now</b>
           </button></a>
@@ -54,5 +54,7 @@
   <div class="homepage__credits" id="footer">
     <app-footer></app-footer>
   </div>
-
+  <div class="fab" *ngIf="showScrollToTop" (click)="scrollToTop()">
+    <div class="fab--button"><i class="ri-arrow-up-line"></i></div>
+  </div>
 </div>
