@@ -15,9 +15,7 @@ import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
-    // LastSyncComponent
-
-    ],
+  ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -33,7 +31,7 @@ import { environment } from '../environments/environment';
     })
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true, }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true, }
   ],
   bootstrap: [AppComponent]
 })

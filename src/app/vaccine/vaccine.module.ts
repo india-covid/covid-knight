@@ -17,7 +17,6 @@ import { FormsModule } from '@angular/forms'
 import { DigitOnlyDirective } from '../core/directives/digit-only.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CentersByDistrictSelectorComponent } from './components/shared/centers-by-district-selector/centers-by-district-selector.component';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { VaccineSubscribeComponent } from './components/vaccine-subscribe/vaccine-subscribe.component';
 import { HeaderComponent } from './../shared/components/shared/header/header.component';
 import { HeaderBackComponent } from './../shared/components/shared/header-back/header-back.component';
@@ -61,7 +60,6 @@ import { VaccineCreditsComponent } from './components/vaccine-credits/vaccine-cr
     VaccineRoutingModule,
     FormsModule,
     NgSelectModule,
-    NgxIntlTelInputModule,
     NgOtpInputModule,
     NgxSpinnerModule,
     BsDropdownModule,
