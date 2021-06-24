@@ -66,6 +66,8 @@ export class SubscribedCentersComponent implements OnInit {
           this.isNoCenterSubscribed=true;
         }
         this.subscribedCenters = subscribedCenters;
+        console.log(subscribedCenters);
+
       })
 
       this.route.queryParams.subscribe((params) => {
@@ -109,13 +111,12 @@ export class SubscribedCentersComponent implements OnInit {
     const date1 = DayJs();
     const date2 = DayJs(to);
     let hours = date2.diff(date1, 'hours');
-    const days = Math.floor(hours / 24);
-    hours = hours - days * 24;
+    const days = Math.abs(Math.floor(hours / 24));
+    hours = hours - (days * 24);
     if(days!=0){
       return `${days} days, ${hours} hours`
     }else{
       return `${hours} hours`
     }
-
   }
 }
