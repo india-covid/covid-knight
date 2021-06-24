@@ -87,3 +87,20 @@ $tab-border-color: var(--app-color-primary);
   }
 
 }
+
+::placeholder {
+  color: rgb(168, 164, 164);
+  font-family: "Helvetica", sans-serif !important;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgb(168, 164, 164);
+  font-weight: 400;
+  letter-spacing: 2px;}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgb(168, 164, 164);
+  font-weight: 400;
+  letter-spacing: 2px;}
