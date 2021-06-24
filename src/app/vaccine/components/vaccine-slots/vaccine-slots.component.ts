@@ -246,21 +246,22 @@ export class VaccineSlotsComponent implements OnInit {
         return {minAgeLimit:false};
       }).filter((d)=>d.minAgeLimit).sort((a, b) => Number(a.minAgeLimit) - Number(b.minAgeLimit)) || [],
     }));
-    newArray.sort((a,b)=>{
-       this.n = a;
-        this.m = b;
-      let c = this.n[this.activeDate][0]?.minAgeLimit || 0;
-      let d = this.m[this.activeDate][0]?.minAgeLimit ||0 ;
-      return Number(d)-Number(c);
-    });
-    newArray.sort((a:any,b:any)=>{
 
+
+    newArray.sort((a:any,b:any)=>{
+      let first=0;
+      let second=0;
       for(let i=0;i<a[this.activeDate]?.length;i++){
         if(a[this.activeDate][i].availableCapacity>0){
-          return -1;
+          first+=a[this.activeDate][i].availableCapacity;
         }
       }
-      return 1;
+      for(let i=0;i<b[this.activeDate]?.length;i++){
+        if(b[this.activeDate][i].availableCapacity>0){
+          second+=b[this.activeDate][i].availableCapacity;
+        }
+      }
+      return Number(second)-Number(first);
    });
     this.centersWithSession = newArray;
     this.centers = newArray;
