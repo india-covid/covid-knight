@@ -2,7 +2,6 @@ import { VaccineTermsConditionComponent } from './components/vaccine-terms-condi
 import { VaccineHowToComponent } from './components/vaccine-how-to/vaccine-how-to.component';
 import { SharedModule } from './../shared/components/shared.module';
 import { VaccineContactComponent } from './components/vaccine-contact/vaccine-contact.component';
-import { VaccineDonateComponent } from './components/vaccine-donate/vaccine-donate.component';
 import { FilterCenterPipe } from './pipes/filter-center.pipe';
 import { SubscribedCentersComponent } from './components/shared/subscribed-centers/subscribed-centers.component';
 import { VaccineAuthHomeComponent } from './components/vaccine-auth-home/vaccine-auth-home.component';
@@ -47,7 +46,6 @@ import { VaccineCreditsComponent } from './components/vaccine-credits/vaccine-cr
     VaccineAuthHomeComponent,
     SubscribedCentersComponent,
     FilterCenterPipe,
-    VaccineDonateComponent,
     VaccineContactComponent,
     VaccineHowToComponent,
     VaccineFaqComponent,

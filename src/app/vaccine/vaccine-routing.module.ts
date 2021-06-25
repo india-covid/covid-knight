@@ -51,10 +51,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 
   },
+  /* Disabled as we use credits instead of donate
   {
     path: 'donate',
     component: VaccineDonateComponent,
   },
+  */
   {
     path: 'contact',
     component: VaccineContactComponent,
