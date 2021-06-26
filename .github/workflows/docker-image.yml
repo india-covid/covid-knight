@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag shinde11/india-covid:frontend
+      run: docker build . --file Dockerfile --tag shinde11/india-covid:knight
   push:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -24,4 +24,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: shinde11/india-covid:frontend
+          tags: shinde11/india-covid:knight
