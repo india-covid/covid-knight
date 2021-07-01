@@ -1,6 +1,8 @@
 # Covid Knight 
 #### Sends notifications about covid-19 vaccine availability.
 
+This is a client implementation of covid knight written in Angular
+
 This site/app will help you get real-time information about the availability & unavailability of the vaccine slots based on centers/hospitals through WhatsApp notifications. 
 
 
@@ -8,7 +10,8 @@ This site/app will help you get real-time information about the availability & u
 
 * This site will send real-time notifications. 
 
-* Each & every information provided to the user is the latest & 100% verified. 
+* Information obtained from Cowin Public Api
+
 
  ## Tips
 
