@@ -4,7 +4,7 @@
       <!-- *ngIf="user?.phoneNumber" -->
       <div class="auth-home__user-info">
         <div class="auth-home__user-info__phone">
-          <p class="text ml-0 font-weight-bold">Logged in as</p>
+          <p class="text ml-0">Logged in as</p>
           <p class="phone">
             {{user?.phoneNumber}}
           </p>
@@ -59,7 +59,7 @@
       <div class="myCard col col-lg-12 col-md-12 myCard__card1" routerLink="/subscribed">
         <div class="myCard__content">
           <p class="myCard__content__text">Centers Subscribed</p>
-          <p class="myCard__content__text-large">
+          <p class="myCard__content__text-large font-weight-bold">
             {{ subscribedCenters.length }}
           </p>
           <p class="myCard__content__text-small">See All</p>
