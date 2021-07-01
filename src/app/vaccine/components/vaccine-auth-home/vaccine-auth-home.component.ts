@@ -63,7 +63,7 @@ export class VaccineAuthHomeComponent implements OnInit {
   shareMessage: string =
     `Covid Knight is a website that sends free vaccine alerts on WhatsApp in real-time. You can also check vaccine availability here for all ages and all  types of vaccines. Share it with your friends and family.`;
   readonly shareMessageEncoded =
-    'whatsapp://send?text=' + window.encodeURIComponent(this.shareMessage+'https://vaccine.india-covid.info/')
+    'whatsapp://send?text=' + window.encodeURIComponent(this.shareMessage + 'https://vaccine.india-covid.info/')
 
 
   constructor(
@@ -73,15 +73,15 @@ export class VaccineAuthHomeComponent implements OnInit {
     private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private dom: DomSanitizer,
-    private alertService:AlertService,
-    public Pwa:PwaService
+    private alertService: AlertService,
+    public Pwa: PwaService
   ) {
     this.getSubscribedCenters();
     this.authService.user$.pipe(take(1)).subscribe((user) => {
       this.user = user;
     });
   }
-  ngOnInit() {}
+  ngOnInit() { }
 
   logout() {
     this.spinner.show();
@@ -95,7 +95,7 @@ export class VaccineAuthHomeComponent implements OnInit {
 
     this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
       this.spinner.hide();
-      if(!subscribedCenters){return};
+      if (!subscribedCenters) { return };
       this.isSubscriptionLoaded = true;
 
       this.subscribedCenters = subscribedCenters;
@@ -108,7 +108,7 @@ export class VaccineAuthHomeComponent implements OnInit {
       return;
     }
     if (this.subscribedCenters.length >= this.MAXSUBSCRIPTION) {
-      this.alertService.maxSubReached(this.MAXSUBSCRIPTION,this.subscribedCenters.length);
+      this.alertService.maxSubReached(this.MAXSUBSCRIPTION, this.subscribedCenters.length);
       return;
     }
     this.router.navigate(['/add-subscription']);
@@ -119,14 +119,14 @@ export class VaccineAuthHomeComponent implements OnInit {
     return this.vaccineRestService.lastSyncTime();
   }
 
-  share(){
+  share() {
     if (navigator.share) {
       navigator.share({
         title: 'Covid Knight',
         text: this.shareMessage,
         url: 'https://vaccine.india-covid.info',
       })
-    }else{
+    } else {
       window.open(this.shareMessageEncoded);
     }
   }
