@@ -49,5 +49,5 @@ export enum VACCINES{
   ANY="Any",
   VACCINE1="COVAXIN",
   VACCINE2="COVISHIELD",
-  VACCINE3="Sputnik",
+  VACCINE3="SPUTNIK V",
 }
