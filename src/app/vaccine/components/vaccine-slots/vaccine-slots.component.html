@@ -115,7 +115,6 @@
         [scrollWindow]="false"
         #list
         >
-        <!-- <cdk-virtual-scroll-viewport [itemSize]="150" class="scroll-viewport"> -->
 
       <div class="myCard__card-wrapper" *ngFor="let center of mainArray; let i = index"  >
         <div class="no-centers" *ngIf="center.name == 'noMatch'" [@enterAnimationRight]>

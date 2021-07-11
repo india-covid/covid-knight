@@ -1,3 +1,5 @@
+import { User } from 'src/app/core/models/user.model';
+import { AuthService } from 'src/app/core/auth.service';
 import { AlertService } from './../../services/alert.service';
 import { FilterCenterPipe } from './../../pipes/filter-center.pipe';
 import { CommonModule } from '@angular/common';
@@ -5,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubscribedCenter } from './../../models/subscribedCenter';
+
 import {
   DOSE,
   AGE,
@@ -27,9 +30,10 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import * as DayJs from 'dayjs';
-import { shareReplay, take, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { shareReplay, take, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
+import { LocalStorageService } from 'src/app/core/localstorage.service';
 
 
 
@@ -117,7 +121,7 @@ export class VaccineSlotsComponent implements OnInit {
     preLoad:10
 
   }
-
+ user:User|null=null;
   constructor(
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
@@ -127,23 +131,31 @@ export class VaccineSlotsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private filterCenterPipe:FilterCenterPipe,
     private alertService:AlertService,
+    private authService:AuthService,
+    private storageService:LocalStorageService
   ) {
-    this.getSubscribedCenters();
-    this.listenHospital();
+    this.authService.user$.pipe(take(1)).subscribe((user) => {
+      this.user = user;
+      console.log("user is",user);
+      this.queryData = { ...this.route.snapshot.queryParams };
+
+      if(user?.phoneNumber){
+        this.getSubscribedCenters();
+      }else{
+        this.getRouteParams(this.queryData);
+      }
+      this.listenHospital();
+    });
   }
 
   mainArray:any=[];
 
   onScrollDown() {
-
     // add another 20 items
     this.infiniteScrollConfig.sum += 20;
     this.addCenters();
   }
-  // onScrollUp(){
-  //   console.log("scroll up");
-  //   this.removeCenters();
-  // }
+
 
   addCenters(){
     let count =0;
@@ -155,15 +167,6 @@ export class VaccineSlotsComponent implements OnInit {
     this.infiniteScrollConfig.sum+=count;
   }
 
-  // removeCenters(){
-  //   for(let i = this.infiniteScrollConfig.sum-1;i>this.infiniteScrollConfig.preLoad;i--){
-  //     console.log("removing",i);
-  //     if(this.mainArray[i]){
-  //       this.mainArray.pop();
-  //      }
-  //   }
-  //   this.infiniteScrollConfig.sum-=this.infiniteScrollConfig.preLoad;
-  // }
   getSubscribedCenters() {
     this.spinner.show();
     this.subscriptionService.subscribedCenters$.subscribe((subscribedCenters) => {
@@ -171,9 +174,9 @@ export class VaccineSlotsComponent implements OnInit {
       if(!subscribedCenters){return };
       this.subscribedCenters = subscribedCenters;
       this.accountTotalSubscribe = subscribedCenters.length;
-      this.queryData = { ...this.route.snapshot.queryParams };
       if (!this.queryData.queryType) {
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
+        console.log("no query data");
         this.spinner.hide();
         return;
       }
@@ -181,7 +184,6 @@ export class VaccineSlotsComponent implements OnInit {
     });
 
   }
-
   getRouteParams(params: any) {
     if (params.queryType == this.QueryType.PIN) {
       //if query type is pincode
@@ -358,8 +360,37 @@ export class VaccineSlotsComponent implements OnInit {
   }
 
 
+  _phoneNumber:string|undefined=undefined;
+  private get _ping$() {
+    return this.authService
+      .ping({ phoneNumber: this._phoneNumber, centers: [] }, 'register')
+  }
+
+
+  registerUser() {
+    let naviagationExtras: NavigationExtras = this.queryData;
+    this.spinner.show();
+    // this.subscribing = true;
+    this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber?.toString())), take(1)).subscribe(results => {
+      this.saveCurrentResults(this._phoneNumber, naviagationExtras);
+    });
+  }
+  private saveCurrentResults(phoneNumber: string = '', naviagationExtras: NavigationExtras) {
+    this.storageService.set('subscription', {time: new Date().getTime() / 1000, phoneNumber,  centers:[]});
+    this.spinner.hide();
+    this.router.navigate(['/subscription'], {queryParams:naviagationExtras});
+  }
+
+
   //handle tick and untick for subscribe
-  changeSubscribe(e: any, center: Center) {
+  async changeSubscribe(e: any, center: Center) {
+    if(!this.user?.phoneNumber){
+      e.target.checked=false;
+      let result = await this.alertService.enterPhone();
+      this._phoneNumber = result.value;
+      this.registerUser();
+      return;
+    }
 
     if (e.target.checked) {
       if (

@@ -107,18 +107,11 @@ export class VaccineWizardComponent implements OnInit {
   }
 
   get isSubscribeButtonEnabled() {
-    if (this.user?.phoneNumber) {
+
       if (this.pincode?.toString().length === 6 || this.districtId) {
         return true;
-      } else {
-        return false;
       }
-    } else if ((this.pincode?.toString().length === 6 || this.districtId) && this._phoneNumber?.number?.toString().length===10) {
-      return true;
-    } else {
-      return false;
-    }
-
+            return false;
   }
 
 
@@ -150,11 +143,12 @@ export class VaccineWizardComponent implements OnInit {
         queryType: queryType
       }
     }
-    if (this.user?.phoneNumber) {
+    console.log("go to slots");
+    // if (this.user?.phoneNumber) {
       this.router.navigate(["/slots"], naviagationExtras)
-    } else {
-      this.registerUser(naviagationExtras);
-    }
+    // } else {
+    //   this.registerUser(naviagationExtras);
+    // }
 
   }
 

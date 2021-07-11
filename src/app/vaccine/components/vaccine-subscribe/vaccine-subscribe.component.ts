@@ -36,9 +36,9 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
         }
         this.spinner.hide();
       });
-      this.subs.add(this.route.queryParams.subscribe((params) => {
-        this.navigationExtras=params;
-      }));
+
+
+      this.navigationExtras=  { ...this.route.snapshot.queryParams };
 
     }
 

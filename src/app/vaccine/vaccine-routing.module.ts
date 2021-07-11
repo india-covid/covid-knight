@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'slots',
     component: VaccineSlotsComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
 
   },
   {

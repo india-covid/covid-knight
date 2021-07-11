@@ -2,13 +2,13 @@ import { paymentUrl } from './../../core/data/razorpay.data';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2'
-
+import { AuthService } from 'src/app/core/auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
 
-constructor(private router:Router) { }
+constructor(private router:Router,private authService:AuthService) { }
 
 hello(){
   Swal.fire('Hello User!')
@@ -79,6 +79,29 @@ errorAlert(){
     confirmButtonText: `OK `,
   })
 }
+
+async enterPhone(){
+     return await Swal.fire({
+      title: "Enter you phone number (whatsApp)",
+      text: "we will send vaccine notification to you phone as soon as vaccine is available",
+      input: 'text',
+      showCancelButton: true ,
+      confirmButtonColor: 'green',
+      confirmButtonText:'Verify',
+      reverseButtons:true,
+      inputValidator:(phoneNumber)=>{
+        if(!this.validatePhoneNumber(phoneNumber)){
+          return 'Please enter correct number';
+        }
+        return '';
+      }
+    })
+}
+
+ validatePhoneNumber (phoneNumber:string):boolean{
+    return phoneNumber.replace(/ /g,'').length ===10;
+ }
+
 
 }
 
