@@ -143,7 +143,6 @@ export class VaccineWizardComponent implements OnInit {
         queryType: queryType
       }
     }
-    console.log("go to slots");
     // if (this.user?.phoneNumber) {
       this.router.navigate(["/slots"], naviagationExtras)
     // } else {

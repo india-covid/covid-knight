@@ -26,7 +26,7 @@ import { environment } from '../environments/environment';
     ToastrModule.forRoot(),
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled:  true,// environment.production,
       registrationStrategy: 'registerImmediately'
     })
   ],

@@ -10,10 +10,6 @@ export class AlertService {
 
 constructor(private router:Router,private authService:AuthService) { }
 
-hello(){
-  Swal.fire('Hello User!')
-}
-
 maxSubReached(maxSub:number,currentSub:number){
   Swal.fire({
     title: '<strong>Subscription Limit Reached</strong>',
@@ -81,14 +77,22 @@ errorAlert(){
 }
 
 async enterPhone(){
+  const inputAttributes: any = {
+      maxlength: 10,
+      pattern:"\d*",
+      oninput:"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" // quick fix
+  };
      return await Swal.fire({
-      title: "Enter you phone number (whatsApp)",
-      text: "we will send vaccine notification to you phone as soon as vaccine is available",
-      input: 'text',
+      title: "Subscribe",
+      text: "We will send vaccine notification on whatsapp when the vaccine is available",
+      input: 'number',
+      inputPlaceholder: 'Enter you WhatsApp Number',
       showCancelButton: true ,
       confirmButtonColor: 'green',
-      confirmButtonText:'Verify',
+      confirmButtonText:'Confirm',
       reverseButtons:true,
+      inputAttributes,
+      position: 'top',
       inputValidator:(phoneNumber)=>{
         if(!this.validatePhoneNumber(phoneNumber)){
           return 'Please enter correct number';
@@ -99,7 +103,7 @@ async enterPhone(){
 }
 
  validatePhoneNumber (phoneNumber:string):boolean{
-    return phoneNumber.replace(/ /g,'').length ===10;
+    return /^\d{10}$/.test(phoneNumber);
  }
 
 

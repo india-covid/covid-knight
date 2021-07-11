@@ -18,6 +18,8 @@ import * as DayJs from 'dayjs'
 export class AuthService {
   private authMainLoginUrl = '/auth'
   private _userSubject = new BehaviorSubject<User | null>(null);
+  private readonly _swCheckKey = 'sw-india-covid';
+  private readonly _swExpireDays = 7;
 
   constructor(private router: Router,
     private storageService: LocalStorageService,
@@ -25,6 +27,7 @@ export class AuthService {
     private httpClient: HttpClient,
     private cookieService: CookieService) {
     this._getStatus();
+    this.checkServiceWorkerInit();
   }
 
   public get user$() {
@@ -88,6 +91,28 @@ export class AuthService {
     phoneNumber = String(phoneNumber);
     const url = environment.apiBase + `${this.authMainLoginUrl}` + '/otp/request';
     return this.httpClient.post<any>(url, { phoneNumber, production: environment.production }); // pass countryCode if not india
+  }
+
+  private checkServiceWorkerInit() {
+    const lastInitDate = this.storageService.get(this._swCheckKey);
+    if(!lastInitDate) {
+      const now = new Date().toISOString();
+      this.storageService.set(this._swCheckKey, now);
+      this.uninstallSwAndReload();
+      return;
+    }
+    const diffDays = DayJs(lastInitDate).diff(DayJs(), 'day');
+    if(diffDays >= this._swExpireDays) {
+      this.uninstallSwAndReload();
+    }
+  }
+
+  private async uninstallSwAndReload() {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    if(registrations.length) {
+      registrations.forEach(r => r.unregister());
+      window.location.reload(true);
+    }
   }
 
 }

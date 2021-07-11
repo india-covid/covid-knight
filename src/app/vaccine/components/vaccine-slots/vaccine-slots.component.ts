@@ -379,7 +379,7 @@ export class VaccineSlotsComponent implements OnInit {
     });
   }
   private saveCurrentResults(phoneNumber: string = '', naviagationExtras: NavigationExtras) {
-    this.storageService.set('subscription', {time: new Date().getTime() / 1000, phoneNumber,  centers:[]});
+    this.storageService.set('subscription', {time: new Date().getTime() / 1000, phoneNumber,  centers: [...this.newSubscribeCenters]});
     this.spinner.hide();
     this.router.navigate(['/subscription'], {queryParams:naviagationExtras});
   }
@@ -387,13 +387,7 @@ export class VaccineSlotsComponent implements OnInit {
 
   //handle tick and untick for subscribe
   async changeSubscribe(e: any, center: Center) {
-    if(!this.user?.phoneNumber){
-      e.target.checked=false;
-      let result = await this.alertService.enterPhone();
-      this._phoneNumber = result.value;
-      this.registerUser();
-      return;
-    }
+
 
     if (e.target.checked) {
       if (
@@ -455,7 +449,17 @@ export class VaccineSlotsComponent implements OnInit {
 
 
   //apply subscribe
-  applySubscribeChanges() {
+  async applySubscribeChanges() {
+    if(!this.user?.phoneNumber){
+      let result = await this.alertService.enterPhone();
+      if(!result.value) {
+        return;
+      }
+      this._phoneNumber = result.value;
+      this.registerUser();
+      return;
+    }
+
     this.spinner.show();
     let centersId =this.newSubscribeCenters.map(a => a._id);
     this.subscriptionService

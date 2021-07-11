@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import * as DayJs from 'dayjs';
 import { NgOtpInputComponent } from 'ng-otp-input/lib/components/ng-otp-input/ng-otp-input.component';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
 import { isNonEmptyArray } from 'src/app/core/utils';
 import { Center } from '../../models/center.model';
@@ -12,6 +12,7 @@ import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from 'src/app/core/auth.service';
 import { environment } from '../../../../environments/environment'
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vaccine-subscribe',
@@ -53,6 +54,9 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
   isOtpLengthValid = false
   otp: string = ''
   isOtpWrong:boolean =false;
+  selectedCenters: Center[] = [];
+  subscriptionRequest$ = of();
+
   @ViewChild('ngOtpInput') ngOtpInputRef: NgOtpInputComponent | null = null;
 
   ngOnInit(): void {
@@ -63,15 +67,16 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
         this.timeExpired();
         return;
       }
-      this.init(this.wizardResult.centers as any);
+      this.createSubscriptionRequest(this.wizardResult.centers as any);
     });
     this.subs.add(sub);
   }
-  init(centers: Center[]) {
+  createSubscriptionRequest(centers: Center[]) {
     if (isNonEmptyArray(this.centers)) {
       return;
     }
-
+    const centerIds = centers.map(c => c._id);
+    this.subscriptionRequest$ = this.subscriptionService.postSubscriptionCenter({ centers: centerIds });
   }
 
   sessionInfo(center: Center) {
@@ -106,12 +111,13 @@ export class VaccineSubscribeComponent implements OnInit, OnDestroy {
     this.authService.vaccineLoginOrSignup({
       otp: this.otp,
       phoneNumber: this.wizardResult.phoneNumber as string,
-    }).subscribe(res => {
+    }).pipe(switchMap(() => this.subscriptionRequest$)).subscribe(res => {
       this.subscriptionService.getSubscriptionCenters();
       this.spinner.hide();
       this.isOtpWrong=false;
       this.storageService.delete('subscription');
-      this.router.navigate(["slots"],{queryParams:this.navigationExtras});
+      this.router.navigate(['home']);
+     // this.router.navigate(["slots"],{queryParams:this.navigationExtras});
     }, err => {
       this.spinner.hide();
       this.isOtpWrong=true;

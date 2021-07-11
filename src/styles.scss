@@ -58,6 +58,10 @@ div {
   }
 }
 
+.swal2-input[type=number] {
+  max-width: inherit !important;
+}
+
 .selector {
   border-bottom: 2px solid rgb(83, 82, 82);
   margin: auto;
