@@ -54,13 +54,9 @@ export class PwaService {
     this.deferredPrompt.userChoice
       .then((choiceResult:any) => {
         if (choiceResult.outcome === 'accepted') {
-          this.authService.ping({phoneNumber:this.user?.phoneNumber,pwaData:choiceResult},'appInstalled').subscribe((data)=>{
-          },(err)=>{
-          })
+          this.authService.ping({phoneNumber:this.user?.phoneNumber,pwaData:choiceResult},'appInstalled').subscribe()
         } else {
-          this.authService.ping({phoneNumber:this.user?.phoneNumber,pwaData:choiceResult},'appInstallDeclined').subscribe(()=>{
-
-          })
+          this.authService.ping({phoneNumber:this.user?.phoneNumber,pwaData:choiceResult},'appInstallDeclined').subscribe();
         }
         this.deferredPrompt = null;
       });
