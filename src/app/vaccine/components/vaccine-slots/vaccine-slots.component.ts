@@ -30,7 +30,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Center } from 'src/app/vaccine/models/center.model';
 import { VaccineRestService } from 'src/app/vaccine/services/vaccine-rest.service';
 import * as DayJs from 'dayjs';
-import { shareReplay, take, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { shareReplay, take, debounceTime, distinctUntilChanged, switchMap, timeout } from 'rxjs/operators';
 import { trigger, style, animate, transition, useAnimation } from '@angular/animations';
 import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
@@ -134,11 +134,14 @@ export class VaccineSlotsComponent implements OnInit {
     private authService:AuthService,
     private storageService:LocalStorageService
   ) {
-    this.authService.user$.pipe(take(1)).subscribe((user) => {
-      this.user = user;
-      console.log("user is",user);
-      this.queryData = { ...this.route.snapshot.queryParams };
+    this.queryData = { ...this.route.snapshot.queryParams };
 
+    let timeoutI = setTimeout(()=>{
+      this.getRouteParams(this.queryData);
+    },2000);
+    this.authService.user$.pipe(take(1)).subscribe((user) => {
+      clearTimeout(timeoutI);
+      this.user = user;
       if(user?.phoneNumber){
         this.getSubscribedCenters();
       }else{
