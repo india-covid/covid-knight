@@ -18,7 +18,7 @@ import * as DayJs from 'dayjs'
 export class AuthService {
   private authMainLoginUrl = '/auth'
   private _userSubject = new BehaviorSubject<User | null>(null);
-  private readonly _swCheckKey = 'sw-india-covid';
+  private readonly _swCheckKey = 'sw-last-refresh';
   private readonly _swExpireDays = 7;
 
   constructor(private router: Router,
@@ -34,7 +34,7 @@ export class AuthService {
     return this._userSubject.asObservable().pipe(filter(user => Boolean(user)));
   }
 
- private _getStatus() {
+  private _getStatus() {
     const url = environment.apiBase + '/auth/status';
     return this.httpClient.get<User>(url).subscribe(user => {
       this._userSubject.next(user);
@@ -66,7 +66,7 @@ export class AuthService {
       const { token, ...user } = body;
       if (token?.token) {
         const expireDate = DayJs().add(token.expiresIn, 'seconds')
-        this.cookieService.put('Authorization', token.token, { expires: expireDate.toDate().toUTCString(), sameSite: true, secure: true  });
+        this.cookieService.put('Authorization', token.token, { expires: expireDate.toDate().toUTCString(), sameSite: true, secure: true });
       }
       this._userSubject.next(user);
     }));
@@ -95,23 +95,28 @@ export class AuthService {
 
   private checkServiceWorkerInit() {
     const lastInitDate = this.storageService.get(this._swCheckKey);
-    if(!lastInitDate) {
+    if (!lastInitDate) {
       const now = new Date().toISOString();
       this.storageService.set(this._swCheckKey, now);
       this.uninstallSwAndReload();
       return;
     }
     const diffDays = DayJs(lastInitDate).diff(DayJs(), 'day');
-    if(diffDays >= this._swExpireDays) {
+    if (diffDays >= this._swExpireDays) {
       this.uninstallSwAndReload();
     }
   }
 
   private async uninstallSwAndReload() {
     const registrations = await navigator.serviceWorker.getRegistrations();
-    if(registrations.length) {
+    if (registrations.length) {
       registrations.forEach(r => r.unregister());
-      window.location.reload(true);
+      caches.keys().then(function (names) {
+        for (let name of names) {
+          caches.delete(name);
+        }
+        window.location.reload(true);
+      });
     }
   }
 
