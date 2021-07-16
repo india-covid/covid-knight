@@ -86,7 +86,7 @@ async enterPhone(){
       title: "Subscribe",
       text: "We will send vaccine notification on whatsapp when the vaccine is available",
       input: 'number',
-      inputPlaceholder: 'Enter you WhatsApp Number',
+      inputPlaceholder: 'Enter WhatsApp Number',
       showCancelButton: true ,
       confirmButtonColor: 'green',
       confirmButtonText:'Confirm',
