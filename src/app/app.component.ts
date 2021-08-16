@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
 
   wizardCheck() {
-    this.spinner.show();
+   // this.spinner.show();
     this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
       if(res && typeof res.expired !== 'boolean') {
         this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'});
