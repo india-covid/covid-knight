@@ -50,7 +50,8 @@ export class AppComponent implements OnInit {
     this.spinner.show();
     this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
       if(res && typeof res.expired !== 'boolean') {
-        this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'})
+        this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'});
+        this.spinner.hide();
       }else if(res && res.expired) {
         this.storageService.delete('subscription');
         this.spinner.hide();
