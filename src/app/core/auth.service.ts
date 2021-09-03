@@ -19,7 +19,7 @@ export class AuthService {
   private authMainLoginUrl = '/auth'
   private _userSubject = new BehaviorSubject<User | null>(null);
   private readonly _swCheckKey = 'sw-last-refresh';
-  private readonly _swExpireDays = 7;
+  private readonly _swExpireDays = 2;
 
   constructor(private router: Router,
     private storageService: LocalStorageService,
@@ -98,7 +98,7 @@ export class AuthService {
     if (!lastInitDate) {
       const now = new Date().toISOString();
       this.storageService.set(this._swCheckKey, now);
-      this.uninstallSwAndReload();
+     // this.uninstallSwAndReload();
       return;
     }
     const diffDays = DayJs(lastInitDate).diff(DayJs(), 'day');
