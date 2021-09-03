@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/localstorage.service';
@@ -16,7 +16,7 @@ import { Meta } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
     @ViewChild('appContainer') appContainer:ElementRef|null=null;
   title = 'Vaccine Finder';
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.wizardCheck();
+
   }
 
   lastSyncTime() {
@@ -46,15 +46,15 @@ export class AppComponent implements OnInit {
   }
 
 
+
   wizardCheck() {
    // this.spinner.show();
     this.subscriptionService.wizardResult.pipe(take(1)).subscribe(res => {
       if(res && typeof res.expired !== 'boolean') {
         this.router.navigate(['subscription'],{queryParamsHandling: 'preserve'});
-        this.spinner.hide();
+        //this.spinner.hide();
       }else if(res && res.expired) {
         this.storageService.delete('subscription');
-        this.spinner.hide();
         this.router.navigate(['/home']);
       }
 
@@ -67,6 +67,7 @@ export class AppComponent implements OnInit {
     }
 
     ngAfterViewInit() {
+     this.wizardCheck();
      this.setHeight();
     }
 
