@@ -9,9 +9,11 @@ export class LastSyncComponent implements OnInit {
 
   constructor(private vaccineRestService:VaccineRestService) { }
 
+  lastSync$ = this.vaccineRestService.lastSyncTime$;
+
   ngOnInit() {
+
+
   }
-  lastSyncTime() {
-    return this.vaccineRestService.lastSyncTime();
-  }
+
 }

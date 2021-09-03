@@ -115,9 +115,6 @@ export class VaccineAuthHomeComponent implements OnInit {
   }
 
 
-  lastSyncTime() {
-    return this.vaccineRestService.lastSyncTime();
-  }
 
   share() {
     if (navigator.share) {

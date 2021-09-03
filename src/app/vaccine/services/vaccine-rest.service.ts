@@ -26,6 +26,7 @@ export class VaccineRestService {
 
   private _lastSyncTime: string = '';
 
+  private _lastSyncTime$ = new ReplaySubject<string>();
 
   centersByPinCode(pin: number | string): Observable<Center[]> {
     const url = environment.apiBase + `${this.vaccineBase}/centers/pin/${pin}`;
@@ -95,13 +96,16 @@ export class VaccineRestService {
  private _startLastSyncChecker() {
     const url = environment.apiBase + '/vaccine/sessions/last-sync';
     timer(0, 1000 * 30).pipe(switchMap(() => this.http.get<{message: string}>(url))).subscribe(({message}) => {
-      this._lastSyncTime = message;
+      this._lastSyncTime$.next(message);
     });
   }
 
-  lastSyncTime() {
-    return this._lastSyncTime;
+
+  get lastSyncTime$() {
+   return this._lastSyncTime$.asObservable();
   }
+
+
 
 
 }

@@ -59,9 +59,6 @@ export class VaccineHomepageComponent implements  OnDestroy {
     });
   }
 
-  lastSyncTime() {
-    return this.vaccineRestService.lastSyncTime();
-  }
 
   wizardDone() {
     this.router.navigate(['subscription']);

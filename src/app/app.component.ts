@@ -37,15 +37,11 @@ export class AppComponent implements OnInit, AfterViewInit {
       ]);
   }
 
+
+
   ngOnInit(){
 
   }
-
-  lastSyncTime() {
-    return this.vaccineRestService.lastSyncTime();
-  }
-
-
 
   wizardCheck() {
    // this.spinner.show();

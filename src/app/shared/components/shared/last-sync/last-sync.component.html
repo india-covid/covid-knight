@@ -1,5 +1,5 @@
 <div class="last-sync">
   <div class="last-sync__blob green"></div>
   <div class="last-sync__title ml-2">Last sync from <span>Cowin</span>: </div>
-  <div class="last-sync__text ml-2"> {{ lastSyncTime() }}</div>
+  <div class="last-sync__text ml-2"> {{ lastSync$ |  async }}</div>
 </div>
