@@ -25,10 +25,10 @@ import { environment } from '../environments/environment';
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     SharedModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      registrationStrategy: 'registerImmediately'
-    })
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    //   registrationStrategy: 'registerImmediately'
+    // })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true, }

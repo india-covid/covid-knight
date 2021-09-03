@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private router: Router,
     private vaccineRestService: VaccineRestService,
     private renderer:Renderer2,
-    public Pwa:PwaService,
+  //  public Pwa:PwaService,
     public conService:ConnectionService,
     private spinner:NgxSpinnerService,
     private meta: Meta

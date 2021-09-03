@@ -18,7 +18,7 @@ import { User } from 'src/app/core/models/user.model';
 import { take } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VaccineRestService } from '../../services/vaccine-rest.service';
-import { PwaService } from 'src/app/core/services/pwa/pwa.service';
+//import { PwaService } from 'src/app/core/services/pwa/pwa.service';
 import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 
 @Component({
@@ -74,7 +74,7 @@ export class VaccineAuthHomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private dom: DomSanitizer,
     private alertService: AlertService,
-    public Pwa: PwaService
+    // public Pwa: PwaService
   ) {
     this.getSubscribedCenters();
     this.authService.user$.pipe(take(1)).subscribe((user) => {
