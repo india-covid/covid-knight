@@ -46,7 +46,7 @@ export class VaccineFaqComponent implements OnInit {
       {
         question: 'What about privacy?',
         answer:
-          `We do not collect any information other than WhatsApp number. Phone numbers are automatically deleted after the notification subscriptions expire. We do not run any kind of ads. You can support us by <a href="${paymentUrl}" target="_blank">donating</a>.`,
+          `We do not collect any information other than WhatsApp number. Phone numbers are automatically deleted after the notification subscriptions expire. We do not run any kind of ads.`,
       },
       {
         question: 'Why should I use Covid Knight?',
@@ -59,7 +59,7 @@ export class VaccineFaqComponent implements OnInit {
           'Click on add centers, select your area, select all the the centers you want to subscribe to and click subscribe.',
       },
       {
-        question: 'Can I Stop the notifications?',
+        question: 'Can I stop the notifications?',
         answer:
           `Yes, you can stop the notification anytime by visiting this website/app.`,
       },
@@ -72,6 +72,11 @@ export class VaccineFaqComponent implements OnInit {
         question: 'Can I book vaccine from this website/app?',
         answer:
           'No, Currently we only send notifications and show availability. Please visit <a href="https://www.cowin.gov.in/" target="_blank">Co-WIN</a> to book appointments.',
+      },
+      {
+        question: 'Can I query the whatsapp bot for vaccine information?',
+        answer:
+          `Yes, you can send a "hi" to our whatsapp bot to know more. <a href="https://api.whatsapp.com/send?phone=919110855173" target="_blank">Click here</a> `,
       },
     ];
   }
