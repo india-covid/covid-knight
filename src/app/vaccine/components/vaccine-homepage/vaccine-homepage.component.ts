@@ -1,4 +1,4 @@
-import { LocalStorageService } from './../../../../../../../covid New/covid-frontend/src/app/core/localstorage.service';
+
 import { AlertService } from './../../services/alert.service';
 import { User } from './../../../core/models/user.model';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, Renderer2 } from '@angular/core';
@@ -10,6 +10,7 @@ import { VaccineRestService } from '../../services/vaccine-rest.service';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
 import { switchMap, take } from 'rxjs/operators';
+import { LocalStorageService } from '../../../core/localstorage.service';
 
 @Component({
   selector: 'app-vaccine-homepage',
