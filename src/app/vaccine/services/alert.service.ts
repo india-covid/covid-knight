@@ -83,7 +83,7 @@ async enterPhone(){
       oninput:"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" // quick fix
   };
      return await Swal.fire({
-      title: "Subscribe",
+      title: "Register/Login",
       text: "We will send vaccine notification on whatsapp when the vaccine is available",
       input: 'number',
       inputPlaceholder: 'Enter WhatsApp Number',

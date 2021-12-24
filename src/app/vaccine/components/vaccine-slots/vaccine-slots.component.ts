@@ -378,6 +378,7 @@ export class VaccineSlotsComponent implements OnInit {
       this.saveCurrentResults(this._phoneNumber, naviagationExtras);
     });
   }
+
   private saveCurrentResults(phoneNumber: string = '', naviagationExtras: NavigationExtras) {
     this.storageService.set('subscription', {time: new Date().getTime() / 1000, phoneNumber,  centers: [...this.newSubscribeCenters]});
     this.spinner.hide();

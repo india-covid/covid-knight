@@ -23,21 +23,17 @@ const routes: Routes = [
     path: 'subscription',
     component: VaccineSubscribeComponent,
    // canActivate: [AuthGuard]
-
-
   },
 
   {
     path: 'slots',
     component: VaccineSlotsComponent,
     // canActivate: [AuthGuard]
-
   },
   {
     path: 'subscribed',
     component: SubscribedCentersComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: 'add-subscription',

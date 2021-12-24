@@ -1,13 +1,15 @@
+import { LocalStorageService } from './../../../../../../../covid New/covid-frontend/src/app/core/localstorage.service';
 import { AlertService } from './../../services/alert.service';
 import { User } from './../../../core/models/user.model';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { VaccineRestService } from '../../services/vaccine-rest.service';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations/pageAnimation';
+import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vaccine-homepage',
@@ -39,24 +41,35 @@ import { enterAnimationLeft, enterAnimationRight } from 'src/app/core/animations
   ],
 })
 export class VaccineHomepageComponent implements  OnDestroy {
-  authSub: Subscription;
   @ViewChild('infoWrapper') infoWrapper:ElementRef|null=null;
   @ViewChild('homepage') homepage:ElementRef|null=null;
 
   showScrollToTop:boolean=false;
+  _phoneNumber:string|undefined=undefined;
+  user:User|null=null;
+
+  private get _ping$() {
+    return this.authService
+      .ping({ phoneNumber: this._phoneNumber, centers: [] }, 'register')
+  }
   constructor(
     private authService: AuthService,
     private vaccineRestService: VaccineRestService,
     private spinner: NgxSpinnerService,
     private router: Router,
     private renderer:Renderer2,
-    private alertService:AlertService) {
-    this.authSub = this.authService.user$.subscribe((user) => {
-      if (user && user.phoneNumber) {
-        this.router.navigate(["/home"])
-      }
-      this.spinner.hide();
-    });
+    private alertService:AlertService,
+    private storageService:LocalStorageService
+    ) {
+      this.authService.user$.pipe(take(1)).subscribe((user) => {
+        this.user = user;
+      });
+  //   this.user = this.authService.user$.subscribe((user) => {
+  //     if (user && user.phoneNumber) {
+  //       this.router.navigate(["/home"])
+  //     }
+  //     this.spinner.hide();
+  //   });
   }
 
 
@@ -65,7 +78,7 @@ export class VaccineHomepageComponent implements  OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authSub.unsubscribe();
+    // this.user.unsubscribe();
   }
 
   onScroll(e:any): void {
@@ -81,4 +94,32 @@ scrollToTop():void{
   let el = this.homepage?.nativeElement;
   el.scrollTo(0,0);
 }
+
+async authenticate() {
+  if(!this.user?.phoneNumber){
+    let result = await this.alertService.enterPhone();
+    if(!result.value) {
+      return;
+    }
+    this._phoneNumber = result.value;
+    this.registerUser();
+    return;
+  }
+
+}
+registerUser() {
+  this.spinner.show();
+  // this.subscribing = true;
+  this._ping$.pipe(switchMap((p) => this.authService.requestOtp(this._phoneNumber?.toString())), take(1)).subscribe(results => {
+    this.saveCurrentResults(this._phoneNumber,{});
+  });
+}
+
+private saveCurrentResults(phoneNumber: string = '', naviagationExtras: NavigationExtras) {
+  this.storageService.set('subscription', {time: new Date().getTime() / 1000, phoneNumber,  centers: []});
+  this.spinner.hide();
+  this.router.navigate(['/subscription'], {queryParams:naviagationExtras});
+}
+
+
 }

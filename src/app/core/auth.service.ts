@@ -115,7 +115,7 @@ export class AuthService {
         for (let name of names) {
           caches.delete(name);
         }
-        window.location.reload(true);
+        window.location.reload();
       });
     }
   }

@@ -36,6 +36,10 @@
 
 
   <div class="homepage__container" >
+    <div class="homepage__container__auth">
+      <button (click)="authenticate()" class="app-btn-auth">Login/Signup</button><br><br>
+      OR
+    </div>
     <div class="homepage__container__wizard">
       <h2 class="text-center homepage__container__wizard__heading" > <i  class="ri-map-pin-user-fill homepage__container__heading__icon"></i>Select your center</h2>
       <app-vaccine-wizard (done)="wizardDone()"></app-vaccine-wizard>
